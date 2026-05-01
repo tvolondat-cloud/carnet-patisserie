@@ -32,6 +32,14 @@ async function loadProfile(userId) {
 		.eq('id', userId)
 		.single();
 	profile.set(data);
+
+	const { count } = await supabase
+		.from('recettes')
+		.select('*', { count: 'exact', head: true })
+		.eq('user_id', userId);
+	if (count === 0) {
+		await supabase.rpc('seed_recettes_cap', { p_user_id: userId });
+	}
 }
 
 export async function signInWithGoogle() {
