@@ -1,4 +1,4 @@
-# Architecture — Carnet
+# Architecture — Brigade Sucrée
 
 Guide technique : modèle de données, stores Svelte, design system, conventions.
 
@@ -135,9 +135,9 @@ stats = {
 
 ### Bottom nav (5 tabs)
 
-🏠 Accueil · 📖 Recettes · 📊 Suivi · 📋 Ordo · 📄 Carnet
+🏠 Accueil · 📖 Recettes · 🧪 Réviser · 📊 Suivi · 👤 Profil
 
-⚠️ "Réviser" et "Profil" ne sont pas dans la nav — accessibles depuis la home (à corriger, voir AUDIT.md).
+(Ordo et Carnet PDF déplacés dans `/profil` après itération 2 du conseil.)
 
 ---
 

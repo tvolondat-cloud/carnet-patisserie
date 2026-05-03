@@ -1,4 +1,4 @@
-# Setup — Carnet
+# Setup — Brigade Sucrée
 
 Guide complet pour configurer le projet de zéro : Supabase, Google OAuth, déploiement.
 
@@ -17,7 +17,7 @@ Guide complet pour configurer le projet de zéro : Supabase, Google OAuth, dépl
 
 1. Va sur https://supabase.com/dashboard → **New Project**
 2. Choisis :
-   - **Name** : `carnet`
+   - **Name** : `brigade-sucree`
    - **Database password** : génère un mot de passe fort (à stocker dans un gestionnaire)
    - **Region** : `eu-west-3` (Paris) ou la plus proche
    - **Plan** : Free pour démarrer
@@ -91,10 +91,10 @@ Garde cette URL ouverte.
 
 #### 4.2 Créer un projet Google Cloud
 
-1. https://console.cloud.google.com → **New Project** → nom `Carnet CAP`
+1. https://console.cloud.google.com → **New Project** → nom `Brigade Sucrée`
 2. **APIs & Services → OAuth consent screen** :
    - User Type : `External`
-   - App name : `Carnet`
+   - App name : `Brigade Sucrée`
    - User support / Developer email : ton email
    - Save & Continue (laisse Scopes et Test users par défaut)
 
@@ -102,7 +102,7 @@ Garde cette URL ouverte.
 
 **APIs & Services → Credentials → Create Credentials → OAuth client ID** :
 - Application type : `Web application`
-- Name : `Carnet Web`
+- Name : `Brigade Sucrée Web`
 - **Authorized JavaScript origins** :
   - `http://localhost:5173`
   - `https://wkexxddknocpmwgfvodw.supabase.co`
@@ -174,7 +174,7 @@ Le repo est déjà connecté à `tvolondat-cloud/carnet-patisserie`. À chaque p
 
 ### 6.3 Mettre à jour les URL OAuth
 
-Une fois ton domaine prod connu (`carnet-xyz.vercel.app`), retourner :
+Une fois ton domaine prod connu (`brigadesucree.app`), retourner :
 1. **Google Cloud Console** → ajouter le domaine dans Authorized origins/redirects
 2. **Supabase** → URL Configuration → ajouter `https://ton-domaine/auth/callback`
 

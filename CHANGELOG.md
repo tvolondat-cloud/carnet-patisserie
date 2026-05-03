@@ -8,6 +8,12 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/), versioning [
 
 ## [Unreleased]
 
+### Branding
+- **Rebrand "Carnet" → "Brigade Sucrée"** (tagline : *« Tu fais partie de la Brigade Sucrée. »*)
+- Domaines réservés : `brigadesucree.fr`, `brigadesucree.app`
+- Icônes PWA régénérées (lettre B)
+- Manifest, app.html, page d'auth, footer profil mis à jour
+
 ### Documentation
 - Ajout `README.md` complet (quick start, architecture, scripts, env)
 - Ajout `.env.example` (template à copier)

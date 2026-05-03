@@ -17,7 +17,7 @@ const baseSvg = (size, padding = 0) => {
     </linearGradient>
   </defs>
   <rect fill="url(#g)" width="${size}" height="${size}" rx="${size * 0.18}"/>
-  <text x="${size / 2}" y="${size / 2 + fontSize * 0.36}" font-family="Arial, Helvetica, sans-serif" font-size="${fontSize}" font-weight="900" fill="white" text-anchor="middle">C</text>
+  <text x="${size / 2}" y="${size / 2 + fontSize * 0.36}" font-family="Arial, Helvetica, sans-serif" font-size="${fontSize}" font-weight="900" fill="white" text-anchor="middle">B</text>
 </svg>`;
 };
 

@@ -1,6 +1,11 @@
-# 🥐 Carnet
+# 🥐 Brigade Sucrée
+
+> *« Tu fais partie de la Brigade Sucrée. »*
 
 PWA mobile-first pour les étudiants **CAP Pâtissier** et particuliers passionnés de pâtisserie. Carnet de recettes, mode laboratoire (test → quiz → chrono), suivi de progression et export PDF.
+
+**Production** : https://brigadesucree.app · https://brigadesucree.fr
+**Repo** : https://github.com/tvolondat-cloud/carnet-patisserie
 
 > **Stack** : SvelteKit · Supabase · vite-plugin-pwa · jsPDF · Chart.js
 > **Mobile-first** (max-width 480px) · **Offline-first** (Workbox) · **Vanilla CSS** (design tokens)

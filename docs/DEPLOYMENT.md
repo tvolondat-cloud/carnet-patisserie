@@ -1,4 +1,4 @@
-# Déploiement — Carnet
+# Déploiement — Brigade Sucrée
 
 Guide de déploiement sur Vercel (recommandé) avec auto-deploy depuis GitHub.
 
@@ -68,7 +68,7 @@ Une fois ton domaine prod connu, **remonter dans Supabase et Google Cloud** :
 ## 5. Domaine custom (optionnel)
 
 Vercel → ton projet → **Settings → Domains** :
-- Ajoute ton domaine (ex: `carnet.app`)
+- Ajoute ton domaine (`brigadesucree.app`, `brigadesucree.fr`)
 - Configure les DNS comme indiqué (CNAME ou A record)
 - HTTPS auto via Let's Encrypt
 
@@ -147,7 +147,7 @@ Tu peux avoir des projets Supabase distincts pour preview/prod :
 | Environment | Supabase Project | Use case |
 |---|---|---|
 | Production | `wkexxddknocpmwgfvodw` (prod) | Domaine principal |
-| Preview | (ex: `carnet-staging`) | PRs, branches |
+| Preview | (ex: `brigade-sucree-staging`) | PRs, branches |
 | Development | (local seul) | `npm run dev` |
 
 Utile pour ne pas polluer la prod avec des données de test.

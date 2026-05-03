@@ -27,7 +27,7 @@ const statutColor = { 'a-tester': 'var(--color-a-tester)', testee: 'var(--color-
 			<p class="text-muted text-sm">Bonjour 👋</p>
 			<h1 style="font-size:1.4rem;font-weight:800">{prenom}</h1>
 		</div>
-		<a href="/auth" style="width:40px;height:40px;border-radius:50%;background:var(--color-surface-2);display:flex;align-items:center;justify-content:center;font-size:1.2rem">👤</a>
+		<a href="/profil" aria-label="Mon profil" style="width:40px;height:40px;border-radius:50%;background:var(--color-surface-2);display:flex;align-items:center;justify-content:center;font-size:1.2rem">👤</a>
 	</div>
 
 	<!-- Score ring + exam countdown -->

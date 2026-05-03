@@ -159,7 +159,7 @@ async function handleSignOut() {
 		🚪 Se déconnecter
 	</button>
 
-	<p class="text-xs text-muted text-center mt-3">Carnet · v0.1.0</p>
+	<p class="text-xs text-muted text-center mt-3">Brigade Sucrée · v0.1.0</p>
 </div>
 
 {#if toast}

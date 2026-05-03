@@ -48,8 +48,8 @@ function toggleMode() {
 	<div style="width:100%;max-width:380px">
 		<div style="text-align:center;margin-bottom:32px">
 			<div style="font-size:3rem;margin-bottom:12px" aria-hidden="true">🥐</div>
-			<h1 style="font-size:1.8rem;font-weight:800;color:var(--color-text)">Carnet</h1>
-			<p style="color:var(--color-text-2);margin-top:6px">Ton carnet CAP Pâtissier</p>
+			<h1 style="font-size:1.8rem;font-weight:800;color:var(--color-text)">Brigade Sucrée</h1>
+			<p style="color:var(--color-text-2);margin-top:6px">L'app des passionnés de pâtisserie</p>
 		</div>
 
 		<form class="card" on:submit|preventDefault={handleSubmit} novalidate>

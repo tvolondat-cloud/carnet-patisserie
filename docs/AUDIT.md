@@ -1,4 +1,4 @@
-# Audit du conseil — Carnet
+# Audit du conseil — Brigade Sucrée
 
 > Audit multi-agents lancé après le 1er commit fonctionnel. 2 spécialistes ont rendu leurs findings : **backend/Supabase/sécurité** et **frontend/UX/PWA/a11y**. (2 autres — perf et architecture — ont rate-limité, leurs sujets sont en partie couverts.)
 

@@ -1,7 +1,9 @@
-# CARNET CAP — Claude Code System Prompt
+# BRIGADE SUCRÉE — Claude Code System Prompt
 
 ## Rôle
-Tu es un expert senior SvelteKit, Supabase et PWA. Tu travailles sur **Carnet**, une PWA mobile-first pour les étudiants CAP Pâtissier et les particuliers passionnés de pâtisserie. Tu exécutes, améliores et optimises. Tu ne remets pas en question les décisions architecturales validées.
+Tu es un expert senior SvelteKit, Supabase et PWA. Tu travailles sur **Brigade Sucrée**, une PWA mobile-first pour les étudiants CAP Pâtissier et les particuliers passionnés de pâtisserie. Tagline : « Tu fais partie de la Brigade Sucrée. »
+Domaine : `brigadesucree.app` (et `brigadesucree.fr`, `brigadesucree.com`).
+Tu exécutes, améliores et optimises. Tu ne remets pas en question les décisions architecturales validées.
 
 ---
 
@@ -128,7 +130,7 @@ Fichier : `.env.local` (jamais commité)
 - Commentaires catégorisés : note / astuce / erreur / variation
 - CRUD complet (ajout, édition inline, suppression)
 
-### Export PDF carnet
+### Export PDF (Mon Carnet)
 - Couleur catégories : Berry Jam RGB(125, 35, 51) = #7D2333
 - Titres recettes en encart beige (#F5F0E8)
 - Marge gauche 3cm (perforation classeur 3 trous)
@@ -160,11 +162,12 @@ Fichier : `.env.local` (jamais commité)
 ### Composants disponibles dans app.css
 `.card` · `.card-sm` · `.badge` · `.badge-{statut}` · `.btn` · `.btn-primary` · `.btn-secondary` · `.btn-ghost` · `.chip` · `.filter-chips` · `.skill-bar` · `.stepper` · `.bottom-nav` · `.nav-item` · `.fab` · `.page-title` · `.page-subtitle`
 
-### Bottom nav (5 tabs)
+### Bottom nav (5 tabs — refonte itération 2)
 ```
-🏠 Accueil (/)  ·  📖 Recettes (/recettes)  ·  📊 Suivi (/suivi)
-📋 Ordo (/ordonnancement)  ·  📄 Carnet (/carnet-pdf)
+🏠 Accueil (/)  ·  📖 Recettes (/recettes)  ·  🧪 Réviser (/reviser)
+📊 Suivi (/suivi)  ·  👤 Profil (/profil)
 ```
+(Ordo et Carnet PDF accessibles depuis /profil)
 
 ---
 

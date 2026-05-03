@@ -10,9 +10,9 @@ export default defineConfig({
 			includeAssets: ['favicon.ico', 'apple-touch-icon.png'],
 			manifest: {
 				id: '/',
-				name: 'Carnet CAP Pâtissier',
-				short_name: 'Carnet',
-				description: 'Ton carnet de recettes CAP Pâtissier',
+				name: 'Brigade Sucrée',
+				short_name: 'Brigade',
+				description: 'L\'app des étudiants CAP Pâtissier et des passionnés. Recettes, mode laboratoire, suivi de progression.',
 				lang: 'fr',
 				theme_color: '#6c63ff',
 				background_color: '#ffffff',
