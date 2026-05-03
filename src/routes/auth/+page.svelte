@@ -1,6 +1,7 @@
 <script>
 import { goto } from '$app/navigation';
 import { signInWithGoogle, signInWithEmail, signUpWithEmail, isAuthenticated } from '$lib/stores/auth.js';
+import { events } from '$lib/analytics.js';
 
 let mode = 'login';
 let email = '';
@@ -14,6 +15,7 @@ $: if ($isAuthenticated) goto('/');
 async function handleGoogle() {
 	errorMsg = '';
 	try {
+		events.login('google');
 		await signInWithGoogle();
 	} catch (e) {
 		errorMsg = e.message;
@@ -26,9 +28,11 @@ async function handleSubmit() {
 	try {
 		if (mode === 'login') {
 			await signInWithEmail(email, password);
+			events.login('email');
 			goto('/');
 		} else {
 			await signUpWithEmail(email, password, nom);
+			events.signUp('email');
 			goto('/');
 		}
 	} catch (e) {

@@ -3,6 +3,7 @@ import { page } from '$app/stores';
 import { goto } from '$app/navigation';
 import { recettes, commentaires, loadCommentaires, addCommentaire, deleteCommentaire, updateNotes, updateIngredient, addIngredient, deleteIngredient } from '$lib/stores/recettes.js';
 import { progression, updateProgression } from '$lib/stores/progression.js';
+import { events } from '$lib/analytics.js';
 import { derived } from 'svelte/store';
 import { onMount } from 'svelte';
 
@@ -11,6 +12,12 @@ $: recette = $recettes.find(r => r.id === id);
 $: p = $progression[id];
 $: statut = p?.statut ?? 'a-tester';
 $: recCommentaires = $commentaires[id] ?? [];
+
+let viewTracked = false;
+$: if (recette && !viewTracked) {
+	events.viewRecipe(recette);
+	viewTracked = true;
+}
 
 let multiplicateur = 1;
 let notes = '';
@@ -32,7 +39,10 @@ onMount(async () => {
 
 $: if (recette && notes !== recette.notes) {
 	clearTimeout(notesTimer);
-	notesTimer = setTimeout(() => updateNotes(id, notes), 800);
+	notesTimer = setTimeout(() => {
+		updateNotes(id, notes);
+		events.notesSaved(id);
+	}, 800);
 }
 
 function calcQte(q) {
@@ -49,7 +59,9 @@ async function advanceStatut() {
 	const order = ['a-tester', 'testee', 'validee', 'maitrisee'];
 	const i = order.indexOf(statut);
 	if (i < order.length - 1) {
-		await updateProgression(id, { statut: order[i + 1] });
+		const newStatut = order[i + 1];
+		await updateProgression(id, { statut: newStatut });
+		if (newStatut === 'maitrisee' && recette) events.recipeMastered(recette);
 		showToast('Statut mis à jour ! 🎉');
 	}
 }
@@ -57,6 +69,7 @@ async function advanceStatut() {
 async function handleAddComment() {
 	if (!newComment.trim()) return;
 	await addCommentaire(id, newComment.trim(), newCommentType);
+	events.commentAdded(id, newCommentType);
 	newComment = '';
 	showAddComment = false;
 	showToast('Commentaire ajouté ✅');

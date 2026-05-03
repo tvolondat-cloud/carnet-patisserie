@@ -2,6 +2,7 @@
 import { goto } from '$app/navigation';
 import { profile, session, signOut, updateProfile } from '$lib/stores/auth.js';
 import { stats } from '$lib/stores/progression.js';
+import { events, consentState, resetConsent } from '$lib/analytics.js';
 
 let editMode = false;
 let editFullName = '';
@@ -32,6 +33,7 @@ async function handleSave() {
 			profil_type: editProfilType
 		});
 		editMode = false;
+		events.profileUpdated();
 		showToast('Profil mis à jour ✅');
 	} catch (e) {
 		showToast('Erreur : ' + e.message);
@@ -42,6 +44,7 @@ async function handleSave() {
 
 async function handleSignOut() {
 	if (!confirm('Te déconnecter ?')) return;
+	events.signOut();
 	await signOut();
 	goto('/auth');
 }
@@ -151,6 +154,22 @@ async function handleSignOut() {
 				<div class="text-xs text-muted">Toutes les fonctionnalités</div>
 			</div>
 			<span class="badge badge-validee">Actif</span>
+		</div>
+	</div>
+
+	<!-- Confidentialité -->
+	<div class="card mb-3">
+		<div class="section-title mb-2">Confidentialité</div>
+		<div style="display:flex;justify-content:space-between;align-items:center">
+			<div>
+				<div class="text-sm font-medium">Cookies analytics</div>
+				<div class="text-xs text-muted">
+					{$consentState === 'granted' ? 'Acceptés' : $consentState === 'denied' ? 'Refusés' : 'Non décidés'}
+				</div>
+			</div>
+			<button type="button" class="btn btn-ghost btn-sm" on:click={resetConsent}>
+				Re-paramétrer
+			</button>
 		</div>
 	</div>
 

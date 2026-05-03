@@ -3,11 +3,18 @@ import { page } from '$app/stores';
 import { goto } from '$app/navigation';
 import { recettes } from '$lib/stores/recettes.js';
 import { progression, updateProgression } from '$lib/stores/progression.js';
+import { events } from '$lib/analytics.js';
 import { onMount, onDestroy } from 'svelte';
 
 $: id = $page.params.id;
 $: recette = $recettes.find(r => r.id === id);
 $: p = $progression[id];
+
+let labStartTracked = false;
+$: if (recette && !labStartTracked) {
+	events.labStarted(id);
+	labStartTracked = true;
+}
 
 let step = 0; // 0=tester, 1=quiz, 2=chrono
 let tested = false;
@@ -44,6 +51,7 @@ function stopChrono() {
 	const cibleSec = chronoCible * 60;
 	chronoValidated = chronoSeconds <= cibleSec * 1.2;
 	updateProgression(id, { chrono_seconds: chronoSeconds, chrono_valide: chronoValidated });
+	events.labChronoCompleted(id, chronoSeconds, chronoValidated);
 }
 
 function resetChrono() {
@@ -61,6 +69,7 @@ function submitQuiz() {
 	quizScore = questions.length ? Math.round((correct / questions.length) * 100) : 0;
 	quizSubmitted = true;
 	updateProgression(id, { quiz_score: quizScore });
+	events.labQuizCompleted(id, quizScore, quizScore >= 75);
 }
 
 function markTested() {
@@ -72,6 +81,7 @@ function markTested() {
 async function finishLab() {
 	if (allDone) {
 		await updateProgression(id, { statut: 'maitrisee' });
+		if (recette) events.recipeMastered(recette);
 	}
 	goto(`/recettes/${id}`);
 }

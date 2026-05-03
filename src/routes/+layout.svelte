@@ -5,6 +5,8 @@ import { goto } from '$app/navigation';
 import { initAuth, isAuthenticated, authLoading } from '$lib/stores/auth.js';
 import { loadRecettes } from '$lib/stores/recettes.js';
 import { loadProgression } from '$lib/stores/progression.js';
+import { initAnalytics, trackPageView } from '$lib/analytics.js';
+import ConsentBanner from '$lib/components/ConsentBanner.svelte';
 import '../app.css';
 
 const publicRoutes = ['/auth', '/auth/callback'];
@@ -12,6 +14,7 @@ const publicRoutes = ['/auth', '/auth/callback'];
 let initialized = false;
 
 onMount(async () => {
+	initAnalytics();
 	await initAuth();
 	initialized = true;
 	if ($isAuthenticated) {
@@ -22,6 +25,11 @@ onMount(async () => {
 $: currentPath = $page.url.pathname;
 $: isPublic = publicRoutes.some((r) => currentPath.startsWith(r));
 $: shouldRender = isPublic || $isAuthenticated;
+
+// Track page views à chaque navigation SvelteKit
+$: if (initialized && currentPath) {
+	trackPageView(currentPath);
+}
 
 $: if (initialized && !$authLoading && !$isAuthenticated && !isPublic) {
 	goto('/auth');
@@ -63,4 +71,6 @@ function isActive(href) {
 			{/each}
 		</nav>
 	{/if}
+
+	<ConsentBanner />
 {/if}

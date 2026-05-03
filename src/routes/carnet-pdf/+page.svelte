@@ -1,6 +1,7 @@
 <script>
 import { recettes } from '$lib/stores/recettes.js';
 import { progression } from '$lib/stores/progression.js';
+import { events } from '$lib/analytics.js';
 import recipesData from '$lib/data/recipes.json';
 
 const categories = recipesData.categories;
@@ -17,6 +18,7 @@ $: filtered = $recettes.filter(r => {
 
 async function generatePDF() {
 	generating = true;
+	events.pdfExported(filtered.length, onlyMaitrisees);
 	try {
 		const { jsPDF } = await import('jspdf');
 		const doc = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait' });
