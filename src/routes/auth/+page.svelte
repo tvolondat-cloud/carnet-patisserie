@@ -6,18 +6,22 @@ let mode = 'login';
 let email = '';
 let password = '';
 let nom = '';
-let error = '';
+let errorMsg = '';
 let loading = false;
 
 $: if ($isAuthenticated) goto('/');
 
 async function handleGoogle() {
-	try { await signInWithGoogle(); }
-	catch (e) { error = e.message; }
+	errorMsg = '';
+	try {
+		await signInWithGoogle();
+	} catch (e) {
+		errorMsg = e.message;
+	}
 }
 
 async function handleSubmit() {
-	error = '';
+	errorMsg = '';
 	loading = true;
 	try {
 		if (mode === 'login') {
@@ -28,24 +32,29 @@ async function handleSubmit() {
 			goto('/');
 		}
 	} catch (e) {
-		error = e.message;
+		errorMsg = e.message;
 	} finally {
 		loading = false;
 	}
+}
+
+function toggleMode() {
+	mode = mode === 'login' ? 'signup' : 'login';
+	errorMsg = '';
 }
 </script>
 
 <div style="min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;background:var(--color-bg)">
 	<div style="width:100%;max-width:380px">
 		<div style="text-align:center;margin-bottom:32px">
-			<div style="font-size:3rem;margin-bottom:12px">🥐</div>
+			<div style="font-size:3rem;margin-bottom:12px" aria-hidden="true">🥐</div>
 			<h1 style="font-size:1.8rem;font-weight:800;color:var(--color-text)">Carnet</h1>
 			<p style="color:var(--color-text-2);margin-top:6px">Ton carnet CAP Pâtissier</p>
 		</div>
 
-		<div class="card">
-			<button class="btn btn-secondary btn-block mb-3" on:click={handleGoogle} style="gap:10px">
-				<img src="https://www.google.com/favicon.ico" alt="Google" width="18" height="18">
+		<form class="card" on:submit|preventDefault={handleSubmit} novalidate>
+			<button type="button" class="btn btn-secondary btn-block mb-3" on:click={handleGoogle} style="gap:10px">
+				<img src="https://www.google.com/favicon.ico" alt="" aria-hidden="true" width="18" height="18" />
 				Continuer avec Google
 			</button>
 
@@ -56,36 +65,63 @@ async function handleSubmit() {
 			</div>
 
 			{#if mode === 'signup'}
-			<div class="form-group">
-				<label class="label">Ton prénom</label>
-				<input class="input" type="text" placeholder="Léa" bind:value={nom}>
-			</div>
+				<div class="form-group">
+					<label class="label" for="auth-nom">Ton prénom</label>
+					<input id="auth-nom" class="input" type="text" placeholder="Léa" bind:value={nom} autocomplete="given-name" />
+				</div>
 			{/if}
 
 			<div class="form-group">
-				<label class="label">Email</label>
-				<input class="input" type="email" placeholder="lea@example.com" bind:value={email}>
+				<label class="label" for="auth-email">Email</label>
+				<input
+					id="auth-email"
+					class="input"
+					type="email"
+					placeholder="lea@example.com"
+					bind:value={email}
+					autocomplete="email"
+					required
+				/>
 			</div>
 
 			<div class="form-group">
-				<label class="label">Mot de passe</label>
-				<input class="input" type="password" placeholder="••••••••" bind:value={password}>
+				<label class="label" for="auth-password">Mot de passe</label>
+				<input
+					id="auth-password"
+					class="input"
+					type="password"
+					placeholder="••••••••"
+					bind:value={password}
+					autocomplete={mode === 'login' ? 'current-password' : 'new-password'}
+					required
+					minlength="6"
+				/>
 			</div>
 
-			{#if error}
-			<div style="background:#fee2e2;color:#dc2626;padding:10px 14px;border-radius:var(--radius-md);font-size:0.85rem;margin-bottom:12px">{error}</div>
+			{#if errorMsg}
+				<div
+					role="alert"
+					style="background:#fee2e2;color:#dc2626;padding:10px 14px;border-radius:var(--radius-md);font-size:0.85rem;margin-bottom:12px"
+				>
+					{errorMsg}
+				</div>
 			{/if}
 
-			<button class="btn btn-primary btn-block" on:click={handleSubmit} disabled={loading}>
+			<button type="submit" class="btn btn-primary btn-block" disabled={loading}>
 				{loading ? '⏳ Connexion...' : mode === 'login' ? 'Se connecter' : 'Créer mon compte'}
 			</button>
 
 			<p class="text-center text-sm mt-3" style="color:var(--color-text-2)">
-				{mode === 'login' ? "Pas encore de compte ?" : "Déjà un compte ?"}
-				<button class="btn-ghost" style="color:var(--color-brand);font-weight:600;padding:0" on:click={() => mode = mode === 'login' ? 'signup' : 'login'}>
-					{mode === 'login' ? "S'inscrire" : "Se connecter"}
+				{mode === 'login' ? 'Pas encore de compte ?' : 'Déjà un compte ?'}
+				<button
+					type="button"
+					class="btn-ghost"
+					style="color:var(--color-brand);font-weight:600;padding:0;background:none;border:none;cursor:pointer"
+					on:click={toggleMode}
+				>
+					{mode === 'login' ? "S'inscrire" : 'Se connecter'}
 				</button>
 			</p>
-		</div>
+		</form>
 	</div>
 </div>

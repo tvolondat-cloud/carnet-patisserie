@@ -9,17 +9,22 @@ export default defineConfig({
 			registerType: 'autoUpdate',
 			includeAssets: ['favicon.ico', 'apple-touch-icon.png'],
 			manifest: {
+				id: '/',
 				name: 'Carnet CAP Pâtissier',
 				short_name: 'Carnet',
 				description: 'Ton carnet de recettes CAP Pâtissier',
+				lang: 'fr',
 				theme_color: '#6c63ff',
 				background_color: '#ffffff',
 				display: 'standalone',
 				orientation: 'portrait',
+				scope: '/',
 				start_url: '/',
+				categories: ['food', 'education', 'productivity'],
 				icons: [
-					{ src: 'icon-192.png', sizes: '192x192', type: 'image/png' },
-					{ src: 'icon-512.png', sizes: '512x512', type: 'image/png' }
+					{ src: 'icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
+					{ src: 'icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
+					{ src: 'icon-maskable-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' }
 				]
 			},
 			workbox: {

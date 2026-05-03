@@ -9,27 +9,31 @@ import '../app.css';
 
 const publicRoutes = ['/auth', '/auth/callback'];
 
+let initialized = false;
+
 onMount(async () => {
 	await initAuth();
+	initialized = true;
 	if ($isAuthenticated) {
 		await Promise.all([loadRecettes(), loadProgression()]);
 	}
 });
 
-$: if (!$authLoading) {
-	const isPublic = publicRoutes.some(r => $page.url.pathname.startsWith(r));
-	if (!$isAuthenticated && !isPublic) goto('/auth');
+$: currentPath = $page.url.pathname;
+$: isPublic = publicRoutes.some((r) => currentPath.startsWith(r));
+$: shouldRender = isPublic || $isAuthenticated;
+
+$: if (initialized && !$authLoading && !$isAuthenticated && !isPublic) {
+	goto('/auth');
 }
 
 const navItems = [
-	{ href: '/',               icon: '🏠', label: 'Accueil' },
-	{ href: '/recettes',       icon: '📖', label: 'Recettes' },
-	{ href: '/suivi',          icon: '📊', label: 'Suivi' },
-	{ href: '/ordonnancement', icon: '📋', label: 'Ordo' },
-	{ href: '/carnet-pdf',     icon: '📄', label: 'Carnet' },
+	{ href: '/', icon: '🏠', label: 'Accueil' },
+	{ href: '/recettes', icon: '📖', label: 'Recettes' },
+	{ href: '/reviser', icon: '🧪', label: 'Réviser' },
+	{ href: '/suivi', icon: '📊', label: 'Suivi' },
+	{ href: '/profil', icon: '👤', label: 'Profil' }
 ];
-
-$: currentPath = $page.url.pathname;
 
 function isActive(href) {
 	if (href === '/') return currentPath === '/';
@@ -37,21 +41,26 @@ function isActive(href) {
 }
 </script>
 
-{#if $authLoading}
-<div style="display:flex;align-items:center;justify-content:center;min-height:100dvh;">
-	<div class="spinner"></div>
-</div>
-{:else}
-<slot />
+{#if $authLoading || !initialized}
+	<div style="display:flex;align-items:center;justify-content:center;min-height:100dvh">
+		<div class="spinner" role="status" aria-label="Chargement"></div>
+	</div>
+{:else if shouldRender}
+	<slot />
 
-{#if $isAuthenticated && !publicRoutes.some(r => currentPath.startsWith(r))}
-<nav class="bottom-nav">
-	{#each navItems as item}
-	<a href={item.href} class="nav-item" class:active={isActive(item.href)}>
-		<span class="nav-icon">{item.icon}</span>
-		<span>{item.label}</span>
-	</a>
-	{/each}
-</nav>
-{/if}
+	{#if $isAuthenticated && !isPublic}
+		<nav class="bottom-nav" aria-label="Navigation principale">
+			{#each navItems as item (item.href)}
+				<a
+					href={item.href}
+					class="nav-item"
+					class:active={isActive(item.href)}
+					aria-current={isActive(item.href) ? 'page' : undefined}
+				>
+					<span class="nav-icon" aria-hidden="true">{item.icon}</span>
+					<span>{item.label}</span>
+				</a>
+			{/each}
+		</nav>
+	{/if}
 {/if}

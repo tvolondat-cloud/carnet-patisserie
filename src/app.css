@@ -30,6 +30,23 @@
   --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --nav-h: 64px;
   --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-top: env(safe-area-inset-top, 0px);
+}
+
+/* ── DARK MODE ──────────────────────────────────────────────── */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #0f172a;
+    --color-surface: #1e293b;
+    --color-surface-2: #273448;
+    --color-border: #334155;
+    --color-text: #f1f5f9;
+    --color-text-2: #cbd5e1;
+    --color-text-3: #94a3b8;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
+  }
 }
 
 /* ── RESET ──────────────────────────────────────────────────── */
@@ -46,11 +63,29 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 input, textarea, select { font: inherit; }
 img { max-width: 100%; display: block; }
 
+/* ── A11Y : focus visible ───────────────────────────────────── */
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── A11Y : prefers-reduced-motion ──────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /* ── LAYOUT ─────────────────────────────────────────────────── */
 .page {
   max-width: 480px;
   margin: 0 auto;
-  padding: 16px 16px calc(var(--nav-h) + var(--safe-bottom) + 16px);
+  padding: calc(16px + var(--safe-top)) 16px calc(var(--nav-h) + var(--safe-bottom) + 16px);
   min-height: 100dvh;
 }
 .page-title {
@@ -297,8 +332,10 @@ img { max-width: 100%; display: block; }
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 3px;
   flex: 1;
+  min-height: 48px;
   padding: 4px 0;
   color: var(--color-text-3);
   font-size: 0.65rem;

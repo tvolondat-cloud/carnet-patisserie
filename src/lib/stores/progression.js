@@ -4,33 +4,45 @@ import { session } from './auth.js';
 import { recettes } from './recettes.js';
 
 export const progression = writable({});
+export const progressionLoading = writable(false);
 
 export async function loadProgression() {
 	const s = get(session);
 	if (!s) return;
-	const { data } = await supabase
-		.from('progression')
-		.select('*')
-		.eq('user_id', s.user.id);
-	const map = {};
-	for (const p of data ?? []) map[p.recette_id] = p;
-	progression.set(map);
+	progressionLoading.set(true);
+	try {
+		const { data, error } = await supabase
+			.from('progression')
+			.select('*')
+			.eq('user_id', s.user.id);
+		if (error) throw error;
+		const map = {};
+		for (const p of data ?? []) map[p.recette_id] = p;
+		progression.set(map);
+	} catch (err) {
+		console.error('loadProgression:', err);
+	} finally {
+		progressionLoading.set(false);
+	}
 }
 
 export async function updateProgression(recetteId, updates) {
 	const s = get(session);
-	const existing = get(progression)[recetteId];
-	if (existing) {
-		await supabase.from('progression').update(updates).eq('id', existing.id);
-		progression.update(p => ({ ...p, [recetteId]: { ...existing, ...updates } }));
-	} else {
-		const { data } = await supabase
-			.from('progression')
-			.insert({ recette_id: recetteId, user_id: s.user.id, ...updates })
-			.select()
-			.single();
-		progression.update(p => ({ ...p, [recetteId]: data }));
+	const previous = get(progression);
+	const existing = previous[recetteId];
+	const merged = { ...existing, ...updates, recette_id: recetteId, user_id: s.user.id };
+	progression.update((p) => ({ ...p, [recetteId]: merged }));
+
+	const { data, error } = await supabase
+		.from('progression')
+		.upsert(merged, { onConflict: 'user_id,recette_id' })
+		.select()
+		.single();
+	if (error) {
+		progression.set(previous);
+		throw error;
 	}
+	progression.update((p) => ({ ...p, [recetteId]: data }));
 }
 
 export const stats = derived([recettes, progression], ([$recettes, $progression]) => {
@@ -43,7 +55,8 @@ export const stats = derived([recettes, progression], ([$recettes, $progression]
 		const statut = p?.statut ?? 'a-tester';
 		byStatut[statut] = (byStatut[statut] ?? 0) + 1;
 
-		const weight = statut === 'maitrisee' ? 1 : statut === 'validee' ? 0.66 : statut === 'testee' ? 0.33 : 0;
+		const weight =
+			statut === 'maitrisee' ? 1 : statut === 'validee' ? 0.66 : statut === 'testee' ? 0.33 : 0;
 		for (const comp of r.competences ?? []) {
 			if (!competenceScores[comp]) competenceScores[comp] = { sum: 0, count: 0 };
 			competenceScores[comp].sum += weight;
