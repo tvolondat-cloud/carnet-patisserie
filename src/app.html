@@ -23,6 +23,16 @@
 		<meta name="twitter:card" content="summary" />
 		<title>Brigade Sucrée — Ton CAP Pâtissier</title>
 
+		<!-- Force le domaine canonique : redirige .pages.dev et www vers l'apex brigadesucree.app -->
+		<script>
+			(function(){
+				var h = location.hostname;
+				if (h === 'brigade-sucree.pages.dev' || h === 'www.brigadesucree.app') {
+					location.replace('https://brigadesucree.app' + location.pathname + location.search + location.hash);
+				}
+			})();
+		</script>
+
 		<!-- Consent Mode v2 : DENIED par défaut, sera "granted" si user accepte -->
 		<script>
 			window.dataLayer = window.dataLayer || [];

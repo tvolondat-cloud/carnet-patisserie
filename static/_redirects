@@ -1,7 +1,0 @@
-# Redirige toute requête arrivant sur le domaine .pages.dev vers le domaine canonique
-# Voir : https://developers.cloudflare.com/pages/configuration/redirects/
-
-https://brigade-sucree.pages.dev/* https://brigadesucree.app/:splat 301!
-
-# Idem pour www → apex
-https://www.brigadesucree.app/* https://brigadesucree.app/:splat 301!
