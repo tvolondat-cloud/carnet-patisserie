@@ -94,13 +94,6 @@
 									{ "type": "TEMPLATE", "key": "name", "value": "page_path" },
 									{ "type": "TEMPLATE", "key": "value", "value": "{{DLV - page_path}}" }
 								]
-							},
-							{
-								"type": "MAP",
-								"map": [
-									{ "type": "TEMPLATE", "key": "name", "value": "page_title" },
-									{ "type": "TEMPLATE", "key": "value", "value": "{{DLV - page_title}}" }
-								]
 							}
 						]
 					}
@@ -515,19 +508,6 @@
 					{ "type": "INTEGER", "key": "dataLayerVersion", "value": "2" },
 					{ "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" },
 					{ "type": "TEMPLATE", "key": "name", "value": "page_path" }
-				],
-				"fingerprint": "0"
-			},
-			{
-				"accountId": "0",
-				"containerId": "0",
-				"variableId": "23",
-				"name": "DLV - page_title",
-				"type": "v",
-				"parameter": [
-					{ "type": "INTEGER", "key": "dataLayerVersion", "value": "2" },
-					{ "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" },
-					{ "type": "TEMPLATE", "key": "name", "value": "page_title" }
 				],
 				"fingerprint": "0"
 			},
