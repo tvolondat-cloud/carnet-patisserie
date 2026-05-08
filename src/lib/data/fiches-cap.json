@@ -1,0 +1,946 @@
+{
+	"categories": [
+		{ "id": "cadre", "label": "Cadre du diplôme", "emoji": "🎓", "color": "#6c63ff" },
+		{ "id": "ep1", "label": "EP1 — Tour & gâteaux de voyage", "emoji": "🥐", "color": "#f59e0b" },
+		{ "id": "ep2", "label": "EP2 — Entremets & petits gâteaux", "emoji": "🎂", "color": "#ec4899" },
+		{ "id": "technologie", "label": "Technologie des produits", "emoji": "🧪", "color": "#10b981" },
+		{ "id": "techniques", "label": "Techniques de base", "emoji": "🛠️", "color": "#3b82f6" },
+		{ "id": "hygiene", "label": "Hygiène & sécurité", "emoji": "🧼", "color": "#06b6d4" },
+		{ "id": "organisation", "label": "Organisation & gestion", "emoji": "📋", "color": "#8b5cf6" },
+		{ "id": "recettes", "label": "Recettes incontournables", "emoji": "📖", "color": "#ef4444" },
+		{ "id": "pieges", "label": "Pièges fréquents", "emoji": "⚠️", "color": "#f97316" },
+		{ "id": "vocabulaire", "label": "Vocabulaire", "emoji": "📚", "color": "#64748b" }
+	],
+	"fiches": [
+		{
+			"id": "f1",
+			"numero": 1,
+			"categorie": "cadre",
+			"titre": "Finalité du CAP",
+			"theme": "Le CAP Pâtissier forme un professionnel capable de fabriquer, à partir de matières premières, des produits de pâtisserie destinés à la commercialisation, dans le respect des règles d'hygiène, de traçabilité, de santé et de sécurité.",
+			"notions": [
+				"Le titulaire du CAP est un ouvrier/ouvrière de fabrication qualifié·e",
+				"Il travaille sur des produits à base de pâtes, crèmes, garnitures, décors, produits de finition et produits salés (quiche, pizza)",
+				"La logique métier repose sur la régularité, la précision, la maîtrise des coûts et la qualité marchande"
+			],
+			"techniques": [
+				"Organiser sa production",
+				"Réaliser, cuire, garnir, glacer, décorer et valoriser",
+				"Travailler proprement, vite et sans gaspillage"
+			],
+			"tips": [
+				"Ne pas confondre « faire une recette » avec « maîtriser un poste de production »",
+				"Le jury évalue aussi la méthode, la propreté, l'enchaînement des tâches et la présentation finale"
+			],
+			"piege": "Le CAP ne demande pas seulement de savoir cuire : il demande d'enchaîner fabrication, organisation, finition et valorisation."
+		},
+		{
+			"id": "f2",
+			"numero": 2,
+			"categorie": "cadre",
+			"titre": "Structure de l'examen",
+			"theme": "Le diplôme repose sur des épreuves professionnelles, une épreuve de prévention-santé-environnement et des épreuves générales, avec dispenses possibles selon le parcours.",
+			"notions": [
+				"Deux grands blocs professionnels : EP1 (Tour, petits fours secs et moelleux, gâteaux de voyage) et EP2 (Entremets et petits gâteaux)",
+				"Le programme comprend aussi PSE, français, histoire-géographie, mathématiques-sciences, EPS et langue vivante selon les cas",
+				"La formation dure généralement 2 ans, avec 14 semaines de PFMP en voie scolaire"
+			],
+			"techniques": [
+				"Lire un sujet, planifier, exécuter, contrôler, corriger",
+				"Gérer le temps d'épreuve et l'enchaînement des fabrications"
+			],
+			"tips": [
+				"Beaucoup de candidats perdent des points sur la gestion du temps avant même la technique",
+				"Un produit juste « bon » mais mal fini est souvent moins bien valorisé qu'un produit régulier, propre et lisible"
+			],
+			"piege": "Les épreuves n'évaluent pas seulement la recette finale, mais aussi l'organisation du poste et la qualité marchande."
+		},
+		{
+			"id": "f3",
+			"numero": 3,
+			"categorie": "ep1",
+			"titre": "Logique du bloc 1 (EP1)",
+			"theme": "Le bloc 1 regroupe la production de pâtes de base, la cuisson, les petits fours et les gâteaux de voyage, avec une forte exigence de précision sur les textures et les cuissons.",
+			"notions": [
+				"L'EP1 valide la capacité à produire des fabrications de base et des produits de conservation ou de transport",
+				"Le sujet impose au moins deux pâtes (dont une levée, levée feuilletée ou feuilletée), une crème par cuisson, un fonçage et une fabrication de petit four ou gâteau de voyage"
+			],
+			"techniques": [
+				"Tourage, abaisse, fonçage, détaillage",
+				"Pochage, dressage, cuisson régulière",
+				"Gestion du froid, du repos et de la détente des pâtes"
+			],
+			"tips": [
+				"Une pâte mal détendue se rétracte, casse ou perd sa régularité",
+				"Beaucoup d'erreurs viennent d'un excès de farine ou d'un manque de repos"
+			],
+			"piege": "Le bloc 1 n'est pas « juste des tartes » : il vise les fondamentaux de la pâte, de la cuisson et du petit four."
+		},
+		{
+			"id": "f4",
+			"numero": 4,
+			"categorie": "ep1",
+			"titre": "Matières premières du bloc 1",
+			"theme": "Le candidat doit connaître la fonction technologique des matières premières pour adapter la fabrication et anticiper les défauts.",
+			"notions": [
+				"Farines, œufs, produits sucrés, matières grasses, fruits, produits laitiers, agents levants, gélifiants et arômes ont chacun un rôle précis",
+				"La qualité, la fraîcheur, le stockage et la conservation conditionnent le résultat final"
+			],
+			"techniques": [
+				"Lire un bon de livraison, contrôler l'état et la température, stocker correctement",
+				"Peser avec rigueur et respecter les ordres d'incorporation"
+			],
+			"tips": [
+				"Confondre « sucre » et « fonction du sucre » : pouvoir sucrant, texture, coloration, conservation",
+				"Négliger le rôle de la matière grasse sur le feuilletage, le sablage ou le moelleux"
+			],
+			"piege": "Le candidat doit raisonner en fonction des ingrédients, pas seulement en nom de recette."
+		},
+		{
+			"id": "f5",
+			"numero": 5,
+			"categorie": "ep1",
+			"titre": "Pâtes de base",
+			"theme": "Les pâtes sont la colonne vertébrale du bloc 1 : elles conditionnent la texture, la tenue, le développement et l'esthétique.",
+			"notions": [
+				"Pâte feuilletée, pâte levée feuilletée, pâte sucrée, pâte sablée, pâte à choux : chacune répond à une logique de structure différente",
+				"Repos, température, ordre de mélange et hydratation sont déterminants"
+			],
+			"techniques": [
+				"Frasage, pétrissage, tourage, fonçage, détaillage, garnissage",
+				"Abaisse régulière, épaisseur constante, découpe nette"
+			],
+			"tips": [
+				"Trop travailler une pâte la rend élastique ou cassante selon le type",
+				"Oublier la détente avant cuisson crée rétractation et déformation"
+			],
+			"piege": "Le feuilletage ne se « crée » pas au four par magie : il dépend du couche-couche beurre/pâte et d'une gestion parfaite de la température."
+		},
+		{
+			"id": "f6",
+			"numero": 6,
+			"categorie": "ep1",
+			"titre": "Petits fours secs et moelleux",
+			"theme": "Les petits fours évaluent la précision, la régularité du pochage, le dosage et la maîtrise de cuisson.",
+			"notions": [
+				"« Sec » désigne la famille des petits fours à faible humidité, pas un produit sec en bouche",
+				"« Moelleux » implique équilibre entre sucre, matière grasse, œufs et cuisson"
+			],
+			"techniques": [
+				"Dresser à la poche, portionner régulièrement, cuire uniformément",
+				"Éviter l'étalement, la casse et la coloration excessive"
+			],
+			"recettes_associees": ["Sablés", "Tuiles", "Financiers", "Madeleines", "Langues de chat", "Rochers", "Meringues"],
+			"tips": [
+				"Même diamètre, même poids, même espacement : sinon cuisson irrégulière",
+				"Surveiller la couleur plus que l'horloge uniquement"
+			],
+			"piege": "Le petit four est jugé autant sur la régularité que sur le goût."
+		},
+		{
+			"id": "f7",
+			"numero": 7,
+			"categorie": "ep1",
+			"titre": "Gâteaux de voyage",
+			"theme": "Le gâteau de voyage doit être stable, transportable, régulier et goûteux après conservation.",
+			"notions": [
+				"Un gâteau de voyage supporte stockage et déplacement mieux qu'une pâtisserie fraîche fragile",
+				"Sa texture doit rester moelleuse ou fondante sans perdre sa tenue"
+			],
+			"techniques": [
+				"Monter un appareil homogène",
+				"Adapter le moule, le graissage, la cuisson et le refroidissement"
+			],
+			"recettes_associees": ["Cake citron", "Financiers", "Madeleines", "Marbrés"],
+			"tips": [
+				"Sous-cuisson au centre ou surcuisson des bords",
+				"Mauvais démoulage à cause d'un moule mal préparé"
+			],
+			"piege": "Un gâteau de voyage doit être pensé pour la tenue dans le temps, pas seulement pour le service immédiat."
+		},
+		{
+			"id": "f8",
+			"numero": 8,
+			"categorie": "ep1",
+			"titre": "EP1 — Organisation et attentes",
+			"theme": "L'EP1 valorise l'organisation du travail, la lecture de sujet et l'exécution propre des fabrications.",
+			"notions": [
+				"Partie écrite, puis partie pratique, puis échanges d'analyse avec le jury",
+				"L'organisation de la production et l'analyse de la fabrication font partie de l'évaluation"
+			],
+			"techniques": [
+				"Faire une chronologie de travail",
+				"Anticiper refroidissements, repos, cuissons et finitions"
+			],
+			"tips": [
+				"Commencer sans plan = perte de temps",
+				"Oublier de décaler les temps de repos entraîne des retards en cascade"
+			],
+			"piege": "L'épreuve n'est pas un concours d'improvisation ; c'est une démonstration de méthode."
+		},
+		{
+			"id": "f9",
+			"numero": 9,
+			"categorie": "ep2",
+			"titre": "Logique du bloc 2 (EP2)",
+			"theme": "Le bloc 2 porte sur les entremets et petits gâteaux, avec une dominante de montage, finition, décor et valorisation esthétique.",
+			"notions": [
+				"L'EP2 évalue la capacité à produire, monter, glacer, décorer et valoriser des entremets et petits gâteaux",
+				"Le bloc met l'accent sur la créativité maîtrisée et la finition marchande"
+			],
+			"techniques": [
+				"Préparer un organigramme de production",
+				"Monter un entremets au cercle ou monté",
+				"Glacer, décorer, écrire au cornet, réaliser un décor chocolat"
+			],
+			"tips": [
+				"Un entremets très bon mais mal nivelé ou mal glacé perd beaucoup de points",
+				"Le décor doit être net, cohérent et adapté au produit"
+			],
+			"piege": "L'EP2 ne juge pas seulement le goût : elle juge l'architecture du produit."
+		},
+		{
+			"id": "f10",
+			"numero": 10,
+			"categorie": "ep2",
+			"titre": "Fonds et biscuits",
+			"theme": "Les fonds et biscuits assurent la structure de l'entremets et des petits gâteaux.",
+			"notions": [
+				"Un fond doit être adapté à la garniture : soutien, moelleux, croustillant ou texture aérée",
+				"Les biscuits servent de base, d'intercalaire ou de support au montage"
+			],
+			"techniques": [
+				"Monter un appareil à biscuit",
+				"Dresser en plaque ou en cercle",
+				"Cuire sans dessécher ni affaisser"
+			],
+			"recettes_associees": ["Génoise", "Dacquoise", "Joconde", "Biscuit cuillère"],
+			"tips": [
+				"Un biscuit trop cuit casse au montage",
+				"Un biscuit mal refroidi détrempe la crème"
+			],
+			"piege": "Le fond n'est pas un simple « support » : il fait partie intégrante de l'équilibre gustatif."
+		},
+		{
+			"id": "f11",
+			"numero": 11,
+			"categorie": "ep2",
+			"titre": "Garnitures et crèmes",
+			"theme": "Les garnitures donnent la saveur, l'onctuosité, le contraste et la tenue interne des entremets.",
+			"notions": [
+				"Mousses, crèmes bavaroises, crèmes au beurre, crèmes dérivées, compotées, croustillants et inserts jouent des rôles complémentaires",
+				"Température, gélification et foisonnement influencent la texture"
+			],
+			"techniques": [
+				"Réaliser une crème homogène",
+				"Incorporer délicatement une masse foisonnée",
+				"Refroidir sans grumeaux ni croûte"
+			],
+			"recettes_associees": ["Crème pâtissière", "Crème mousseline", "Crème diplomate", "Crème anglaise", "Crème au beurre"],
+			"tips": [
+				"Une crème trop chaude fait fondre la structure",
+				"Une crème trop froide se poche mal et déchire le biscuit"
+			],
+			"piege": "« Léger » ne veut pas dire « sans tenue » : une mousse doit rester stable."
+		},
+		{
+			"id": "f12",
+			"numero": 12,
+			"categorie": "ep2",
+			"titre": "Montage et glaçage",
+			"theme": "Le montage conditionne la hauteur, la régularité, la netteté des bords et la coupe du produit fini.",
+			"notions": [
+				"Le montage se fait avec logique de couches, de même dimension et d'épaisseur régulière",
+				"Le glaçage et la finition protègent, lissent et valorisent le produit"
+			],
+			"techniques": [
+				"Monter en cercle, lisser, surgeler si nécessaire",
+				"Couler ou étaler un glaçage à bonne température",
+				"Obtenir arêtes nettes et surface uniforme"
+			],
+			"tips": [
+				"Trop chaud = glaçage trop fluide",
+				"Trop froid = glaçage figé et irrégulier"
+			],
+			"piege": "Le glaçage n'est pas un camouflage ; il révèle la précision du montage."
+		},
+		{
+			"id": "f13",
+			"numero": 13,
+			"categorie": "ep2",
+			"titre": "Décors et valorisation",
+			"theme": "La finition transforme une bonne fabrication en produit vendable et lisible visuellement.",
+			"notions": [
+				"L'écriture au cornet, le décor chocolat, la finition fruitée et la présentation sur plateau participent à la valorisation",
+				"L'esthétique doit rester cohérente avec la nature du produit"
+			],
+			"techniques": [
+				"Tempérage ou mise en forme du chocolat selon besoin",
+				"Corne, poche, douille, écriture propre, symétrie",
+				"Nettoyage des bords et du support"
+			],
+			"tips": [
+				"Trop de décor tue la lecture du produit",
+				"Un décor sale ou mal placé pénalise fortement la perception"
+			],
+			"piege": "« Décorer » n'est pas « charger » : il faut souligner le produit, pas le masquer."
+		},
+		{
+			"id": "f14",
+			"numero": 14,
+			"categorie": "ep2",
+			"titre": "EP2 — Organisation et coût",
+			"theme": "L'EP2 intègre l'organisation de la production, l'évaluation de la qualité marchande et la mesure du coût des produits fabriqués.",
+			"notions": [
+				"Le candidat élabore un organigramme de travail puis justifie ses choix techniques",
+				"Le coût de revient ou le coût matière fait partie de la logique professionnelle"
+			],
+			"techniques": [
+				"Planifier les étapes pour respecter les refroidissements",
+				"Rationaliser les pertes",
+				"Contrôler la quantité utile des ingrédients"
+			],
+			"tips": [
+				"Tout faire en même temps au lieu de hiérarchiser les tâches",
+				"Oublier l'impact des chutes et des surdosages sur le coût matière"
+			],
+			"piege": "Le coût n'est pas un sujet « comptable à part » : il influence les choix de fabrication au quotidien."
+		},
+		{
+			"id": "f15",
+			"numero": 15,
+			"categorie": "technologie",
+			"titre": "Farines et céréales",
+			"theme": "La farine structure la majorité des pâtes et influence élasticité, friabilité, développement et tenue.",
+			"notions": [
+				"Le gluten donne élasticité et réseau",
+				"La force de la farine conditionne la levée et la tenue des pâtes"
+			],
+			"techniques": [
+				"Choisir une farine adaptée au produit",
+				"Éviter de surtravailler les pâtes à gluten"
+			],
+			"tips": [
+				"Une farine trop forte sur une pâte sablée peut la rendre dure",
+				"Une farine mal adaptée au feuilletage perturbe le développement"
+			],
+			"piege": "La farine n'a pas seulement une fonction « de masse » : elle pilote la texture."
+		},
+		{
+			"id": "f16",
+			"numero": 16,
+			"categorie": "technologie",
+			"titre": "Œufs, sucres et matières grasses",
+			"theme": "Ces ingrédients gouvernent texture, couleur, stabilité, foisonnement et conservation.",
+			"notions": [
+				"Les œufs apportent eau, protéines, émulsion et coloration",
+				"Les sucres participent au goût, à l'humidité, à la coloration et à la conservation",
+				"Les matières grasses jouent sur le fondant, le sablage, la plasticité et le feuilletage"
+			],
+			"techniques": [
+				"Peser précisément",
+				"Incorporer à la bonne température",
+				"Utiliser le bon type de sucre ou de matière grasse selon la recette"
+			],
+			"tips": [
+				"Trop de sucre peut freiner la prise ou la cuisson",
+				"Un beurre trop froid ou trop chaud dégrade le résultat"
+			],
+			"piege": "Le sucre n'est pas seulement sucrant ; il agit sur la structure du produit."
+		},
+		{
+			"id": "f17",
+			"numero": 17,
+			"categorie": "technologie",
+			"titre": "Fruits, lait et produits laitiers",
+			"theme": "Ces matières premières apportent goût, humidité, acidité, fraîcheur et variété de textures.",
+			"notions": [
+				"Les fruits peuvent être crus, cuits, en compotée, en insert ou en décor",
+				"Le lait et les crèmes interviennent dans les appareils, les crèmes et les montages"
+			],
+			"techniques": [
+				"Gérer l'humidité apportée par les fruits",
+				"Adapter la conservation des produits laitiers",
+				"Cuire ou gélifier selon l'usage"
+			],
+			"tips": [
+				"Un fruit trop aqueux détrempe un fond",
+				"Une compotée trop chaude fait fondre le montage"
+			],
+			"piege": "Les fruits ne sont pas seulement décoratifs : ils modifient l'équilibre global."
+		},
+		{
+			"id": "f18",
+			"numero": 18,
+			"categorie": "hygiene",
+			"titre": "Hygiène alimentaire",
+			"theme": "L'hygiène est une exigence centrale de production, de conservation et de commercialisation.",
+			"notions": [
+				"Le respect des règles d'hygiène, de santé et de sécurité est au cœur du diplôme",
+				"La traçabilité, le contrôle des températures et le plan de nettoyage sont des piliers opérationnels"
+			],
+			"techniques": [
+				"Se laver les mains correctement et au bon moment",
+				"Séparer cru/cuit, propre/sale, allergènes et non allergènes quand nécessaire",
+				"Nettoyer, désinfecter et enregistrer les opérations"
+			],
+			"tips": [
+				"Oublier une prise de température ou une étiquette de traçabilité peut coûter cher",
+				"Un poste beau mais sale reste un mauvais poste"
+			],
+			"piege": "L'hygiène n'est pas seulement « nettoyer » : c'est une organisation permanente."
+		},
+		{
+			"id": "f19",
+			"numero": 19,
+			"categorie": "hygiene",
+			"titre": "Traçabilité et réception",
+			"theme": "Chaque denrée doit pouvoir être suivie depuis sa réception jusqu'à son utilisation ou sa vente.",
+			"notions": [
+				"La traçabilité permet d'identifier l'origine et la destination d'un produit",
+				"La réception inclut contrôle visuel, température, DLC/DDM, état du conditionnement et conformité documentaire"
+			],
+			"techniques": [
+				"Vérifier les livraisons et consigner les anomalies",
+				"Ranger immédiatement selon les zones de stockage",
+				"Conserver les documents nécessaires"
+			],
+			"tips": [
+				"Accepter une marchandise douteuse « pour ne pas perdre de temps » est une faute professionnelle",
+				"Ne pas étiqueter correctement rend la gestion impossible"
+			],
+			"piege": "La traçabilité est aussi un outil de défense en cas de contrôle ou d'alerte sanitaire."
+		},
+		{
+			"id": "f20",
+			"numero": 20,
+			"categorie": "hygiene",
+			"titre": "Sécurité et poste de travail",
+			"theme": "La sécurité concerne les risques physiques, thermiques, chimiques et matériels du laboratoire.",
+			"notions": [
+				"Le poste doit être organisé pour limiter les accidents",
+				"Les températures, les machines, les couteaux et les fours sont des sources de danger"
+			],
+			"techniques": [
+				"Porter la tenue adaptée",
+				"Utiliser les machines selon les consignes",
+				"Ranger et baliser son espace"
+			],
+			"tips": [
+				"Couteau mal rangé, torchon mal positionné, plaque brûlante oubliée : erreurs fréquentes",
+				"Les allers-retours inutiles augmentent les risques"
+			],
+			"piege": "La sécurité n'est pas seulement personnelle : elle concerne aussi l'équipe et les clients."
+		},
+		{
+			"id": "f21",
+			"numero": 21,
+			"categorie": "organisation",
+			"titre": "Organisation de la production",
+			"theme": "Le candidat doit savoir préparer son travail, ordonner ses tâches et respecter les impératifs de temps.",
+			"notions": [
+				"La production se pense avant d'être exécutée",
+				"Un organigramme ou une chronologie de fabrication est un outil clé"
+			],
+			"techniques": [
+				"Lister les tâches par ordre logique",
+				"Identifier les temps morts utiles",
+				"Regrouper les fabrications compatibles"
+			],
+			"tips": [
+				"Démarrer la mauvaise tâche en premier",
+				"Négliger les temps de refroidissement, prise ou repos"
+			],
+			"piege": "Bien organiser, ce n'est pas aller vite ; c'est éviter les blocages."
+		},
+		{
+			"id": "f22",
+			"numero": 22,
+			"categorie": "organisation",
+			"titre": "Développement durable et gaspillage",
+			"theme": "Le métier intègre des préconisations liées à la réduction du gaspillage et à une gestion raisonnée des matières premières.",
+			"notions": [
+				"Limiter les pertes améliore la rentabilité et la responsabilité environnementale",
+				"Le surdosage et les chutes non valorisées sont des sources de gaspillage"
+			],
+			"techniques": [
+				"Peser juste",
+				"Valoriser les chutes quand c'est possible",
+				"Ajuster les quantités au besoin réel"
+			],
+			"tips": [
+				"Prévoir trop « au cas où » augmente les invendus",
+				"Jeter trop vite sans tri ni réflexion fait perdre de la marge"
+			],
+			"piege": "Le gaspillage se joue autant sur la préparation que sur le stockage et l'usage."
+		},
+		{
+			"id": "f23",
+			"numero": 23,
+			"categorie": "vocabulaire",
+			"titre": "Vocabulaire technique indispensable",
+			"theme": "Le candidat doit maîtriser le vocabulaire technique pour comprendre les consignes, rédiger et expliquer ses choix.",
+			"notions": [
+				"Verbes : abaisser, foncer, détailler, dresser, garnir, glacer, chemiser, foisonner, détendre, tourer",
+				"Vocabulaire de texture, de cuisson et de finition à employer précisément",
+				"Détrempe, frasage, sablage, crémage : termes techniques précis"
+			],
+			"techniques": [
+				"Nommer correctement les opérations",
+				"Expliquer une correction technique avec le bon vocabulaire"
+			],
+			"tips": [
+				"Employer un mot approximatif révèle souvent une compréhension incomplète",
+				"« Faire la pâte » ne remplace pas « réaliser un fonçage » ou « effectuer un tourage »"
+			],
+			"piege": "Le vocabulaire fait partie de la compétence professionnelle."
+		},
+		{
+			"id": "f24",
+			"numero": 24,
+			"categorie": "techniques",
+			"titre": "Pesée et préparation (mise en place)",
+			"theme": "La pesée et la préparation conditionnent toute la qualité de la production qui suit.",
+			"notions": [
+				"Peser avec rigueur est indispensable, particulièrement en pâtisserie où 5 g d'écart sur la levure peut tout rater",
+				"Préparer tous les ingrédients avant de commencer (mise en place)",
+				"Anticiper les ordres d'incorporation"
+			],
+			"techniques": [
+				"Tarer la balance entre chaque ingrédient",
+				"Vérifier les températures de départ des ingrédients",
+				"Peser dans l'ordre de la recette"
+			],
+			"tips": [
+				"Une mise en place propre = 50% du travail réussi",
+				"Une mauvaise pesée ne se rattrape pas en cuisson"
+			],
+			"piege": "On ne « rectifie pas en cours de route » : la précision se joue avant."
+		},
+		{
+			"id": "f25",
+			"numero": 25,
+			"categorie": "techniques",
+			"titre": "Pétrissage et mélange",
+			"theme": "Le pétrissage et le mélange définissent la texture finale.",
+			"notions": [
+				"Le pétrissage développe le réseau glutineux dans certaines pâtes (pâte levée, pâte à brioche)",
+				"Le mélange homogénéise les appareils sans trop les travailler",
+				"Le surtravail peut détériorer la texture (gluten cassé, foisonnement perdu)"
+			],
+			"techniques": [
+				"Adapter la durée et la vitesse au produit",
+				"Stopper dès l'homogénéité atteinte sur les appareils délicats"
+			],
+			"tips": [
+				"Trop de mélange rend certaines pâtes élastiques",
+				"Pas assez de mélange crée des défauts d'homogénéité"
+			]
+		},
+		{
+			"id": "f26",
+			"numero": 26,
+			"categorie": "techniques",
+			"titre": "Sablage et crémage",
+			"theme": "Deux techniques clés qui inversent le rôle de la matière grasse.",
+			"notions": [
+				"Le sablage enrobe la farine avec la matière grasse → friabilité, pas d'élasticité (pâte sablée)",
+				"Le crémage incorpore de l'air dans une matière grasse et un sucre → légèreté (cake, biscuit)",
+				"Ces techniques influencent friabilité, légèreté et texture"
+			],
+			"techniques": [
+				"Sablage : beurre froid, du bout des doigts ou à la feuille",
+				"Crémage : beurre pommade, fouet, crémer jusqu'à blanchiment"
+			],
+			"tips": [
+				"Sablage avec beurre trop chaud = pâte qui devient pommade",
+				"Crémage incomplet = cake dense"
+			]
+		},
+		{
+			"id": "f27",
+			"numero": 27,
+			"categorie": "techniques",
+			"titre": "Tourage (feuilletage)",
+			"theme": "Le tourage est la technique reine pour créer le feuilletage par alternance pâte/beurre.",
+			"notions": [
+				"Le tourage crée les couches de feuilletage par succession de tours simples ou doubles",
+				"Il exige une gestion stricte de la température (beurre à 16°C, pâte froide)",
+				"Le repos entre les tours est essentiel (30 min au froid)"
+			],
+			"techniques": [
+				"Détrempe → 30 min froid → Beurrage → 1er tour → 30 min → 2e tour → 30 min → 3e tour → Façonnage",
+				"Maintenir le rectangle régulier, ne pas écraser les feuillets"
+			],
+			"tips": [
+				"Trop de farine ou de chaleur abîme le développement",
+				"Un beurre trop froid casse, trop chaud fond dans la pâte"
+			],
+			"piege": "Le feuilletage ne se rattrape pas au four : tout se joue au tourage."
+		},
+		{
+			"id": "f28",
+			"numero": 28,
+			"categorie": "techniques",
+			"titre": "Fonçage",
+			"theme": "Le fonçage consiste à garnir un cercle ou un moule avec une pâte abaissée.",
+			"notions": [
+				"L'épaisseur doit être régulière (3 mm typique)",
+				"Les angles et les bords doivent être nets",
+				"Une pâte détendue limite la rétractation à la cuisson"
+			],
+			"techniques": [
+				"Abaisser à épaisseur constante",
+				"Foncer en marquant l'angle au pouce",
+				"Détailler proprement les bords",
+				"Piquer le fond à la fourchette pour éviter les cloques"
+			],
+			"tips": [
+				"Pâte mal détendue = rétraction et bords irréguliers",
+				"Excès de farine au fonçage = pâte sèche"
+			]
+		},
+		{
+			"id": "f29",
+			"numero": 29,
+			"categorie": "techniques",
+			"titre": "Dressage à la poche",
+			"theme": "Le dressage à la poche demande régularité et précision pour une cuisson uniforme.",
+			"notions": [
+				"La pression, la distance et l'angle influencent la forme",
+				"Les produits doivent être identiques en taille et en poids",
+				"Le dressage conditionne la cuisson"
+			],
+			"techniques": [
+				"Tenir la poche à 90° pour les choux, 45° pour les éclairs",
+				"Pression constante = régularité",
+				"S'entraîner sur papier cuisson"
+			],
+			"tips": [
+				"Choux trop petits = sous-cuisson au cœur",
+				"Choux de tailles différentes = cuissons inégales"
+			]
+		},
+		{
+			"id": "f30",
+			"numero": 30,
+			"categorie": "techniques",
+			"titre": "Cuisson",
+			"theme": "La cuisson fixe la structure et développe les arômes.",
+			"notions": [
+				"Adaptée au produit, au format et au four utilisé",
+				"Préchauffer le four 20 min minimum",
+				"Crème pâtissière : 1 min ébullition après épaississement",
+				"Pâte à choux : creux quand on tape le dessous = cuit"
+			],
+			"techniques": [
+				"Four à sole 220°C pour viennoiseries, 180°C biscuits, 160°C crèmes",
+				"Ne pas ouvrir les 10 premières minutes (chute de température = effondrement)"
+			],
+			"tips": [
+				"Une cuisson incomplète donne des produits instables",
+				"Une cuisson excessive assèche, colore ou casse"
+			]
+		},
+		{
+			"id": "f31",
+			"numero": 31,
+			"categorie": "techniques",
+			"titre": "Refroidissement et chaîne du froid",
+			"theme": "Le refroidissement stabilise la texture et est crucial pour la sécurité alimentaire.",
+			"notions": [
+				"Le refroidissement stabilise la texture",
+				"Il évite les condensations et les déformations",
+				"Indispensable avant montage, glaçage ou découpe",
+				"La chaîne du froid : pas plus de 2h à température ambiante pour les produits sensibles"
+			],
+			"techniques": [
+				"Refroidissement rapide (cellule de refroidissement)",
+				"Filmer au contact pour éviter la condensation"
+			],
+			"tips": [
+				"Un produit chaud détériore les crèmes et les montages",
+				"Surveiller les ruptures de froid"
+			]
+		},
+		{
+			"id": "f32",
+			"numero": 32,
+			"categorie": "techniques",
+			"titre": "Tempérage du chocolat",
+			"theme": "Le tempérage cristallise le chocolat pour obtenir brillance et cassant.",
+			"notions": [
+				"Fondre à 50°C → Tablage à 27°C → Remonter à 31-32°C (noir) ou 29-30°C (lait/blanc)",
+				"Le chocolat tempéré reste brillant et cassant en refroidissant"
+			],
+			"techniques": [
+				"Méthode au tablage (marbre)",
+				"Méthode à l'ensemencement (ajout de chocolat solide)",
+				"Travailler vite, le chocolat cristallise"
+			],
+			"tips": [
+				"Chocolat mal tempéré = aspect terne, cassant mou",
+				"Trace blanche = mauvaise cristallisation"
+			]
+		},
+		{
+			"id": "f33",
+			"numero": 33,
+			"categorie": "recettes",
+			"titre": "Pâte sablée",
+			"theme": "Texture friable et fondante, base classique des fonds de tartes.",
+			"notions": [
+				"Méthode par sablage : enrober la farine avec le beurre froid puis ajouter le liquide",
+				"Convient aux tartes, fonds et biscuits",
+				"Sensible au surtravail (rendrait la pâte dure)"
+			],
+			"techniques": [
+				"Sabler du bout des doigts ou à la feuille",
+				"Ajouter œufs et sucre rapidement",
+				"Fraser la pâte (l'écraser avec la paume) pour finir"
+			],
+			"piege": "Trop pétrir = perte de friabilité."
+		},
+		{
+			"id": "f34",
+			"numero": 34,
+			"categorie": "recettes",
+			"titre": "Pâte sucrée",
+			"theme": "Plus structurée que la pâte sablée, idéale pour fonds nets et réguliers.",
+			"notions": [
+				"Méthode par crémage : crémer beurre + sucre, ajouter œuf, puis farine",
+				"Plus dense et plus sucrée que la sablée",
+				"Demande repos et abaisse soignée",
+				"Réagit fortement à la chaleur de travail"
+			]
+		},
+		{
+			"id": "f35",
+			"numero": 35,
+			"categorie": "recettes",
+			"titre": "Pâte feuilletée",
+			"theme": "Alternance de pâte et beurre par tourage, donne le développement en couches.",
+			"notions": [
+				"Détrempe + beurre de tourage à 16°C",
+				"6 tours au total (alternance simples et doubles)",
+				"Repose sur les tours et la cuisson",
+				"Nécessite froideur et précision"
+			]
+		},
+		{
+			"id": "f36",
+			"numero": 36,
+			"categorie": "recettes",
+			"titre": "Pâte levée feuilletée (PLF)",
+			"theme": "Combine levure boulangère et tourage, base des viennoiseries.",
+			"notions": [
+				"Détrempe avec levure → 30 min froid → Beurrage → 1er tour simple → 30 min → 2e tour → 30 min → 3e tour → Façonnage",
+				"Sensible à la température et au pointage",
+				"Exige un bon équilibre entre fermentation et feuilletage"
+			],
+			"recettes_associees": ["Croissants", "Pains au chocolat", "Pains aux raisins"],
+			"tips": [
+				"Triangle 8×20 cm pour croissants",
+				"Pains au chocolat : 2 bâtons à 1/3 et 2/3"
+			]
+		},
+		{
+			"id": "f37",
+			"numero": 37,
+			"categorie": "recettes",
+			"titre": "Pâte à choux",
+			"theme": "Pâte desséchée puis détendue aux œufs, base des éclairs et choux.",
+			"notions": [
+				"Eau + beurre + sel → ébullition → ajout farine en pluie → desséchage → ajout œufs un par un",
+				"Sert à éclairs, choux, religieuses, paris-brest",
+				"Demande un dessèchement maîtrisé",
+				"Le dressage influence la régularité de cuisson"
+			]
+		},
+		{
+			"id": "f38",
+			"numero": 38,
+			"categorie": "recettes",
+			"titre": "Crème pâtissière",
+			"theme": "Base majeure de garniture, doit être lisse, cuite et refroidie correctement.",
+			"notions": [
+				"Lait bouillant + jaunes blanchis avec sucre et fécule → cuisson → 1 min ébullition après épaississement",
+				"Pasteurisation à 85°C minimum",
+				"Sert de base à plusieurs dérivées (mousseline, diplomate, frangipane)",
+				"Sensible aux grumeaux et au manque de cuisson"
+			],
+			"techniques": [
+				"Filmer au contact pour éviter la peau",
+				"Ajouter le beurre hors du feu pour brillance"
+			]
+		},
+		{
+			"id": "f39",
+			"numero": 39,
+			"categorie": "recettes",
+			"titre": "Crème mousseline",
+			"theme": "Crème pâtissière enrichie en beurre, plus légère et plus riche.",
+			"notions": [
+				"Crème pâtissière + beurre pommade en 2 fois",
+				"Ratio classique : 1 part beurre pour 1 part crème pâtissière",
+				"Utilisée dans Paris-Brest, fraisier, framboisier",
+				"Demande un bon foisonnement"
+			]
+		},
+		{
+			"id": "f40",
+			"numero": 40,
+			"categorie": "recettes",
+			"titre": "Crème diplomate",
+			"theme": "Association crème pâtissière et crème fouettée, texture aérienne.",
+			"notions": [
+				"Crème pâtissière + crème fouettée + gélatine (parfois)",
+				"Texture plus aérienne que la mousseline",
+				"Utilisée pour entremets et petits gâteaux",
+				"Sensible à la température de montage"
+			]
+		},
+		{
+			"id": "f41",
+			"numero": 41,
+			"categorie": "recettes",
+			"titre": "Crème au beurre",
+			"theme": "Crème riche et stable, sert au montage, décor et finitions.",
+			"notions": [
+				"Plusieurs méthodes : à la meringue italienne, à l'anglaise, simple",
+				"Sert au montage, au décor et à certaines finitions (Opéra)",
+				"Nécessite maîtrise des températures",
+				"Peut trancher si elle est mal gérée"
+			]
+		},
+		{
+			"id": "f42",
+			"numero": 42,
+			"categorie": "recettes",
+			"titre": "Crème anglaise",
+			"theme": "Base liquide aux œufs et au lait, ne doit pas bouillir.",
+			"notions": [
+				"Lait + jaunes + sucre → cuisson 82-84°C (à la nappe)",
+				"Vérifier la nappe : passer le doigt, le trait reste net",
+				"Sert souvent aux appareils et à certaines dérivées (bavaroise)",
+				"Ne doit pas bouillir (sinon coagulation)"
+			]
+		},
+		{
+			"id": "f43",
+			"numero": 43,
+			"categorie": "recettes",
+			"titre": "Mousses et bavaroises",
+			"theme": "Texture aérienne ou légère, souvent gélifiée ou stabilisée.",
+			"notions": [
+				"Bavaroise = crème anglaise + gélatine + crème fouettée",
+				"Mousse : base + gélatine + élément foisonné (crème, blancs)",
+				"Utilisées dans les entremets",
+				"Dépendent du bon foisonnement"
+			],
+			"techniques": [
+				"Crème anglaise à 82-84°C",
+				"Gélatine gonflée à froid",
+				"Monter la crème à 35% avant incorporation",
+				"Le montage doit être rapide et propre"
+			]
+		},
+		{
+			"id": "f44",
+			"numero": 44,
+			"categorie": "recettes",
+			"titre": "Biscuits de base",
+			"theme": "Génoise, biscuit cuillère, joconde, dacquoise — structure des entremets.",
+			"notions": [
+				"Génoise : œufs + sucre montés au bain-marie + farine",
+				"Joconde : poudre d'amande, idéal pour Opéra",
+				"Cuillère : biscuit aux œufs montés séparément (charlotte)",
+				"Dacquoise : meringue + poudre d'amande",
+				"Le foisonnement est essentiel"
+			],
+			"tips": [
+				"La cuisson doit rester souple ou sèche selon l'usage",
+				"Test au toucher : doit rebondir au doigt"
+			]
+		},
+		{
+			"id": "f45",
+			"numero": 45,
+			"categorie": "recettes",
+			"titre": "Glaçage miroir",
+			"theme": "Finition brillante des entremets surgelés.",
+			"notions": [
+				"Composé de sucre, glucose, gélatine, lait concentré, chocolat",
+				"Utilisé à 35°C sur entremets sortant du congélateur (-18°C)",
+				"Verser en une fois au centre et laisser couler",
+				"Ne jamais toucher avec une spatule"
+			],
+			"piege": "Glaçage trop chaud = trop fluide / trop froid = figé."
+		},
+		{
+			"id": "f46",
+			"numero": 46,
+			"categorie": "pieges",
+			"titre": "Pièges de texture",
+			"theme": "Les défauts de texture proviennent souvent du pétrissage ou de la cuisson.",
+			"notions": [
+				"Trop de mélange rend certaines pâtes élastiques",
+				"Pas assez de mélange crée des défauts d'homogénéité",
+				"Un excès de cuisson assèche",
+				"Une sous-cuisson rend instable"
+			]
+		},
+		{
+			"id": "f47",
+			"numero": 47,
+			"categorie": "pieges",
+			"titre": "Pièges de température",
+			"theme": "Les températures décident de la réussite ou de l'échec en pâtisserie.",
+			"notions": [
+				"Beurre trop chaud : pâte sablée qui devient pommade",
+				"Appareil trop froid : foisonnement difficile",
+				"Crème trop chaude au montage : structure qui s'effondre",
+				"Entremets glacé ou monté au mauvais moment"
+			]
+		},
+		{
+			"id": "f48",
+			"numero": 48,
+			"categorie": "pieges",
+			"titre": "Pièges de régularité",
+			"theme": "Le jury sanctionne fortement la non-régularité.",
+			"notions": [
+				"Produits de taille inégale → cuisson inégale",
+				"Montage non centré",
+				"Décors asymétriques sans intention",
+				"Cuisson non uniforme"
+			]
+		},
+		{
+			"id": "f49",
+			"numero": 49,
+			"categorie": "pieges",
+			"titre": "Pièges de présentation",
+			"theme": "La présentation peut faire perdre des points même sur un produit techniquement réussi.",
+			"notions": [
+				"Sur-décoration",
+				"Bords sales",
+				"Support négligé",
+				"Lisibilité du produit perdue"
+			]
+		},
+		{
+			"id": "f50",
+			"numero": 50,
+			"categorie": "pieges",
+			"titre": "Pièges d'organisation",
+			"theme": "Le jour J, l'organisation fait souvent la différence entre admis et recalé.",
+			"notions": [
+				"Mauvais ordre des tâches",
+				"Oubli d'un repos ou d'un refroidissement",
+				"Matériel mal préparé",
+				"Temps de finition insuffisant"
+			]
+		}
+	]
+}

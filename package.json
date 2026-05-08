@@ -6,7 +6,9 @@
     "dev": "vite dev",
     "build": "vite build",
     "preview": "vite preview",
-    "icons": "node scripts/generate-icons.js"
+    "icons": "node scripts/generate-icons.js",
+    "docs:sync": "node scripts/sync-docs.js --verbose",
+    "prepare": "node scripts/install-hooks.js"
   },
   "devDependencies": {
     "@sveltejs/adapter-static": "^3.0.0",

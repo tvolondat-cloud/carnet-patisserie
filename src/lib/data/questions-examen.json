@@ -1,0 +1,784 @@
+{
+	"questions": [
+		{
+			"id": "q1",
+			"theme": "cadre",
+			"niveau": "fondamental",
+			"question": "Quel est le rôle principal du titulaire du CAP Pâtissier ?",
+			"reponses": [
+				"Ouvrier/ouvrière de fabrication qualifié·e",
+				"Chef de production",
+				"Cadre de gestion en pâtisserie",
+				"Formateur en école hôtelière"
+			],
+			"bonne": 0,
+			"explication": "Le titulaire du CAP est un ouvrier qualifié de fabrication, niveau d'entrée professionnelle."
+		},
+		{
+			"id": "q2",
+			"theme": "cadre",
+			"niveau": "fondamental",
+			"question": "Combien de blocs professionnels structurent le CAP Pâtissier ?",
+			"reponses": ["1", "2", "3", "4"],
+			"bonne": 1,
+			"explication": "Deux blocs : EP1 (Tour, petits fours, gâteaux de voyage) et EP2 (Entremets et petits gâteaux)."
+		},
+		{
+			"id": "q3",
+			"theme": "cadre",
+			"niveau": "fondamental",
+			"question": "Quelle est la durée de PFMP (Période de Formation en Milieu Professionnel) en voie scolaire ?",
+			"reponses": ["8 semaines", "10 semaines", "14 semaines", "20 semaines"],
+			"bonne": 2,
+			"explication": "14 semaines de PFMP sont prévues sur les 2 années de formation en voie scolaire."
+		},
+		{
+			"id": "q4",
+			"theme": "cadre",
+			"niveau": "intermediaire",
+			"question": "Sur quoi porte principalement l'évaluation du jury, en plus de la recette finale ?",
+			"reponses": [
+				"Uniquement le goût du produit",
+				"L'organisation du poste et la qualité marchande",
+				"La rapidité d'exécution uniquement",
+				"Le respect de la quantité produite"
+			],
+			"bonne": 1,
+			"explication": "Le jury évalue la méthode, la propreté, l'enchaînement et la présentation finale, en plus de la recette."
+		},
+		{
+			"id": "q5",
+			"theme": "ep1",
+			"niveau": "fondamental",
+			"question": "L'EP1 impose au minimum :",
+			"reponses": [
+				"Une seule pâte et une crème",
+				"Deux pâtes (dont une levée ou feuilletée), une crème par cuisson, un fonçage et un petit four ou gâteau de voyage",
+				"Trois pâtes différentes et deux crèmes",
+				"Un entremets monté"
+			],
+			"bonne": 1,
+			"explication": "L'EP1 demande deux pâtes, une crème par cuisson, un fonçage et un petit four ou gâteau de voyage."
+		},
+		{
+			"id": "q6",
+			"theme": "ep1",
+			"niveau": "fondamental",
+			"question": "À quelle température doit être le beurre pour le tourage ?",
+			"reponses": ["4°C", "16°C", "25°C", "30°C"],
+			"bonne": 1,
+			"explication": "Le beurre de tourage doit être plastique : autour de 16°C, ni trop dur ni trop mou."
+		},
+		{
+			"id": "q7",
+			"theme": "ep1",
+			"niveau": "intermediaire",
+			"question": "Combien de tours simples comporte typiquement une pâte feuilletée classique ?",
+			"reponses": ["3 tours", "4 tours", "6 tours", "8 tours"],
+			"bonne": 2,
+			"explication": "La pâte feuilletée classique comporte 6 tours (souvent en alternance simples/doubles)."
+		},
+		{
+			"id": "q8",
+			"theme": "ep1",
+			"niveau": "intermediaire",
+			"question": "Pourquoi laisser reposer une pâte avant abaisse ?",
+			"reponses": [
+				"Pour gagner du temps",
+				"Pour la détendre et éviter la rétractation au four",
+				"Pour la sécher",
+				"Pour la sucrer davantage"
+			],
+			"bonne": 1,
+			"explication": "Le repos détend le réseau glutineux et limite la rétractation à la cuisson."
+		},
+		{
+			"id": "q9",
+			"theme": "ep1",
+			"niveau": "fondamental",
+			"question": "Que désigne le terme « petits fours secs » ?",
+			"reponses": [
+				"Des produits desséchés en bouche",
+				"Une famille de petits fours à faible humidité",
+				"Des produits brûlés au four",
+				"Des biscuits sans sucre"
+			],
+			"bonne": 1,
+			"explication": "« Sec » désigne la famille à faible humidité, pas un produit sec ou desséché."
+		},
+		{
+			"id": "q10",
+			"theme": "ep1",
+			"niveau": "fondamental",
+			"question": "Quelle qualité est la plus déterminante pour un gâteau de voyage ?",
+			"reponses": [
+				"L'esthétique luxueuse",
+				"La tenue dans le temps et la transportabilité",
+				"La rapidité de consommation",
+				"L'utilisation de fruits frais"
+			],
+			"bonne": 1,
+			"explication": "Un gâteau de voyage est pensé pour la conservation et le transport, pas pour le service immédiat."
+		},
+		{
+			"id": "q11",
+			"theme": "ep2",
+			"niveau": "fondamental",
+			"question": "Que juge l'EP2 en plus du goût du produit ?",
+			"reponses": [
+				"L'apparence sociale du candidat",
+				"L'architecture du produit (montage, glaçage, finition)",
+				"Le coût matière uniquement",
+				"Le nombre de produits réalisés"
+			],
+			"bonne": 1,
+			"explication": "L'EP2 évalue l'architecture : montage, glaçage, décor et valorisation."
+		},
+		{
+			"id": "q12",
+			"theme": "ep2",
+			"niveau": "intermediaire",
+			"question": "À quelle température utilise-t-on un glaçage miroir ?",
+			"reponses": [
+				"15°C",
+				"35°C",
+				"50°C",
+				"65°C"
+			],
+			"bonne": 1,
+			"explication": "Le glaçage miroir s'utilise à 35°C sur entremets sortant du congélateur."
+		},
+		{
+			"id": "q13",
+			"theme": "ep2",
+			"niveau": "intermediaire",
+			"question": "Pour un entremets, à quel moment réalise-t-on le glaçage miroir ?",
+			"reponses": [
+				"Sur entremets à température ambiante",
+				"Sur entremets sortant du congélateur (-18°C)",
+				"Sur entremets sortant du four",
+				"Sur entremets fraîchement monté"
+			],
+			"bonne": 1,
+			"explication": "Le glaçage miroir se coule sur un entremets congelé à -18°C pour figer instantanément."
+		},
+		{
+			"id": "q14",
+			"theme": "ep2",
+			"niveau": "fondamental",
+			"question": "Que doit assurer un fond d'entremets ?",
+			"reponses": [
+				"Uniquement de l'esthétique",
+				"Structure, soutien, contraste ou moelleux",
+				"Le goût principal du gâteau",
+				"La couleur du produit"
+			],
+			"bonne": 1,
+			"explication": "Le fond apporte structure, soutien, contraste ou moelleux selon le type."
+		},
+		{
+			"id": "q15",
+			"theme": "ep2",
+			"niveau": "intermediaire",
+			"question": "Une crème mousseline est composée de :",
+			"reponses": [
+				"Crème anglaise + gélatine",
+				"Crème pâtissière + beurre",
+				"Crème fouettée + sucre glace",
+				"Crème pâtissière + crème fouettée"
+			],
+			"bonne": 1,
+			"explication": "La mousseline = crème pâtissière enrichie de beurre pommade."
+		},
+		{
+			"id": "q16",
+			"theme": "ep2",
+			"niveau": "intermediaire",
+			"question": "Une crème diplomate est composée de :",
+			"reponses": [
+				"Crème anglaise + chocolat",
+				"Crème pâtissière + crème fouettée (et parfois gélatine)",
+				"Crème pâtissière + beurre",
+				"Crème au beurre + meringue"
+			],
+			"bonne": 1,
+			"explication": "La diplomate associe crème pâtissière et crème fouettée pour une texture aérienne."
+		},
+		{
+			"id": "q17",
+			"theme": "technologie",
+			"niveau": "fondamental",
+			"question": "Quel élément donne l'élasticité aux pâtes ?",
+			"reponses": ["L'eau", "Le gluten", "Le sel", "Le sucre"],
+			"bonne": 1,
+			"explication": "Le gluten (protéine) donne élasticité et réseau aux pâtes."
+		},
+		{
+			"id": "q18",
+			"theme": "technologie",
+			"niveau": "fondamental",
+			"question": "Le sucre joue plusieurs rôles. Lequel n'est PAS un rôle du sucre ?",
+			"reponses": [
+				"Pouvoir sucrant",
+				"Coloration des produits",
+				"Conservation",
+				"Élasticité du gluten"
+			],
+			"bonne": 3,
+			"explication": "Le sucre n'élastifie pas le gluten ; il agit sur le goût, la couleur et la conservation."
+		},
+		{
+			"id": "q19",
+			"theme": "technologie",
+			"niveau": "intermediaire",
+			"question": "Que se passe-t-il avec une farine trop forte sur une pâte sablée ?",
+			"reponses": [
+				"Elle devient plus moelleuse",
+				"Elle peut devenir dure",
+				"Elle développe mieux",
+				"Elle conserve mieux"
+			],
+			"bonne": 1,
+			"explication": "Une farine trop forte sur sablée la rend dure (gluten trop développé)."
+		},
+		{
+			"id": "q20",
+			"theme": "technologie",
+			"niveau": "intermediaire",
+			"question": "Un fruit aqueux dans une tarte va :",
+			"reponses": [
+				"Améliorer la cuisson",
+				"Détrémper le fond",
+				"Renforcer la texture",
+				"N'avoir aucun effet"
+			],
+			"bonne": 1,
+			"explication": "Un fruit aqueux libère de l'eau et détrempe le fond ; il faut anticiper (fond cuit, abaisse plus épaisse, etc.)."
+		},
+		{
+			"id": "q21",
+			"theme": "techniques",
+			"niveau": "fondamental",
+			"question": "Quel est le rôle du sablage ?",
+			"reponses": [
+				"Aérer une pâte",
+				"Enrober la farine avec la matière grasse",
+				"Cuire à blanc",
+				"Glacer une surface"
+			],
+			"bonne": 1,
+			"explication": "Le sablage enrobe la farine avec la matière grasse et donne une texture friable."
+		},
+		{
+			"id": "q22",
+			"theme": "techniques",
+			"niveau": "fondamental",
+			"question": "Quel est le rôle du crémage ?",
+			"reponses": [
+				"Sécher une crème",
+				"Incorporer de l'air dans matière grasse + sucre",
+				"Refroidir un appareil",
+				"Lisser un glaçage"
+			],
+			"bonne": 1,
+			"explication": "Le crémage incorpore de l'air dans le mélange beurre + sucre pour donner légèreté (cake, biscuit)."
+		},
+		{
+			"id": "q23",
+			"theme": "techniques",
+			"niveau": "intermediaire",
+			"question": "À quelle température cuit-on une crème pâtissière (pasteurisation) ?",
+			"reponses": ["70°C", "82°C", "85°C minimum, 1 min après ébullition", "100°C 5 min"],
+			"bonne": 2,
+			"explication": "La pâtissière doit être pasteurisée à 85°C minimum, et cuite 1 min après ébullition pour être stable."
+		},
+		{
+			"id": "q24",
+			"theme": "techniques",
+			"niveau": "intermediaire",
+			"question": "Pourquoi filme-t-on une crème pâtissière au contact ?",
+			"reponses": [
+				"Pour la décorer",
+				"Pour éviter la formation d'une peau",
+				"Pour accélérer la cuisson",
+				"Pour la sucrer"
+			],
+			"bonne": 1,
+			"explication": "Le film au contact évite la formation d'une peau et la condensation."
+		},
+		{
+			"id": "q25",
+			"theme": "techniques",
+			"niveau": "intermediaire",
+			"question": "Comment vérifier la cuisson d'une crème anglaise ?",
+			"reponses": [
+				"Quand elle bout 1 min",
+				"Quand elle nappe la spatule (le doigt laisse un trait net)",
+				"Quand elle dépasse 100°C",
+				"Quand elle est jaune foncé"
+			],
+			"bonne": 1,
+			"explication": "Crème anglaise : nappe la spatule, le trait du doigt reste net, à 82-84°C."
+		},
+		{
+			"id": "q26",
+			"theme": "techniques",
+			"niveau": "intermediaire",
+			"question": "Quelle température maximale pour le tempérage du chocolat noir ?",
+			"reponses": ["27°C", "29°C", "31-32°C", "40°C"],
+			"bonne": 2,
+			"explication": "Tempérage chocolat noir : fonte 50°C → tablage 27°C → remontée 31-32°C."
+		},
+		{
+			"id": "q27",
+			"theme": "techniques",
+			"niveau": "intermediaire",
+			"question": "Pourquoi ne pas ouvrir le four pendant les 10 premières minutes d'une pâte à choux ?",
+			"reponses": [
+				"Pour économiser de l'énergie",
+				"Pour éviter la chute de température et l'effondrement",
+				"Parce que c'est dangereux",
+				"Pour ne pas perdre l'arôme"
+			],
+			"bonne": 1,
+			"explication": "Une chute de température en début de cuisson fait s'effondrer choux et soufflés."
+		},
+		{
+			"id": "q28",
+			"theme": "techniques",
+			"niveau": "fondamental",
+			"question": "Comment savoir si une pâte à choux est cuite ?",
+			"reponses": [
+				"Elle est jaune doré",
+				"Elle sonne creux quand on tape le dessous",
+				"Elle dépasse les bords du moule",
+				"Elle est dure au toucher"
+			],
+			"bonne": 1,
+			"explication": "Une pâte à choux cuite sonne creux quand on tape le dessous."
+		},
+		{
+			"id": "q29",
+			"theme": "hygiene",
+			"niveau": "fondamental",
+			"question": "À quel moment doit-on se laver les mains en pâtisserie ?",
+			"reponses": [
+				"Uniquement en arrivant au labo",
+				"Avant de commencer, après chaque interruption, après contact avec œufs crus, après avoir touché le sol",
+				"Une fois par heure",
+				"Seulement avant de manger"
+			],
+			"bonne": 1,
+			"explication": "Lavage des mains aux moments clés : début, interruption, après cru, après contamination potentielle."
+		},
+		{
+			"id": "q30",
+			"theme": "hygiene",
+			"niveau": "fondamental",
+			"question": "Que doit comporter une étiquette de traçabilité ?",
+			"reponses": [
+				"Uniquement le nom du produit",
+				"Nom du produit, date de fabrication, DLC",
+				"Le prix de vente",
+				"Le nom du pâtissier uniquement"
+			],
+			"bonne": 1,
+			"explication": "Étiquetage minimum : Nom + Date de fabrication + DLC."
+		},
+		{
+			"id": "q31",
+			"theme": "hygiene",
+			"niveau": "intermediaire",
+			"question": "Que faire d'une marchandise douteuse à la réception ?",
+			"reponses": [
+				"L'accepter pour ne pas perdre de temps",
+				"Refuser et consigner l'anomalie",
+				"La stocker à part sans l'utiliser",
+				"La rendre la semaine suivante"
+			],
+			"bonne": 1,
+			"explication": "Accepter une marchandise douteuse est une faute professionnelle. Refuser et tracer."
+		},
+		{
+			"id": "q32",
+			"theme": "hygiene",
+			"niveau": "intermediaire",
+			"question": "Combien de temps maximum un produit sensible peut-il rester à température ambiante ?",
+			"reponses": ["30 minutes", "1 heure", "2 heures", "4 heures"],
+			"bonne": 2,
+			"explication": "Au-delà de 2h à température ambiante, les produits sensibles entrent en zone de risque microbien."
+		},
+		{
+			"id": "q33",
+			"theme": "organisation",
+			"niveau": "fondamental",
+			"question": "Quelle est la première étape avant de commencer la fabrication en EP1/EP2 ?",
+			"reponses": [
+				"Sortir tous les ingrédients",
+				"Lire entièrement le sujet et écrire un ordre de fabrication",
+				"Allumer le four",
+				"Peser le sucre"
+			],
+			"bonne": 1,
+			"explication": "Lecture du sujet + chronologie de travail = bases de la réussite."
+		},
+		{
+			"id": "q34",
+			"theme": "organisation",
+			"niveau": "fondamental",
+			"question": "Par quoi doit-on commencer en EP1, en priorité ?",
+			"reponses": [
+				"Les petits fours simples",
+				"Les viennoiseries (pâte levée feuilletée demande plusieurs repos)",
+				"La crème pâtissière",
+				"Le glaçage"
+			],
+			"bonne": 1,
+			"explication": "En EP1 : commencer toujours par la PLF, qui demande détrempe + 3 tours + 30 min entre chaque."
+		},
+		{
+			"id": "q35",
+			"theme": "organisation",
+			"niveau": "fondamental",
+			"question": "Par quoi doit-on commencer en EP2, en priorité ?",
+			"reponses": [
+				"Le glaçage final",
+				"L'insert (crémeux, confit, gelée) qui doit être congelé avant montage",
+				"Le décor chocolat",
+				"L'assiette de présentation"
+			],
+			"bonne": 1,
+			"explication": "En EP2 : l'insert doit être congelé avant le montage, donc en premier."
+		},
+		{
+			"id": "q36",
+			"theme": "organisation",
+			"niveau": "intermediaire",
+			"question": "Quelle est la philosophie de la bonne organisation ?",
+			"reponses": [
+				"Aller le plus vite possible",
+				"Faire toutes les tâches en parallèle",
+				"Éviter les blocages en anticipant les temps morts utiles",
+				"Préparer plus de produits que demandé"
+			],
+			"bonne": 2,
+			"explication": "Bien organiser, c'est éviter les blocages, pas aller vite."
+		},
+		{
+			"id": "q37",
+			"theme": "organisation",
+			"niveau": "intermediaire",
+			"question": "Comment limiter le gaspillage en pâtisserie ?",
+			"reponses": [
+				"Prévoir 50% de plus « au cas où »",
+				"Peser juste, valoriser les chutes, ajuster aux besoins réels",
+				"Jeter rapidement tout ce qui ne sert pas",
+				"Ne jamais peser pour aller plus vite"
+			],
+			"bonne": 1,
+			"explication": "Pesée juste + valorisation des chutes + ajustement = gestion responsable."
+		},
+		{
+			"id": "q38",
+			"theme": "vocabulaire",
+			"niveau": "fondamental",
+			"question": "Que signifie « foncer » en pâtisserie ?",
+			"reponses": [
+				"Cuire à four chaud",
+				"Garnir un cercle ou un moule avec une pâte abaissée",
+				"Battre une crème",
+				"Glacer un produit"
+			],
+			"bonne": 1,
+			"explication": "Foncer = garnir un cercle/moule avec une pâte abaissée, en respectant épaisseur et angles."
+		},
+		{
+			"id": "q39",
+			"theme": "vocabulaire",
+			"niveau": "fondamental",
+			"question": "Que signifie « chemiser » ?",
+			"reponses": [
+				"Mettre une chemise blanche",
+				"Beurrer-fariner ou tapisser un moule",
+				"Laver la vaisselle",
+				"Empaqueter un produit fini"
+			],
+			"bonne": 1,
+			"explication": "Chemiser = tapisser un moule (beurre+farine ou papier sulfurisé)."
+		},
+		{
+			"id": "q40",
+			"theme": "vocabulaire",
+			"niveau": "fondamental",
+			"question": "Que signifie « foisonner » ?",
+			"reponses": [
+				"Faire fondre",
+				"Incorporer de l'air dans une préparation pour la rendre légère",
+				"Laisser reposer",
+				"Cuire à feu vif"
+			],
+			"bonne": 1,
+			"explication": "Foisonner = incorporer de l'air (chantilly, blancs montés, crémage)."
+		},
+		{
+			"id": "q41",
+			"theme": "vocabulaire",
+			"niveau": "intermediaire",
+			"question": "Que signifie « détendre » une pâte ?",
+			"reponses": [
+				"La cuire doucement",
+				"La laisser reposer pour relâcher le réseau glutineux",
+				"La rendre plus liquide",
+				"L'aérer au fouet"
+			],
+			"bonne": 1,
+			"explication": "Détendre = repos pour relâcher le gluten et limiter la rétractation."
+		},
+		{
+			"id": "q42",
+			"theme": "vocabulaire",
+			"niveau": "intermediaire",
+			"question": "Qu'est-ce qu'une « détrempe » ?",
+			"reponses": [
+				"Le mélange de base d'une pâte feuilletée (avant beurrage)",
+				"Une pâte dégelée",
+				"Une crème ratée",
+				"Un glaçage liquide"
+			],
+			"bonne": 0,
+			"explication": "La détrempe est le mélange farine+eau+sel de base de la pâte feuilletée, avant le beurrage."
+		},
+		{
+			"id": "q43",
+			"theme": "vocabulaire",
+			"niveau": "intermediaire",
+			"question": "Que signifie « frasage » ?",
+			"reponses": [
+				"Étape finale d'écrasement de la pâte avec la paume pour homogénéiser sans trop pétrir",
+				"Cuisson à blanc",
+				"Refroidissement rapide",
+				"Foisonnement à la spatule"
+			],
+			"bonne": 0,
+			"explication": "Le frasage finalise une pâte sablée/sucrée en l'écrasant brièvement avec la paume."
+		},
+		{
+			"id": "q44",
+			"theme": "pieges",
+			"niveau": "intermediaire",
+			"question": "« Léger » en pâtisserie signifie :",
+			"reponses": [
+				"Sans tenue ni structure",
+				"Aérien, mais conservant sa stabilité",
+				"Sans goût",
+				"Sans sucre"
+			],
+			"bonne": 1,
+			"explication": "« Léger » ne veut pas dire « sans tenue » : une mousse doit rester stable."
+		},
+		{
+			"id": "q45",
+			"theme": "pieges",
+			"niveau": "intermediaire",
+			"question": "Le rôle du décor en pâtisserie est :",
+			"reponses": [
+				"De masquer les défauts du produit",
+				"De charger visuellement le produit",
+				"De souligner et valoriser le produit, pas de le masquer",
+				"De montrer la créativité du candidat sans contrainte"
+			],
+			"bonne": 2,
+			"explication": "« Décorer » n'est pas « charger » : il faut souligner le produit, pas le masquer."
+		},
+		{
+			"id": "q46",
+			"theme": "pieges",
+			"niveau": "intermediaire",
+			"question": "Le glaçage miroir doit-il servir à camoufler les défauts du montage ?",
+			"reponses": [
+				"Oui, c'est sa fonction principale",
+				"Non, il révèle au contraire la précision du montage",
+				"Oui, mais uniquement au chocolat",
+				"Cela dépend du jury"
+			],
+			"bonne": 1,
+			"explication": "Le glaçage révèle plutôt qu'il ne masque : un montage imparfait se voit sous un miroir."
+		},
+		{
+			"id": "q47",
+			"theme": "pieges",
+			"niveau": "fondamental",
+			"question": "Quel est le piège classique d'un gâteau de voyage ?",
+			"reponses": [
+				"Trop colorer la surface",
+				"Sous-cuisson au centre OU surcuisson des bords",
+				"Mettre trop de sucre",
+				"Utiliser trop de levure"
+			],
+			"bonne": 1,
+			"explication": "Cake et financiers : équilibre cuisson centre/bords est fragile."
+		},
+		{
+			"id": "q48",
+			"theme": "ep1",
+			"niveau": "intermediaire",
+			"question": "Combien de temps minimum repose-t-on entre les tours d'une pâte feuilletée ?",
+			"reponses": ["5 minutes", "15 minutes", "30 minutes au froid", "1 heure ambiante"],
+			"bonne": 2,
+			"explication": "30 minutes minimum au froid entre chaque tour pour détendre et figer le beurre."
+		},
+		{
+			"id": "q49",
+			"theme": "ep2",
+			"niveau": "fondamental",
+			"question": "Pourquoi monter un entremets à l'envers dans un cercle ?",
+			"reponses": [
+				"Pour économiser du temps",
+				"Pour avoir une surface lisse et nette à glacer",
+				"Pour utiliser moins de crème",
+				"Par tradition uniquement"
+			],
+			"bonne": 1,
+			"explication": "Le montage inversé (mousse → insert → biscuit, retournement final) garantit une surface impeccable pour le glaçage."
+		},
+		{
+			"id": "q50",
+			"theme": "ep2",
+			"niveau": "intermediaire",
+			"question": "À quelle température monter une crème (35% MG) avant incorporation dans une mousse ?",
+			"reponses": [
+				"À 4°C, bol et fouet froids",
+				"À 20°C, température ambiante",
+				"À 50°C tiède",
+				"Peu importe"
+			],
+			"bonne": 0,
+			"explication": "Crème + bol + fouet froids (4°C) = meilleur foisonnement et stabilité."
+		},
+		{
+			"id": "q51",
+			"theme": "ep1",
+			"niveau": "intermediaire",
+			"question": "À quelle dimension typique abaisse-t-on un croissant en pâte levée feuilletée ?",
+			"reponses": [
+				"1 mm",
+				"3 mm",
+				"6 mm",
+				"10 mm"
+			],
+			"bonne": 1,
+			"explication": "Croissant : abaisse à 3 mm, triangle 8×20 cm typique."
+		},
+		{
+			"id": "q52",
+			"theme": "ep1",
+			"niveau": "intermediaire",
+			"question": "Pourquoi ne faut-il pas dorer un croissant sur les bords ?",
+			"reponses": [
+				"Pour économiser de la dorure",
+				"Pour ne pas coller les feuillets et bloquer le développement",
+				"Pour des raisons d'hygiène",
+				"Par esthétique"
+			],
+			"bonne": 1,
+			"explication": "Dorer les tranches colle les feuillets et empêche le développement à la cuisson."
+		},
+		{
+			"id": "q53",
+			"theme": "techniques",
+			"niveau": "fondamental",
+			"question": "Quelle est la température classique pour cuire des viennoiseries au four à sole ?",
+			"reponses": ["140°C", "180°C", "220°C", "260°C"],
+			"bonne": 2,
+			"explication": "Viennoiseries au four à sole : 220°C pour bon développement et coloration."
+		},
+		{
+			"id": "q54",
+			"theme": "techniques",
+			"niveau": "fondamental",
+			"question": "Combien de temps minimum préchauffer le four ?",
+			"reponses": ["5 min", "10 min", "20 min minimum", "1 heure"],
+			"bonne": 2,
+			"explication": "Préchauffer 20 min minimum pour stabiliser la température."
+		},
+		{
+			"id": "q55",
+			"theme": "hygiene",
+			"niveau": "intermediaire",
+			"question": "Que signifie HACCP ?",
+			"reponses": [
+				"Hygiène Alimentaire Contrôle Qualité Production",
+				"Hazard Analysis and Critical Control Points (Analyse des dangers et points critiques)",
+				"Hôpital Alimentaire et Cuisine Pédagogique",
+				"Haut Apprentissage Culinaire et Pâtissier"
+			],
+			"bonne": 1,
+			"explication": "HACCP = méthode internationale d'analyse et maîtrise des dangers en sécurité alimentaire."
+		},
+		{
+			"id": "q56",
+			"theme": "vocabulaire",
+			"niveau": "intermediaire",
+			"question": "Que signifie « tourer » ?",
+			"reponses": [
+				"Faire un tour de la cuisine",
+				"Donner des tours à une pâte feuilletée pour créer les couches",
+				"Mélanger une crème",
+				"Chauffer doucement"
+			],
+			"bonne": 1,
+			"explication": "Tourer = pratiquer les tours (simples ou doubles) qui créent les couches du feuilletage."
+		},
+		{
+			"id": "q57",
+			"theme": "ep2",
+			"niveau": "intermediaire",
+			"question": "L'épreuve EP2 demande au minimum :",
+			"reponses": [
+				"Un seul entremets",
+				"Un entremets monté + petits gâteaux avec au moins 2 fonds, 2 garnitures, 1 glaçage/sucre, 1 décor chocolat et 1 valorisation finale",
+				"Trois entremets différents",
+				"Un dessert à l'assiette"
+			],
+			"bonne": 1,
+			"explication": "L'EP2 impose : entremets monté + petits gâteaux avec 2 fonds, 2 garnitures, glaçage, décor chocolat, valorisation."
+		},
+		{
+			"id": "q58",
+			"theme": "cadre",
+			"niveau": "intermediaire",
+			"question": "Le CAP Pâtissier valide quel niveau de qualification ?",
+			"reponses": ["Niveau 1", "Niveau 3", "Niveau 5", "Niveau 7"],
+			"bonne": 1,
+			"explication": "Le CAP est un diplôme de niveau 3 (anciennement V)."
+		},
+		{
+			"id": "q59",
+			"theme": "ep2",
+			"niveau": "fondamental",
+			"question": "Une bavaroise classique contient :",
+			"reponses": [
+				"Crème pâtissière + meringue italienne",
+				"Crème anglaise + gélatine + crème fouettée",
+				"Crème au beurre + chocolat",
+				"Lait + sucre uniquement"
+			],
+			"bonne": 1,
+			"explication": "Bavaroise = crème anglaise + gélatine gonflée + crème fouettée incorporée."
+		},
+		{
+			"id": "q60",
+			"theme": "techniques",
+			"niveau": "intermediaire",
+			"question": "Pour un Opéra, quel biscuit utilise-t-on traditionnellement ?",
+			"reponses": [
+				"Génoise",
+				"Biscuit cuillère",
+				"Biscuit Joconde",
+				"Dacquoise"
+			],
+			"bonne": 2,
+			"explication": "L'Opéra se monte sur biscuit Joconde imbibé de café."
+		}
+	]
+}

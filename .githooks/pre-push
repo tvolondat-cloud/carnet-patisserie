@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+# ============================================================
+# Hook pre-push : met à jour CHANGELOG.md avant chaque push.
+# Activé via package.json "prepare" → git config core.hooksPath .githooks
+# ============================================================
+
+set -e
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+cd "$REPO_ROOT"
+
+# Skip en cas de --no-verify ou si SKIP_DOCS_SYNC=1
+if [ "$SKIP_DOCS_SYNC" = "1" ]; then
+	echo "[pre-push] SKIP_DOCS_SYNC=1, skip."
+	exit 0
+fi
+
+# Pas de mise à jour si aucun fichier dans staging area & pas de nouveaux commits
+if ! command -v node >/dev/null 2>&1; then
+	echo "[pre-push] node introuvable, skip sync-docs."
+	exit 0
+fi
+
+if [ ! -f scripts/sync-docs.js ]; then
+	echo "[pre-push] scripts/sync-docs.js manquant, skip."
+	exit 0
+fi
+
+echo "[pre-push] Synchronisation CHANGELOG.md..."
+node scripts/sync-docs.js --auto-stage
+
+# Si CHANGELOG modifié et staged, créer un commit séparé
+if ! git diff --cached --quiet -- CHANGELOG.md; then
+	echo "[pre-push] CHANGELOG.md modifié, création d'un commit auto..."
+	git commit -m "docs(auto): sync CHANGELOG.md" --no-verify
+	echo ""
+	echo "⚠️  Un commit 'docs(auto): sync CHANGELOG.md' a été ajouté à ta branche."
+	echo "    Le push va l'inclure automatiquement."
+	echo ""
+fi
+
+exit 0
