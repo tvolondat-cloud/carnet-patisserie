@@ -1,81 +1,109 @@
 // ============================================================
-// Analytics — GTM + GA4 avec Consent Mode v2 (RGPD)
+// Analytics — GTM + GA4 avec Consent Mode v2 (RGPD/CNIL)
 // ============================================================
 //
 // Stratégie :
 // - GTM est chargé une seule fois (dans app.html), avec consent
 //   par défaut = DENIED (RGPD : pas de tracking sans opt-in).
-// - Tant que le user n'a pas donné son consentement, AUCUN cookie
-//   analytics n'est posé (Consent Mode v2 envoie juste des "pings"
-//   anonymes, pas de cookies).
-// - Quand le user clique "Accepter" → on update consent → GA4
-//   commence à tracker.
-// - Si "Refuser" → on garde DENIED, aucun event ne part.
-// - Le choix est stocké dans localStorage et persiste.
+// - Catégories supportées : necessary, analytics, marketing.
+// - L'utilisateur choisit Tout accepter / Tout refuser / Personnaliser.
+// - Conforme art. 82 LIL + reco CNIL : action explicite requise,
+//   3 actions de poids visuel équivalent.
+// - En dev : log dans la console, rien envoyé.
 
 import { browser } from '$app/environment';
-import { writable } from 'svelte/store';
+import { writable, derived } from 'svelte/store';
 
-const STORAGE_KEY = 'bs_analytics_consent';
+const STORAGE_KEY = 'bs_consent_v2';
 const DEV = import.meta.env.DEV;
 
 /**
- * @typedef {'granted'|'denied'|'pending'} ConsentState
+ * @typedef {{ necessary: boolean, analytics: boolean, marketing: boolean, decided_at?: string }} ConsentChoices
  */
 
-/** @type {import('svelte/store').Writable<ConsentState>} */
-export const consentState = writable('pending');
+const DEFAULT_CHOICES = {
+	necessary: true, // toujours activé (cookies de session, préférences)
+	analytics: false,
+	marketing: false
+};
+
+/** @type {import('svelte/store').Writable<ConsentChoices | null>} */
+export const consentChoices = writable(null);
+
+/** Dérive un statut simple : 'pending' | 'granted' (au moins analytics) | 'denied' (que necessary) */
+export const consentState = derived(consentChoices, ($c) => {
+	if (!$c) return 'pending';
+	if ($c.analytics || $c.marketing) return 'granted';
+	return 'denied';
+});
 
 /** Initialise au démarrage : lit localStorage et applique. */
 export function initAnalytics() {
 	if (!browser) return;
 
-	const stored = localStorage.getItem(STORAGE_KEY);
-	if (stored === 'granted') {
-		consentState.set('granted');
-		updateConsent(true);
-	} else if (stored === 'denied') {
-		consentState.set('denied');
-		updateConsent(false);
-	} else {
-		consentState.set('pending');
-		// Default est 'denied' (déjà set dans app.html avant le chargement de GTM).
+	try {
+		const raw = localStorage.getItem(STORAGE_KEY);
+		if (raw) {
+			const stored = JSON.parse(raw);
+			consentChoices.set({ ...DEFAULT_CHOICES, ...stored });
+			applyConsent(stored);
+			return;
+		}
+	} catch {
+		// JSON corrompu, on reset
+		localStorage.removeItem(STORAGE_KEY);
 	}
+	consentChoices.set(null); // pending
 }
 
-/** L'utilisateur accepte → on update Consent Mode + on stocke. */
-export function acceptConsent() {
-	if (!browser) return;
-	localStorage.setItem(STORAGE_KEY, 'granted');
-	consentState.set('granted');
-	updateConsent(true);
-	track('consent_granted');
+/** Accepter toutes les catégories. */
+export function acceptAllConsent() {
+	saveConsent({ necessary: true, analytics: true, marketing: true });
+	track('consent_granted', { all: true });
 }
 
-/** L'utilisateur refuse → on update Consent Mode + on stocke. */
-export function denyConsent() {
-	if (!browser) return;
-	localStorage.setItem(STORAGE_KEY, 'denied');
-	consentState.set('denied');
-	updateConsent(false);
+/** Tout refuser sauf nécessaires. */
+export function denyAllConsent() {
+	saveConsent({ necessary: true, analytics: false, marketing: false });
+	track('consent_denied');
 }
 
-/** Reset : permet de re-poser la question (lien "Gérer cookies"). */
+/** Accepter des catégories spécifiques (depuis le drawer). */
+export function saveCategoryConsent(choices) {
+	const finalChoices = {
+		necessary: true,
+		analytics: !!choices.analytics,
+		marketing: !!choices.marketing
+	};
+	saveConsent(finalChoices);
+	track('consent_customized', finalChoices);
+}
+
+/** Reset : permet de re-poser la question (lien "Gérer cookies" depuis /profil). */
 export function resetConsent() {
 	if (!browser) return;
 	localStorage.removeItem(STORAGE_KEY);
-	consentState.set('pending');
-	updateConsent(false);
+	consentChoices.set(null);
+	applyConsent({ necessary: true, analytics: false, marketing: false });
 }
 
-function updateConsent(granted) {
+function saveConsent(choices) {
+	if (!browser) return;
+	const enriched = { ...choices, decided_at: new Date().toISOString() };
+	localStorage.setItem(STORAGE_KEY, JSON.stringify(enriched));
+	consentChoices.set(enriched);
+	applyConsent(enriched);
+}
+
+function applyConsent(choices) {
 	if (!browser || !window.gtag) return;
-	const status = granted ? 'granted' : 'denied';
 	window.gtag('consent', 'update', {
-		ad_storage: status,
-		analytics_storage: status,
-		ad_user_data: status,
-		ad_personalization: status
+		ad_storage: choices.marketing ? 'granted' : 'denied',
+		ad_user_data: choices.marketing ? 'granted' : 'denied',
+		ad_personalization: choices.marketing ? 'granted' : 'denied',
+		analytics_storage: choices.analytics ? 'granted' : 'denied',
+		functionality_storage: 'granted',
+		security_storage: 'granted'
 	});
 }
 
