@@ -24,6 +24,14 @@ onMount(async () => {
 	initialized = true;
 	if ($isAuthenticated) {
 		await Promise.all([loadRecettes(), loadProgression()]);
+	} else {
+		// Préfetch idle du chunk Landing pour les visiteurs anonymes
+		// (Reco audit CRO : améliorer LCP de la home publique)
+		if ('requestIdleCallback' in window) {
+			window.requestIdleCallback(() => import('$lib/components/Landing.svelte'));
+		} else {
+			setTimeout(() => import('$lib/components/Landing.svelte'), 100);
+		}
 	}
 });
 

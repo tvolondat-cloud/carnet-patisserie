@@ -25,11 +25,16 @@ import Gingerbread from './Gingerbread.svelte';
 				</a>
 			</div>
 
+			<p class="hero-reassurance">
+				⏱️ <strong>30 secondes</strong> pour t'inscrire · Pas de carte bancaire ·
+				Tu peux supprimer ton compte à tout moment
+			</p>
+
 			<div class="hero-trust">
 				<div class="trust-stars" aria-hidden="true">
 					<span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
 				</div>
-				<span class="trust-text">100% gratuit pendant la bêta · Aucune carte bancaire requise</span>
+				<span class="trust-text">Bêta de lancement · Toutes les fonctionnalités débloquées</span>
 			</div>
 		</div>
 
@@ -92,9 +97,17 @@ import Gingerbread from './Gingerbread.svelte';
 .hero-cta {
 	display: flex;
 	gap: 12px;
-	margin-bottom: 32px;
+	margin-bottom: 16px;
 	flex-wrap: wrap;
 }
+
+.hero-reassurance {
+	margin: 0 0 24px;
+	font-size: 0.85rem;
+	color: var(--ld-text-muted);
+	line-height: 1.5;
+}
+.hero-reassurance strong { color: var(--ld-deep); }
 
 .hero-trust {
 	display: flex;

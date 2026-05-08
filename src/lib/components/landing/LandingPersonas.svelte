@@ -1,18 +1,33 @@
 <script>
-const personas = [
+// Cas d'usage type — ces profils sont des illustrations marketing,
+// PAS des témoignages clients. Recadrage post-audit CRO pour ne
+// pas tromper la perception de preuve sociale.
+const profiles = [
 	{
 		emoji: '🎓',
-		name: 'Léa, 19 ans',
-		role: 'Étudiante CAP Pâtissier en alternance',
-		quote: 'Je révisais mes recettes sur des post-it dans la cuisine. Avec Brigade Sucrée, j\'ai mon labo dans la poche, je m\'auto-évalue avec les quiz et je vois si je suis dans les temps.',
-		highlights: ['Mode Labo', 'Date d\'examen + countdown', 'Carnet PDF en cours']
+		title: 'Si tu es étudiant CAP',
+		subtitle: 'En alternance, en formation continue ou en candidat libre',
+		bullets: [
+			'Le Mode Labo reproduit la méthode des CFA : test, quiz, chrono',
+			'Date d\'examen + countdown sur ton tableau de bord',
+			'Carnet PDF imprimable pour réviser n\'importe où',
+			'Vocabulaire technique conforme au référentiel 2024-2025'
+		],
+		cta: 'Voir le mode Labo',
+		anchor: '#how'
 	},
 	{
 		emoji: '🥐',
-		name: 'Sophie, 42 ans',
-		role: 'Particulière passionnée',
-		quote: 'J\'ai pas fait d\'école, mais je veux progresser sérieusement. Le calculateur de rendement, les fiches détaillées et le suivi par compétence m\'ont changé la vie.',
-		highlights: ['Calculateur ×0.25 → ×10', 'Notes & commentaires', 'Mode cuisine grand format']
+		title: 'Si tu es particulier passionné',
+		subtitle: 'Sans école, mais avec l\'envie de progresser sérieusement',
+		bullets: [
+			'17 recettes incontournables, pédagogiques et détaillées',
+			'Calculateur de rendement ×0.25 → ×10 en temps réel',
+			'Notes et commentaires : ton journal de cuisine perso',
+			'Mode cuisine grand format pour les mains farinées'
+		],
+		cta: 'Voir les recettes',
+		anchor: '#features'
 	}
 ];
 </script>
@@ -29,24 +44,23 @@ const personas = [
 		</div>
 
 		<div class="ld-grid ld-grid-2">
-			{#each personas as p}
+			{#each profiles as p}
 				<article class="persona-card ld-card">
 					<div class="persona-header">
 						<div class="persona-emoji" aria-hidden="true">{p.emoji}</div>
 						<div>
-							<h3 class="ld-h3">{p.name}</h3>
-							<p class="persona-role">{p.role}</p>
+							<h3 class="ld-h3">{p.title}</h3>
+							<p class="persona-role">{p.subtitle}</p>
 						</div>
 					</div>
-					<blockquote class="persona-quote">
-						<span class="quote-mark" aria-hidden="true">"</span>
-						{p.quote}
-					</blockquote>
-					<div class="persona-highlights">
-						{#each p.highlights as h}
-							<span class="highlight-tag">{h}</span>
+					<ul class="persona-bullets">
+						{#each p.bullets as b}
+							<li>{b}</li>
 						{/each}
-					</div>
+					</ul>
+					<a href={p.anchor} class="persona-link" data-track="cta:persona-{p.emoji}">
+						{p.cta} →
+					</a>
 				</article>
 			{/each}
 		</div>
@@ -87,36 +101,37 @@ const personas = [
 	margin: 4px 0 0;
 }
 
-.persona-quote {
-	position: relative;
-	font-style: italic;
-	color: var(--ld-text);
+.persona-bullets {
+	list-style: none;
+	padding: 0;
 	margin: 0 0 20px;
-	padding-left: 24px;
-	font-size: 1rem;
-	line-height: 1.6;
-	border-left: 3px solid var(--ld-orange);
-}
-
-.quote-mark {
-	color: var(--ld-orange);
-	font-size: 1.4rem;
-	font-weight: 900;
-	margin-right: 4px;
-}
-
-.persona-highlights {
 	display: flex;
-	gap: 8px;
-	flex-wrap: wrap;
+	flex-direction: column;
+	gap: 10px;
+}
+.persona-bullets li {
+	font-size: 0.92rem;
+	color: var(--ld-text);
+	padding-left: 26px;
+	position: relative;
+	line-height: 1.5;
+}
+.persona-bullets li::before {
+	content: '✓';
+	position: absolute;
+	left: 0;
+	top: 1px;
+	color: var(--ld-orange);
+	font-weight: 800;
+	font-size: 1rem;
 }
 
-.highlight-tag {
-	background: rgba(31, 77, 69, 0.08);
-	color: var(--ld-deep);
-	padding: 6px 12px;
-	border-radius: 20px;
-	font-size: 0.78rem;
-	font-weight: 600;
+.persona-link {
+	color: var(--ld-orange);
+	font-weight: 700;
+	text-decoration: none;
+	font-size: 0.9rem;
+	transition: gap 0.15s;
 }
+.persona-link:hover { color: var(--ld-orange-dark); }
 </style>

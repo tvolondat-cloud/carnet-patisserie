@@ -42,9 +42,14 @@ const plans = [
 			<span class="ld-eyebrow">Tarifs</span>
 			<h2 class="ld-h2">Simple, transparent, beta gratuite</h2>
 			<p class="ld-lead">
-				On lance Brigade Sucrée en bêta gratuite. Profite de toutes les fonctionnalités
-				maintenant, le plan Pro arrive après le Sprint 3.
+				On lance Brigade Sucrée en bêta gratuite jusqu'au lancement officiel
+				du plan Pro (Sprint 3, été 2026). Inscris-toi maintenant pour bloquer
+				l'accès gratuit à toutes les fonctionnalités.
 			</p>
+			<div class="pricing-banner">
+				<span class="banner-icon" aria-hidden="true">🚀</span>
+				<span><strong>Offre bêta de lancement</strong> — Tous les inscrits avant le passage en Pro gardent leur accès gratuit aux fonctionnalités actuelles.</span>
+			</div>
 		</div>
 
 		<div class="ld-grid ld-grid-2 pricing-grid">
@@ -95,10 +100,27 @@ const plans = [
 <style>
 .pricing-header {
 	text-align: center;
-	max-width: 640px;
-	margin: 0 auto 56px;
+	max-width: 720px;
+	margin: 0 auto 48px;
 }
 .pricing-header .ld-lead { margin-left: auto; margin-right: auto; }
+
+.pricing-banner {
+	display: inline-flex;
+	align-items: center;
+	gap: 12px;
+	background: linear-gradient(135deg, rgba(232, 152, 85, 0.16), rgba(210, 104, 61, 0.08));
+	border: 1.5px solid var(--ld-orange);
+	border-radius: 14px;
+	padding: 14px 22px;
+	margin-top: 20px;
+	font-size: 0.9rem;
+	color: var(--ld-deep);
+	text-align: left;
+	max-width: 620px;
+}
+.pricing-banner .banner-icon { font-size: 1.4rem; flex-shrink: 0; }
+.pricing-banner strong { color: var(--ld-orange-dark); }
 
 .pricing-grid { max-width: 880px; margin: 0 auto; }
 

@@ -4,6 +4,7 @@ import LandingHero from './landing/LandingHero.svelte';
 import LandingFeatures from './landing/LandingFeatures.svelte';
 import LandingHowItWorks from './landing/LandingHowItWorks.svelte';
 import LandingPersonas from './landing/LandingPersonas.svelte';
+import LandingComparison from './landing/LandingComparison.svelte';
 import LandingPricing from './landing/LandingPricing.svelte';
 import LandingFAQ from './landing/LandingFAQ.svelte';
 import LandingCTA from './landing/LandingCTA.svelte';
@@ -25,6 +26,7 @@ import './landing/landing.css';
 		<LandingFeatures />
 		<LandingHowItWorks />
 		<LandingPersonas />
+		<LandingComparison />
 		<LandingPricing />
 		<LandingFAQ />
 		<LandingCTA />
