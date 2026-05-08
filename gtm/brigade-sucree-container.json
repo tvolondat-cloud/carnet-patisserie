@@ -1,0 +1,565 @@
+{
+	"exportFormatVersion": 2,
+	"exportTime": "2026-05-04 12:00:00",
+	"containerVersion": {
+		"path": "accounts/0/containers/0/versions/0",
+		"accountId": "0",
+		"containerId": "0",
+		"containerVersionId": "0",
+		"container": {
+			"path": "accounts/0/containers/0",
+			"accountId": "0",
+			"containerId": "0",
+			"name": "Brigade Sucrée",
+			"publicId": "GTM-KRKFJLVD",
+			"usageContext": ["WEB"],
+			"fingerprint": "0",
+			"tagManagerUrl": "https://tagmanager.google.com/#/container/accounts/0/containers/0/workspaces?apiLink=container",
+			"features": {
+				"supportUserPermissions": true,
+				"supportEnvironments": true,
+				"supportWorkspaces": true,
+				"supportGtagConfigs": true,
+				"supportBuiltInVariables": true,
+				"supportClients": true,
+				"supportFolders": true,
+				"supportTags": true,
+				"supportTemplates": true,
+				"supportTriggers": true,
+				"supportVariables": true,
+				"supportVersions": true,
+				"supportZones": true,
+				"supportTransformations": true
+			},
+			"tagIds": ["GTM-KRKFJLVD"]
+		},
+		"tag": [
+			{
+				"accountId": "0",
+				"containerId": "0",
+				"tagId": "1",
+				"name": "GA4 — Configuration",
+				"type": "googtag",
+				"parameter": [
+					{ "type": "TEMPLATE", "key": "tagId", "value": "G-XJMXR88JGC" },
+					{
+						"type": "LIST",
+						"key": "configSettingsTable",
+						"list": [
+							{
+								"type": "MAP",
+								"map": [
+									{ "type": "TEMPLATE", "key": "parameter", "value": "send_page_view" },
+									{ "type": "TEMPLATE", "key": "parameterValue", "value": "false" }
+								]
+							},
+							{
+								"type": "MAP",
+								"map": [
+									{ "type": "TEMPLATE", "key": "parameter", "value": "anonymize_ip" },
+									{ "type": "TEMPLATE", "key": "parameterValue", "value": "true" }
+								]
+							}
+						]
+					}
+				],
+				"fingerprint": "0",
+				"firingTriggerId": ["100"],
+				"tagFiringOption": "ONCE_PER_EVENT",
+				"monitoringMetadata": { "type": "MAP" },
+				"consentSettings": {
+					"consentStatus": "NEEDED",
+					"consentType": {
+						"type": "LIST",
+						"list": [{ "type": "TEMPLATE", "value": "analytics_storage" }]
+					}
+				}
+			},
+			{
+				"accountId": "0",
+				"containerId": "0",
+				"tagId": "2",
+				"name": "GA4 — Page View",
+				"type": "gaawe",
+				"parameter": [
+					{ "type": "TEMPLATE", "key": "eventName", "value": "page_view" },
+					{ "type": "TEMPLATE", "key": "measurementId", "value": "G-XJMXR88JGC" },
+					{
+						"type": "LIST",
+						"key": "eventParameters",
+						"list": [
+							{
+								"type": "MAP",
+								"map": [
+									{ "type": "TEMPLATE", "key": "name", "value": "page_path" },
+									{ "type": "TEMPLATE", "key": "value", "value": "{{DLV - page_path}}" }
+								]
+							},
+							{
+								"type": "MAP",
+								"map": [
+									{ "type": "TEMPLATE", "key": "name", "value": "page_title" },
+									{ "type": "TEMPLATE", "key": "value", "value": "{{DLV - page_title}}" }
+								]
+							}
+						]
+					}
+				],
+				"fingerprint": "0",
+				"firingTriggerId": ["110"],
+				"tagFiringOption": "ONCE_PER_EVENT",
+				"consentSettings": {
+					"consentStatus": "NEEDED",
+					"consentType": {
+						"type": "LIST",
+						"list": [{ "type": "TEMPLATE", "value": "analytics_storage" }]
+					}
+				}
+			},
+			{
+				"accountId": "0",
+				"containerId": "0",
+				"tagId": "3",
+				"name": "GA4 — Custom Events (catch-all)",
+				"type": "gaawe",
+				"parameter": [
+					{ "type": "TEMPLATE", "key": "eventName", "value": "{{Event}}" },
+					{ "type": "TEMPLATE", "key": "measurementId", "value": "G-XJMXR88JGC" },
+					{
+						"type": "LIST",
+						"key": "eventParameters",
+						"list": [
+							{
+								"type": "MAP",
+								"map": [
+									{ "type": "TEMPLATE", "key": "name", "value": "method" },
+									{ "type": "TEMPLATE", "key": "value", "value": "{{DLV - method}}" }
+								]
+							},
+							{
+								"type": "MAP",
+								"map": [
+									{ "type": "TEMPLATE", "key": "name", "value": "recipe_id" },
+									{ "type": "TEMPLATE", "key": "value", "value": "{{DLV - recipe_id}}" }
+								]
+							},
+							{
+								"type": "MAP",
+								"map": [
+									{ "type": "TEMPLATE", "key": "name", "value": "recipe_name" },
+									{ "type": "TEMPLATE", "key": "value", "value": "{{DLV - recipe_name}}" }
+								]
+							},
+							{
+								"type": "MAP",
+								"map": [
+									{ "type": "TEMPLATE", "key": "name", "value": "recipe_categorie" },
+									{ "type": "TEMPLATE", "key": "value", "value": "{{DLV - recipe_categorie}}" }
+								]
+							},
+							{
+								"type": "MAP",
+								"map": [
+									{ "type": "TEMPLATE", "key": "name", "value": "recipe_ep" },
+									{ "type": "TEMPLATE", "key": "value", "value": "{{DLV - recipe_ep}}" }
+								]
+							},
+							{
+								"type": "MAP",
+								"map": [
+									{ "type": "TEMPLATE", "key": "name", "value": "recipe_difficulte" },
+									{ "type": "TEMPLATE", "key": "value", "value": "{{DLV - recipe_difficulte}}" }
+								]
+							},
+							{
+								"type": "MAP",
+								"map": [
+									{ "type": "TEMPLATE", "key": "name", "value": "score" },
+									{ "type": "TEMPLATE", "key": "value", "value": "{{DLV - score}}" }
+								]
+							},
+							{
+								"type": "MAP",
+								"map": [
+									{ "type": "TEMPLATE", "key": "name", "value": "seconds" },
+									{ "type": "TEMPLATE", "key": "value", "value": "{{DLV - seconds}}" }
+								]
+							},
+							{
+								"type": "MAP",
+								"map": [
+									{ "type": "TEMPLATE", "key": "name", "value": "passed" },
+									{ "type": "TEMPLATE", "key": "value", "value": "{{DLV - passed}}" }
+								]
+							},
+							{
+								"type": "MAP",
+								"map": [
+									{ "type": "TEMPLATE", "key": "name", "value": "comment_type" },
+									{ "type": "TEMPLATE", "key": "value", "value": "{{DLV - comment_type}}" }
+								]
+							},
+							{
+								"type": "MAP",
+								"map": [
+									{ "type": "TEMPLATE", "key": "name", "value": "count" },
+									{ "type": "TEMPLATE", "key": "value", "value": "{{DLV - count}}" }
+								]
+							},
+							{
+								"type": "MAP",
+								"map": [
+									{ "type": "TEMPLATE", "key": "name", "value": "only_maitrisees" },
+									{ "type": "TEMPLATE", "key": "value", "value": "{{DLV - only_maitrisees}}" }
+								]
+							}
+						]
+					}
+				],
+				"fingerprint": "0",
+				"firingTriggerId": ["120"],
+				"tagFiringOption": "ONCE_PER_EVENT",
+				"consentSettings": {
+					"consentStatus": "NEEDED",
+					"consentType": {
+						"type": "LIST",
+						"list": [{ "type": "TEMPLATE", "value": "analytics_storage" }]
+					}
+				}
+			},
+			{
+				"accountId": "0",
+				"containerId": "0",
+				"tagId": "4",
+				"name": "GA4 — Conversions",
+				"type": "gaawe",
+				"notes": "Tag dédié aux conversions clés (sign_up, recipe_mastered, pdf_exported). Tag distinct pour faciliter le marquage en Conversion dans GA4 Admin.",
+				"parameter": [
+					{ "type": "TEMPLATE", "key": "eventName", "value": "{{Event}}" },
+					{ "type": "TEMPLATE", "key": "measurementId", "value": "G-XJMXR88JGC" },
+					{
+						"type": "LIST",
+						"key": "eventParameters",
+						"list": [
+							{
+								"type": "MAP",
+								"map": [
+									{ "type": "TEMPLATE", "key": "name", "value": "recipe_id" },
+									{ "type": "TEMPLATE", "key": "value", "value": "{{DLV - recipe_id}}" }
+								]
+							},
+							{
+								"type": "MAP",
+								"map": [
+									{ "type": "TEMPLATE", "key": "name", "value": "recipe_name" },
+									{ "type": "TEMPLATE", "key": "value", "value": "{{DLV - recipe_name}}" }
+								]
+							},
+							{
+								"type": "MAP",
+								"map": [
+									{ "type": "TEMPLATE", "key": "name", "value": "method" },
+									{ "type": "TEMPLATE", "key": "value", "value": "{{DLV - method}}" }
+								]
+							}
+						]
+					}
+				],
+				"fingerprint": "0",
+				"firingTriggerId": ["130"],
+				"tagFiringOption": "ONCE_PER_EVENT",
+				"consentSettings": {
+					"consentStatus": "NEEDED",
+					"consentType": {
+						"type": "LIST",
+						"list": [{ "type": "TEMPLATE", "value": "analytics_storage" }]
+					}
+				}
+			}
+		],
+		"trigger": [
+			{
+				"accountId": "0",
+				"containerId": "0",
+				"triggerId": "100",
+				"name": "Trigger — Initialization (All Pages)",
+				"type": "INIT",
+				"fingerprint": "0"
+			},
+			{
+				"accountId": "0",
+				"containerId": "0",
+				"triggerId": "110",
+				"name": "Trigger — Custom: page_view",
+				"type": "CUSTOM_EVENT",
+				"customEventFilter": [
+					{
+						"type": "EQUALS",
+						"parameter": [
+							{ "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" },
+							{ "type": "TEMPLATE", "key": "arg1", "value": "page_view" }
+						]
+					}
+				],
+				"fingerprint": "0"
+			},
+			{
+				"accountId": "0",
+				"containerId": "0",
+				"triggerId": "120",
+				"name": "Trigger — All Custom Events (regex)",
+				"type": "CUSTOM_EVENT",
+				"customEventFilter": [
+					{
+						"type": "MATCH_REGEX",
+						"parameter": [
+							{ "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" },
+							{
+								"type": "TEMPLATE",
+								"key": "arg1",
+								"value": "^(sign_up|login|logout|view_recipe|lab_started|lab_quiz_completed|lab_chrono_completed|recipe_mastered|notes_saved|comment_added|pdf_exported|profile_updated|consent_granted|consent_denied|consent_customized)$"
+							},
+							{ "type": "BOOLEAN", "key": "ignore_case", "value": "false" }
+						]
+					}
+				],
+				"fingerprint": "0"
+			},
+			{
+				"accountId": "0",
+				"containerId": "0",
+				"triggerId": "130",
+				"name": "Trigger — Conversions (sign_up | recipe_mastered | pdf_exported)",
+				"type": "CUSTOM_EVENT",
+				"customEventFilter": [
+					{
+						"type": "MATCH_REGEX",
+						"parameter": [
+							{ "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" },
+							{
+								"type": "TEMPLATE",
+								"key": "arg1",
+								"value": "^(sign_up|recipe_mastered|pdf_exported)$"
+							},
+							{ "type": "BOOLEAN", "key": "ignore_case", "value": "false" }
+						]
+					}
+				],
+				"fingerprint": "0"
+			}
+		],
+		"variable": [
+			{
+				"accountId": "0",
+				"containerId": "0",
+				"variableId": "10",
+				"name": "DLV - method",
+				"type": "v",
+				"parameter": [
+					{ "type": "INTEGER", "key": "dataLayerVersion", "value": "2" },
+					{ "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" },
+					{ "type": "TEMPLATE", "key": "name", "value": "method" }
+				],
+				"fingerprint": "0"
+			},
+			{
+				"accountId": "0",
+				"containerId": "0",
+				"variableId": "11",
+				"name": "DLV - recipe_id",
+				"type": "v",
+				"parameter": [
+					{ "type": "INTEGER", "key": "dataLayerVersion", "value": "2" },
+					{ "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" },
+					{ "type": "TEMPLATE", "key": "name", "value": "recipe_id" }
+				],
+				"fingerprint": "0"
+			},
+			{
+				"accountId": "0",
+				"containerId": "0",
+				"variableId": "12",
+				"name": "DLV - recipe_name",
+				"type": "v",
+				"parameter": [
+					{ "type": "INTEGER", "key": "dataLayerVersion", "value": "2" },
+					{ "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" },
+					{ "type": "TEMPLATE", "key": "name", "value": "recipe_name" }
+				],
+				"fingerprint": "0"
+			},
+			{
+				"accountId": "0",
+				"containerId": "0",
+				"variableId": "13",
+				"name": "DLV - recipe_categorie",
+				"type": "v",
+				"parameter": [
+					{ "type": "INTEGER", "key": "dataLayerVersion", "value": "2" },
+					{ "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" },
+					{ "type": "TEMPLATE", "key": "name", "value": "recipe_categorie" }
+				],
+				"fingerprint": "0"
+			},
+			{
+				"accountId": "0",
+				"containerId": "0",
+				"variableId": "14",
+				"name": "DLV - recipe_ep",
+				"type": "v",
+				"parameter": [
+					{ "type": "INTEGER", "key": "dataLayerVersion", "value": "2" },
+					{ "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" },
+					{ "type": "TEMPLATE", "key": "name", "value": "recipe_ep" }
+				],
+				"fingerprint": "0"
+			},
+			{
+				"accountId": "0",
+				"containerId": "0",
+				"variableId": "15",
+				"name": "DLV - recipe_difficulte",
+				"type": "v",
+				"parameter": [
+					{ "type": "INTEGER", "key": "dataLayerVersion", "value": "2" },
+					{ "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" },
+					{ "type": "TEMPLATE", "key": "name", "value": "recipe_difficulte" }
+				],
+				"fingerprint": "0"
+			},
+			{
+				"accountId": "0",
+				"containerId": "0",
+				"variableId": "16",
+				"name": "DLV - score",
+				"type": "v",
+				"parameter": [
+					{ "type": "INTEGER", "key": "dataLayerVersion", "value": "2" },
+					{ "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" },
+					{ "type": "TEMPLATE", "key": "name", "value": "score" }
+				],
+				"fingerprint": "0"
+			},
+			{
+				"accountId": "0",
+				"containerId": "0",
+				"variableId": "17",
+				"name": "DLV - seconds",
+				"type": "v",
+				"parameter": [
+					{ "type": "INTEGER", "key": "dataLayerVersion", "value": "2" },
+					{ "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" },
+					{ "type": "TEMPLATE", "key": "name", "value": "seconds" }
+				],
+				"fingerprint": "0"
+			},
+			{
+				"accountId": "0",
+				"containerId": "0",
+				"variableId": "18",
+				"name": "DLV - passed",
+				"type": "v",
+				"parameter": [
+					{ "type": "INTEGER", "key": "dataLayerVersion", "value": "2" },
+					{ "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" },
+					{ "type": "TEMPLATE", "key": "name", "value": "passed" }
+				],
+				"fingerprint": "0"
+			},
+			{
+				"accountId": "0",
+				"containerId": "0",
+				"variableId": "19",
+				"name": "DLV - comment_type",
+				"type": "v",
+				"parameter": [
+					{ "type": "INTEGER", "key": "dataLayerVersion", "value": "2" },
+					{ "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" },
+					{ "type": "TEMPLATE", "key": "name", "value": "comment_type" }
+				],
+				"fingerprint": "0"
+			},
+			{
+				"accountId": "0",
+				"containerId": "0",
+				"variableId": "20",
+				"name": "DLV - count",
+				"type": "v",
+				"parameter": [
+					{ "type": "INTEGER", "key": "dataLayerVersion", "value": "2" },
+					{ "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" },
+					{ "type": "TEMPLATE", "key": "name", "value": "count" }
+				],
+				"fingerprint": "0"
+			},
+			{
+				"accountId": "0",
+				"containerId": "0",
+				"variableId": "21",
+				"name": "DLV - only_maitrisees",
+				"type": "v",
+				"parameter": [
+					{ "type": "INTEGER", "key": "dataLayerVersion", "value": "2" },
+					{ "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" },
+					{ "type": "TEMPLATE", "key": "name", "value": "only_maitrisees" }
+				],
+				"fingerprint": "0"
+			},
+			{
+				"accountId": "0",
+				"containerId": "0",
+				"variableId": "22",
+				"name": "DLV - page_path",
+				"type": "v",
+				"parameter": [
+					{ "type": "INTEGER", "key": "dataLayerVersion", "value": "2" },
+					{ "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" },
+					{ "type": "TEMPLATE", "key": "name", "value": "page_path" }
+				],
+				"fingerprint": "0"
+			},
+			{
+				"accountId": "0",
+				"containerId": "0",
+				"variableId": "23",
+				"name": "DLV - page_title",
+				"type": "v",
+				"parameter": [
+					{ "type": "INTEGER", "key": "dataLayerVersion", "value": "2" },
+					{ "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" },
+					{ "type": "TEMPLATE", "key": "name", "value": "page_title" }
+				],
+				"fingerprint": "0"
+			},
+			{
+				"accountId": "0",
+				"containerId": "0",
+				"variableId": "30",
+				"name": "Const - GA4 Measurement ID",
+				"type": "c",
+				"parameter": [
+					{ "type": "TEMPLATE", "key": "value", "value": "G-XJMXR88JGC" }
+				],
+				"fingerprint": "0"
+			}
+		],
+		"builtInVariable": [
+			{ "accountId": "0", "containerId": "0", "type": "PAGE_URL", "name": "Page URL" },
+			{ "accountId": "0", "containerId": "0", "type": "PAGE_HOSTNAME", "name": "Page Hostname" },
+			{ "accountId": "0", "containerId": "0", "type": "PAGE_PATH", "name": "Page Path" },
+			{ "accountId": "0", "containerId": "0", "type": "PAGE_TITLE", "name": "Page Title" },
+			{ "accountId": "0", "containerId": "0", "type": "REFERRER", "name": "Referrer" },
+			{ "accountId": "0", "containerId": "0", "type": "EVENT", "name": "Event" },
+			{ "accountId": "0", "containerId": "0", "type": "CLICK_ELEMENT", "name": "Click Element" },
+			{ "accountId": "0", "containerId": "0", "type": "CLICK_URL", "name": "Click URL" },
+			{ "accountId": "0", "containerId": "0", "type": "CLICK_TEXT", "name": "Click Text" },
+			{ "accountId": "0", "containerId": "0", "type": "CLICK_ID", "name": "Click ID" },
+			{ "accountId": "0", "containerId": "0", "type": "CLICK_TARGET", "name": "Click Target" },
+			{ "accountId": "0", "containerId": "0", "type": "CLICK_CLASSES", "name": "Click Classes" },
+			{ "accountId": "0", "containerId": "0", "type": "FORM_ELEMENT", "name": "Form Element" },
+			{ "accountId": "0", "containerId": "0", "type": "FORM_ID", "name": "Form ID" }
+		],
+		"fingerprint": "0",
+		"tagManagerUrl": "https://tagmanager.google.com/#/versions/accounts/0/containers/0/versions/0?apiLink=version"
+	}
+}
