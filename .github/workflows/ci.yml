@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build & Validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --no-audit --prefer-offline
+
+      - name: Validate JSON files
+        run: |
+          for f in $(find . -name "*.json" -not -path "./node_modules/*" -not -path "./.svelte-kit/*" -not -path "./build/*" -not -path "./package-lock.json"); do
+            echo "Checking $f..."
+            node -e "JSON.parse(require('fs').readFileSync('$f', 'utf8'))" || exit 1
+          done
+          echo "✅ All JSON files valid"
+
+      - name: Build production
+        run: npm run build
+        env:
+          # Variables factices pour permettre le build (les vraies sont sur Cloudflare Pages)
+          VITE_SUPABASE_URL: https://placeholder.supabase.co
+          VITE_SUPABASE_ANON_KEY: placeholder.placeholder.placeholder
+
+      - name: Check build output
+        run: |
+          test -f build/index.html || (echo "❌ build/index.html missing" && exit 1)
+          test -d build/_app/immutable || (echo "❌ _app/immutable missing" && exit 1)
+          echo "✅ Build output OK"
+          echo "Bundle size:"
+          du -sh build/_app/immutable/
+
+      - name: Check critical files
+        run: |
+          test -f static/_headers || (echo "❌ static/_headers missing" && exit 1)
+          test -f static/icon-192.png || (echo "❌ icon-192.png missing" && exit 1)
+          test -f static/icon-512.png || (echo "❌ icon-512.png missing" && exit 1)
+          echo "✅ Static assets OK"
