@@ -9,7 +9,12 @@ import { initAnalytics, trackPageView } from '$lib/analytics.js';
 import ConsentBanner from '$lib/components/ConsentBanner.svelte';
 import '../app.css';
 
-const publicRoutes = ['/auth', '/auth/callback'];
+// Routes publiques :
+// - /auth, /auth/callback : flux d'authentification
+// - / : home publique (Landing pour anonymes, Dashboard pour authentifiés)
+// - /confidentialite, /mentions-legales, /cgu : pages légales
+const publicRoutes = ['/auth', '/auth/callback', '/confidentialite', '/mentions-legales', '/cgu'];
+const homeIsPublic = true; // / accessible sans auth (Landing)
 
 let initialized = false;
 
@@ -23,7 +28,7 @@ onMount(async () => {
 });
 
 $: currentPath = $page.url.pathname;
-$: isPublic = publicRoutes.some((r) => currentPath.startsWith(r));
+$: isPublic = publicRoutes.some((r) => currentPath.startsWith(r)) || (homeIsPublic && currentPath === '/');
 $: shouldRender = isPublic || $isAuthenticated;
 
 // Track page views à chaque navigation SvelteKit

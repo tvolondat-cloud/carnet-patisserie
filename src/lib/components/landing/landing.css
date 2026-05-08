@@ -1,0 +1,188 @@
+/* ============================================================
+ * Landing Brigade Sucrée — Design System
+ * Palette gingerbread + vert sapin + orange (DA fournie)
+ * Scope : uniquement les classes .ld-* dans la landing
+ * ============================================================ */
+
+.ld {
+	/* Tokens locaux landing (palette DA) */
+	--ld-cream: #F4E5D2;
+	--ld-cream-light: #FAF1E2;
+	--ld-cream-dark: #ECDCC6;
+	--ld-gingerbread: #A86D3D;
+	--ld-gingerbread-light: #C8884E;
+	--ld-gingerbread-dark: #7D502B;
+	--ld-orange: #D2683D;
+	--ld-orange-light: #E89855;
+	--ld-orange-dark: #B0552F;
+	--ld-deep: #1F4D45;
+	--ld-deep-light: #2A6B5F;
+	--ld-deep-dark: #143632;
+	--ld-text: #1F2937;
+	--ld-text-muted: #4B5563;
+	--ld-white: #FFFFFF;
+
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+	color: var(--ld-text);
+	background: var(--ld-cream-light);
+	line-height: 1.6;
+}
+
+.ld * { box-sizing: border-box; }
+
+.ld-container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 24px;
+}
+
+.ld-section {
+	padding: 80px 0;
+}
+
+.ld-section-cream { background: var(--ld-cream); }
+.ld-section-deep { background: var(--ld-deep); color: var(--ld-cream-light); }
+.ld-section-white { background: var(--ld-white); }
+
+.ld-eyebrow {
+	display: inline-block;
+	font-size: 0.78rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: var(--ld-orange);
+	background: rgba(210, 104, 61, 0.1);
+	padding: 6px 14px;
+	border-radius: 9999px;
+	margin-bottom: 20px;
+}
+
+.ld-h1 {
+	font-size: clamp(2rem, 5vw, 3.5rem);
+	font-weight: 900;
+	line-height: 1.1;
+	color: var(--ld-deep);
+	letter-spacing: -0.02em;
+	margin: 0 0 20px;
+}
+
+.ld-h1 .accent { color: var(--ld-orange); }
+
+.ld-h2 {
+	font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+	font-weight: 800;
+	line-height: 1.15;
+	color: var(--ld-deep);
+	letter-spacing: -0.015em;
+	margin: 0 0 16px;
+}
+
+.ld-section-deep .ld-h2 { color: var(--ld-cream-light); }
+.ld-section-deep .ld-eyebrow { color: var(--ld-orange-light); background: rgba(232, 152, 85, 0.15); }
+
+.ld-h3 {
+	font-size: 1.2rem;
+	font-weight: 700;
+	color: var(--ld-deep);
+	margin: 0 0 8px;
+}
+
+.ld-lead {
+	font-size: clamp(1rem, 2vw, 1.18rem);
+	color: var(--ld-text-muted);
+	max-width: 620px;
+	margin: 0 0 32px;
+}
+
+.ld-section-deep .ld-lead { color: rgba(244, 229, 210, 0.85); }
+
+/* Boutons */
+.ld-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	padding: 14px 26px;
+	border-radius: 12px;
+	font-size: 0.95rem;
+	font-weight: 700;
+	border: 2px solid transparent;
+	cursor: pointer;
+	transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+	text-decoration: none;
+	white-space: nowrap;
+}
+.ld-btn-primary {
+	background: var(--ld-orange);
+	color: var(--ld-white);
+	box-shadow: 0 6px 20px rgba(210, 104, 61, 0.35);
+}
+.ld-btn-primary:hover {
+	background: var(--ld-orange-dark);
+	transform: translateY(-2px);
+	box-shadow: 0 10px 28px rgba(210, 104, 61, 0.45);
+}
+.ld-btn-primary:active { transform: translateY(0); }
+
+.ld-btn-secondary {
+	background: var(--ld-white);
+	color: var(--ld-deep);
+	border-color: var(--ld-deep);
+}
+.ld-btn-secondary:hover {
+	background: var(--ld-deep);
+	color: var(--ld-cream-light);
+}
+
+.ld-btn-ghost {
+	background: transparent;
+	color: var(--ld-deep);
+}
+.ld-btn-ghost:hover { background: rgba(31, 77, 69, 0.08); }
+
+.ld-btn-large {
+	padding: 18px 36px;
+	font-size: 1.05rem;
+	border-radius: 14px;
+}
+
+/* Grilles */
+.ld-grid {
+	display: grid;
+	gap: 24px;
+}
+.ld-grid-2 { grid-template-columns: repeat(2, 1fr); }
+.ld-grid-3 { grid-template-columns: repeat(3, 1fr); }
+.ld-grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+@media (max-width: 768px) {
+	.ld-grid-2, .ld-grid-3, .ld-grid-4 { grid-template-columns: 1fr; }
+	.ld-section { padding: 56px 0; }
+}
+
+/* Card */
+.ld-card {
+	background: var(--ld-white);
+	border-radius: 18px;
+	padding: 28px;
+	border: 1px solid rgba(31, 77, 69, 0.08);
+	box-shadow: 0 2px 8px rgba(31, 77, 69, 0.04);
+	transition: transform 0.2s, box-shadow 0.2s;
+}
+.ld-card:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 12px 30px rgba(31, 77, 69, 0.1);
+}
+
+/* Animations scroll */
+@media (prefers-reduced-motion: no-preference) {
+	.ld-fade {
+		opacity: 0;
+		transform: translateY(20px);
+		transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+	}
+	.ld-fade.visible {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}

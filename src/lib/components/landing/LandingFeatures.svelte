@@ -1,0 +1,124 @@
+<script>
+const features = [
+	{
+		icon: '🧪',
+		title: 'Mode Laboratoire',
+		desc: 'Tester → Quiz → Chrono. La méthode des CFA pour ancrer chaque recette en mémoire.',
+		bullets: ['Quiz validé à 75%', 'Chrono +20% tolérance', 'Maîtrisée = 3 étapes ✓']
+	},
+	{
+		icon: '📚',
+		title: '17 recettes du référentiel',
+		desc: 'Crèmes, pâtes, viennoiseries, entremets… Toutes les bases du CAP, prêtes à étudier.',
+		bullets: ['Pâte feuilletée, levée feuilletée, à choux', 'Crèmes pâtissière, anglaise, mousseline', 'Opéra, Paris-Brest, Tarte Tatin']
+	},
+	{
+		icon: '📊',
+		title: 'Suivi par compétence',
+		desc: 'Score global et barres par compétence CAP. Tu vois où tu progresses, où tu cales.',
+		bullets: ['Cuissons · Textures · Pesées', 'Assemblages · Organisation', '4 statuts : à tester → maîtrisée']
+	},
+	{
+		icon: '📄',
+		title: 'Carnet PDF imprimable',
+		desc: 'Exporte tes fiches au format A4, marge 3 cm classeur, couleurs Berry Jam. Parfait pour le labo.',
+		bullets: ['100% client-side', 'Filtres par catégorie', 'Tes notes incluses']
+	},
+	{
+		icon: '🥐',
+		title: 'Calculateur de rendement',
+		desc: 'Multiplicateur ×0.25 à ×10. Adapte chaque recette en temps réel selon tes besoins.',
+		bullets: ['Édition inline', 'Sauvegarde auto', 'Toutes les unités']
+	},
+	{
+		icon: '📋',
+		title: 'Cours EP1 / EP2',
+		desc: 'Stratégie d\'épreuve, ordonnancement, vocabulaire pro. Le savoir des formateurs.',
+		bullets: ['Référentiel 2024-2025', '7 sections illustrées', 'Méthode d\'entraînement']
+	}
+];
+</script>
+
+<section class="ld-section ld-section-cream features" id="features">
+	<div class="ld-container">
+		<div class="features-header">
+			<span class="ld-eyebrow">Tout ce qu'il te faut</span>
+			<h2 class="ld-h2">Une boîte à outils pensée pour le CAP</h2>
+			<p class="ld-lead">
+				Chaque feature est calibrée sur le référentiel officiel et conçue pour les conditions réelles :
+				cuisine, transport, révision la veille de l'examen.
+			</p>
+		</div>
+
+		<div class="ld-grid ld-grid-3 features-grid">
+			{#each features as f}
+				<article class="feature-card ld-card">
+					<div class="feature-icon" aria-hidden="true">{f.icon}</div>
+					<h3 class="ld-h3">{f.title}</h3>
+					<p class="feature-desc">{f.desc}</p>
+					<ul class="feature-bullets">
+						{#each f.bullets as b}
+							<li>{b}</li>
+						{/each}
+					</ul>
+				</article>
+			{/each}
+		</div>
+	</div>
+</section>
+
+<style>
+.features-header {
+	text-align: center;
+	max-width: 720px;
+	margin: 0 auto 48px;
+}
+.features-header .ld-lead { margin-left: auto; margin-right: auto; }
+
+.feature-card {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.feature-icon {
+	width: 56px;
+	height: 56px;
+	border-radius: 14px;
+	background: linear-gradient(135deg, var(--ld-orange-light), var(--ld-orange));
+	display: grid;
+	place-items: center;
+	font-size: 1.6rem;
+	margin-bottom: 8px;
+	box-shadow: 0 6px 14px rgba(210, 104, 61, 0.25);
+}
+
+.feature-desc {
+	color: var(--ld-text-muted);
+	margin: 0 0 12px;
+	font-size: 0.92rem;
+	line-height: 1.55;
+}
+
+.feature-bullets {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+.feature-bullets li {
+	font-size: 0.85rem;
+	color: var(--ld-deep);
+	padding-left: 22px;
+	position: relative;
+}
+.feature-bullets li::before {
+	content: '✓';
+	position: absolute;
+	left: 0;
+	color: var(--ld-orange);
+	font-weight: 700;
+}
+</style>

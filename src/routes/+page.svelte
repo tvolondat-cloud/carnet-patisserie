@@ -1,7 +1,24 @@
 <script>
-import { session, profile } from '$lib/stores/auth.js';
+import { session, profile, isAuthenticated, authLoading } from '$lib/stores/auth.js';
 import { recettes } from '$lib/stores/recettes.js';
 import { stats, progression } from '$lib/stores/progression.js';
+import { onMount } from 'svelte';
+
+// Lazy-load la Landing : on n'inclut son JS+CSS que pour les visiteurs
+// anonymes. Les utilisateurs connectés ne paient pas le coût bundle
+// (Landing ~80 KB d'images SVG + sections inline).
+let LandingComponent = null;
+
+onMount(async () => {
+	if (!$isAuthenticated) {
+		const mod = await import('$lib/components/Landing.svelte');
+		LandingComponent = mod.default;
+	}
+});
+
+$: if ($authLoading === false && !$isAuthenticated && !LandingComponent) {
+	import('$lib/components/Landing.svelte').then((m) => (LandingComponent = m.default));
+}
 
 $: prenom = $profile?.full_name?.split(' ')[0] ?? $session?.user?.email?.split('@')[0] ?? 'toi';
 
@@ -21,6 +38,15 @@ const statutLabel = { 'a-tester': 'À tester', testee: 'Testée', validee: 'Vali
 const statutColor = { 'a-tester': 'var(--color-a-tester)', testee: 'var(--color-testee)', validee: 'var(--color-validee)', maitrisee: 'var(--color-maitrisee)' };
 </script>
 
+{#if !$isAuthenticated}
+	{#if LandingComponent}
+		<svelte:component this={LandingComponent} />
+	{:else}
+		<div style="display:flex;align-items:center;justify-content:center;min-height:100dvh;background:#FAF1E2">
+			<div class="spinner" role="status" aria-label="Chargement"></div>
+		</div>
+	{/if}
+{:else}
 <div class="page">
 	<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
 		<div>
@@ -93,3 +119,4 @@ const statutColor = { 'a-tester': 'var(--color-a-tester)', testee: 'var(--color-
 		</a>
 	</div>
 </div>
+{/if}
