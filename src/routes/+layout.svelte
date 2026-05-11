@@ -1,5 +1,6 @@
 <script>
 import { onMount } from 'svelte';
+import { browser } from '$app/environment';
 import { page } from '$app/stores';
 import { goto } from '$app/navigation';
 import { initAuth, isAuthenticated, authLoading } from '$lib/stores/auth.js';
@@ -16,7 +17,9 @@ import '../app.css';
 const publicRoutes = ['/auth', '/auth/callback', '/confidentialite', '/mentions-legales', '/cgu'];
 const homeIsPublic = true; // / accessible sans auth (Landing)
 
-let initialized = false;
+// Initialisé à true au SSR pour que le HTML prerendered contienne
+// la Landing (SEO/GEO). Côté client, initAuth se déclenche dans onMount.
+let initialized = !browser;
 
 onMount(async () => {
 	initAnalytics();
@@ -24,14 +27,6 @@ onMount(async () => {
 	initialized = true;
 	if ($isAuthenticated) {
 		await Promise.all([loadRecettes(), loadProgression()]);
-	} else {
-		// Préfetch idle du chunk Landing pour les visiteurs anonymes
-		// (Reco audit CRO : améliorer LCP de la home publique)
-		if ('requestIdleCallback' in window) {
-			window.requestIdleCallback(() => import('$lib/components/Landing.svelte'));
-		} else {
-			setTimeout(() => import('$lib/components/Landing.svelte'), 100);
-		}
 	}
 });
 
@@ -39,12 +34,13 @@ $: currentPath = $page.url.pathname;
 $: isPublic = publicRoutes.some((r) => currentPath.startsWith(r)) || (homeIsPublic && currentPath === '/');
 $: shouldRender = isPublic || $isAuthenticated;
 
-// Track page views à chaque navigation SvelteKit
-$: if (initialized && currentPath) {
+// Track page views (seulement côté client après initialisation)
+$: if (browser && initialized && currentPath) {
 	trackPageView(currentPath);
 }
 
-$: if (initialized && !$authLoading && !$isAuthenticated && !isPublic) {
+// Redirect uniquement côté client + après résolution de l'auth
+$: if (browser && initialized && !$authLoading && !$isAuthenticated && !isPublic) {
 	goto('/auth');
 }
 
@@ -62,11 +58,13 @@ function isActive(href) {
 }
 </script>
 
-{#if $authLoading || !initialized}
-	<div style="display:flex;align-items:center;justify-content:center;min-height:100dvh">
-		<div class="spinner" role="status" aria-label="Chargement"></div>
-	</div>
-{:else if shouldRender}
+<!--
+  Pas de loading state au layout : on rend toujours la slot pour
+  permettre le prerender SSR de la home (Landing avec SEO complet).
+  Si l'user est sur une route protégée sans auth, le goto('/auth')
+  côté client gère le redirect (juste un flash bref).
+-->
+{#if shouldRender}
 	<slot />
 
 	{#if $isAuthenticated && !isPublic}

@@ -6,7 +6,12 @@ import { progression } from './progression.js';
 
 export const session = writable(null);
 export const profile = writable(null);
-export const authLoading = writable(true);
+
+// authLoading initialisé à `true` côté client (jusqu'à résolution de initAuth)
+// mais `false` au SSR : sinon le layout cache la Landing pendant le prerender
+// avec un spinner, et les bots SEO/GEO ne voient pas le HTML optimisé.
+// Au prerender, on considère que l'auth est "résolue" et que l'user est anonyme.
+export const authLoading = writable(browser);
 
 export const isAuthenticated = derived(session, ($s) => !!$s);
 
