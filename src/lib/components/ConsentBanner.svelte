@@ -32,21 +32,6 @@ function handleKey(e) {
 			aria-label="Préférences cookies"
 			aria-modal="true"
 		>
-			<!-- Bouton fermeture rapide (= refuser tout, acte explicite) -->
-			<button
-				type="button"
-				class="consent-close"
-				on:click={denyAllConsent}
-				aria-label="Fermer (refuser les cookies analytics)"
-				title="Refuser les cookies analytics"
-				data-track="consent:close"
-			>
-				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true">
-					<line x1="18" y1="6" x2="6" y2="18"></line>
-					<line x1="6" y1="6" x2="18" y2="18"></line>
-				</svg>
-			</button>
-
 			<!-- Confetti décoratif top-right -->
 			<span class="consent-sparkle" aria-hidden="true">✨</span>
 
@@ -140,27 +125,6 @@ function handleKey(e) {
 		0 0 0 1px rgba(0, 0, 0, 0.04);
 	padding: 18px 20px;
 	animation: consent-zoom-in 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.consent-close {
-	position: absolute;
-	top: 10px;
-	right: 10px;
-	width: 30px;
-	height: 30px;
-	display: grid;
-	place-items: center;
-	border-radius: 50%;
-	border: none;
-	background: var(--color-surface-2);
-	color: var(--color-text-3);
-	cursor: pointer;
-	z-index: 2;
-	transition: background 0.15s, color 0.15s;
-}
-.consent-close:hover {
-	background: var(--color-border);
-	color: var(--color-text);
 }
 
 .consent-sparkle {
