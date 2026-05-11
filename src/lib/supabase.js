@@ -1,3 +1,4 @@
+// Build marker (force hash refresh) : 2026-05-11-cf-fix
 import { createClient } from '@supabase/supabase-js';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
