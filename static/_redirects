@@ -1,0 +1,2 @@
+# Redirects gérés par SvelteKit adapter-static + Cloudflare Pages fallback (200.html)
+# Ce fichier est intentionnellement vide pour ne pas overrider le routing SvelteKit.

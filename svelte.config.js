@@ -11,6 +11,13 @@ const config = {
 			// SPA pour les routes dynamiques inconnues.
 			fallback: '200.html'
 		}),
+		// paths.relative=false force adapter-static à émettre des chemins
+		// absolus (/_app/...) dans le HTML au lieu de relatifs (./_app/...).
+		// Sinon, sur une route profonde comme /recettes/abc, le HTML cherche
+		// /recettes/_app/... = 404. Cause connue de chunks 404 mélangés.
+		paths: {
+			relative: false
+		},
 		prerender: {
 			handleHttpError: 'warn',
 			handleMissingId: 'warn'
