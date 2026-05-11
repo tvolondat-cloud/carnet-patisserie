@@ -1,0 +1,58 @@
+# Brigade Sucrée — robots.txt
+# https://brigadesucree.app
+
+User-agent: *
+Allow: /
+
+# Pages app authentifiées : interdites à l'indexation
+# (elles redirigent vers /auth pour les anonymes de toute façon)
+Disallow: /recettes
+Disallow: /laboratoire
+Disallow: /suivi
+Disallow: /reviser
+Disallow: /ordonnancement
+Disallow: /carnet-pdf
+Disallow: /profil
+Disallow: /auth/callback
+
+# Assets internes SvelteKit
+Disallow: /_app/
+
+# Bots agressifs / scrapers : bloqués
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# Bots IA — autorisés explicitement (GEO)
+# On veut être indexé/cité par les moteurs IA
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Sitemap
+Sitemap: https://brigadesucree.app/sitemap.xml

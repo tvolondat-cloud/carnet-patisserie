@@ -1,4 +1,5 @@
 <script>
+import LandingSEO from './landing/LandingSEO.svelte';
 import LandingHeader from './landing/LandingHeader.svelte';
 import LandingHero from './landing/LandingHero.svelte';
 import LandingFeatures from './landing/LandingFeatures.svelte';
@@ -12,16 +13,11 @@ import LandingFooter from './landing/LandingFooter.svelte';
 import './landing/landing.css';
 </script>
 
-<svelte:head>
-	<title>Brigade Sucrée — Réussis ton CAP Pâtissier sans stress</title>
-	<meta name="description" content="L'app des étudiants CAP Pâtissier et des passionnés : 17 recettes du référentiel, mode laboratoire (test + quiz + chrono), suivi de progression, carnet PDF. Bêta gratuite." />
-	<meta property="og:title" content="Brigade Sucrée — Réussis ton CAP Pâtissier sans stress" />
-	<meta property="og:description" content="L'app des étudiants CAP Pâtissier et des passionnés. 17 recettes, mode laboratoire, suivi de progression. Bêta gratuite." />
-</svelte:head>
+<LandingSEO />
 
 <div class="ld">
 	<LandingHeader />
-	<main>
+	<main id="main">
 		<LandingHero />
 		<LandingFeatures />
 		<LandingHowItWorks />
