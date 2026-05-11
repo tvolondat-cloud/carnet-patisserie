@@ -111,8 +111,6 @@ function handleKey(e) {
 	position: relative;
 	width: 100%;
 	max-width: 28rem;
-	max-height: calc(100dvh - 32px); /* anti-overflow petit écran */
-	overflow-y: auto; /* scroll si contenu déborde */
 	border-radius: 18px;
 	border: 2px solid color-mix(in srgb, var(--color-brand) 20%, transparent);
 	background:
