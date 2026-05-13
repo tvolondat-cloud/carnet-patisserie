@@ -53,30 +53,28 @@ $: nbPieces = (recette?.nb_pieces_base && masseTotale !== null)
 	? Math.round(recette.nb_pieces_base * multiplicateur)
 	: null;
 
-// Détecte si un ingrédient est "oeuf entier" → unité, sinon grammes
+const MASS_UNITS = new Set(['g', 'kg', 'ml', 'cl', 'l']);
+
+// Œuf entier → afficher en pce SEULEMENT si l'unité n'est pas déjà une masse/volume.
+// Ex: "Œufs entiers" avec unite="g" → reste en g (300g ≠ 300 pce !)
 function isOeufEntier(nom, unite) {
 	const n = (nom ?? '').toLowerCase();
 	const u = (unite ?? '').toLowerCase().trim();
-	// Œuf entier → unité si: nom contient "oeuf" et pas "blanc" / "jaune" / "g"
+	if (MASS_UNITS.has(u)) return false; // unité de masse → on respecte
 	if ((n.includes('oeuf') || n.includes('œuf') || n.includes('egg'))
 		&& !n.includes('blanc') && !n.includes('jaune')
 		&& !n.includes('white') && !n.includes('yolk')) {
 		return true;
 	}
-	// Ou si l'unité est déjà une unité de comptage
 	return ['pce', 'pcs', 'u', 'unité', 'unité(s)', 'pc', 'piece', 'pièce'].includes(u);
 }
 
-function calcQte(q, nom, unite) {
-	const raw = parseFloat(q) * multiplicateur;
-	if (isNaN(raw)) return q;
-
-	// Oeufs entiers → arrondi entier
-	if (isOeufEntier(nom, unite)) {
-		return Math.max(1, Math.round(raw)).toString();
-	}
-
-	// Autres → 1 décimale max, sans zéros inutiles
+// mult est passé explicitement pour que la déclaration $: ci-dessous
+// référence multiplicateur directement → Svelte le trace comme dépendance.
+function calcQte(q, nom, unite, mult) {
+	const raw = parseFloat(q) * mult;
+	if (isNaN(raw)) return String(q);
+	if (isOeufEntier(nom, unite)) return Math.max(1, Math.round(raw)).toString();
 	if (raw >= 100) return Math.round(raw).toString();
 	if (raw >= 10) return (Math.round(raw * 10) / 10 % 1 === 0)
 		? Math.round(raw).toString()
@@ -85,7 +83,6 @@ function calcQte(q, nom, unite) {
 }
 
 function getDisplayUnite(nom, unite) {
-	// Blancs / Jaunes d'œufs → toujours en g
 	const n = (nom ?? '').toLowerCase();
 	if ((n.includes('blanc') || n.includes('jaune')) && (n.includes('oeuf') || n.includes('œuf'))) {
 		return 'g';
@@ -93,6 +90,17 @@ function getDisplayUnite(nom, unite) {
 	if (isOeufEntier(nom, unite)) return 'pce';
 	return unite;
 }
+
+// Recalculé chaque fois que multiplicateur OU les ingrédients changent.
+// multiplicateur est référencé explicitement → Svelte le trace comme dépendance.
+$: ingredientsDisplay = (recette?.ingredients ?? [])
+	.slice()
+	.sort((a, b) => (a.ordre ?? 0) - (b.ordre ?? 0))
+	.map(ing => ({
+		...ing,
+		_qte: calcQte(ing.quantite, ing.nom, ing.unite, multiplicateur),
+		_unite: getDisplayUnite(ing.nom, ing.unite)
+	}));
 
 // ── Nb pièces base (éditable) ──────────────────────────────
 let editingNbPieces = false;
@@ -320,7 +328,7 @@ onMount(async () => {
 		</div>
 
 		<div style="display:flex;flex-direction:column;gap:8px">
-			{#each (recette.ingredients ?? []).sort((a,b) => a.ordre - b.ordre) as ing}
+			{#each ingredientsDisplay as ing}
 			{#if editingIngId === ing.id}
 			<div style="display:flex;gap:6px;align-items:center">
 				<input class="input" style="flex:2" bind:value={editIng.nom}>
@@ -332,9 +340,7 @@ onMount(async () => {
 			<div class="ing-row">
 				<span class="ing-name">{ing.nom}</span>
 				<div class="ing-right">
-					<span class="ing-qte">
-						{calcQte(ing.quantite, ing.nom, ing.unite)}&nbsp;{getDisplayUnite(ing.nom, ing.unite)}
-					</span>
+					<span class="ing-qte">{ing._qte}&nbsp;{ing._unite}</span>
 					<button class="btn btn-ghost btn-sm" style="padding:2px 6px" on:click={() => startEditIng(ing)}>✏️</button>
 					<button class="btn btn-ghost btn-sm" style="padding:2px 6px" on:click={() => deleteIngredient(id, ing.id)}>🗑</button>
 				</div>
@@ -346,17 +352,17 @@ onMount(async () => {
 		<button class="btn btn-ghost btn-sm mt-3" on:click={handleAddIng}>+ Ajouter ingrédient</button>
 
 		<!-- Masse totale + nb pièces -->
-		{#if masseTotaleAjustee !== null || recette.nb_pieces_base}
+		{#if masseTotaleAjustee !== null || nbPieces !== null}
 		<div class="masse-total-row">
 			{#if masseTotaleAjustee !== null}
 			<div class="masse-chip">
-				⚖️ Masse totale : <strong>{masseTotaleAjustee} g</strong>
-				{#if multiplicateur !== 1}<span class="text-muted text-xs">(base : {Math.round(masseTotale ?? 0)} g)</span>{/if}
+				⚖️ <strong>{masseTotaleAjustee} g</strong>
+				{#if multiplicateur !== 1}<span class="text-muted text-xs"> (base {Math.round(masseTotale ?? 0)} g)</span>{/if}
 			</div>
 			{/if}
 			{#if nbPieces !== null}
-			<div class="masse-chip">
-				🔢 Pièces : <strong>{nbPieces}</strong>
+			<div class="masse-chip masse-chip-pieces">
+				🔢 <strong>{nbPieces} pièce{nbPieces > 1 ? 's' : ''}</strong> réalisable{nbPieces > 1 ? 's' : ''}
 			</div>
 			{/if}
 		</div>

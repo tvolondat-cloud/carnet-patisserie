@@ -135,7 +135,7 @@
         { "nom": "Eau",          "quantite": 250, "unite": "g" },
         { "nom": "Beurre",       "quantite": 100, "unite": "g" },
         { "nom": "Farine T55",   "quantite": 150, "unite": "g" },
-        { "nom": "Œufs entiers", "quantite": 250, "unite": "g" },
+        { "nom": "Œufs entiers", "quantite": 5,   "unite": "u" },
         { "nom": "Sel",          "quantite": 4,   "unite": "g" },
         { "nom": "Sucre",        "quantite": 5,   "unite": "g" }
       ],
@@ -169,7 +169,7 @@
         { "nom": "Farine T55",    "quantite": 250, "unite": "g" },
         { "nom": "Beurre",        "quantite": 125, "unite": "g" },
         { "nom": "Sucre glace",   "quantite": 100, "unite": "g" },
-        { "nom": "Œuf entier",    "quantite": 50,  "unite": "g" },
+        { "nom": "Œuf entier",    "quantite": 1,   "unite": "u" },
         { "nom": "Poudre amande", "quantite": 30,  "unite": "g" },
         { "nom": "Sel",           "quantite": 2,   "unite": "g" }
       ],
@@ -264,7 +264,7 @@
       "ep": "EP2",
       "prerequis": [],
       "ingredients": [
-        { "nom": "Œufs entiers",   "quantite": 300, "unite": "g" },
+        { "nom": "Œufs entiers",   "quantite": 6,   "unite": "u" },
         { "nom": "Poudre amande",  "quantite": 150, "unite": "g" },
         { "nom": "Sucre glace",    "quantite": 150, "unite": "g" },
         { "nom": "Farine T55",     "quantite": 40,  "unite": "g" },
@@ -303,7 +303,7 @@
         { "nom": "Farine T55",     "quantite": 200, "unite": "g" },
         { "nom": "Sucre",          "quantite": 200, "unite": "g" },
         { "nom": "Beurre fondu",   "quantite": 150, "unite": "g" },
-        { "nom": "Œufs entiers",   "quantite": 200, "unite": "g" },
+        { "nom": "Œufs entiers",   "quantite": 4,   "unite": "u" },
         { "nom": "Levure chimique","quantite": 8,   "unite": "g" },
         { "nom": "Zestes citron",  "quantite": 2,   "unite": "citrons" },
         { "nom": "Jus de citron",  "quantite": 30,  "unite": "g" }
@@ -369,7 +369,7 @@
       "ingredients": [
         { "nom": "Pâte sucrée",              "quantite": 250, "unite": "g" },
         { "nom": "Citrons (jus + zeste)",    "quantite": 3,   "unite": "pièces" },
-        { "nom": "Œufs entiers",             "quantite": 3,   "unite": "pièces" },
+        { "nom": "Œufs entiers",             "quantite": 3,   "unite": "u" },
         { "nom": "Sucre semoule",            "quantite": 150, "unite": "g" },
         { "nom": "Beurre",                   "quantite": 80,  "unite": "g" },
         { "nom": "Blancs d'œufs (meringue)", "quantite": 3,   "unite": "pièces" },
@@ -405,7 +405,7 @@
         { "nom": "Lait entier",    "quantite": 125, "unite": "ml" },
         { "nom": "Beurre",         "quantite": 110, "unite": "g" },
         { "nom": "Farine T55",     "quantite": 140, "unite": "g" },
-        { "nom": "Œufs entiers",   "quantite": 4,   "unite": "pièces" },
+        { "nom": "Œufs entiers",   "quantite": 4,   "unite": "u" },
         { "nom": "Lait (crème)",   "quantite": 500, "unite": "ml" },
         { "nom": "Jaunes d'œufs", "quantite": 4,   "unite": "pièces" },
         { "nom": "Sucre semoule",  "quantite": 100, "unite": "g" },
@@ -512,7 +512,7 @@
         { "nom": "Lait entier",      "quantite": 125, "unite": "ml" },
         { "nom": "Beurre",           "quantite": 110, "unite": "g" },
         { "nom": "Farine T55",       "quantite": 140, "unite": "g" },
-        { "nom": "Œufs entiers",     "quantite": 4,   "unite": "pièces" },
+        { "nom": "Œufs entiers",     "quantite": 4,   "unite": "u" },
         { "nom": "Amandes effilées", "quantite": 50,  "unite": "g" },
         { "nom": "Pralin en poudre", "quantite": 80,  "unite": "g" },
         { "nom": "Crème pâtissière", "quantite": 300, "unite": "g" },
@@ -579,7 +579,7 @@
       "ingredients": [
         { "nom": "Chocolat noir 70%", "quantite": 200, "unite": "g" },
         { "nom": "Beurre",            "quantite": 120, "unite": "g" },
-        { "nom": "Œufs entiers",      "quantite": 4,   "unite": "pièces" },
+        { "nom": "Œufs entiers",      "quantite": 4,   "unite": "u" },
         { "nom": "Sucre semoule",     "quantite": 100, "unite": "g" },
         { "nom": "Farine T55",        "quantite": 40,  "unite": "g" },
         { "nom": "Sel fin",           "quantite": 1,   "unite": "pincée" }

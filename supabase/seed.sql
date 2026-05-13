@@ -77,7 +77,7 @@ INSERT INTO ingredients (recette_id, user_id, nom, quantite, unite, ordre) VALUE
   (r_id, p_user_id, 'Eau',          250, 'g', 1),
   (r_id, p_user_id, 'Beurre',       100, 'g', 2),
   (r_id, p_user_id, 'Farine T55',   150, 'g', 3),
-  (r_id, p_user_id, 'Œufs entiers', 250, 'g', 4),
+  (r_id, p_user_id, 'Œufs entiers', 5,   'u', 4),
   (r_id, p_user_id, 'Sel',          4,   'g', 5),
   (r_id, p_user_id, 'Sucre',        5,   'g', 6);
 INSERT INTO quiz_questions (recette_id, user_id, question, reponses, bonne, ordre) VALUES
@@ -97,7 +97,7 @@ INSERT INTO ingredients (recette_id, user_id, nom, quantite, unite, ordre) VALUE
   (r_id, p_user_id, 'Farine T55',    250, 'g', 1),
   (r_id, p_user_id, 'Beurre',        125, 'g', 2),
   (r_id, p_user_id, 'Sucre glace',   100, 'g', 3),
-  (r_id, p_user_id, 'Œuf entier',    50,  'g', 4),
+  (r_id, p_user_id, 'Œuf entier',    1,   'u', 4),
   (r_id, p_user_id, 'Poudre amande', 30,  'g', 5),
   (r_id, p_user_id, 'Sel',           2,   'g', 6);
 INSERT INTO quiz_questions (recette_id, user_id, question, reponses, bonne, ordre) VALUES
@@ -148,7 +148,7 @@ VALUES (uuid_generate_v4(), p_user_id, 'Biscuit Joconde', 'bases-cap',
         ARRAY['cuissons','techniques','assemblages'], 25, 3, 'EP2', 20, '')
 RETURNING id INTO r_id;
 INSERT INTO ingredients (recette_id, user_id, nom, quantite, unite, ordre) VALUES
-  (r_id, p_user_id, 'Œufs entiers',   300, 'g', 1),
+  (r_id, p_user_id, 'Œufs entiers',   6,   'u', 1),
   (r_id, p_user_id, 'Poudre amande',  150, 'g', 2),
   (r_id, p_user_id, 'Sucre glace',    150, 'g', 3),
   (r_id, p_user_id, 'Farine T55',     40,  'g', 4),
@@ -168,7 +168,7 @@ INSERT INTO ingredients (recette_id, user_id, nom, quantite, unite, ordre) VALUE
   (r_id, p_user_id, 'Farine T55',      200, 'g',      1),
   (r_id, p_user_id, 'Sucre',           200, 'g',      2),
   (r_id, p_user_id, 'Beurre fondu',    150, 'g',      3),
-  (r_id, p_user_id, 'Œufs entiers',    200, 'g',      4),
+  (r_id, p_user_id, 'Œufs entiers',    4,   'u',       4),
   (r_id, p_user_id, 'Levure chimique', 8,   'g',      5),
   (r_id, p_user_id, 'Zestes citron',   2,   'citrons',6),
   (r_id, p_user_id, 'Jus de citron',   30,  'g',      7);
@@ -203,7 +203,7 @@ RETURNING id INTO r_id;
 INSERT INTO ingredients (recette_id, user_id, nom, quantite, unite, ordre) VALUES
   (r_id, p_user_id, 'Pâte sucrée',             250, 'g',      1),
   (r_id, p_user_id, 'Citrons (jus + zeste)',   3,   'pièces', 2),
-  (r_id, p_user_id, 'Œufs entiers',            3,   'pièces', 3),
+  (r_id, p_user_id, 'Œufs entiers',            3,   'u',      3),
   (r_id, p_user_id, 'Sucre semoule',           150, 'g',      4),
   (r_id, p_user_id, 'Beurre',                  80,  'g',      5),
   (r_id, p_user_id, 'Blancs d''œufs meringue',3,   'pièces', 6),
@@ -224,7 +224,7 @@ INSERT INTO ingredients (recette_id, user_id, nom, quantite, unite, ordre) VALUE
   (r_id, p_user_id, 'Lait entier',     125, 'ml', 2),
   (r_id, p_user_id, 'Beurre',          110, 'g',  3),
   (r_id, p_user_id, 'Farine T55',      140, 'g',  4),
-  (r_id, p_user_id, 'Œufs entiers',    4,   'pièces', 5),
+  (r_id, p_user_id, 'Œufs entiers',    4,   'u',      5),
   (r_id, p_user_id, 'Lait (crème)',    500, 'ml', 6),
   (r_id, p_user_id, 'Jaunes d''œufs', 4,   'pièces', 7),
   (r_id, p_user_id, 'Sucre semoule',   100, 'g',  8),
@@ -286,7 +286,7 @@ INSERT INTO ingredients (recette_id, user_id, nom, quantite, unite, ordre) VALUE
   (r_id, p_user_id, 'Lait entier',      125, 'ml',     2),
   (r_id, p_user_id, 'Beurre',           110, 'g',      3),
   (r_id, p_user_id, 'Farine T55',       140, 'g',      4),
-  (r_id, p_user_id, 'Œufs entiers',     4,   'pièces', 5),
+  (r_id, p_user_id, 'Œufs entiers',     4,   'u',      5),
   (r_id, p_user_id, 'Amandes effilées', 50,  'g',      6),
   (r_id, p_user_id, 'Pralin en poudre', 80,  'g',      7),
   (r_id, p_user_id, 'Crème pâtissière', 300, 'g',      8),
@@ -323,7 +323,7 @@ RETURNING id INTO r_id;
 INSERT INTO ingredients (recette_id, user_id, nom, quantite, unite, ordre) VALUES
   (r_id, p_user_id, 'Chocolat noir 70%', 200, 'g',      1),
   (r_id, p_user_id, 'Beurre',            120, 'g',      2),
-  (r_id, p_user_id, 'Œufs entiers',      4,   'pièces', 3),
+  (r_id, p_user_id, 'Œufs entiers',      4,   'u',      3),
   (r_id, p_user_id, 'Sucre semoule',     100, 'g',      4),
   (r_id, p_user_id, 'Farine T55',        40,  'g',      5),
   (r_id, p_user_id, 'Sel fin',           1,   'pincée', 6);
