@@ -151,6 +151,100 @@ export async function deleteIngredient(recetteId, id) {
 	}
 }
 
+// ── Mise à jour champ recette (ex: nb_pieces_base) ───────────
+export async function updateRecetteField(recetteId, updates) {
+	const s = get(session);
+	const previous = get(recettes);
+	recettes.update((list) => list.map((r) => (r.id === recetteId ? { ...r, ...updates } : r)));
+	const { error } = await supabase
+		.from('recettes')
+		.update(updates)
+		.eq('id', recetteId)
+		.eq('user_id', s.user.id);
+	if (error) {
+		recettes.set(previous);
+		throw error;
+	}
+}
+
+// ── Photos recette ────────────────────────────────────────────
+export const recipePhotos = writable({});
+
+export async function loadPhotos(recetteId) {
+	const s = get(session);
+	if (!s) return;
+	const { data, error } = await supabase
+		.from('recipe_photos')
+		.select('*')
+		.eq('recette_id', recetteId)
+		.eq('user_id', s.user.id)
+		.order('created_at', { ascending: false });
+	if (error) { console.error('loadPhotos:', error); return; }
+	recipePhotos.update((p) => ({ ...p, [recetteId]: data ?? [] }));
+}
+
+export async function uploadPhoto(recetteId, file) {
+	const s = get(session);
+	if (!s) throw new Error('Non connecté');
+	const ext = file.name.split('.').pop() || 'jpg';
+	const path = `${s.user.id}/${recetteId}/${Date.now()}.${ext}`;
+
+	const { error: upErr } = await supabase.storage
+		.from('recipe-photos')
+		.upload(path, file, { cacheControl: '3600', upsert: false });
+	if (upErr) throw upErr;
+
+	const { data: urlData } = supabase.storage.from('recipe-photos').getPublicUrl(path);
+
+	const { data, error: dbErr } = await supabase
+		.from('recipe_photos')
+		.insert({ recette_id: recetteId, user_id: s.user.id, storage_path: path })
+		.select()
+		.single();
+	if (dbErr) throw dbErr;
+
+	recipePhotos.update((p) => ({
+		...p,
+		[recetteId]: [{ ...data, publicUrl: urlData.publicUrl }, ...(p[recetteId] ?? [])]
+	}));
+	return urlData.publicUrl;
+}
+
+export async function deletePhoto(recetteId, photoId, storagePath) {
+	const previous = get(recipePhotos);
+	recipePhotos.update((p) => ({
+		...p,
+		[recetteId]: (p[recetteId] ?? []).filter((x) => x.id !== photoId)
+	}));
+	await supabase.storage.from('recipe-photos').remove([storagePath]);
+	const { error } = await supabase.from('recipe_photos').delete().eq('id', photoId);
+	if (error) {
+		recipePhotos.set(previous);
+		throw error;
+	}
+}
+
+export function getPhotoUrl(path) {
+	const { data } = supabase.storage.from('recipe-photos').getPublicUrl(path);
+	return data.publicUrl;
+}
+
+// ── Suggestions utilisateur ───────────────────────────────────
+export const suggestions = writable([]);
+
+export async function submitSuggestion(contenu, type = 'amelioration') {
+	const s = get(session);
+	if (!s) throw new Error('Non connecté');
+	const { data, error } = await supabase
+		.from('suggestions')
+		.insert({ user_id: s.user.id, contenu: contenu.trim(), type })
+		.select()
+		.single();
+	if (error) throw error;
+	suggestions.update((list) => [data, ...list]);
+	return data;
+}
+
 export function getStaticRecipes() {
 	return recipesData.recettes;
 }

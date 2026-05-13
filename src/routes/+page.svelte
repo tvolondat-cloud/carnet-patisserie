@@ -1,17 +1,12 @@
 <script>
-import { session, profile, isAuthenticated } from '$lib/stores/auth.js';
+import { session, profile, isAuthenticated, signOut } from '$lib/stores/auth.js';
 import { recettes } from '$lib/stores/recettes.js';
 import { stats, progression } from '$lib/stores/progression.js';
-// Import statique de la Landing :
-// Le lazy loading n'est pas compatible avec le prerender SSR — le
-// HTML statique ne contenait que le spinner, sans le <svelte:head>
-// de LandingSEO (title, description, JSON-LD). Les bots SEO/GEO ne
-// voyaient rien. En import statique, le prerender génère le HTML
-// complet de la Landing avec toutes les meta tags + JSON-LD.
-// Coût : ~20 kB gzippé dans le bundle home authentifié (acceptable).
+import { goto } from '$app/navigation';
 import Landing from '$lib/components/Landing.svelte';
 
 $: prenom = $profile?.full_name?.split(' ')[0] ?? $session?.user?.email?.split('@')[0] ?? 'toi';
+$: initiales = (prenom || '?').charAt(0).toUpperCase();
 
 $: examDate = $profile?.exam_date ? new Date($profile.exam_date) : null;
 $: daysLeft = examDate ? Math.ceil((examDate - new Date()) / 86400000) : null;
@@ -23,22 +18,57 @@ $: recentsIds = Object.entries($progression)
 $: recentRecettes = $recettes.filter(r => recentsIds.includes(r.id));
 
 $: pct = $stats.score;
-$: progressStyle = `--pct: ${pct * 3.6}deg`;
 
 const statutLabel = { 'a-tester': 'À tester', testee: 'Testée', validee: 'Validée', maitrisee: 'Maîtrisée' };
 const statutColor = { 'a-tester': 'var(--color-a-tester)', testee: 'var(--color-testee)', validee: 'var(--color-validee)', maitrisee: 'var(--color-maitrisee)' };
+
+let avatarOpen = false;
+
+function toggleAvatar() { avatarOpen = !avatarOpen; }
+function closeAvatar() { avatarOpen = false; }
+
+async function handleSignOut() {
+	avatarOpen = false;
+	await signOut();
+	goto('/');
+}
 </script>
+
+<svelte:window on:click={closeAvatar} />
 
 {#if !$isAuthenticated}
 	<Landing />
 {:else}
 <div class="page">
-	<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+	<!-- Header avec avatar dropdown -->
+	<div class="home-header">
 		<div>
 			<p class="text-muted text-sm">Bonjour 👋</p>
 			<h1 style="font-size:1.4rem;font-weight:800">{prenom}</h1>
 		</div>
-		<a href="/profil" aria-label="Mon profil" style="width:40px;height:40px;border-radius:50%;background:var(--color-surface-2);display:flex;align-items:center;justify-content:center;font-size:1.2rem">👤</a>
+		<!-- Avatar + dropdown -->
+		<div class="avatar-wrap" on:click|stopPropagation={toggleAvatar} on:keydown={e => e.key === 'Escape' && closeAvatar()}>
+			<button
+				type="button"
+				class="avatar-btn"
+				aria-label="Menu compte"
+				aria-expanded={avatarOpen}
+				aria-haspopup="true"
+			>
+				{initiales}
+			</button>
+			{#if avatarOpen}
+			<div class="avatar-dropdown" role="menu">
+				<a href="/profil" class="avatar-menu-item" on:click={closeAvatar} role="menuitem">
+					👤 Mon profil
+				</a>
+				<hr class="avatar-menu-sep" />
+				<button type="button" class="avatar-menu-item avatar-menu-signout" on:click={handleSignOut} role="menuitem">
+					🚪 Se déconnecter
+				</button>
+			</div>
+			{/if}
+		</div>
 	</div>
 
 	<!-- Score ring + exam countdown -->
@@ -105,3 +135,65 @@ const statutColor = { 'a-tester': 'var(--color-a-tester)', testee: 'var(--color-
 	</div>
 </div>
 {/if}
+
+<style>
+.home-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+.avatar-wrap {
+	position: relative;
+}
+
+.avatar-btn {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	background: var(--color-brand);
+	color: #fff;
+	font-size: 1rem;
+	font-weight: 700;
+	border: none;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: opacity 0.15s;
+}
+.avatar-btn:hover { opacity: 0.85; }
+
+.avatar-dropdown {
+	position: absolute;
+	top: calc(100% + 8px);
+	right: 0;
+	background: var(--color-surface);
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-md);
+	box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+	min-width: 180px;
+	z-index: 500;
+	overflow: hidden;
+}
+
+.avatar-menu-item {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 12px 16px;
+	font-size: 0.9rem;
+	color: var(--color-text);
+	text-decoration: none;
+	background: none;
+	border: none;
+	width: 100%;
+	text-align: left;
+	cursor: pointer;
+	transition: background 0.12s;
+}
+.avatar-menu-item:hover { background: var(--color-surface-2); }
+.avatar-menu-signout { color: #ef4444; }
+.avatar-menu-sep { margin: 0; border: none; border-top: 1px solid var(--color-border); }
+</style>
