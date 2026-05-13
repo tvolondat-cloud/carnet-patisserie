@@ -33,12 +33,16 @@ onMount(() => {
 });
 </script>
 
-{#if fiche && cat}
-	<svelte:head>
+<svelte:head>
+	{#if fiche}
 		<title>Fiche {fiche.numero} — {fiche.titre} | Brigade Sucrée</title>
 		<meta name="description" content={fiche.theme} />
-	</svelte:head>
+	{:else}
+		<title>Fiches CAP | Brigade Sucrée</title>
+	{/if}
+</svelte:head>
 
+{#if fiche && cat}
 	<div class="page">
 		<div class="fiche-header-row">
 			<button type="button" class="btn btn-ghost btn-sm" on:click={() => goto('/fiches')}>← Fiches</button>

@@ -189,7 +189,7 @@ function catById(id) {
 	overflow: hidden;
 }
 
-.chip[style*="--cat-color"].active {
+:global(.chip[style*="--cat-color"].active) {
 	background: var(--cat-color);
 	border-color: var(--cat-color);
 }
