@@ -414,13 +414,65 @@ npm run dev              # dev avec PWA active (localhost:5173)
 npm run build            # build production
 npm run preview          # tester le build offline (localhost:4173)
 npm run preview:check    # build + preview en une commande (avant tout push)
+npm run security         # scan sécurité complet (secrets + npm audit)
+npm run security:staged  # scan rapide des fichiers staged seulement
 npm run push:staging     # pousse sur la branche staging → staging.brigade-sucree.pages.dev
 npm run push:prod        # pousse main en prod → brigadesucree.app
 npm run icons            # régénère les 7 icônes PWA depuis SVG
 npm run docs:sync        # synchronise CHANGELOG.md depuis git log
 ```
 
-À chaque `git push` : `pre-push` hook lance `docs:sync` automatiquement (voir `docs/UPDATE-DOCS.md`).
+À chaque `git push` : `pre-push` hook lance build check + `docs:sync` automatiquement.
+À chaque push sur `main` : job CI **Security Scan** tourne (secrets + npm audit).
+
+---
+
+## 🔒 Sécurité — Scan automatique
+
+### Ce qui est scanné à chaque push en prod (`main`)
+
+| Vérification | Outil | Déclencheur |
+|---|---|---|
+| Secrets hardcodés (JWT, tokens, clés privées, credentials dans URLs…) | `scripts/security-scan.js` | CI — job `security` |
+| Vulnérabilités npm nouvelles (critical + high hors allowlist) | `npm audit --production` | CI — job `security` |
+| Secrets dans les fichiers staged | `npm run security:staged` | Optionnel en local |
+
+### Commandes locales
+
+```bash
+npm run security          # scan complet avant un push prod
+npm run security:staged   # scan rapide (fichiers staged seulement, sans audit npm)
+```
+
+### Patterns détectés
+
+- Clés Supabase `service_role` (toujours bloquant)
+- JWTs longs hardcodés (hors `src/lib/supabase.js` et docs)
+- GitHub PAT (`ghp_...`) et OAuth token (`gho_...`)
+- Clés OpenAI/Anthropic (`sk-...`)
+- Clés privées PEM
+- Fichiers `.env` commités par accident
+- URLs avec credentials intégrés
+
+### Ignorer un faux positif
+
+Ajoute `// security-scan-ignore` en fin de ligne :
+
+```js
+const url = `https://x-access-token:${token}@github.com/...`; // security-scan-ignore
+```
+
+### Vulnérabilités connues sans fix (allowlist)
+
+Définies dans `scripts/security-scan.js` → `AUDIT_ALLOWLIST` :
+
+| Package | Sévérité | Raison |
+|---|---|---|
+| `jspdf` | critical | Pas de version corrigée — export PDF client-side uniquement |
+| `xlsx` | high | SheetJS ReDoS — exports locaux uniquement, pas de parsing tiers |
+| `@sveltejs/kit` | high | Vuln transitive, surveiller les releases |
+
+Pour ajouter un package à l'allowlist, modifier `AUDIT_ALLOWLIST` dans `scripts/security-scan.js` avec le nom, la sévérité et la justification.
 
 ---
 

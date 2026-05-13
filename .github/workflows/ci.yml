@@ -73,3 +73,39 @@ jobs:
           echo "  🔗 Preview staging (disponible dans ~90s)"
           echo "     https://staging.brigade-sucree.pages.dev"
           echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+  # ─────────────────────────────────────────────────────────────
+  # Job security — scan secrets + vulnérabilités npm
+  # Tourne sur chaque push main + PR vers main
+  # ─────────────────────────────────────────────────────────────
+  security:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    if: github.ref == 'refs/heads/main' || github.event_name == 'pull_request'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # besoin de tout l'historique pour git ls-files
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --no-audit --prefer-offline
+
+      - name: Scan secrets & vulnérabilités
+        run: node scripts/security-scan.js
+        env:
+          CI: true
+
+      - name: Résumé si succès
+        if: success()
+        run: |
+          echo ""
+          echo "✅ Security scan OK — aucun secret ni nouvelle vuln critique."

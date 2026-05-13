@@ -7,6 +7,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "preview:check": "npm run build && npm run preview",
+    "security": "node scripts/security-scan.js",
+    "security:staged": "node scripts/security-scan.js --staged --no-audit",
     "push:staging": "node scripts/push.js staging",
     "push:prod": "node scripts/push.js main",
     "icons": "node scripts/generate-icons.js",
