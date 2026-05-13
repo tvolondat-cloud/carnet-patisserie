@@ -1,10 +1,13 @@
 <script>
-import { consentState, acceptAllConsent, denyAllConsent } from '$lib/analytics.js';
+import { consentState, consentReady, acceptAllConsent, denyAllConsent } from '$lib/analytics.js';
 import CookieDrawer from './CookieDrawer.svelte';
 
 let drawerOpen = false;
 
-$: visible = $consentState === 'pending';
+// On n'affiche le bandeau qu'APRÈS que initAnalytics() ait lu le localStorage.
+// Sans ça, consentState='pending' au rendu initial (race condition) et le bandeau
+// flashe sur chaque page même quand le consentement est déjà enregistré.
+$: visible = $consentReady && $consentState === 'pending';
 
 function openDrawer() {
 	drawerOpen = true;

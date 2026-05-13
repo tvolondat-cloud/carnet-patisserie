@@ -30,6 +30,13 @@ const DEFAULT_CHOICES = {
 /** @type {import('svelte/store').Writable<ConsentChoices | null>} */
 export const consentChoices = writable(null);
 
+/**
+ * Vrai une fois que initAnalytics() a fini de lire le localStorage.
+ * Évite le flash "bandeau visible" au chargement sur les pages où
+ * le consentement a déjà été donné.
+ */
+export const consentReady = writable(false);
+
 /** Dérive un statut simple : 'pending' | 'granted' (au moins analytics) | 'denied' (que necessary) */
 export const consentState = derived(consentChoices, ($c) => {
 	if (!$c) return 'pending';
@@ -47,6 +54,7 @@ export function initAnalytics() {
 			const stored = JSON.parse(raw);
 			consentChoices.set({ ...DEFAULT_CHOICES, ...stored });
 			applyConsent(stored);
+			consentReady.set(true);
 			return;
 		}
 	} catch {
@@ -54,6 +62,7 @@ export function initAnalytics() {
 		localStorage.removeItem(STORAGE_KEY);
 	}
 	consentChoices.set(null); // pending
+	consentReady.set(true);   // check terminé, pas de consentement stocké → afficher le bandeau
 }
 
 /** Accepter toutes les catégories. */
