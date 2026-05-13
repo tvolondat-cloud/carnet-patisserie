@@ -14,9 +14,11 @@ import { progression, updateProgression } from '$lib/stores/progression.js';
 import { session } from '$lib/stores/auth.js';
 import { events } from '$lib/analytics.js';
 import { onDestroy } from 'svelte';
+import { slugify } from '$lib/utils/slugify.js';
 
-$: id = $page.params.id;
-$: recette = $recettes.find(r => r.id === id);
+$: slug = $page.params.id;
+$: recette = $recettes.find(r => slugify(r.nom) === slug);
+$: id = recette?.id;
 $: p = $progression[id];
 $: statut = p?.statut ?? 'a-tester';
 $: recCommentaires = $commentaires[id] ?? [];
@@ -308,7 +310,7 @@ onMount(async () => {
 		<button class="btn btn-primary" style="flex:1" on:click={advanceStatut}>
 			✅ {nextStatutLabel[statut]}
 		</button>
-		<a href="/laboratoire/{id}" class="btn btn-secondary" style="flex:1">🧪 Mode Labo</a>
+		<a href="/laboratoire/{slug}" class="btn btn-secondary" style="flex:1">🧪 Mode Labo</a>
 	</div>
 	{:else}
 	<div style="background:var(--color-maitrisee);color:#fff;border-radius:var(--radius-md);padding:12px 16px;text-align:center;margin-bottom:20px">

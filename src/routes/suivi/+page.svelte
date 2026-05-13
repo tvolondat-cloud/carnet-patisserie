@@ -2,6 +2,7 @@
 import { recettes } from '$lib/stores/recettes.js';
 import { stats, progression } from '$lib/stores/progression.js';
 import recipesData from '$lib/data/recipes.json';
+import { slugify } from '$lib/utils/slugify.js';
 
 const competences = recipesData.competences;
 
@@ -59,7 +60,7 @@ const statutColor = { 'a-tester': 'var(--color-a-tester)', testee: 'var(--color-
 	<div class="card mb-3">
 		<div class="section-title mb-2" style="color:{statutColor[statut]}">{statutLabel[statut]} ({recs.length})</div>
 		{#each recs as r}
-		<a href="/recettes/{r.id}" style="display:block;padding:8px 0;border-bottom:1px solid var(--color-border);font-size:0.9rem">
+		<a href="/recettes/{slugify(r.nom)}" style="display:block;padding:8px 0;border-bottom:1px solid var(--color-border);font-size:0.9rem">
 			{r.nom}
 		</a>
 		{/each}

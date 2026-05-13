@@ -3,6 +3,7 @@ import { recettes, recettesLoading } from '$lib/stores/recettes.js';
 import { progression } from '$lib/stores/progression.js';
 import { goto } from '$app/navigation';
 import recipesData from '$lib/data/recipes.json';
+import { slugify } from '$lib/utils/slugify.js';
 
 const categories = recipesData.categories;
 const competences = recipesData.competences;
@@ -65,7 +66,7 @@ const statutLabel = { 'a-tester': 'À tester', testee: 'Testée', validee: 'Vali
 	{#each filtered as r}
 	{@const p = $progression[r.id]}
 	{@const statut = p?.statut ?? 'a-tester'}
-	<a href="/recettes/{r.id}" class="recipe-card" style="margin-bottom:10px;display:block">
+	<a href="/recettes/{slugify(r.nom)}" class="recipe-card" style="margin-bottom:10px;display:block">
 		<div class="recipe-card-title">{r.nom}</div>
 		<div class="recipe-card-meta">
 			<span class="badge badge-{statut}">{statutLabel[statut]}</span>

@@ -1,6 +1,7 @@
 <script>
 import { recettes } from '$lib/stores/recettes.js';
 import { progression } from '$lib/stores/progression.js';
+import { slugify } from '$lib/utils/slugify.js';
 
 $: aTester = $recettes.filter(r => !$progression[r.id] || $progression[r.id].statut === 'a-tester');
 $: testees  = $recettes.filter(r => $progression[r.id]?.statut === 'testee');
@@ -23,7 +24,7 @@ const statutColor = { 'a-tester': 'var(--color-a-tester)', testee: 'var(--color-
 				<div style="font-size:0.9rem;font-weight:600">{r.nom}</div>
 				<div class="text-xs text-muted">⏱ {r.temps} min · {r.ep}</div>
 			</div>
-			<a href="/laboratoire/{r.id}" class="btn btn-primary btn-sm">🧪 Labo</a>
+			<a href="/laboratoire/{slugify(r.nom)}" class="btn btn-primary btn-sm">🧪 Labo</a>
 		</div>
 		{/each}
 	</div>

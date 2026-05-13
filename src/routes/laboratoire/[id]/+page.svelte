@@ -4,9 +4,11 @@ import { goto } from '$app/navigation';
 import { recettes } from '$lib/stores/recettes.js';
 import { progression, updateProgression } from '$lib/stores/progression.js';
 import { events } from '$lib/analytics.js';
+import { slugify } from '$lib/utils/slugify.js';
 
-$: id = $page.params.id;
-$: recette = $recettes.find(r => r.id === id);
+$: slug = $page.params.id;
+$: recette = $recettes.find(r => slugify(r.nom) === slug);
+$: id = recette?.id;
 $: p = $progression[id];
 
 let labStartTracked = false;
@@ -49,7 +51,7 @@ async function finishLab() {
 		await updateProgression(id, { statut: 'maitrisee' });
 		if (recette) events.recipeMastered(recette);
 	}
-	goto(`/recettes/${id}`);
+	goto(`/recettes/${slug}`);
 }
 </script>
 
@@ -58,7 +60,7 @@ async function finishLab() {
 {:else}
 <div class="page">
 	<div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
-		<button class="btn btn-ghost btn-sm" on:click={() => goto(`/recettes/${id}`)}>← Retour</button>
+		<button class="btn btn-ghost btn-sm" on:click={() => goto(`/recettes/${slug}`)}>← Retour</button>
 	</div>
 
 	<h1 class="page-title">🧪 Mode Labo</h1>

@@ -4,6 +4,7 @@ import { recettes } from '$lib/stores/recettes.js';
 import { stats, progression } from '$lib/stores/progression.js';
 import { goto } from '$app/navigation';
 import Landing from '$lib/components/Landing.svelte';
+import { slugify } from '$lib/utils/slugify.js';
 
 $: prenom = $profile?.full_name?.split(' ')[0] ?? $session?.user?.email?.split('@')[0] ?? 'toi';
 $: initiales = (prenom || '?').charAt(0).toUpperCase();
@@ -116,7 +117,7 @@ async function handleSignOut() {
 	{#each recentRecettes as r}
 	{@const p = $progression[r.id]}
 	{@const statut = p?.statut ?? 'a-tester'}
-	<a href="/recettes/{r.id}" class="recipe-card" style="margin-bottom:10px">
+	<a href="/recettes/{slugify(r.nom)}" class="recipe-card" style="margin-bottom:10px">
 		<div class="recipe-card-title">{r.nom}</div>
 		<div class="recipe-card-meta">
 			<span class="badge badge-{statut}">{statutLabel[statut]}</span>
