@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 # ============================================================
-# Hook pre-push : met à jour CHANGELOG.md avant chaque push.
-# Activé via package.json "prepare" → git config core.hooksPath .githooks
+# Hook pre-push : build check + sync CHANGELOG avant chaque push.
+#
+# Bypass disponibles :
+#   SKIP_BUILD_CHECK=1  git push ...   → skip le build (garde le docs sync)
+#   SKIP_DOCS_SYNC=1    git push ...   → skip le docs sync (garde le build)
+#   SKIP_ALL=1          git push ...   → skip tout (équivalent --no-verify)
 # ============================================================
 
 set -e
@@ -9,13 +13,47 @@ set -e
 REPO_ROOT="$(git rev-parse --show-toplevel)"
 cd "$REPO_ROOT"
 
-# Skip en cas de --no-verify ou si SKIP_DOCS_SYNC=1
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
+# ── 0. Skip global ─────────────────────────────────────────
+if [ "$SKIP_ALL" = "1" ]; then
+	echo "[pre-push] SKIP_ALL=1, hook complet ignoré."
+	exit 0
+fi
+
+# ── 1. Build check ─────────────────────────────────────────
+if [ "$SKIP_BUILD_CHECK" != "1" ]; then
+	echo "[pre-push] 🔨 Build check sur la branche '${BRANCH}'..."
+
+	# Vérifie que node est disponible
+	if ! command -v node >/dev/null 2>&1; then
+		echo "[pre-push] ⚠️  node introuvable, build check ignoré."
+	else
+		# Variables factices pour permettre le build sans .env.local
+		export VITE_SUPABASE_URL="${VITE_SUPABASE_URL:-https://placeholder.supabase.co}"
+		export VITE_SUPABASE_ANON_KEY="${VITE_SUPABASE_ANON_KEY:-placeholder.placeholder.placeholder}"
+
+		if npm run build --silent 2>&1; then
+			echo "[pre-push] ✅ Build OK."
+		else
+			echo ""
+			echo "❌ Build échoué — push annulé."
+			echo "   Corrige les erreurs ci-dessus avant de pousser."
+			echo "   Pour bypasser : SKIP_BUILD_CHECK=1 git push ..."
+			echo ""
+			exit 1
+		fi
+	fi
+else
+	echo "[pre-push] SKIP_BUILD_CHECK=1, build ignoré."
+fi
+
+# ── 2. Sync CHANGELOG ──────────────────────────────────────
 if [ "$SKIP_DOCS_SYNC" = "1" ]; then
 	echo "[pre-push] SKIP_DOCS_SYNC=1, skip."
 	exit 0
 fi
 
-# Pas de mise à jour si aucun fichier dans staging area & pas de nouveaux commits
 if ! command -v node >/dev/null 2>&1; then
 	echo "[pre-push] node introuvable, skip sync-docs."
 	exit 0
@@ -26,7 +64,7 @@ if [ ! -f scripts/sync-docs.js ]; then
 	exit 0
 fi
 
-echo "[pre-push] Synchronisation CHANGELOG.md..."
+echo "[pre-push] 📝 Synchronisation CHANGELOG.md..."
 node scripts/sync-docs.js --auto-stage
 
 # Si CHANGELOG modifié et staged, créer un commit séparé

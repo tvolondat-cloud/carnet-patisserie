@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, staging]
   pull_request:
     branches: [main]
 
@@ -64,3 +64,12 @@ jobs:
           test -f static/icon-192.png || (echo "❌ icon-192.png missing" && exit 1)
           test -f static/icon-512.png || (echo "❌ icon-512.png missing" && exit 1)
           echo "✅ Static assets OK"
+
+      - name: Show staging URL
+        if: github.ref == 'refs/heads/staging'
+        run: |
+          echo ""
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "  🔗 Preview staging (disponible dans ~90s)"
+          echo "     https://staging.brigade-sucree.pages.dev"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"

@@ -1,153 +1,244 @@
 # Déploiement — Brigade Sucrée
 
-Guide de déploiement sur Vercel (recommandé) avec auto-deploy depuis GitHub.
+> **Plateforme** : Cloudflare Pages (adapter-static, SPA fallback `200.html`)
+> **Repo** : `tvolondat-cloud/carnet-patisserie`
+> **Prod** : https://brigadesucree.app
+> **Staging** : https://staging.brigade-sucree.pages.dev
 
 ---
 
-## Pré-requis
+## Workflow standard (à suivre à chaque changement)
 
-- Repo poussé sur GitHub : `tvolondat-cloud/carnet-patisserie` ✅
-- Compte Vercel lié à GitHub : https://vercel.com/login → Continue with GitHub
-- Projet Supabase configuré ([SETUP.md](SETUP.md))
-
----
-
-## 1. Importer le projet sur Vercel
-
-1. https://vercel.com/new
-2. **Import Git Repository** → sélectionne `tvolondat-cloud/carnet-patisserie`
-3. Vercel détecte automatiquement **SvelteKit** comme framework
-4. Avant de cliquer Deploy, configure les variables d'environnement ↓
-
----
-
-## 2. Variables d'environnement
-
-Dans la page **Configure Project** → section **Environment Variables**, ajoute :
-
-| Variable | Valeur | Environments |
-|---|---|---|
-| `VITE_SUPABASE_URL` | `https://wkexxddknocpmwgfvodw.supabase.co` | Production, Preview, Development |
-| `VITE_SUPABASE_ANON_KEY` | `eyJhbGci...` (la clé anon) | Production, Preview, Development |
-
-> ⚠️ **N'utilise jamais la clé `service_role`** — c'est la clé admin, elle ne doit jamais être exposée côté client.
-
-Clique **Deploy**.
-
----
-
-## 3. Premier déploiement
-
-Vercel va :
-1. Cloner le repo
-2. `npm install`
-3. `npm run build` (adapter-static génère `build/` avec HTML statique + service worker)
-4. Servir depuis le CDN global
-
-Au bout de ~1-2 min : tu obtiens une URL `https://carnet-patisserie-xyz.vercel.app`.
-
----
-
-## 4. Mettre à jour les URLs OAuth
-
-Une fois ton domaine prod connu, **remonter dans Supabase et Google Cloud** :
-
-### Supabase
-**Authentication → URL Configuration** :
-- **Site URL** : `https://carnet-patisserie.vercel.app` (ou domaine custom)
-- **Redirect URLs** (ajouter) :
-  - `https://carnet-patisserie.vercel.app/auth/callback`
-
-### Google Cloud Console
-**APIs & Services → Credentials** → ton OAuth client → **Edit** :
-- **Authorized JavaScript origins** : ajouter `https://carnet-patisserie.vercel.app`
-- **Authorized redirect URIs** : déjà configurée pour Supabase, ne pas y ajouter le domaine Vercel
-
----
-
-## 5. Domaine custom (optionnel)
-
-Vercel → ton projet → **Settings → Domains** :
-- Ajoute ton domaine (`brigadesucree.app`, `brigadesucree.fr`)
-- Configure les DNS comme indiqué (CNAME ou A record)
-- HTTPS auto via Let's Encrypt
-
-Puis **remonter le domaine custom** dans Supabase + Google Cloud (étape 4).
-
----
-
-## 6. Auto-deploy
-
-À chaque `git push origin main` :
-- Vercel build et déploie automatiquement
-- L'URL `production` reste stable
-- Chaque PR a un déploiement preview unique : `https://carnet-patisserie-git-feature-tvolondat.vercel.app`
-
----
-
-## 7. PWA en production
-
-Le service worker est généré par `vite-plugin-pwa` au build. Il sera actif dès le 2e chargement (1er chargement = installation).
-
-### Tester l'installation PWA
-
-**Chrome desktop** : icône d'installation à droite de la barre d'URL.
-
-**Mobile Safari (iOS)** : Partager → "Sur l'écran d'accueil".
-
-**Chrome Android** : "Installer l'application" via menu ⋮.
-
-### Mises à jour
-
-Avec `registerType: 'autoUpdate'` (config actuelle), le SW vérifie une nouvelle version à chaque chargement. Il l'applique au refresh suivant.
-
----
-
-## 8. Monitoring
-
-### Vercel Analytics
-
-**Settings → Analytics** : active l'option (gratuit jusqu'à 2500 events/mois).
-
-### Supabase
-
-**Database → Logs** pour les erreurs SQL et triggers.
-**Auth → Logs** pour les échecs de connexion.
-
-### Lighthouse (perf + a11y + PWA)
-
-```bash
-# Local
-npx lighthouse https://carnet-patisserie.vercel.app --view
+```
+1. Coder en local  →  npm run dev
+2. Vérifier le build  →  npm run preview:check
+3. Pousser sur staging  →  npm run push:staging
+4. Valider sur  https://staging.brigade-sucree.pages.dev  (~90s)
+5. Pousser en prod  →  npm run push:prod
 ```
 
-Score cible :
+### Commandes disponibles
+
+| Commande | Action |
+|---|---|
+| `npm run dev` | Dev server local (HMR, :5173) |
+| `npm run preview:check` | Build + preview local (:4173) — **à lancer avant tout push** |
+| `npm run push:staging` | Push branche courante → `staging` (auto-switch compte gh) |
+| `npm run push:prod` | Push `main` → `main` = déploiement prod |
+| `npm run build` | Build seul (sans preview) |
+
+### Bypass des hooks
+
+```bash
+# Sauter le build check (garde sync docs)
+SKIP_BUILD_CHECK=1 git push ...
+
+# Sauter le docs sync (garde build check)
+SKIP_DOCS_SYNC=1 git push ...
+
+# Sauter tout
+SKIP_ALL=1 git push ...
+```
+
+---
+
+## Environnements
+
+### Production
+| | |
+|---|---|
+| **URL** | https://brigadesucree.app |
+| **Branch** | `main` |
+| **Deploy** | Auto à chaque push sur `main` |
+| **Rollback** | CF Pages → Deployments → ⋯ → Rollback |
+
+### Staging (preview)
+| | |
+|---|---|
+| **URL** | https://staging.brigade-sucree.pages.dev |
+| **Branch** | `staging` |
+| **Deploy** | Auto à chaque `npm run push:staging` |
+| **Variables** | Mêmes variables Supabase que prod (configurées dans CF Pages) |
+
+### Dev local
+| | |
+|---|---|
+| **URL** | http://localhost:5173 |
+| **Commande** | `npm run dev` |
+| **Variables** | `.env.local` à la racine (gitignored) |
+
+---
+
+## Cloudflare Pages — Configuration
+
+### Variables d'environnement (Settings → Environment variables)
+
+| Variable | Valeur | Environnements |
+|---|---|---|
+| `VITE_SUPABASE_URL` | `https://wkexxddknocpmwgfvodw.supabase.co` | Production + Preview |
+| `VITE_SUPABASE_ANON_KEY` | `eyJhbGci...` (clé anon) | Production + Preview |
+| `NODE_VERSION` | `20` | Production + Preview |
+
+> ⚠️ **Jamais la clé `service_role`** côté client. Anon key uniquement.
+
+### Build settings (Workers & Pages → brigade-sucree → Settings)
+
+| Setting | Valeur |
+|---|---|
+| Build command | `npm run build` |
+| Build output directory | `build` |
+| Root directory | *(vide)* |
+| Node version | 20 (via `NODE_VERSION` env var) |
+
+### Branches déployées
+
+CF Pages déploie automatiquement **toutes les branches** poussées sur GitHub :
+- `main` → production (https://brigadesucree.app)
+- `staging` → preview (https://staging.brigade-sucree.pages.dev)
+- Toute autre branche → preview URL aléatoire `<hash>.brigade-sucree.pages.dev`
+
+---
+
+## Push sécurisé — Bug Windows Credential Manager
+
+Le système a un cache obsolète pointant vers `googlepartner-debug` (ancien compte).
+Un `git push` direct échoue avec **403 Permission denied**.
+
+**Solution** : les scripts `push:staging` et `push:prod` utilisent `gh auth token`
+automatiquement. Ils basculent aussi le compte actif si nécessaire.
+
+```bash
+# Vérifier le compte actif
+gh auth status
+
+# Basculer manuellement si besoin
+gh auth switch --user tvolondat-cloud
+
+# Pattern manuel (si les scripts npm ne fonctionnent pas)
+TOKEN=$(gh auth token) && git push "https://x-access-token:${TOKEN}@github.com/tvolondat-cloud/carnet-patisserie.git" staging
+```
+
+---
+
+## Validation post-déploiement
+
+### Checklist staging
+
+- [ ] `https://staging.brigade-sucree.pages.dev` répond 200
+- [ ] La landing page s'affiche correctement
+- [ ] La connexion Supabase fonctionne (login test)
+- [ ] Les nouvelles features à valider fonctionnent
+- [ ] Console navigateur sans erreur critique
+
+```bash
+# Vérifier les chunks JS (tous doivent retourner 200)
+curl -s -o /dev/null -w "%{http_code}" https://staging.brigade-sucree.pages.dev
+
+# Voir la version déployée
+curl -s https://staging.brigade-sucree.pages.dev/_app/version.json
+```
+
+### Checklist prod (après push:prod)
+
+```bash
+# Version prod
+curl -s https://brigadesucree.app/_app/version.json
+
+# CI derniers runs
+gh run list --repo tvolondat-cloud/carnet-patisserie --limit 3
+```
+
+---
+
+## Rollback
+
+### Rollback rapide (CF Pages)
+
+1. Ouvre https://dash.cloudflare.com → Workers & Pages → `brigade-sucree`
+2. Onglet **Deployments**
+3. Trouve le dernier déploiement stable
+4. Clique **⋯ → Rollback to this deployment**
+
+Le rollback est instantané (changement de pointeur CDN, sans rebuild).
+
+### Rollback via git
+
+```bash
+# Revenir au commit précédent sur main
+git revert HEAD --no-edit
+npm run push:prod
+```
+
+---
+
+## CI GitHub Actions
+
+Le workflow `.github/workflows/ci.yml` tourne sur :
+- Chaque push sur `main` (prod)
+- Chaque push sur `staging` (validation pre-prod)
+- Chaque PR vers `main`
+
+Il vérifie : JSON valides, build propre, fichiers critiques présents, bundle size.
+
+Sur un push `staging` réussi, le CI affiche l'URL de preview dans les logs.
+
+```bash
+# Voir le statut du dernier run CI
+gh run list --repo tvolondat-cloud/carnet-patisserie --limit 3
+
+# Logs d'un run spécifique
+gh run view <run-id> --repo tvolondat-cloud/carnet-patisserie --log-failed
+```
+
+---
+
+## Monitoring
+
+### Vérifier que la prod tourne
+
+```bash
+curl -s https://brigadesucree.app | grep -o '<title>[^<]*</title>'
+curl -s -o /dev/null -w "%{http_code}" https://brigadesucree.app
+```
+
+### Supabase
+
+- **Database → Logs** : erreurs SQL et triggers
+- **Auth → Logs** : échecs de connexion
+- Dashboard : https://supabase.com/dashboard/project/wkexxddknocpmwgfvodw
+
+### PWA & Performance (Lighthouse)
+
+```bash
+npx lighthouse https://brigadesucree.app --view
+```
+
+Scores cibles :
 - Performance : ≥ 90
-- Accessibility : ≥ 95 (après fixes a11y de [AUDIT.md](AUDIT.md))
+- Accessibility : ≥ 95
 - Best Practices : ≥ 95
 - SEO : ≥ 90
-- PWA : "Installable" + critères Workbox
 
 ---
 
-## 9. Rollback
+## Domaines
 
-En cas de bug en prod :
-
-**Vercel** → ton projet → **Deployments** → trouve le dernier déploiement OK → **⋯ → Promote to Production**.
-
-Le rollback est instantané (changement de pointeur, pas de rebuild).
-
----
-
-## 10. Variables d'environnement par environnement
-
-Tu peux avoir des projets Supabase distincts pour preview/prod :
-
-| Environment | Supabase Project | Use case |
+| Domaine | DNS | Cible |
 |---|---|---|
-| Production | `wkexxddknocpmwgfvodw` (prod) | Domaine principal |
-| Preview | (ex: `brigade-sucree-staging`) | PRs, branches |
-| Development | (local seul) | `npm run dev` |
+| `brigadesucree.app` | Cloudflare | Prod (CNAME → brigade-sucree.pages.dev) |
+| `www.brigadesucree.app` | Cloudflare | Redirect 301 → apex |
+| `brigadesucree.fr` | Cloudflare | Redirect 301 → brigadesucree.app |
+| `staging.brigade-sucree.pages.dev` | CF Pages auto | Staging branch |
 
-Utile pour ne pas polluer la prod avec des données de test.
+Les domaines sont enregistrés chez **Gandi**, nameservers pointent vers **Cloudflare**.
+
+---
+
+## Première configuration (si reprise from scratch)
+
+1. Crée un projet CF Pages → importe `tvolondat-cloud/carnet-patisserie`
+2. Build command : `npm run build` | Output : `build`
+3. Ajoute les 3 env vars (URL + ANON_KEY + NODE_VERSION=20)
+4. Premier deploy → associe `brigadesucree.app` comme domaine custom
+5. Supabase → Auth → Redirect URLs : ajoute `https://brigadesucree.app/auth/callback`
+6. Crée la branche `staging` : `git checkout -b staging && npm run push:staging`

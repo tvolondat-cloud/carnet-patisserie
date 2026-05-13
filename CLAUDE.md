@@ -32,14 +32,20 @@ Le pattern qui marche pour pousser :
 TOKEN=$(gh auth token) && git push "https://x-access-token:${TOKEN}@github.com/tvolondat-cloud/carnet-patisserie.git" main
 ```
 
-### Workflow standard à chaque commit+push
+### Workflow standard à chaque changement
 
-1. `cd` dans `/c/Users/TimothyVolondat/Downloads/carnet-claude-code-full/carnet`
-2. `git add -A`
-3. `git commit -m "..."` avec préfixe conventional (`feat:`, `fix:`, `docs:`, etc.)
-4. Push via le pattern ci-dessus (jamais `git push origin main` direct)
-5. Le hook `.githooks/pre-push` lance auto `sync-docs.js` (CHANGELOG)
-6. Cloudflare Pages redéploie automatiquement (~60-90s)
+```
+1. npm run dev          → développer + tester en local
+2. npm run preview:check → build + preview local (OBLIGATOIRE avant push)
+3. git add / git commit  → conventional commit
+4. npm run push:staging  → pousse sur staging (auto-switch compte gh)
+5. Valider sur https://staging.brigade-sucree.pages.dev (~90s)
+6. npm run push:prod     → pousse sur main = déploiement prod
+```
+
+- Le hook `pre-push` lance automatiquement le **build check** + **sync CHANGELOG**
+- Bypass build check si besoin : `SKIP_BUILD_CHECK=1 npm run push:staging`
+- Le CI GitHub Actions valide aussi chaque push `staging` et `main`
 
 ### Vérifications utiles
 
@@ -48,7 +54,15 @@ gh auth status                                              # doit montrer tvolo
 gh repo view tvolondat-cloud/carnet-patisserie             # doit afficher le repo
 gh run list --repo tvolondat-cloud/carnet-patisserie --limit 3  # voir le dernier CI
 curl -s https://brigadesucree.app/_app/version.json        # voir la version prod déployée
+curl -s https://staging.brigade-sucree.pages.dev/_app/version.json  # version staging
 ```
+
+### URLs staging vs prod
+
+| | URL |
+|---|---|
+| **Prod** | https://brigadesucree.app |
+| **Staging** | https://staging.brigade-sucree.pages.dev |
 
 ### Si jamais `gh` n'est plus auth comme tvolondat-cloud
 
@@ -398,7 +412,10 @@ Tables : `ingredient_prices`, `frais_variables`, `frais_fixes`, `projections_ca`
 npm install              # installer les dépendances
 npm run dev              # dev avec PWA active (localhost:5173)
 npm run build            # build production
-npm run preview          # tester le build offline
+npm run preview          # tester le build offline (localhost:4173)
+npm run preview:check    # build + preview en une commande (avant tout push)
+npm run push:staging     # pousse sur la branche staging → staging.brigade-sucree.pages.dev
+npm run push:prod        # pousse main en prod → brigadesucree.app
 npm run icons            # régénère les 7 icônes PWA depuis SVG
 npm run docs:sync        # synchronise CHANGELOG.md depuis git log
 ```
