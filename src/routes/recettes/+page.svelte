@@ -13,6 +13,7 @@ let filterCat = 'all';
 let filterComp = 'all';
 let filterStatut = 'all';
 let search = '';
+let showAllCats = false;
 
 const statuts = [
 	{ id: 'all', label: 'Tous' },
@@ -48,11 +49,21 @@ const statutLabel = { 'a-tester': 'À tester', testee: 'Testée', validee: 'Vali
 		{/each}
 	</div>
 
-	<div class="filter-chips">
-		<button class="chip" class:active={filterCat === 'all'} on:click={() => filterCat = 'all'}>Catégories</button>
-		{#each categories as cat}
-		<button class="chip" class:active={filterCat === cat.id} on:click={() => filterCat = cat.id}>{cat.emoji} {cat.label}</button>
-		{/each}
+	<div class="cat-filter">
+		<div class="filter-chips chips-wrap" class:collapsed={!showAllCats}>
+			<button class="chip" class:active={filterCat === 'all'} on:click={() => filterCat = 'all'}>Toutes</button>
+			{#each categories as cat}
+			<button class="chip" class:active={filterCat === cat.id} on:click={() => filterCat = cat.id}>{cat.emoji} {cat.label}</button>
+			{/each}
+		</div>
+		<button
+			type="button"
+			class="cat-toggle"
+			aria-expanded={showAllCats}
+			on:click={() => (showAllCats = !showAllCats)}
+		>
+			{showAllCats ? '▲ Réduire' : `▾ Toutes les catégories (${categories.length})`}
+		</button>
 	</div>
 
 	{#if $recettesLoading}
@@ -100,6 +111,34 @@ const statutLabel = { 'a-tester': 'À tester', testee: 'Testée', validee: 'Vali
 </div>
 
 <style>
+/* Filtre catégories : wrap multi-lignes + repli, plus de scroll tronqué */
+.cat-filter { margin-bottom: 16px; }
+.filter-chips.chips-wrap {
+	flex-wrap: wrap;
+	overflow: visible;
+	margin-bottom: 8px;
+	transition: max-height 0.25s ease;
+}
+.filter-chips.chips-wrap.collapsed {
+	max-height: 84px; /* ~2 rangées */
+	overflow: hidden;
+	-webkit-mask-image: linear-gradient(180deg, #000 60%, transparent);
+	mask-image: linear-gradient(180deg, #000 60%, transparent);
+}
+.cat-toggle {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	font-size: 0.8rem;
+	font-weight: 600;
+	color: var(--color-brand);
+	background: none;
+	border: none;
+	padding: 4px 2px;
+	cursor: pointer;
+}
+.cat-toggle:hover { text-decoration: underline; }
+
 .recipe-locked {
 	opacity: 0.65;
 	filter: saturate(0.4);

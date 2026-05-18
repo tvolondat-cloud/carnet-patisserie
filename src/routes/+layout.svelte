@@ -44,10 +44,10 @@ const navItems = [
 	{ href: '/profil',    icon: '👤', label: 'Profil' },
 ];
 
-function isActive(href) {
-	if (href === '/') return currentPath === '/';
-	return currentPath.startsWith(href);
-}
+// Réactif : recalculé à chaque changement de route (une fonction simple
+// ne serait pas re-évaluée par Svelte au changement de currentPath).
+$: isActive = (href) =>
+	href === '/' ? currentPath === '/' : currentPath.startsWith(href);
 </script>
 
 {#if shouldRender}

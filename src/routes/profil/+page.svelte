@@ -164,14 +164,27 @@ async function handleSignOut() {
 			</div>
 			<span class="badge badge-validee">Actif</span>
 		</div>
-		<div style="background:rgba(108,99,255,0.06);border-radius:var(--radius-md);padding:12px;border:1px solid var(--color-border)">
+		<div class="upgrade-box">
 			<div class="text-sm font-medium mb-1">🚀 Passer au plan Pro</div>
-			<div class="text-xs text-muted mb-2">58 recettes CAP · Carnet PDF · 50 fiches · 60 QCM</div>
-			<div style="display:flex;gap:8px">
-				<button class="btn btn-primary btn-sm" style="flex:1" disabled>4,99€/mois</button>
-				<button class="btn btn-ghost btn-sm" style="flex:1" disabled>39€/an</button>
-			</div>
-			<p class="text-xs text-muted" style="margin-top:6px;text-align:center">Bientôt disponible</p>
+			<div class="text-xs text-muted mb-3">58 recettes CAP · Carnet PDF · 50 fiches · 60 QCM</div>
+
+			<button type="button" class="plan-opt plan-opt-year" disabled>
+				<span class="plan-opt-best">Le plus avantageux · −35%</span>
+				<span class="plan-opt-main">
+					<span class="plan-opt-price">39€<small>/an</small></span>
+					<span class="plan-opt-eq">soit 3,25€/mois</span>
+				</span>
+				<span class="plan-opt-save">Tu économises 20,88€ vs mensuel</span>
+			</button>
+
+			<button type="button" class="plan-opt plan-opt-month" disabled>
+				<span class="plan-opt-main">
+					<span class="plan-opt-price">4,99€<small>/mois</small></span>
+					<span class="plan-opt-eq">59,88€ sur l'année</span>
+				</span>
+			</button>
+
+			<p class="text-xs text-muted" style="margin-top:8px;text-align:center">Bientôt disponible · 7 jours d'essai gratuit</p>
 		</div>
 		{/if}
 	</div>
@@ -203,3 +216,64 @@ async function handleSignOut() {
 {#if toast}
 	<div class="toast" role="status" aria-live="polite">{toast}</div>
 {/if}
+
+<style>
+.upgrade-box {
+	background: rgba(108, 99, 255, 0.06);
+	border-radius: var(--radius-md);
+	padding: 14px;
+	border: 1px solid var(--color-border);
+}
+.plan-opt {
+	position: relative;
+	width: 100%;
+	text-align: left;
+	border-radius: var(--radius-md);
+	border: 1.5px solid var(--color-border);
+	background: var(--color-surface);
+	padding: 12px 14px;
+	cursor: not-allowed;
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+.plan-opt + .plan-opt { margin-top: 8px; }
+.plan-opt-year {
+	border-color: var(--color-brand);
+	background: var(--color-surface);
+	box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.12);
+	padding-top: 20px;
+}
+.plan-opt-best {
+	position: absolute;
+	top: -10px;
+	left: 12px;
+	background: var(--color-maitrisee);
+	color: #fff;
+	font-size: 0.66rem;
+	font-weight: 800;
+	letter-spacing: 0.03em;
+	padding: 2px 8px;
+	border-radius: 999px;
+}
+.plan-opt-main {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 8px;
+}
+.plan-opt-price {
+	font-size: 1.35rem;
+	font-weight: 900;
+	color: var(--color-text);
+}
+.plan-opt-price small { font-size: 0.72rem; font-weight: 600; color: var(--color-text-2); }
+.plan-opt-eq { font-size: 0.78rem; color: var(--color-text-2); }
+.plan-opt-save {
+	font-size: 0.76rem;
+	font-weight: 700;
+	color: var(--color-maitrisee);
+}
+.plan-opt-month { opacity: 0.75; }
+.plan-opt-month .plan-opt-price { font-size: 1.05rem; }
+</style>
