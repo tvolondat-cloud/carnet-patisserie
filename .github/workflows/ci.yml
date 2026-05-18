@@ -100,23 +100,10 @@ jobs:
         run: npm ci --no-audit --prefer-offline
 
       - name: Scan secrets & vulnérabilités
+        # security-scan.js fait : scan secrets + npm audit avec AUDIT_ALLOWLIST
+        # (jspdf/xlsx : vulns connues sans fix, exemptées). Échoue si NOUVELLE
+        # vuln critique/haute hors allowlist.
         run: node scripts/security-scan.js
-        env:
-          CI: true
-
-      - name: npm audit (auto-fix si possible)
-        run: |
-          echo "=== npm audit (production deps) ==="
-          npm audit --production --json > /tmp/audit.json 2>/dev/null || true
-          # Afficher un résumé lisible
-          node -e "
-            const a = JSON.parse(require('fs').readFileSync('/tmp/audit.json','utf8'));
-            const meta = a.metadata?.vulnerabilities ?? {};
-            const total = (meta.critical??0)+(meta.high??0)+(meta.moderate??0)+(meta.low??0);
-            console.log('Vulnérabilités :', JSON.stringify(meta));
-            if ((meta.critical??0) > 0) { console.error('❌ Vulnérabilités critiques détectées !'); process.exit(1); }
-            console.log('✅ Audit OK (' + total + ' vulns dont 0 critiques)');
-          "
         env:
           CI: true
 
