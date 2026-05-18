@@ -133,7 +133,8 @@
 | Rang | Action | I | C | E | Score | Justifications |
 |------|--------|---|---|---|-------|----------------|
 | 1 | Instrumenter les indicateurs (inscrits, DAU/MAU, Free→Pro, NPS) | 7 | 9 | 8 | **8.0** | I : prérequis transverse, débloque la priorisation de tout le reste / C : nécessité évidente, GTM+Supabase déjà en place / E : events GA4 + 1 vue SQL, ~1j |
-| 2 | Screenshots produit dans la landing | 8 | 7 | 6 | **7.0** | I : 100% du trafic visiteurs, "chat dans un sac" = fuite conversion / C : best practice universelle + audit critique / E : front, ~1-2j mais bloqueur = vraies captures |
+| 2 | **Wake Lock — écran toujours allumé sur les pages recette/labo** | 6 | 8 | 8 | **7.3** | I : pain point réel du persona cœur (mains sales en cuisine, écran qui s'éteint), même esprit que l'offline "critique en labo" / C : `navigator.wakeLock` documenté, attendu d'une app cuisine / E : front seul, ~2-4h (acquérir le lock à l'entrée recette/labo, ré-acquérir sur `visibilitychange`, fallback silencieux iOS<16.4) |
+| 3 | Screenshots produit dans la landing | 8 | 7 | 6 | **7.0** | I : 100% du trafic visiteurs, "chat dans un sac" = fuite conversion / C : best practice universelle + audit critique / E : front, ~1-2j mais bloqueur = vraies captures |
 | 3 | Pages recettes publiques (SEO) | 9 | 8 | 4 | **7.0** | I : levier d'acquisition #1, débloque le SEO (SPA cache tout) / C : audit le désigne frein majeur, mots-clés volume identifiés / E : 1-2 sem dev+rédac, prerender + paywall partiel — **big bet** |
 | 4 | Compteur d'inscrits réel | 5 | 6 | 8 | **6.3** | I : FOMO, modéré si volume faible / C : best practice, efficacité dépend du chiffre réel / E : RPC count public + UI, ~2-3h |
 | 5 | Contraste couleur marque (WCAG AA) | 3 | 9 | 7 | **6.3** | I : a11y + qualité perçue, effet conversion faible / C : ratio mesurable objectivement / E : ajustement token ciblé <1j (vérifier régressions) |
@@ -148,11 +149,14 @@
 | 14 | Contenu hors-saison (passionnés) | 4 | 4 | 4 | **4.0** | I : lisse la saisonnalité, segment secondaire / C : hypothèse, peu de data / E : production continue |
 | 15 | Communauté / partage de recettes | 5 | 3 | 2 | **3.3** | I : rétention + effet réseau mais **risque de dilution du focus** / C : double tranchant / E : 6+ mois |
 
+> _Note : l'insertion du Wake Lock en rang 2 décale d'un cran les rangs suivants (le rang n devient n+1). Non renuméroté ligne à ligne — la roadmap est itérative, le score fait foi._
+
 ### Quick wins à lancer en premier
 *(Ease ≥ 7 ET Impact ≥ 5)*
 1. **Instrumenter les indicateurs** (#1) — ~1j. **Prérequis** : sans baseline, toutes les Confidence restent plafonnées et aucun argument chiffré pour les CFA.
-2. **Compteur d'inscrits réel** (#4) — ~2-3h, à enchaîner une fois #1 en place (réutilise le `count`).
-3. **Recipe schema.org** (#12) — trivial **mais bloqué** par les pages recettes (#3) : à faire dans la foulée de #3.
+2. **Wake Lock écran sur recette/labo** (#2) — ~2-4h, front seul, sans dépendance. Quick win à plus fort confort pour le persona cœur ; à shipper rapidement.
+3. **Compteur d'inscrits réel** (#4) — ~2-3h, à enchaîner une fois #1 en place (réutilise le `count`).
+4. **Recipe schema.org** (#12) — trivial **mais bloqué** par les pages recettes : à faire dans la foulée des pages publiques.
 
 ### Sprint suivant (2–4 semaines)
 4. **Screenshots produit landing** (#2) — dès que des captures propres du Mode Labo / menu comptoir / suivi sont disponibles.
