@@ -137,7 +137,7 @@ src/
 │   │   ├── +page.svelte          ← Login/Signup (form + a11y + FR errors)
 │   │   └── callback/+page.svelte ← OAuth callback (poll session)
 │   ├── recettes/
-│   │   ├── +page.svelte          ← Liste avec filtres
+│   │   ├── +page.svelte          ← Liste + menu catégories "comptoir" (tuiles colorées + compteurs)
 │   │   └── [id]/+page.svelte     ← Détail + calculateur + notes + commentaires
 │   ├── laboratoire/[id]/+page.svelte ← Mode Labo 3 étapes
 │   ├── suivi/+page.svelte        ← Dashboard skill bars + listes par statut
@@ -362,6 +362,14 @@ Automatique via `@media (prefers-color-scheme: dark)` — tokens override.
 
 ### Composants CSS disponibles
 `.card`, `.card-sm`, `.recipe-card`, `.btn-primary/secondary/ghost/danger`, `.btn-block/sm/lg`, `.fab`, `.badge-{statut}`, `.badge-ep1/ep2`, `.chip`, `.filter-chips`, `.skill-bar`, `.stepper`, `.step`, `.bottom-nav`, `.nav-item`, `.score-ring`, `.stat-card`, `.spinner`, `.toast`, `.empty-state`, `.input`, `.label`
+
+### Menu catégories "comptoir" (page `/recettes`, styles scoped)
+- Grille `.cat-grid` de tuiles `.cat-tile` (responsive 3/4/6 col), pas de scroll tronqué
+- Identité couleur par catégorie : map `CAT_COLORS` dans `recettes/+page.svelte`, exposée en `--c` ; teintes via `color-mix()` (dark-mode safe, fallback `--color-surface`)
+- Compteur par catégorie calculé réactivement depuis `$recettes` (`catCounts`)
+- Repli progressif `visibleCats` : 6 catégories + "Toutes" ; la catégorie active reste toujours visible même repliée
+- Cibles ≥ 92px, entrée animée en cascade (`--i`), `prefers-reduced-motion` respecté
+- Pour ajouter une catégorie : l'ajouter dans `recipes.json` ET lui donner une teinte dans `CAT_COLORS` (sinon fallback `--color-brand`)
 
 ### Bottom nav (5 tabs — refonte itération 2 du conseil)
 ```
