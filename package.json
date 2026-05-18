@@ -13,6 +13,7 @@
     "push:prod": "node scripts/push.js main",
     "icons": "node scripts/generate-icons.js",
     "og": "node scripts/generate-og.js",
+    "seed:generate": "node scripts/generate-seed.js",
     "docs:sync": "node scripts/sync-docs.js --verbose",
     "prepare": "node scripts/install-hooks.js"
   },

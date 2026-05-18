@@ -1,6 +1,6 @@
 # BRIGADE SUCRÉE — Claude Code System Prompt
 
-> **Dernière mise à jour** : 2026-05-11
+> **Dernière mise à jour** : 2026-05-18
 
 ## Rôle
 Tu es un expert senior SvelteKit, Supabase, PWA et déploiement Cloudflare. Tu travailles sur **Brigade Sucrée**, une PWA mobile-first pour les étudiants CAP Pâtissier et les particuliers passionnés de pâtisserie.
@@ -122,7 +122,7 @@ src/
 │   ├── components/
 │   │   └── ConsentBanner.svelte  ← Bannière cookies RGPD
 │   ├── data/
-│   │   ├── recipes.json          ← 17 recettes CAP (catégories, compétences)
+│   │   ├── recipes.json          ← 58 recettes CAP (12 catégories, compétences) — source de seed.sql
 │   │   ├── fiches-cap.json       ← 50 fiches référentiel (PDF source)
 │   │   └── questions-examen.json ← 60 QCM examen blanc
 │   ├── stores/
@@ -151,12 +151,17 @@ src/
 
 supabase/
 ├── schema.sql                              ← 6 tables + RLS de base + triggers
-├── seed.sql                                ← seed_recettes_cap (17 recettes)
+├── seed.sql                                ← AUTO-GÉNÉRÉ (58 recettes) — ne pas éditer à la main
 └── migrations/
-    └── 20260501_security_hardening.sql    ← RLS WITH CHECK + index + constraints + idempotence
+    ├── 20260501_security_hardening.sql    ← RLS WITH CHECK + index + constraints + idempotence
+    ├── 20260513_fix_oeufs_unite.sql
+    ├── 20260513_photos_suggestions_nb_pieces.sql
+    └── 20260514_add_plan_freemium.sql     ← colonne profiles.plan (free/pro/admin)
 
 scripts/
 ├── generate-icons.js             ← Génère 7 icônes PWA depuis SVG (lettre B)
+├── generate-seed.js              ← Génère seed.sql depuis recipes.json (npm run seed:generate)
+├── security-scan.js              ← Scan secrets + npm audit (CI prod + pre-push main)
 └── sync-docs.js                  ← Auto-update CHANGELOG depuis git log
 
 .githooks/
@@ -190,6 +195,21 @@ progression       -- user_id, recette_id, statut, tested, quiz_score, chrono_sec
 commentaires      -- user_id, recette_id, contenu, type (note/erreur/astuce/variation)
 ```
 
+### Modèle freemium
+
+| Plan | Accès |
+|---|---|
+| `free` | 10 recettes fondamentales (slugs dans `FREE_RECIPE_SLUGS`), Mode Labo, Suivi, Ordonnancement, Calculateur |
+| `pro` | Tout : 58 recettes, Carnet PDF, fiches, QCM |
+| `admin` | = pro |
+
+- Colonne `profiles.plan TEXT DEFAULT 'free'` (migration `20260514_add_plan_freemium.sql`)
+- Store dérivé `isPro` + Set `FREE_RECIPE_SLUGS` dans `src/lib/stores/auth.js`
+- Gate côté client : `locked = !$isPro && !FREE_RECIPE_SLUGS.has(slugify(r.nom))`
+- Paywall sur : liste recettes, détail recette, Mode Labo, Carnet PDF
+- Slugs gratuits = `slugify(nom)` (ex. « Pâte sablée » → `pate-sablee`)
+- Paiement Stripe : Sprint 3 (boutons `disabled` « Bientôt disponible »)
+
 ### Statuts progression (ordre)
 ```
 a-tester → testee → validee → maitrisee
@@ -203,7 +223,7 @@ a-tester → testee → validee → maitrisee
 - CHECK constraints : quiz_score ∈ [0,100], chrono_seconds ≥ 0, bonne ∈ [0, len(reponses)), competences whitelist
 
 ### Fonctions RPC
-- `seed_recettes_cap(p_user_id)` — seed 17 recettes (legacy)
+- `seed_recettes_cap(p_user_id)` — seed 58 recettes (auto-généré depuis recipes.json)
 - `seed_recettes_cap_safe(p_user_id)` — wrapper idempotent (no-op si déjà seedé) ← utilisé par le client
 - `get_user_stats(p_user_id)` — stats côté DB (pour optim future)
 
@@ -252,21 +272,23 @@ VITE_SUPABASE_ANON_KEY=eyJhbGci...
 
 ---
 
-## Données — 17 recettes CAP
+## Données — 58 recettes CAP
 
-### Catégories
-`cremes` · `pates` · `choux` · `fours-secs` · `entremets` · `viennoiseries` · `bases-cap` · `gateaux-voyage` · `tartes` · `feuilletage` · `biscuits`
+Référentiel complet : [`docs/carnet-cap-2025-2026.md`](docs/carnet-cap-2025-2026.md).
+Source unique : `src/lib/data/recipes.json` → `npm run seed:generate` → `supabase/seed.sql`.
+
+### Catégories (12)
+`cremes` · `pates` · `bases-cap` · `biscuits` · `fours-secs` · `gateaux-voyage` · `choux` · `feuilletage` · `tartes` · `entremets` · `viennoiseries` · `glacages`
 
 ### Compétences CAP
 `cuissons` · `textures` · `pesees` · `assemblages` · `organisation` · `techniques`
 
-### Recettes intégrées (via seed)
-- Crème pâtissière, Crème anglaise, Crème chantilly
-- Pâte à choux, Pâte sablée, Pâte levée feuilletée
-- Financier, Biscuit Joconde, Cake citron
-- Opéra, Tarte citron meringuée, Éclair café
-- Mille-feuille, Charlotte fraises, Paris-Brest
-- Tarte Tatin, Fondant chocolat
+### Répartition (58)
+cremes 10 · pates 5 · bases-cap 4 · biscuits 4 · fours-secs 5 · gateaux-voyage 3 · choux 5 · feuilletage 3 · tartes 5 · entremets 7 · viennoiseries 5 · glacages 2
+
+⚠️ `seed.sql` est **auto-généré** : ne jamais l'éditer à la main. Modifier `recipes.json`
+puis lancer `npm run seed:generate`, et ré-exécuter le SQL dans Supabase pour mettre à jour
+la fonction `seed_recettes_cap` (les users existants gardent leurs recettes — wrapper idempotent).
 
 ---
 
@@ -309,7 +331,7 @@ VITE_SUPABASE_ANON_KEY=eyJhbGci...
 - Édition prénom, type (CAP/particulier), date d'examen
 - Score ring + stats globales
 - Outils : Ordonnancement, Carnet PDF
-- Plan freemium (placeholder Free, Pro à venir Sprint 3)
+- Plan freemium dynamique (`#plan`) : badge Pro actif, ou CTA upgrade (boutons disabled « Bientôt disponible »)
 - Confidentialité (re-paramétrer cookies analytics)
 - Bouton signOut avec confirm
 

@@ -1,6 +1,7 @@
 <script>
 import { recettes, recettesLoading } from '$lib/stores/recettes.js';
 import { progression } from '$lib/stores/progression.js';
+import { isPro, FREE_RECIPE_SLUGS } from '$lib/stores/auth.js';
 import { goto } from '$app/navigation';
 import recipesData from '$lib/data/recipes.json';
 import { slugify } from '$lib/utils/slugify.js';
@@ -66,10 +67,17 @@ const statutLabel = { 'a-tester': 'À tester', testee: 'Testée', validee: 'Vali
 	{#each filtered as r}
 	{@const p = $progression[r.id]}
 	{@const statut = p?.statut ?? 'a-tester'}
-	<a href="/recettes/{slugify(r.nom)}" class="recipe-card" style="margin-bottom:10px;display:block">
-		<div class="recipe-card-title">{r.nom}</div>
+	{@const slug = slugify(r.nom)}
+	{@const locked = !$isPro && !FREE_RECIPE_SLUGS.has(slug)}
+	<a href={locked ? '/profil#plan' : `/recettes/${slug}`} class="recipe-card" class:recipe-locked={locked} style="margin-bottom:10px;display:block">
+		<div class="recipe-card-title">
+			{r.nom}
+			{#if locked}<span class="pro-badge">Pro</span>{/if}
+		</div>
 		<div class="recipe-card-meta">
+			{#if !locked}
 			<span class="badge badge-{statut}">{statutLabel[statut]}</span>
+			{/if}
 			<span class="badge badge-{r.ep?.toLowerCase()}">{r.ep}</span>
 			<span class="text-xs text-muted">⏱ {r.temps} min</span>
 			<div class="recipe-difficulty">
@@ -78,7 +86,7 @@ const statutLabel = { 'a-tester': 'À tester', testee: 'Testée', validee: 'Vali
 				{/each}
 			</div>
 		</div>
-		{#if (r.competences ?? []).length}
+		{#if (r.competences ?? []).length && !locked}
 		<div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:4px">
 			{#each r.competences as comp}
 			{@const c = competences.find(x => x.id === comp)}
@@ -90,3 +98,27 @@ const statutLabel = { 'a-tester': 'À tester', testee: 'Testée', validee: 'Vali
 	{/each}
 	{/if}
 </div>
+
+<style>
+.recipe-locked {
+	opacity: 0.65;
+	filter: saturate(0.4);
+	cursor: default;
+}
+.recipe-locked:hover {
+	border-color: var(--color-brand);
+	opacity: 0.85;
+}
+.pro-badge {
+	display: inline-block;
+	font-size: 0.65rem;
+	font-weight: 800;
+	letter-spacing: 0.04em;
+	background: var(--color-brand);
+	color: #fff;
+	padding: 1px 6px;
+	border-radius: 6px;
+	margin-left: 6px;
+	vertical-align: middle;
+}
+</style>

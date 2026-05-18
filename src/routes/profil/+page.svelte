@@ -1,6 +1,6 @@
 <script>
 import { goto } from '$app/navigation';
-import { profile, session, signOut, updateProfile } from '$lib/stores/auth.js';
+import { profile, session, signOut, updateProfile, isPro } from '$lib/stores/auth.js';
 import { stats } from '$lib/stores/progression.js';
 import { events, consentState, resetConsent } from '$lib/analytics.js';
 
@@ -145,16 +145,35 @@ async function handleSignOut() {
 		</a>
 	</div>
 
-	<!-- Plan (placeholder freemium) -->
-	<div class="card mb-3">
+	<!-- Plan freemium -->
+	<div class="card mb-3" id="plan">
 		<div class="section-title mb-2">Plan</div>
+		{#if $isPro}
 		<div style="display:flex;justify-content:space-between;align-items:center">
 			<div>
-				<div class="font-bold">Free</div>
-				<div class="text-xs text-muted">Toutes les fonctionnalités</div>
+				<div class="font-bold" style="color:var(--color-brand)">⭐ Pro</div>
+				<div class="text-xs text-muted">58 recettes · Carnet PDF · Fiches</div>
+			</div>
+			<span class="badge badge-maitrisee">Actif</span>
+		</div>
+		{:else}
+		<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+			<div>
+				<div class="font-bold">Gratuit</div>
+				<div class="text-xs text-muted">10 recettes · Mode Labo · Suivi</div>
 			</div>
 			<span class="badge badge-validee">Actif</span>
 		</div>
+		<div style="background:rgba(108,99,255,0.06);border-radius:var(--radius-md);padding:12px;border:1px solid var(--color-border)">
+			<div class="text-sm font-medium mb-1">🚀 Passer au plan Pro</div>
+			<div class="text-xs text-muted mb-2">58 recettes CAP · Carnet PDF · 50 fiches · 60 QCM</div>
+			<div style="display:flex;gap:8px">
+				<button class="btn btn-primary btn-sm" style="flex:1" disabled>4,99€/mois</button>
+				<button class="btn btn-ghost btn-sm" style="flex:1" disabled>39€/an</button>
+			</div>
+			<p class="text-xs text-muted" style="margin-top:6px;text-align:center">Bientôt disponible</p>
+		</div>
+		{/if}
 	</div>
 
 	<!-- Confidentialité -->

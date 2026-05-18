@@ -15,6 +15,23 @@ export const authLoading = writable(browser);
 
 export const isAuthenticated = derived(session, ($s) => !!$s);
 
+// Plan freemium — dérivé du profil
+export const isPro = derived(profile, ($p) => $p?.plan === 'pro' || $p?.plan === 'admin');
+
+// IDs des recettes accessibles gratuitement (slugs correspondant aux noms)
+export const FREE_RECIPE_SLUGS = new Set([
+	'creme-patissiere',
+	'creme-anglaise',
+	'creme-chantilly',
+	'pate-a-choux',
+	'pate-sablee',
+	'financier',
+	'cake-citron',
+	'pate-brisee',
+	'madeleine',
+	'meringue-francaise',
+]);
+
 let seedingPromise = null;
 
 export async function initAuth() {

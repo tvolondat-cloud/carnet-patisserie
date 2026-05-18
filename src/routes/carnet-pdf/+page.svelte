@@ -1,6 +1,7 @@
 <script>
 import { recettes } from '$lib/stores/recettes.js';
 import { progression } from '$lib/stores/progression.js';
+import { isPro } from '$lib/stores/auth.js';
 import { events } from '$lib/analytics.js';
 import recipesData from '$lib/data/recipes.json';
 
@@ -106,6 +107,24 @@ async function generatePDF() {
 	<h1 class="page-title">📄 Carnet PDF</h1>
 	<p class="page-subtitle">Exporte tes recettes au format A4 (classeur 3 trous)</p>
 
+	{#if !$isPro}
+	<!-- Paywall carnet PDF -->
+	<div class="paywall-card">
+		<div class="paywall-icon">📄</div>
+		<div class="paywall-title">Carnet PDF · Fonctionnalité Pro</div>
+		<p class="paywall-desc">
+			Le carnet imprimable avec les 58 recettes CAP (format A4, Berry Jam, classeur 3 trous)
+			est disponible avec le plan Pro.
+		</p>
+		<div class="paywall-features">
+			<span>✓ 58 recettes CAP complètes</span>
+			<span>✓ Format A4 · Marge 3 cm · Berry Jam</span>
+			<span>✓ Filtres par catégorie</span>
+		</div>
+		<a href="/profil#plan" class="btn btn-primary btn-block" style="margin-top:16px">Passer au plan Pro →</a>
+		<p class="paywall-note">7 jours d'essai gratuit · Annulable à tout moment</p>
+	</div>
+	{:else}
 	<div class="card mb-3">
 		<div class="section-title mb-3">Filtres</div>
 
@@ -145,4 +164,33 @@ async function generatePDF() {
 			Couleur catégories : Berry Jam.
 		</p>
 	</div>
+	{/if}
 </div>
+
+<style>
+.paywall-card {
+	text-align: center;
+	padding: 40px 24px;
+	background: var(--color-surface);
+	border: 2px dashed var(--color-border);
+	border-radius: var(--radius-xl);
+}
+.paywall-icon { font-size: 2.8rem; margin-bottom: 12px; }
+.paywall-title { font-size: 1.2rem; font-weight: 800; color: var(--color-text); margin-bottom: 10px; }
+.paywall-desc { font-size: 0.9rem; color: var(--color-text-2); line-height: 1.55; margin: 0 0 16px; }
+.paywall-features {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	font-size: 0.85rem;
+	color: var(--color-text-2);
+	text-align: left;
+	max-width: 260px;
+	margin: 0 auto;
+}
+.paywall-note {
+	font-size: 0.78rem;
+	color: var(--color-text-3);
+	margin: 8px 0 0;
+}
+</style>

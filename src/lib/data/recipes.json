@@ -11,71 +11,60 @@
   "categories": [
     { "id": "cremes",         "label": "Crèmes",            "emoji": "🥣" },
     { "id": "pates",          "label": "Pâtes",             "emoji": "🧈" },
+    { "id": "bases-cap",      "label": "Bases CAP",         "emoji": "📘" },
+    { "id": "biscuits",       "label": "Biscuits",          "emoji": "🍫" },
     { "id": "fours-secs",     "label": "Fours secs",        "emoji": "🍪" },
+    { "id": "gateaux-voyage", "label": "Gâteaux de voyage", "emoji": "🍰" },
+    { "id": "choux",          "label": "Pâte à choux",      "emoji": "🍮" },
+    { "id": "feuilletage",    "label": "Feuilletage",       "emoji": "📄" },
+    { "id": "tartes",         "label": "Tartes",            "emoji": "🥧" },
     { "id": "entremets",      "label": "Entremets",         "emoji": "🎂" },
     { "id": "viennoiseries",  "label": "Viennoiseries",     "emoji": "🥐" },
-    { "id": "bases-cap",      "label": "Bases CAP",         "emoji": "📘" },
-    { "id": "gateaux-voyage", "label": "Gâteaux de voyage", "emoji": "🍰" },
-    { "id": "tartes",         "label": "Tartes",            "emoji": "🥧" },
-    { "id": "feuilletage",    "label": "Feuilletage",       "emoji": "📄" },
-    { "id": "choux",          "label": "Pâte à choux",      "emoji": "🍮" },
-    { "id": "biscuits",       "label": "Biscuits",          "emoji": "🍫" }
+    { "id": "glacages",       "label": "Glaçages",          "emoji": "✨" }
   ],
 
   "recettes": [
-
-    
-    
-    
     {
       "id": "creme-patissiere",
       "nom": "Crème pâtissière",
       "categorie": "cremes",
       "competences": ["cuissons", "textures"],
-      "temps": 25,
-      "difficulte": 2,
-      "ep": "EP1",
-      "prerequis": [],
+      "temps": 25, "difficulte": 2, "ep": "EP1", "prerequis": [],
       "ingredients": [
-        { "nom": "Lait entier",     "quantite": 500, "unite": "g" },
-        { "nom": "Sucre",           "quantite": 100, "unite": "g" },
-        { "nom": "Jaunes d'œufs",  "quantite": 80,  "unite": "g" },
-        { "nom": "Fécule de maïs", "quantite": 40,  "unite": "g" },
-        { "nom": "Beurre",          "quantite": 30,  "unite": "g" },
-        { "nom": "Vanille",         "quantite": 1,   "unite": "gousse" }
+        { "nom": "Lait entier",    "quantite": 1000, "unite": "g" },
+        { "nom": "Sucre",          "quantite": 200,  "unite": "g" },
+        { "nom": "Jaunes d'œufs",  "quantite": 160,  "unite": "g" },
+        { "nom": "Fécule de maïs", "quantite": 80,   "unite": "g" },
+        { "nom": "Beurre",         "quantite": 60,   "unite": "g" },
+        { "nom": "Vanille",        "quantite": 1,    "unite": "gousse" }
       ],
       "etapes": [
         { "ordre": 1, "description": "Faire bouillir le lait avec la gousse de vanille fendue et grattée." },
         { "ordre": 2, "description": "Blanchir les jaunes avec le sucre, incorporer la fécule tamisée." },
         { "ordre": 3, "description": "Verser le lait bouillant sur les jaunes en fouettant, reverser dans la casserole." },
-        { "ordre": 4, "description": "Cuire à feu moyen en remuant jusqu'à épaississement (85°C, 1 min)." },
+        { "ordre": 4, "description": "Cuire à feu moyen en remuant jusqu'à pasteurisation (85°C, 1 min)." },
         { "ordre": 5, "description": "Incorporer le beurre hors du feu, filmer au contact, refroidir rapidement." }
       ],
       "quiz": [
         { "question": "À quelle température pasteuriser la crème pâtissière ?", "reponses": ["85°C pendant 1 min", "70°C pendant 30 sec", "100°C jusqu'à ébullition"], "bonne": 0 },
-        { "question": "Pourquoi tamiser la fécule avant incorporation ?", "reponses": ["Éviter les grumeaux", "Aérer la préparation", "Accélérer la cuisson"], "bonne": 0 },
-        { "question": "Comment éviter la formation d'une peau en refroidissant ?", "reponses": ["Filmer au contact", "Couvrir avec un torchon", "Refroidir à l'air libre"], "bonne": 0 },
+        { "question": "Pourquoi filmer au contact ?", "reponses": ["Éviter la formation d'une peau", "Conserver plus longtemps", "Accélérer le refroidissement"], "bonne": 0 },
         { "question": "Rôle du beurre ajouté hors du feu ?", "reponses": ["Brillance et onctuosité", "Stopper la cuisson", "Épaissir la crème"], "bonne": 0 }
       ],
       "techniques_cap": ["Crème pâtissière", "Pasteurisation", "Filmage au contact"],
       "conseils": "Le filmage au contact est indispensable pour éviter la formation d'une peau.",
       "chrono_cible": 20
     },
-
     {
       "id": "creme-anglaise",
       "nom": "Crème anglaise",
       "categorie": "cremes",
       "competences": ["cuissons", "textures"],
-      "temps": 20,
-      "difficulte": 2,
-      "ep": "EP1",
-      "prerequis": [],
+      "temps": 20, "difficulte": 2, "ep": "EP1", "prerequis": [],
       "ingredients": [
-        { "nom": "Lait entier",    "quantite": 500, "unite": "g" },
-        { "nom": "Sucre",          "quantite": 100, "unite": "g" },
+        { "nom": "Lait entier",   "quantite": 500, "unite": "g" },
+        { "nom": "Sucre",         "quantite": 100, "unite": "g" },
         { "nom": "Jaunes d'œufs", "quantite": 120, "unite": "g" },
-        { "nom": "Vanille",        "quantite": 1,   "unite": "gousse" }
+        { "nom": "Vanille",       "quantite": 1,   "unite": "gousse" }
       ],
       "etapes": [
         { "ordre": 1, "description": "Faire infuser la vanille dans le lait chaud 15 min." },
@@ -91,20 +80,16 @@
       "conseils": "Ne jamais dépasser 84°C sous peine de coagulation des jaunes.",
       "chrono_cible": 18
     },
-
     {
       "id": "creme-chantilly",
       "nom": "Crème chantilly",
       "categorie": "cremes",
       "competences": ["textures", "techniques"],
-      "temps": 10,
-      "difficulte": 1,
-      "ep": "EP1",
-      "prerequis": [],
+      "temps": 10, "difficulte": 1, "ep": "EP1", "prerequis": [],
       "ingredients": [
         { "nom": "Crème liquide 35% MG", "quantite": 500, "unite": "g" },
-        { "nom": "Sucre glace",           "quantite": 50,  "unite": "g" },
-        { "nom": "Vanille liquide",        "quantite": 5,   "unite": "g" }
+        { "nom": "Sucre glace",          "quantite": 50,  "unite": "g" },
+        { "nom": "Vanille liquide",      "quantite": 5,   "unite": "g" }
       ],
       "etapes": [
         { "ordre": 1, "description": "Refroidir le bol et les fouets au congélateur 15 min." },
@@ -118,127 +103,531 @@
       "conseils": "La crème doit être à moins de 4°C. Surveiller : elle peut trancher rapidement.",
       "chrono_cible": 8
     },
-
-    
-    
-    
     {
-      "id": "pate-a-choux",
-      "nom": "Pâte à choux",
-      "categorie": "choux",
-      "competences": ["cuissons", "techniques", "pesees"],
-      "temps": 35,
-      "difficulte": 3,
-      "ep": "EP1",
-      "prerequis": [],
+      "id": "creme-mousseline",
+      "nom": "Crème mousseline",
+      "categorie": "cremes",
+      "competences": ["textures", "assemblages"],
+      "temps": 15, "difficulte": 3, "ep": "EP1", "prerequis": ["creme-patissiere"],
       "ingredients": [
-        { "nom": "Eau",          "quantite": 250, "unite": "g" },
-        { "nom": "Beurre",       "quantite": 100, "unite": "g" },
-        { "nom": "Farine T55",   "quantite": 150, "unite": "g" },
-        { "nom": "Œufs entiers", "quantite": 5,   "unite": "u" },
-        { "nom": "Sel",          "quantite": 4,   "unite": "g" },
-        { "nom": "Sucre",        "quantite": 5,   "unite": "g" }
+        { "nom": "Crème pâtissière", "quantite": 500, "unite": "g" },
+        { "nom": "Beurre pommade",   "quantite": 250, "unite": "g" }
       ],
       "etapes": [
-        { "ordre": 1, "description": "Porter à ébullition l'eau, le beurre, le sel et le sucre." },
-        { "ordre": 2, "description": "Ajouter la farine d'un coup hors du feu, mélanger vigoureusement." },
-        { "ordre": 3, "description": "Remettre sur le feu pour dessécher la panade (elle doit se décoller des parois)." },
-        { "ordre": 4, "description": "Incorporer les œufs un par un hors du feu jusqu'à consistance ruban." },
-        { "ordre": 5, "description": "Pocher, dorer, cuire 28–32 min à 180°C sans ouvrir le four." }
+        { "ordre": 1, "description": "Tempérer la crème pâtissière (même T° que le beurre)." },
+        { "ordre": 2, "description": "Crémer le beurre pommade au fouet jusqu'à blanchiment." },
+        { "ordre": 3, "description": "Incorporer la crème pâtissière en 3 fois en foisonnant." }
       ],
       "quiz": [
-        { "question": "Comment savoir que la panade est bien desséchée ?", "reponses": ["Elle se décolle des parois et forme une boule", "Elle est brillante", "Elle fume abondamment"], "bonne": 0 },
-        { "question": "Pourquoi ne pas ouvrir le four pendant les 15 premières minutes ?", "reponses": ["Les choux retomberaient", "Risque de brûlure", "La porte reste bloquée"], "bonne": 0 },
-        { "question": "La pâte à choux est prête quand elle forme…", "reponses": ["Un ruban souple", "Une boule ferme", "Une masse liquide"], "bonne": 0 }
+        { "question": "Pourquoi tempérer la crème pâtissière avant incorporation ?", "reponses": ["Éviter que le beurre se fige ou tranche", "Pour la conserver", "Pour l'aérer"], "bonne": 0 }
       ],
-      "techniques_cap": ["Pâte à choux", "Desséchage", "Pochage"],
-      "conseils": "Ne jamais ouvrir le four en cours de cuisson. La PAC doit former un ruban souple — ni trop ferme ni trop liquide.",
-      "chrono_cible": 30
+      "techniques_cap": ["Crème mousseline", "Foisonnage"],
+      "conseils": "Beurre et crème pâtissière à 20–22°C. Si la crème tranche, réchauffer légèrement le bol.",
+      "chrono_cible": 12
+    },
+    {
+      "id": "creme-diplomate",
+      "nom": "Crème diplomate",
+      "categorie": "cremes",
+      "competences": ["textures", "assemblages"],
+      "temps": 20, "difficulte": 3, "ep": "EP2", "prerequis": ["creme-patissiere", "creme-chantilly"],
+      "ingredients": [
+        { "nom": "Crème pâtissière",       "quantite": 500, "unite": "g" },
+        { "nom": "Gélatine (2 feuilles)",  "quantite": 4,   "unite": "g" },
+        { "nom": "Crème montée souple",    "quantite": 300, "unite": "g" }
+      ],
+      "etapes": [
+        { "ordre": 1, "description": "Réhydrater la gélatine dans l'eau froide 10 min." },
+        { "ordre": 2, "description": "Faire fondre la gélatine dans une petite portion de crème pâtissière chaude." },
+        { "ordre": 3, "description": "Incorporer dans le reste de crème pâtissière à 30°C." },
+        { "ordre": 4, "description": "Détendre avec 1/3 de crème montée, incorporer le reste délicatement." }
+      ],
+      "quiz": [
+        { "question": "Quel est l'intérêt de la gélatine dans la diplomate ?", "reponses": ["Tenue après foisonnage", "Allonger la conservation", "Goûter plus sucré"], "bonne": 0 }
+      ],
+      "techniques_cap": ["Gélatine", "Foisonnage", "Incorporation délicate"],
+      "conseils": "Utiliser rapidement après foisonnage : la gélatine prend en 15–20 min.",
+      "chrono_cible": 18
+    },
+    {
+      "id": "creme-au-beurre",
+      "nom": "Crème au beurre",
+      "categorie": "cremes",
+      "competences": ["cuissons", "techniques"],
+      "temps": 25, "difficulte": 4, "ep": "EP2", "prerequis": [],
+      "ingredients": [
+        { "nom": "Beurre pommade", "quantite": 500, "unite": "g" },
+        { "nom": "Sucre",          "quantite": 200, "unite": "g" },
+        { "nom": "Eau",            "quantite": 60,  "unite": "g" },
+        { "nom": "Blancs d'œufs",  "quantite": 100, "unite": "g" }
+      ],
+      "etapes": [
+        { "ordre": 1, "description": "Cuire le sirop sucre + eau jusqu'à 121°C." },
+        { "ordre": 2, "description": "Monter les blancs en neige souple." },
+        { "ordre": 3, "description": "Verser le sirop en filet sur les blancs, fouetter jusqu'au refroidissement." },
+        { "ordre": 4, "description": "Crémer le beurre pommade. Incorporer la meringue italienne progressivement." }
+      ],
+      "quiz": [
+        { "question": "À quelle température cuire le sirop pour la crème au beurre ?", "reponses": ["121°C", "100°C", "140°C"], "bonne": 0 },
+        { "question": "Pourquoi la meringue doit-elle être froide avant d'ajouter le beurre ?", "reponses": ["Sinon le beurre fond et la crème tranche", "Pour gagner du temps", "Pour la rendre plus aérée"], "bonne": 0 }
+      ],
+      "techniques_cap": ["Sirop 121°C", "Meringue italienne", "Crème au beurre"],
+      "conseils": "Si la crème tranche, fouetter au chalumeau ou bain-marie tiède pour rattraper.",
+      "chrono_cible": 22
+    },
+    {
+      "id": "creme-amandes",
+      "nom": "Crème d'amandes",
+      "categorie": "cremes",
+      "competences": ["pesees", "techniques"],
+      "temps": 12, "difficulte": 2, "ep": "EP1", "prerequis": [],
+      "ingredients": [
+        { "nom": "Beurre pommade",    "quantite": 125, "unite": "g" },
+        { "nom": "Sucre glace",       "quantite": 125, "unite": "g" },
+        { "nom": "Poudre d'amandes",  "quantite": 125, "unite": "g" },
+        { "nom": "Œufs entiers",      "quantite": 2,   "unite": "u" },
+        { "nom": "Maïzena",           "quantite": 15,  "unite": "g" },
+        { "nom": "Rhum ambré",        "quantite": 10,  "unite": "g" }
+      ],
+      "etapes": [
+        { "ordre": 1, "description": "Crémer le beurre pommade avec le sucre glace." },
+        { "ordre": 2, "description": "Ajouter la poudre d'amandes, mélanger." },
+        { "ordre": 3, "description": "Incorporer les œufs un par un, puis la maïzena et le rhum." }
+      ],
+      "quiz": [
+        { "question": "Pourquoi ne pas trop foisonner la crème d'amandes ?", "reponses": ["Elle gonflerait trop à la cuisson", "Elle perdrait son goût", "Elle changerait de couleur"], "bonne": 0 }
+      ],
+      "techniques_cap": ["Crémage", "Crème d'amandes"],
+      "conseils": "Travailler à la maryse, pas au fouet : la crème ne doit pas être trop aérée.",
+      "chrono_cible": 10
+    },
+    {
+      "id": "frangipane",
+      "nom": "Frangipane",
+      "categorie": "cremes",
+      "competences": ["assemblages", "pesees"],
+      "temps": 8, "difficulte": 2, "ep": "EP1", "prerequis": ["creme-amandes", "creme-patissiere"],
+      "ingredients": [
+        { "nom": "Crème d'amandes",  "quantite": 300, "unite": "g" },
+        { "nom": "Crème pâtissière", "quantite": 150, "unite": "g" }
+      ],
+      "etapes": [
+        { "ordre": 1, "description": "Tempérer la crème pâtissière (sortir 30 min avant)." },
+        { "ordre": 2, "description": "Détendre la crème pâtissière au fouet." },
+        { "ordre": 3, "description": "Incorporer la crème d'amandes délicatement à la maryse." }
+      ],
+      "quiz": [
+        { "question": "Ratio classique crème d'amandes / crème pâtissière ?", "reponses": ["2/3 amandes — 1/3 pâtissière", "1/2 — 1/2", "1/3 — 2/3"], "bonne": 0 }
+      ],
+      "techniques_cap": ["Frangipane", "Mélange à froid"],
+      "conseils": "Utilisée pour la galette des rois. La crème pâtissière apporte le moelleux.",
+      "chrono_cible": 6
+    },
+    {
+      "id": "ganache-chocolat",
+      "nom": "Ganache chocolat noir",
+      "categorie": "cremes",
+      "competences": ["cuissons", "textures"],
+      "temps": 15, "difficulte": 2, "ep": "EP2", "prerequis": [],
+      "ingredients": [
+        { "nom": "Chocolat noir 65%",     "quantite": 400, "unite": "g" },
+        { "nom": "Crème liquide 35% MG",  "quantite": 400, "unite": "g" },
+        { "nom": "Beurre",                "quantite": 40,  "unite": "g" }
+      ],
+      "etapes": [
+        { "ordre": 1, "description": "Hacher le chocolat finement." },
+        { "ordre": 2, "description": "Porter la crème à ébullition." },
+        { "ordre": 3, "description": "Verser sur le chocolat en 3 fois en émulsionnant au centre." },
+        { "ordre": 4, "description": "Incorporer le beurre à 40°C au mixeur plongeant." }
+      ],
+      "quiz": [
+        { "question": "Pourquoi verser la crème en 3 fois sur le chocolat ?", "reponses": ["Pour réussir l'émulsion", "Pour refroidir progressivement", "Pour éviter les grumeaux de cacao"], "bonne": 0 }
+      ],
+      "techniques_cap": ["Ganache", "Émulsion", "Mixeur plongeant"],
+      "conseils": "L'émulsion réussie a un aspect brillant et lisse. Si elle tranche, mixer au mixeur plongeant.",
+      "chrono_cible": 12
+    },
+    {
+      "id": "creme-chiboust",
+      "nom": "Crème chiboust",
+      "categorie": "cremes",
+      "competences": ["cuissons", "textures", "techniques"],
+      "temps": 30, "difficulte": 4, "ep": "EP2", "prerequis": ["creme-patissiere"],
+      "ingredients": [
+        { "nom": "Crème pâtissière",       "quantite": 500, "unite": "g" },
+        { "nom": "Gélatine (3 feuilles)",  "quantite": 6,   "unite": "g" },
+        { "nom": "Blancs d'œufs",          "quantite": 150, "unite": "g" },
+        { "nom": "Sucre",                  "quantite": 300, "unite": "g" },
+        { "nom": "Eau",                    "quantite": 90,  "unite": "g" }
+      ],
+      "etapes": [
+        { "ordre": 1, "description": "Réhydrater la gélatine, l'incorporer dans la crème pâtissière chaude." },
+        { "ordre": 2, "description": "Cuire le sirop sucre + eau à 121°C." },
+        { "ordre": 3, "description": "Monter les blancs et verser le sirop en filet : meringue italienne." },
+        { "ordre": 4, "description": "Incorporer 1/3 de meringue dans la pâtissière puis le reste délicatement." }
+      ],
+      "quiz": [
+        { "question": "Qu'est-ce qui distingue la chiboust de la diplomate ?", "reponses": ["Meringue italienne au lieu de crème montée", "Plus de gélatine", "Pas de sucre"], "bonne": 0 }
+      ],
+      "techniques_cap": ["Meringue italienne", "Gélatine", "Crème chiboust"],
+      "conseils": "Utilisée pour le Saint-honoré. Travailler vite : la gélatine prend en 10–15 min.",
+      "chrono_cible": 25
     },
 
     {
-      "id": "pate-sable",
+      "id": "pate-sablee",
       "nom": "Pâte sablée",
       "categorie": "pates",
       "competences": ["pesees", "techniques"],
-      "temps": 20,
-      "difficulte": 2,
-      "ep": "EP1",
-      "prerequis": [],
+      "temps": 20, "difficulte": 2, "ep": "EP1", "prerequis": [],
       "ingredients": [
-        { "nom": "Farine T55",    "quantite": 250, "unite": "g" },
-        { "nom": "Beurre",        "quantite": 125, "unite": "g" },
-        { "nom": "Sucre glace",   "quantite": 100, "unite": "g" },
-        { "nom": "Œuf entier",    "quantite": 1,   "unite": "u" },
-        { "nom": "Poudre amande", "quantite": 30,  "unite": "g" },
-        { "nom": "Sel",           "quantite": 2,   "unite": "g" }
+        { "nom": "Farine T55",        "quantite": 500, "unite": "g" },
+        { "nom": "Beurre froid",      "quantite": 250, "unite": "g" },
+        { "nom": "Sucre glace",       "quantite": 200, "unite": "g" },
+        { "nom": "Poudre d'amandes",  "quantite": 60,  "unite": "g" },
+        { "nom": "Œufs entiers",      "quantite": 2,   "unite": "u" },
+        { "nom": "Sel",               "quantite": 4,   "unite": "g" }
       ],
       "etapes": [
-        { "ordre": 1, "description": "Sabler la farine avec le beurre froid en dés jusqu'à obtenir une texture sableuse." },
-        { "ordre": 2, "description": "Ajouter le sucre glace, la poudre d'amande et le sel, mélanger." },
-        { "ordre": 3, "description": "Incorporer l'œuf, fraser rapidement sans corser." },
-        { "ordre": 4, "description": "Bouler, filmer, reposer 30 min au froid avant utilisation." }
+        { "ordre": 1, "description": "Sabler la farine avec le beurre froid en dés." },
+        { "ordre": 2, "description": "Ajouter sucre glace, poudre d'amandes et sel, mélanger." },
+        { "ordre": 3, "description": "Incorporer les œufs, fraser rapidement sans corser." },
+        { "ordre": 4, "description": "Bouler, filmer, reposer 30 min au froid." }
       ],
       "quiz": [
-        { "question": "Pourquoi sabler la farine avec le beurre avant l'œuf ?", "reponses": ["Pour enrober le gluten et éviter l'élasticité", "Pour homogénéiser la couleur", "Pour accélérer la préparation"], "bonne": 0 }
+        { "question": "Pourquoi sabler avant d'ajouter les œufs ?", "reponses": ["Enrober le gluten et éviter l'élasticité", "Homogénéiser la couleur", "Gagner du temps"], "bonne": 0 }
       ],
       "techniques_cap": ["Sablage", "Fraser", "Repos au froid"],
-      "conseils": "Ne pas trop travailler la pâte après ajout de l'œuf pour éviter de la rendre élastique.",
+      "conseils": "Ne pas trop travailler la pâte après ajout de l'œuf.",
       "chrono_cible": 15
     },
-
     {
-      "id": "pate-levee-feuilletee",
-      "nom": "Pâte levée feuilletée",
-      "categorie": "viennoiseries",
-      "competences": ["cuissons", "techniques", "assemblages"],
-      "temps": 180,
-      "difficulte": 5,
-      "ep": "EP1",
-      "prerequis": ["pate-sable"],
+      "id": "pate-sucree",
+      "nom": "Pâte sucrée",
+      "categorie": "pates",
+      "competences": ["pesees", "techniques"],
+      "temps": 20, "difficulte": 2, "ep": "EP1", "prerequis": [],
       "ingredients": [
-        { "nom": "Farine T45",          "quantite": 500, "unite": "g" },
-        { "nom": "Lait entier",          "quantite": 250, "unite": "g" },
-        { "nom": "Levure fraîche",       "quantite": 20,  "unite": "g" },
-        { "nom": "Sucre",               "quantite": 50,  "unite": "g" },
-        { "nom": "Sel",                 "quantite": 10,  "unite": "g" },
-        { "nom": "Beurre de détrempe",  "quantite": 50,  "unite": "g" },
-        { "nom": "Beurre de tourage",   "quantite": 250, "unite": "g" }
+        { "nom": "Farine T55",        "quantite": 500, "unite": "g" },
+        { "nom": "Beurre pommade",    "quantite": 250, "unite": "g" },
+        { "nom": "Sucre glace",       "quantite": 200, "unite": "g" },
+        { "nom": "Poudre d'amandes",  "quantite": 60,  "unite": "g" },
+        { "nom": "Œufs entiers",      "quantite": 2,   "unite": "u" },
+        { "nom": "Sel",               "quantite": 4,   "unite": "g" },
+        { "nom": "Vanille",           "quantite": 5,   "unite": "g" }
       ],
       "etapes": [
-        { "ordre": 1, "description": "Pétrir la détrempe sans le beurre de tourage. Pointer 30 min." },
-        { "ordre": 2, "description": "Abaisser la détrempe, enfermer le beurre de tourage (14–16°C)." },
-        { "ordre": 3, "description": "Donner 3 tours simples avec repos de 20 min entre chaque au froid." },
-        { "ordre": 4, "description": "Abaisser à 3 mm, détailler, façonner, apprêter 1h30." },
-        { "ordre": 5, "description": "Dorer, enfourner 18–22 min à 170°C four ventilé." }
+        { "ordre": 1, "description": "Crémer le beurre pommade avec le sucre glace, la vanille et le sel." },
+        { "ordre": 2, "description": "Incorporer les œufs, puis la poudre d'amandes." },
+        { "ordre": 3, "description": "Ajouter la farine en une seule fois, fraser." },
+        { "ordre": 4, "description": "Bouler, filmer, reposer 1h au froid." }
       ],
       "quiz": [
-        { "question": "Combien de tours simples pour une PLF classique ?", "reponses": ["3 tours simples", "5 tours simples", "1 tour double uniquement"], "bonne": 0 },
-        { "question": "À quelle température doit être le beurre de tourage ?", "reponses": ["14–16°C (même consistance que la détrempe)", "Sortie du frigo direct", "Température ambiante"], "bonne": 0 }
+        { "question": "Quelle technique distingue la pâte sucrée de la sablée ?", "reponses": ["Crémage du beurre pommade", "Cuisson plus longue", "Plus de sucre"], "bonne": 0 }
       ],
-      "techniques_cap": ["Tourage", "Feuilletage", "Pointage", "Apprêt"],
-      "conseils": "Le beurre de tourage et la détrempe doivent avoir la même consistance pour un feuilletage régulier.",
+      "techniques_cap": ["Crémage", "Fraser"],
+      "conseils": "Plus friable et goûteuse que la sablée. Idéale pour fonds de tartes.",
+      "chrono_cible": 18
+    },
+    {
+      "id": "pate-a-foncer",
+      "nom": "Pâte à foncer",
+      "categorie": "pates",
+      "competences": ["pesees", "techniques"],
+      "temps": 18, "difficulte": 2, "ep": "EP1", "prerequis": [],
+      "ingredients": [
+        { "nom": "Farine T55",   "quantite": 500, "unite": "g" },
+        { "nom": "Beurre froid", "quantite": 250, "unite": "g" },
+        { "nom": "Eau froide",   "quantite": 100, "unite": "g" },
+        { "nom": "Sucre",        "quantite": 10,  "unite": "g" },
+        { "nom": "Sel",          "quantite": 10,  "unite": "g" },
+        { "nom": "Œufs",         "quantite": 2,   "unite": "u" }
+      ],
+      "etapes": [
+        { "ordre": 1, "description": "Sabler rapidement la farine et le beurre froid." },
+        { "ordre": 2, "description": "Mélanger eau froide, œufs, sucre et sel." },
+        { "ordre": 3, "description": "Incorporer le liquide au sablage, fraser rapidement sans corps." },
+        { "ordre": 4, "description": "Filmer et reposer 30 min au froid." }
+      ],
+      "quiz": [
+        { "question": "Pour quel type de tarte utilise-t-on la pâte à foncer ?", "reponses": ["Tartes Tatin et tartes salées", "Tartes au chocolat", "Tartes meringuées"], "bonne": 0 }
+      ],
+      "techniques_cap": ["Sablage rapide", "Fraser"],
+      "conseils": "Moins sucrée que la sablée. Tient bien la cuisson longue.",
+      "chrono_cible": 15
+    },
+    {
+      "id": "pate-brisee",
+      "nom": "Pâte brisée",
+      "categorie": "pates",
+      "competences": ["pesees", "techniques"],
+      "temps": 15, "difficulte": 1, "ep": "EP1", "prerequis": [],
+      "ingredients": [
+        { "nom": "Farine T55",   "quantite": 500, "unite": "g" },
+        { "nom": "Beurre froid", "quantite": 250, "unite": "g" },
+        { "nom": "Eau froide",   "quantite": 100, "unite": "g" },
+        { "nom": "Sel",          "quantite": 10,  "unite": "g" }
+      ],
+      "etapes": [
+        { "ordre": 1, "description": "Sabler la farine avec le beurre froid en dés." },
+        { "ordre": 2, "description": "Dissoudre le sel dans l'eau froide." },
+        { "ordre": 3, "description": "Incorporer l'eau salée, fraser sans corser." },
+        { "ordre": 4, "description": "Bouler, filmer, reposer 30 min au froid." }
+      ],
+      "quiz": [
+        { "question": "Pourquoi l'eau doit-elle être froide ?", "reponses": ["Pour ne pas faire fondre le beurre", "Pour gagner du temps", "Pour la conservation"], "bonne": 0 }
+      ],
+      "techniques_cap": ["Sablage", "Fraser"],
+      "conseils": "La plus simple. Idéale pour quiches, Tatin et tartes rustiques.",
+      "chrono_cible": 12
+    },
+    {
+      "id": "pate-feuilletee",
+      "nom": "Pâte feuilletée",
+      "categorie": "pates",
+      "competences": ["cuissons", "techniques", "organisation"],
+      "temps": 180, "difficulte": 5, "ep": "EP1", "prerequis": [],
+      "ingredients": [
+        { "nom": "Farine T55",          "quantite": 500, "unite": "g" },
+        { "nom": "Eau froide",          "quantite": 250, "unite": "g" },
+        { "nom": "Sel",                 "quantite": 12,  "unite": "g" },
+        { "nom": "Beurre fondu (détrempe)", "quantite": 50, "unite": "g" },
+        { "nom": "Beurre sec de tourage", "quantite": 350, "unite": "g" }
+      ],
+      "etapes": [
+        { "ordre": 1, "description": "Réaliser la détrempe (farine + eau + sel + beurre fondu). Reposer 30 min." },
+        { "ordre": 2, "description": "Abaisser la détrempe, enfermer le beurre de tourage (14–16°C)." },
+        { "ordre": 3, "description": "Donner 6 tours simples (ou 4 tours doubles)." },
+        { "ordre": 4, "description": "Reposer 20 min entre chaque double tour au froid." },
+        { "ordre": 5, "description": "Abaisser à 3 mm, piquer, détailler." }
+      ],
+      "quiz": [
+        { "question": "À quelle température doit être le beurre de tourage ?", "reponses": ["14–16°C", "Sortie du frigo", "Température ambiante"], "bonne": 0 },
+        { "question": "Combien de tours simples pour une feuilletée classique ?", "reponses": ["6 tours simples", "3 tours simples", "10 tours"], "bonne": 0 }
+      ],
+      "techniques_cap": ["Détrempe", "Tourage", "Feuilletage"],
+      "conseils": "Détrempe et beurre à la même consistance = feuilletage régulier.",
       "chrono_cible": 150
     },
 
-    
-    
-    
+    {
+      "id": "meringue-francaise",
+      "nom": "Meringue française",
+      "categorie": "bases-cap",
+      "competences": ["cuissons", "techniques"],
+      "temps": 130, "difficulte": 1, "ep": "EP1", "prerequis": [],
+      "ingredients": [
+        { "nom": "Blancs d'œufs", "quantite": 100, "unite": "g" },
+        { "nom": "Sucre semoule", "quantite": 100, "unite": "g" },
+        { "nom": "Sucre glace",   "quantite": 100, "unite": "g" }
+      ],
+      "etapes": [
+        { "ordre": 1, "description": "Monter les blancs à vitesse moyenne." },
+        { "ordre": 2, "description": "Serrer progressivement avec le sucre semoule." },
+        { "ordre": 3, "description": "Incorporer le sucre glace tamisé à la maryse." },
+        { "ordre": 4, "description": "Pocher et cuire 2h à 90°C." }
+      ],
+      "quiz": [
+        { "question": "À quelle température cuire la meringue française ?", "reponses": ["90°C pendant 2h", "180°C pendant 20 min", "120°C pendant 1h"], "bonne": 0 }
+      ],
+      "techniques_cap": ["Foisonnage", "Meringue française", "Cuisson lente"],
+      "conseils": "Ne jamais ouvrir le four. La meringue doit sécher, pas cuire.",
+      "chrono_cible": 15
+    },
+    {
+      "id": "meringue-suisse",
+      "nom": "Meringue suisse",
+      "categorie": "bases-cap",
+      "competences": ["cuissons", "techniques"],
+      "temps": 25, "difficulte": 2, "ep": "EP1", "prerequis": [],
+      "ingredients": [
+        { "nom": "Blancs d'œufs", "quantite": 100, "unite": "g" },
+        { "nom": "Sucre",         "quantite": 200, "unite": "g" }
+      ],
+      "etapes": [
+        { "ordre": 1, "description": "Mélanger blancs et sucre dans un cul-de-poule." },
+        { "ordre": 2, "description": "Chauffer au bain-marie jusqu'à 50–55°C en fouettant." },
+        { "ordre": 3, "description": "Retirer du feu, monter au batteur jusqu'au refroidissement complet." }
+      ],
+      "quiz": [
+        { "question": "Température cible au bain-marie pour la meringue suisse ?", "reponses": ["50–55°C", "80°C", "30°C"], "bonne": 0 }
+      ],
+      "techniques_cap": ["Bain-marie", "Meringue suisse"],
+      "conseils": "Très ferme, utilisée pour décors et sujets en meringue.",
+      "chrono_cible": 20
+    },
+    {
+      "id": "meringue-italienne",
+      "nom": "Meringue italienne",
+      "categorie": "bases-cap",
+      "competences": ["cuissons", "techniques"],
+      "temps": 20, "difficulte": 3, "ep": "EP1", "prerequis": [],
+      "ingredients": [
+        { "nom": "Blancs d'œufs", "quantite": 100, "unite": "g" },
+        { "nom": "Sucre",         "quantite": 200, "unite": "g" },
+        { "nom": "Eau",           "quantite": 60,  "unite": "g" }
+      ],
+      "etapes": [
+        { "ordre": 1, "description": "Cuire sucre + eau jusqu'à 121°C." },
+        { "ordre": 2, "description": "Démarrer les blancs en neige souple en parallèle." },
+        { "ordre": 3, "description": "Verser le sirop en filet sur les blancs en mouvement." },
+        { "ordre": 4, "description": "Fouetter jusqu'au refroidissement complet." }
+      ],
+      "quiz": [
+        { "question": "Température du sirop pour la meringue italienne ?", "reponses": ["121°C", "100°C", "140°C"], "bonne": 0 }
+      ],
+      "techniques_cap": ["Sirop 121°C", "Meringue italienne"],
+      "conseils": "Très stable. Utilisée pour macarons, mousses, crème au beurre.",
+      "chrono_cible": 18
+    },
+    {
+      "id": "biscuit-joconde",
+      "nom": "Biscuit Joconde",
+      "categorie": "bases-cap",
+      "competences": ["cuissons", "techniques", "assemblages"],
+      "temps": 25, "difficulte": 3, "ep": "EP2", "prerequis": [],
+      "ingredients": [
+        { "nom": "Œufs entiers",      "quantite": 6,   "unite": "u" },
+        { "nom": "Poudre d'amandes",  "quantite": 150, "unite": "g" },
+        { "nom": "Sucre glace",       "quantite": 150, "unite": "g" },
+        { "nom": "Farine T55",        "quantite": 40,  "unite": "g" },
+        { "nom": "Blancs d'œufs",     "quantite": 150, "unite": "g" },
+        { "nom": "Sucre",             "quantite": 15,  "unite": "g" },
+        { "nom": "Beurre fondu",      "quantite": 30,  "unite": "g" }
+      ],
+      "etapes": [
+        { "ordre": 1, "description": "Monter les blancs avec le sucre (meringue française légère)." },
+        { "ordre": 2, "description": "Blanchir œufs entiers + sucre glace + poudre d'amande 5 min au fouet." },
+        { "ordre": 3, "description": "Incorporer la farine, puis les blancs montés délicatement." },
+        { "ordre": 4, "description": "Ajouter le beurre fondu tiède en dernier." },
+        { "ordre": 5, "description": "Étaler sur silpat, cuire 10–12 min à 200°C." }
+      ],
+      "quiz": [
+        { "question": "Comment incorporer les blancs montés ?", "reponses": ["En soulevant de bas en haut", "Au fouet électrique", "Vigoureusement"], "bonne": 0 }
+      ],
+      "techniques_cap": ["Biscuit Joconde", "Meringue française", "Incorporation blancs"],
+      "conseils": "Le beurre fondu s'incorpore en dernier pour ne pas casser les blancs.",
+      "chrono_cible": 20
+    },
+
+    {
+      "id": "genoise",
+      "nom": "Génoise",
+      "categorie": "biscuits",
+      "competences": ["cuissons", "techniques"],
+      "temps": 35, "difficulte": 3, "ep": "EP2", "prerequis": [],
+      "ingredients": [
+        { "nom": "Œufs entiers",  "quantite": 6,   "unite": "u" },
+        { "nom": "Sucre",         "quantite": 180, "unite": "g" },
+        { "nom": "Farine T55",    "quantite": 180, "unite": "g" },
+        { "nom": "Beurre fondu",  "quantite": 50,  "unite": "g" }
+      ],
+      "etapes": [
+        { "ordre": 1, "description": "Monter œufs + sucre au bain-marie jusqu'à 50°C." },
+        { "ordre": 2, "description": "Foisonner hors du feu jusqu'au ruban complet." },
+        { "ordre": 3, "description": "Incorporer la farine tamisée par mouvements enveloppants." },
+        { "ordre": 4, "description": "Ajouter le beurre fondu tiède en dernier." },
+        { "ordre": 5, "description": "Cuire 20–25 min à 175°C dans un cercle beurré-fariné." }
+      ],
+      "quiz": [
+        { "question": "Test du ruban : qu'observe-t-on ?", "reponses": ["L'appareil retombe en ruban lisse et continu", "Une mousse compacte", "Un appareil liquide"], "bonne": 0 }
+      ],
+      "techniques_cap": ["Ruban", "Bain-marie", "Génoise"],
+      "conseils": "Base de nombreux entremets (fraisier, moka, forêt-noire).",
+      "chrono_cible": 30
+    },
+    {
+      "id": "biscuit-cuillere",
+      "nom": "Biscuit cuillère",
+      "categorie": "biscuits",
+      "competences": ["cuissons", "techniques"],
+      "temps": 25, "difficulte": 3, "ep": "EP2", "prerequis": [],
+      "ingredients": [
+        { "nom": "Jaunes d'œufs",         "quantite": 120, "unite": "g" },
+        { "nom": "Sucre (jaunes)",        "quantite": 70,  "unite": "g" },
+        { "nom": "Blancs d'œufs",         "quantite": 160, "unite": "g" },
+        { "nom": "Sucre (blancs)",        "quantite": 70,  "unite": "g" },
+        { "nom": "Farine T55",            "quantite": 130, "unite": "g" },
+        { "nom": "Sucre glace (finition)","quantite": 30,  "unite": "g" }
+      ],
+      "etapes": [
+        { "ordre": 1, "description": "Blanchir les jaunes avec le sucre." },
+        { "ordre": 2, "description": "Monter les blancs en meringue française avec leur sucre." },
+        { "ordre": 3, "description": "Incorporer 1/3 de blancs aux jaunes, puis la farine tamisée." },
+        { "ordre": 4, "description": "Incorporer le reste des blancs délicatement." },
+        { "ordre": 5, "description": "Pocher à la douille 10 mm. Saupoudrer 2× de sucre glace. Cuire 10–12 min à 180°C." }
+      ],
+      "quiz": [
+        { "question": "Pourquoi saupoudrer 2× de sucre glace avant cuisson ?", "reponses": ["Pour créer la croûte 'perlée' typique", "Pour sucrer davantage", "Pour éviter qu'ils accrochent"], "bonne": 0 }
+      ],
+      "techniques_cap": ["Biscuit cuillère", "Meringue française", "Pochage"],
+      "conseils": "Utilisés pour la charlotte. Doivent rester moelleux à cœur.",
+      "chrono_cible": 22
+    },
+    {
+      "id": "biscuit-dacquoise",
+      "nom": "Biscuit dacquoise",
+      "categorie": "biscuits",
+      "competences": ["cuissons", "techniques"],
+      "temps": 30, "difficulte": 3, "ep": "EP2", "prerequis": [],
+      "ingredients": [
+        { "nom": "Blancs d'œufs",     "quantite": 300, "unite": "g" },
+        { "nom": "Sucre",             "quantite": 60,  "unite": "g" },
+        { "nom": "Poudre d'amandes",  "quantite": 240, "unite": "g" },
+        { "nom": "Sucre glace",       "quantite": 240, "unite": "g" },
+        { "nom": "Farine T55",        "quantite": 30,  "unite": "g" }
+      ],
+      "etapes": [
+        { "ordre": 1, "description": "Monter les blancs avec le sucre en meringue ferme." },
+        { "ordre": 2, "description": "Tamiser amandes + sucre glace + farine ensemble." },
+        { "ordre": 3, "description": "Incorporer délicatement le sec dans les blancs." },
+        { "ordre": 4, "description": "Pocher ou étaler en disques. Cuire 20–25 min à 170°C." }
+      ],
+      "quiz": [
+        { "question": "Quelle est la particularité de la dacquoise ?", "reponses": ["Sans jaunes, base poudre d'amandes", "Sans farine du tout", "À base de chocolat"], "bonne": 0 }
+      ],
+      "techniques_cap": ["Dacquoise", "Meringue française", "Tamisage"],
+      "conseils": "Base aérée et fondante des entremets aux fruits rouges et nuts.",
+      "chrono_cible": 25
+    },
+    {
+      "id": "biscuit-roule",
+      "nom": "Biscuit roulé",
+      "categorie": "biscuits",
+      "competences": ["cuissons", "techniques", "assemblages"],
+      "temps": 25, "difficulte": 2, "ep": "EP1", "prerequis": [],
+      "ingredients": [
+        { "nom": "Œufs entiers", "quantite": 4,   "unite": "u" },
+        { "nom": "Sucre",        "quantite": 120, "unite": "g" },
+        { "nom": "Farine T55",   "quantite": 120, "unite": "g" }
+      ],
+      "etapes": [
+        { "ordre": 1, "description": "Blanchir œufs et sucre au ruban." },
+        { "ordre": 2, "description": "Incorporer la farine tamisée délicatement." },
+        { "ordre": 3, "description": "Étaler sur silpat 4–5 mm. Cuire 8–10 min à 200°C." },
+        { "ordre": 4, "description": "Démouler chaud sur un torchon humide. Rouler immédiatement." },
+        { "ordre": 5, "description": "Refroidir, dérouler, garnir, rouler à nouveau." }
+      ],
+      "quiz": [
+        { "question": "Pourquoi rouler le biscuit chaud ?", "reponses": ["Pour qu'il prenne la forme sans craquer", "Pour le faire cuire davantage", "Pour le refroidir vite"], "bonne": 0 }
+      ],
+      "techniques_cap": ["Ruban", "Roulage chaud"],
+      "conseils": "Garnir confiture, chantilly ou ganache. Bûche de Noël = variante.",
+      "chrono_cible": 20
+    },
+
     {
       "id": "financier",
       "nom": "Financier",
       "categorie": "fours-secs",
       "competences": ["cuissons", "pesees"],
-      "temps": 30,
-      "difficulte": 1,
-      "ep": "EP1",
-      "prerequis": [],
+      "temps": 30, "difficulte": 1, "ep": "EP1", "prerequis": [],
       "ingredients": [
-        { "nom": "Beurre noisette", "quantite": 125, "unite": "g" },
-        { "nom": "Sucre glace",     "quantite": 200, "unite": "g" },
-        { "nom": "Poudre amande",   "quantite": 75,  "unite": "g" },
-        { "nom": "Farine T55",      "quantite": 50,  "unite": "g" },
-        { "nom": "Blancs d'œufs",   "quantite": 150, "unite": "g" }
+        { "nom": "Beurre noisette",  "quantite": 125, "unite": "g" },
+        { "nom": "Sucre glace",      "quantite": 200, "unite": "g" },
+        { "nom": "Poudre d'amandes", "quantite": 75,  "unite": "g" },
+        { "nom": "Farine T55",       "quantite": 50,  "unite": "g" },
+        { "nom": "Blancs d'œufs",    "quantite": 150, "unite": "g" }
       ],
       "etapes": [
         { "ordre": 1, "description": "Réaliser le beurre noisette, filtrer et laisser tiédir." },
@@ -247,186 +636,337 @@
         { "ordre": 4, "description": "Couler dans les moules beurrés, cuire 12–14 min à 180°C." }
       ],
       "quiz": [
-        { "question": "Pourquoi le beurre noisette est-il indispensable aux financiers ?", "reponses": ["Il apporte le goût de noisette et la texture moelleuse", "Il remplace le beurre ordinaire", "Il permet la conservation"], "bonne": 0 }
+        { "question": "Pourquoi le beurre noisette ?", "reponses": ["Goût de noisette et moelleux", "Conservation prolongée", "Cuisson plus rapide"], "bonne": 0 }
       ],
       "techniques_cap": ["Beurre noisette", "Appareil à financier"],
-      "conseils": "Les blancs ne doivent pas être montés, juste liquides. Le beurre noisette doit être tiède, pas chaud.",
+      "conseils": "Blancs non montés, juste liquides. Beurre noisette tiède (pas chaud).",
       "chrono_cible": 25
     },
-
     {
-      "id": "biscuit-joconde",
-      "nom": "Biscuit Joconde",
-      "categorie": "bases-cap",
-      "competences": ["cuissons", "techniques", "assemblages"],
-      "temps": 25,
-      "difficulte": 3,
-      "ep": "EP2",
-      "prerequis": [],
+      "id": "madeleine",
+      "nom": "Madeleine",
+      "categorie": "fours-secs",
+      "competences": ["cuissons", "pesees"],
+      "temps": 90, "difficulte": 1, "ep": "EP1", "prerequis": [],
       "ingredients": [
-        { "nom": "Œufs entiers",   "quantite": 6,   "unite": "u" },
-        { "nom": "Poudre amande",  "quantite": 150, "unite": "g" },
-        { "nom": "Sucre glace",    "quantite": 150, "unite": "g" },
-        { "nom": "Farine T55",     "quantite": 40,  "unite": "g" },
-        { "nom": "Blancs d'œufs", "quantite": 150, "unite": "g" },
-        { "nom": "Sucre",          "quantite": 15,  "unite": "g" },
-        { "nom": "Beurre fondu",   "quantite": 30,  "unite": "g" }
+        { "nom": "Farine T55",       "quantite": 200, "unite": "g" },
+        { "nom": "Sucre",            "quantite": 200, "unite": "g" },
+        { "nom": "Beurre fondu",     "quantite": 200, "unite": "g" },
+        { "nom": "Œufs entiers",     "quantite": 4,   "unite": "u" },
+        { "nom": "Levure chimique",  "quantite": 8,   "unite": "g" },
+        { "nom": "Miel",             "quantite": 20,  "unite": "g" },
+        { "nom": "Zeste de citron",  "quantite": 1,   "unite": "citron" },
+        { "nom": "Lait",             "quantite": 30,  "unite": "g" }
       ],
       "etapes": [
-        { "ordre": 1, "description": "Monter les blancs en neige avec le sucre (meringue française légère)." },
-        { "ordre": 2, "description": "Blanchir œufs entiers + sucre glace + poudre d'amande 5 min au fouet." },
-        { "ordre": 3, "description": "Incorporer la farine, puis les blancs montés délicatement." },
-        { "ordre": 4, "description": "Ajouter le beurre fondu tiède en dernier." },
-        { "ordre": 5, "description": "Étaler sur silpat, cuire 10–12 min à 200°C." }
+        { "ordre": 1, "description": "Mélanger tous les ingrédients (sauf beurre)." },
+        { "ordre": 2, "description": "Incorporer le beurre fondu tiède en dernier." },
+        { "ordre": 3, "description": "Reposer 1h au frais (choc thermique = bosse)." },
+        { "ordre": 4, "description": "Couler dans les moules, cuire 12–14 min à 200°C." }
       ],
       "quiz": [
-        { "question": "Comment incorporer les blancs montés pour ne pas les casser ?", "reponses": ["En soulevant délicatement de bas en haut", "Au fouet électrique", "En remuant vigoureusement"], "bonne": 0 }
+        { "question": "Pourquoi reposer la pâte au froid ?", "reponses": ["Choc thermique → bosse caractéristique", "Pour la conservation", "Pour la lever"], "bonne": 0 }
       ],
-      "techniques_cap": ["Biscuit Joconde", "Meringue française", "Incorporation blancs"],
-      "conseils": "Le beurre fondu s'incorpore en dernier pour ne pas faire tomber les blancs.",
+      "techniques_cap": ["Choc thermique", "Appareil à madeleine"],
+      "conseils": "Le repos froid + four chaud = la bosse. Four bien préchauffé.",
       "chrono_cible": 20
     },
-
-    
-    
-    
     {
-      "id": "cake-voyage",
+      "id": "langue-de-chat",
+      "nom": "Langue de chat",
+      "categorie": "fours-secs",
+      "competences": ["cuissons", "pesees"],
+      "temps": 25, "difficulte": 2, "ep": "EP1", "prerequis": [],
+      "ingredients": [
+        { "nom": "Beurre pommade", "quantite": 100, "unite": "g" },
+        { "nom": "Sucre glace",    "quantite": 100, "unite": "g" },
+        { "nom": "Blancs d'œufs",  "quantite": 100, "unite": "g" },
+        { "nom": "Farine T55",     "quantite": 100, "unite": "g" },
+        { "nom": "Vanille",        "quantite": 5,   "unite": "g" }
+      ],
+      "etapes": [
+        { "ordre": 1, "description": "Crémer beurre + sucre glace." },
+        { "ordre": 2, "description": "Incorporer les blancs progressivement." },
+        { "ordre": 3, "description": "Ajouter la farine tamisée et la vanille." },
+        { "ordre": 4, "description": "Pocher à la douille 5 mm en bâtonnets de 6 cm. Cuire 8–10 min à 170°C." }
+      ],
+      "quiz": [
+        { "question": "À quelle douille pocher les langues de chat ?", "reponses": ["5 mm unie", "12 mm unie", "Cannelée"], "bonne": 0 }
+      ],
+      "techniques_cap": ["Crémage", "Pochage"],
+      "conseils": "Bords colorés, cœur blond. Servis avec entremets et glaces.",
+      "chrono_cible": 22
+    },
+    {
+      "id": "tuile-amande",
+      "nom": "Tuile aux amandes",
+      "categorie": "fours-secs",
+      "competences": ["cuissons", "techniques"],
+      "temps": 25, "difficulte": 2, "ep": "EP1", "prerequis": [],
+      "ingredients": [
+        { "nom": "Amandes effilées", "quantite": 150, "unite": "g" },
+        { "nom": "Sucre glace",      "quantite": 150, "unite": "g" },
+        { "nom": "Blancs d'œufs",    "quantite": 60,  "unite": "g" },
+        { "nom": "Farine T55",       "quantite": 30,  "unite": "g" },
+        { "nom": "Beurre fondu",     "quantite": 30,  "unite": "g" }
+      ],
+      "etapes": [
+        { "ordre": 1, "description": "Mélanger sucre glace + farine. Ajouter les blancs." },
+        { "ordre": 2, "description": "Incorporer le beurre fondu tiède, puis les amandes effilées." },
+        { "ordre": 3, "description": "Déposer en petits tas sur silpat, étaler en cercles." },
+        { "ordre": 4, "description": "Cuire 8–10 min à 170°C. Former sur rouleau chaud immédiatement." }
+      ],
+      "quiz": [
+        { "question": "Pourquoi former les tuiles à la sortie du four ?", "reponses": ["Elles deviennent cassantes en refroidissant", "Pour gagner du temps", "Pour les saupoudrer"], "bonne": 0 }
+      ],
+      "techniques_cap": ["Tuiles", "Mise en forme à chaud"],
+      "conseils": "Si elles durcissent, les repasser 1 min au four.",
+      "chrono_cible": 22
+    },
+    {
+      "id": "rocher-coco",
+      "nom": "Rocher coco",
+      "categorie": "fours-secs",
+      "competences": ["cuissons", "pesees"],
+      "temps": 25, "difficulte": 1, "ep": "EP1", "prerequis": [],
+      "ingredients": [
+        { "nom": "Noix de coco râpée", "quantite": 200, "unite": "g" },
+        { "nom": "Sucre",              "quantite": 150, "unite": "g" },
+        { "nom": "Blancs d'œufs",      "quantite": 80,  "unite": "g" },
+        { "nom": "Vanille",            "quantite": 5,   "unite": "g" }
+      ],
+      "etapes": [
+        { "ordre": 1, "description": "Mélanger tous les ingrédients." },
+        { "ordre": 2, "description": "Chauffer au bain-marie à 50°C en remuant." },
+        { "ordre": 3, "description": "Former des rochers à la cuillère ou à la poche." },
+        { "ordre": 4, "description": "Cuire 15 min à 160°C jusqu'à coloration dorée." }
+      ],
+      "quiz": [
+        { "question": "Pourquoi chauffer le mélange à 50°C ?", "reponses": ["Pour faire fondre le sucre et lier la coco", "Pour pasteuriser", "Pour gagner du temps"], "bonne": 0 }
+      ],
+      "techniques_cap": ["Bain-marie", "Pochage manuel"],
+      "conseils": "Doivent être moelleux à cœur. Trop cuit = sec.",
+      "chrono_cible": 22
+    },
+
+    {
+      "id": "cake-citron",
       "nom": "Cake citron",
       "categorie": "gateaux-voyage",
       "competences": ["cuissons", "pesees"],
-      "temps": 60,
-      "difficulte": 2,
-      "ep": "EP1",
-      "prerequis": [],
+      "temps": 60, "difficulte": 2, "ep": "EP1", "prerequis": [],
       "ingredients": [
-        { "nom": "Farine T55",     "quantite": 200, "unite": "g" },
-        { "nom": "Sucre",          "quantite": 200, "unite": "g" },
-        { "nom": "Beurre fondu",   "quantite": 150, "unite": "g" },
-        { "nom": "Œufs entiers",   "quantite": 4,   "unite": "u" },
-        { "nom": "Levure chimique","quantite": 8,   "unite": "g" },
-        { "nom": "Zestes citron",  "quantite": 2,   "unite": "citrons" },
-        { "nom": "Jus de citron",  "quantite": 30,  "unite": "g" }
+        { "nom": "Farine T55",       "quantite": 200, "unite": "g" },
+        { "nom": "Sucre",            "quantite": 200, "unite": "g" },
+        { "nom": "Beurre fondu",     "quantite": 150, "unite": "g" },
+        { "nom": "Œufs entiers",     "quantite": 4,   "unite": "u" },
+        { "nom": "Levure chimique",  "quantite": 8,   "unite": "g" },
+        { "nom": "Zestes citron",    "quantite": 2,   "unite": "citrons" },
+        { "nom": "Jus de citron",    "quantite": 30,  "unite": "g" }
       ],
       "etapes": [
-        { "ordre": 1, "description": "Blanchir les œufs avec le sucre, incorporer les zestes et jus de citron." },
-        { "ordre": 2, "description": "Ajouter la farine et levure tamisées, puis le beurre fondu tiède." },
+        { "ordre": 1, "description": "Blanchir les œufs avec le sucre, incorporer zestes et jus de citron." },
+        { "ordre": 2, "description": "Ajouter farine et levure tamisées, puis le beurre fondu tiède." },
         { "ordre": 3, "description": "Verser dans le moule beurré fariné aux 3/4." },
-        { "ordre": 4, "description": "Inciser le dessus au couteau beurré avant cuisson pour maîtriser la fente." },
-        { "ordre": 5, "description": "Cuire 45–50 min à 165°C. Vérifier avec la pointe d'un couteau." }
+        { "ordre": 4, "description": "Inciser au couteau beurré avant cuisson." },
+        { "ordre": 5, "description": "Cuire 45–50 min à 165°C. Test pointe couteau." }
       ],
       "quiz": [
-        { "question": "Pourquoi inciser le cake en surface avant cuisson ?", "reponses": ["Pour maîtriser la fissure et avoir un beau développement", "Pour accélérer la cuisson", "Pour décorer"], "bonne": 0 }
+        { "question": "Pourquoi inciser le cake avant cuisson ?", "reponses": ["Maîtriser la fissure", "Décorer", "Accélérer cuisson"], "bonne": 0 }
       ],
       "techniques_cap": ["Appareil à cake", "Cuisson four"],
-      "conseils": "Inciser le dessus avec un couteau beurré avant enfournement pour maîtriser la fente centrale.",
+      "conseils": "Incision au couteau beurré = fente centrale régulière.",
       "chrono_cible": 50
     },
-
     {
-      "id": "opera",
-      "nom": "Opéra",
-      "categorie": "entremets",
-      "competences": ["assemblages", "techniques", "cuissons"],
-      "temps": 120,
-      "difficulte": 5,
-      "ep": "EP2",
-      "prerequis": ["creme-patissiere", "biscuit-joconde"],
+      "id": "fondant-chocolat",
+      "nom": "Fondant au chocolat",
+      "categorie": "gateaux-voyage",
+      "competences": ["cuissons", "pesees", "textures"],
+      "temps": 32, "difficulte": 2, "ep": "EP1", "prerequis": [],
       "ingredients": [
-        { "nom": "Biscuit Joconde",       "quantite": 1,   "unite": "plaque" },
-        { "nom": "Crème au beurre café",  "quantite": 300, "unite": "g" },
-        { "nom": "Ganache chocolat noir", "quantite": 250, "unite": "g" },
-        { "nom": "Sirop café",            "quantite": 150, "unite": "g" },
-        { "nom": "Nappage chocolat",      "quantite": 150, "unite": "g" }
+        { "nom": "Chocolat noir 70%", "quantite": 200, "unite": "g" },
+        { "nom": "Beurre",            "quantite": 120, "unite": "g" },
+        { "nom": "Œufs entiers",      "quantite": 4,   "unite": "u" },
+        { "nom": "Sucre",             "quantite": 100, "unite": "g" },
+        { "nom": "Farine T55",        "quantite": 40,  "unite": "g" }
       ],
       "etapes": [
-        { "ordre": 1, "description": "Préparer le biscuit Joconde, la crème au beurre café et la ganache chocolat." },
-        { "ordre": 2, "description": "Montage : biscuit imbibé café / crème au beurre / biscuit imbibé / ganache / biscuit imbibé / crème au beurre." },
-        { "ordre": 3, "description": "Bloquer au froid 2h minimum." },
-        { "ordre": 4, "description": "Napper avec le nappage chocolat lissé à la palette." },
-        { "ordre": 5, "description": "Inscrire 'Opéra' au cornet de chocolat. Couper net à la lyre." }
+        { "ordre": 1, "description": "Faire fondre chocolat + beurre au bain-marie. Laisser tiédir." },
+        { "ordre": 2, "description": "Blanchir œufs + sucre au ruban." },
+        { "ordre": 3, "description": "Incorporer chocolat-beurre, puis la farine tamisée." },
+        { "ordre": 4, "description": "Verser dans moules beurrés-farinés aux 3/4." },
+        { "ordre": 5, "description": "Cuire 10–12 min à 200°C. Cœur coulant. Démouler aussitôt." }
       ],
       "quiz": [
-        { "question": "Combien de couches compte un opéra traditionnel ?", "reponses": ["3 biscuits, 2 crèmes au beurre, 1 ganache, 1 nappage", "2 biscuits, 1 crème, 1 glaçage", "4 biscuits, 3 crèmes"], "bonne": 0 }
+        { "question": "Comment savoir si le fondant est cuit à cœur coulant ?", "reponses": ["Bords fermes, centre tremblotant", "Cure-dent ressort propre", "Surface complètement sèche"], "bonne": 0 }
       ],
-      "techniques_cap": ["Biscuit Joconde", "Crème au beurre", "Ganache", "Montage entremet", "Nappage"],
-      "conseils": "Travailler dans un endroit frais. Chaque couche doit être bien plane avant d'ajouter la suivante.",
-      "chrono_cible": 100
+      "techniques_cap": ["Bain-marie", "Cuisson minute"],
+      "conseils": "Temps de cuisson crucial. Centre doit rester tremblotant.",
+      "chrono_cible": 25
     },
-
-    
-    
-    
     {
-      "id": "tarte-citron-meringuee",
-      "nom": "Tarte au citron meringuée",
-      "categorie": "tartes",
-      "competences": ["cuissons", "techniques", "assemblages"],
-      "temps": 70,
-      "difficulte": 3,
-      "ep": "EP1",
-      "prerequis": ["pate-sable"],
+      "id": "cake-marbre",
+      "nom": "Cake marbré",
+      "categorie": "gateaux-voyage",
+      "competences": ["cuissons", "pesees", "techniques"],
+      "temps": 65, "difficulte": 2, "ep": "EP1", "prerequis": [],
       "ingredients": [
-        { "nom": "Pâte sucrée",              "quantite": 250, "unite": "g" },
-        { "nom": "Citrons (jus + zeste)",    "quantite": 3,   "unite": "pièces" },
-        { "nom": "Œufs entiers",             "quantite": 3,   "unite": "u" },
-        { "nom": "Sucre semoule",            "quantite": 150, "unite": "g" },
-        { "nom": "Beurre",                   "quantite": 80,  "unite": "g" },
-        { "nom": "Blancs d'œufs (meringue)", "quantite": 3,   "unite": "pièces" },
-        { "nom": "Sucre glace (meringue)",   "quantite": 180, "unite": "g" }
+        { "nom": "Beurre pommade",    "quantite": 200, "unite": "g" },
+        { "nom": "Sucre",             "quantite": 200, "unite": "g" },
+        { "nom": "Œufs entiers",      "quantite": 4,   "unite": "u" },
+        { "nom": "Farine T55",        "quantite": 220, "unite": "g" },
+        { "nom": "Levure chimique",   "quantite": 8,   "unite": "g" },
+        { "nom": "Cacao en poudre",   "quantite": 20,  "unite": "g" },
+        { "nom": "Lait",              "quantite": 40,  "unite": "g" }
       ],
       "etapes": [
-        { "ordre": 1, "description": "Foncer le cercle avec la pâte sucrée, piquer et cuire à blanc 20 min à 170°C." },
-        { "ordre": 2, "description": "Préparer le curd citron : chauffer jus, zeste, sucre et œufs en remuant jusqu'à épaississement. Incorporer le beurre hors du feu." },
-        { "ordre": 3, "description": "Garnir le fond de tarte refroidi avec le curd. Réfrigérer 30 min." },
-        { "ordre": 4, "description": "Monter les blancs en neige, incorporer le sucre glace pour obtenir une meringue italienne." },
-        { "ordre": 5, "description": "Pocher la meringue sur le curd et brûler au chalumeau." }
+        { "ordre": 1, "description": "Crémer beurre pommade et sucre." },
+        { "ordre": 2, "description": "Incorporer les œufs un par un, puis farine + levure." },
+        { "ordre": 3, "description": "Diviser la pâte en 2. Mélanger cacao + lait dans une moitié." },
+        { "ordre": 4, "description": "Alterner les deux pâtes dans le moule, marbrer à la pointe d'un couteau." },
+        { "ordre": 5, "description": "Cuire 45–50 min à 165°C." }
       ],
       "quiz": [
-        { "question": "Le curd citron est prêt quand il…", "reponses": ["Nappe la spatule", "Bout vigoureusement", "Devient transparent"], "bonne": 0 },
-        { "question": "Pourquoi cuire la pâte à blanc avant de garnir ?", "reponses": ["Pour éviter que le fond soit humide", "Pour colorer la pâte", "Pour la faire gonfler"], "bonne": 0 }
+        { "question": "Comment créer le marbrage ?", "reponses": ["Alterner les pâtes et tracer à la pointe", "Mélanger légèrement", "Cuire en 2 fois"], "bonne": 0 }
       ],
-      "techniques_cap": ["Fonçage", "Cuisson à blanc", "Curd citron", "Meringue italienne", "Chalumeau"],
-      "conseils": "Le curd doit napper la spatule. Ne pas trop brûler la meringue au chalumeau pour garder le contraste blanc/doré.",
-      "chrono_cible": 60
+      "techniques_cap": ["Crémage", "Marbrage"],
+      "conseils": "Ne pas trop mélanger : le marbrage doit rester visible.",
+      "chrono_cible": 55
     },
 
+    {
+      "id": "pate-a-choux",
+      "nom": "Pâte à choux",
+      "categorie": "choux",
+      "competences": ["cuissons", "techniques", "pesees"],
+      "temps": 35, "difficulte": 3, "ep": "EP1", "prerequis": [],
+      "ingredients": [
+        { "nom": "Eau",          "quantite": 125, "unite": "g" },
+        { "nom": "Lait entier",  "quantite": 125, "unite": "g" },
+        { "nom": "Beurre",       "quantite": 100, "unite": "g" },
+        { "nom": "Farine T55",   "quantite": 150, "unite": "g" },
+        { "nom": "Œufs entiers", "quantite": 5,   "unite": "u" },
+        { "nom": "Sel",          "quantite": 4,   "unite": "g" },
+        { "nom": "Sucre",        "quantite": 5,   "unite": "g" }
+      ],
+      "etapes": [
+        { "ordre": 1, "description": "Porter à ébullition eau, lait, beurre, sel et sucre." },
+        { "ordre": 2, "description": "Ajouter la farine d'un coup hors du feu, mélanger." },
+        { "ordre": 3, "description": "Dessécher la panade sur le feu jusqu'à décollement des parois." },
+        { "ordre": 4, "description": "Incorporer les œufs un par un hors du feu, consistance ruban." },
+        { "ordre": 5, "description": "Pocher, dorer, cuire 28–32 min à 180°C sans ouvrir le four." }
+      ],
+      "quiz": [
+        { "question": "Comment savoir que la panade est desséchée ?", "reponses": ["Elle forme une boule qui se décolle", "Elle fume", "Elle brille"], "bonne": 0 },
+        { "question": "Pourquoi ne pas ouvrir le four ?", "reponses": ["Les choux retomberaient", "Risque de brûlure", "Bloque la porte"], "bonne": 0 }
+      ],
+      "techniques_cap": ["Pâte à choux", "Desséchage", "Pochage"],
+      "conseils": "Ruban souple : ni trop ferme ni trop liquide.",
+      "chrono_cible": 30
+    },
     {
       "id": "eclair-cafe",
       "nom": "Éclair au café",
       "categorie": "choux",
       "competences": ["cuissons", "techniques", "assemblages"],
-      "temps": 90,
-      "difficulte": 4,
-      "ep": "EP1",
-      "prerequis": ["pate-a-choux", "creme-patissiere"],
+      "temps": 90, "difficulte": 4, "ep": "EP1", "prerequis": ["pate-a-choux", "creme-patissiere"],
       "ingredients": [
-        { "nom": "Eau",            "quantite": 125, "unite": "ml" },
-        { "nom": "Lait entier",    "quantite": 125, "unite": "ml" },
-        { "nom": "Beurre",         "quantite": 110, "unite": "g" },
-        { "nom": "Farine T55",     "quantite": 140, "unite": "g" },
-        { "nom": "Œufs entiers",   "quantite": 4,   "unite": "u" },
-        { "nom": "Lait (crème)",   "quantite": 500, "unite": "ml" },
-        { "nom": "Jaunes d'œufs", "quantite": 4,   "unite": "pièces" },
-        { "nom": "Sucre semoule",  "quantite": 100, "unite": "g" },
-        { "nom": "Maïzena",        "quantite": 40,  "unite": "g" },
-        { "nom": "Extrait de café","quantite": 20,  "unite": "ml" },
-        { "nom": "Fondant blanc",  "quantite": 200, "unite": "g" }
+        { "nom": "Pâte à choux",           "quantite": 400, "unite": "g" },
+        { "nom": "Crème pâtissière",       "quantite": 400, "unite": "g" },
+        { "nom": "Extrait de café",        "quantite": 20,  "unite": "g" },
+        { "nom": "Fondant blanc",          "quantite": 200, "unite": "g" }
       ],
       "etapes": [
-        { "ordre": 1, "description": "Faire bouillir eau, lait, beurre et sel. Ajouter la farine d'un coup, dessécher sur le feu." },
-        { "ordre": 2, "description": "Incorporer les œufs un par un jusqu'à consistance ruban." },
-        { "ordre": 3, "description": "Pocher les éclairs à la douille cannelée n°12, 12 cm de long. Cuire 28 min à 180°C sans ouvrir le four." },
-        { "ordre": 4, "description": "Préparer la crème pâtissière café. Garnir les éclairs par le dessous." },
-        { "ordre": 5, "description": "Glacer avec le fondant blanc teinté café, tiédi à 37°C." }
+        { "ordre": 1, "description": "Pocher des éclairs à la douille cannelée n°12, 12 cm de long." },
+        { "ordre": 2, "description": "Dorer, cuire 28 min à 180°C sans ouvrir le four." },
+        { "ordre": 3, "description": "Parfumer la crème pâtissière à l'extrait de café." },
+        { "ordre": 4, "description": "Garnir les éclairs par le dessous à la douille fine." },
+        { "ordre": 5, "description": "Tiédir le fondant teinté café à 37°C max. Glacer le dessus." }
       ],
       "quiz": [
-        { "question": "À quelle température tiédir le fondant pour le glaçage ?", "reponses": ["37°C", "50°C", "60°C"], "bonne": 0 },
-        { "question": "Pourquoi ne jamais dépasser 40°C avec le fondant ?", "reponses": ["Il perd sa brillance et blanchit", "Il devient trop liquide", "Il colle aux doigts"], "bonne": 0 }
+        { "question": "Température max du fondant ?", "reponses": ["40°C (sinon perte de brillance)", "60°C", "30°C"], "bonne": 0 }
       ],
-      "techniques_cap": ["Pâte à choux", "Crème pâtissière café", "Glaçage fondant", "Pochage éclairs"],
-      "conseils": "Ne jamais ouvrir le four en cours de cuisson. Le fondant ne doit jamais dépasser 40°C.",
+      "techniques_cap": ["Pâte à choux", "Glaçage fondant", "Pochage éclairs"],
+      "conseils": "Fondant jamais au-dessus de 40°C. Garnir par le dessous = aspect propre.",
       "chrono_cible": 75
+    },
+    {
+      "id": "paris-brest",
+      "nom": "Paris-Brest",
+      "categorie": "choux",
+      "competences": ["cuissons", "techniques", "assemblages"],
+      "temps": 85, "difficulte": 3, "ep": "EP1", "prerequis": ["pate-a-choux", "creme-patissiere"],
+      "ingredients": [
+        { "nom": "Pâte à choux",          "quantite": 400, "unite": "g" },
+        { "nom": "Crème pâtissière",      "quantite": 300, "unite": "g" },
+        { "nom": "Beurre pommade",        "quantite": 150, "unite": "g" },
+        { "nom": "Pralin en poudre",      "quantite": 80,  "unite": "g" },
+        { "nom": "Amandes effilées",      "quantite": 50,  "unite": "g" },
+        { "nom": "Sucre glace (déco)",    "quantite": 20,  "unite": "g" }
+      ],
+      "etapes": [
+        { "ordre": 1, "description": "Pocher la pâte à choux en couronne 22 cm (double rangée)." },
+        { "ordre": 2, "description": "Parsemer d'amandes effilées. Cuire 28–30 min à 180°C." },
+        { "ordre": 3, "description": "Préparer la mousseline pralinée : crémer beurre + crème pâtissière tempérée + pralin." },
+        { "ordre": 4, "description": "Couper la couronne en deux. Pocher la mousseline à la douille étoile." },
+        { "ordre": 5, "description": "Replacer le couvercle. Saupoudrer de sucre glace." }
+      ],
+      "quiz": [
+        { "question": "Crème utilisée pour le Paris-Brest ?", "reponses": ["Mousseline pralinée", "Chantilly", "Anglaise"], "bonne": 0 }
+      ],
+      "techniques_cap": ["Pâte à choux", "Mousseline", "Pralin", "Couronne"],
+      "conseils": "Mousseline à T° ambiante pour foisonner. Éviter les courants d'air.",
+      "chrono_cible": 70
+    },
+    {
+      "id": "religieuse",
+      "nom": "Religieuse",
+      "categorie": "choux",
+      "competences": ["assemblages", "techniques", "cuissons"],
+      "temps": 100, "difficulte": 4, "ep": "EP1", "prerequis": ["pate-a-choux", "creme-patissiere"],
+      "ingredients": [
+        { "nom": "Pâte à choux",                "quantite": 400, "unite": "g" },
+        { "nom": "Crème pâtissière café",       "quantite": 400, "unite": "g" },
+        { "nom": "Fondant blanc teinté café",   "quantite": 200, "unite": "g" },
+        { "nom": "Crème au beurre (décor)",     "quantite": 100, "unite": "g" }
+      ],
+      "etapes": [
+        { "ordre": 1, "description": "Pocher 2 tailles de choux (gros + petit). Cuire 25–30 min à 180°C." },
+        { "ordre": 2, "description": "Garnir tous les choux de crème pâtissière café." },
+        { "ordre": 3, "description": "Glacer le sommet de chaque chou au fondant café à 37°C." },
+        { "ordre": 4, "description": "Coller le petit sur le gros. Décorer avec crème au beurre à la douille cannelée." }
+      ],
+      "quiz": [
+        { "question": "Combien de tailles de choux pour une religieuse ?", "reponses": ["2 (gros + petit)", "3 tailles", "1 seule"], "bonne": 0 }
+      ],
+      "techniques_cap": ["Pâte à choux", "Glaçage fondant", "Décor douille cannelée"],
+      "conseils": "Le petit chou collé symbolise la coiffe de religieuse.",
+      "chrono_cible": 85
+    },
+    {
+      "id": "gland",
+      "nom": "Glands",
+      "categorie": "choux",
+      "competences": ["cuissons", "techniques", "assemblages"],
+      "temps": 70, "difficulte": 3, "ep": "EP1", "prerequis": ["pate-a-choux", "creme-patissiere"],
+      "ingredients": [
+        { "nom": "Pâte à choux",              "quantite": 400, "unite": "g" },
+        { "nom": "Crème pâtissière chocolat", "quantite": 300, "unite": "g" },
+        { "nom": "Fondant chocolat",          "quantite": 150, "unite": "g" }
+      ],
+      "etapes": [
+        { "ordre": 1, "description": "Pocher la pâte à choux en forme de glands allongés." },
+        { "ordre": 2, "description": "Cuire 22–25 min à 180°C. Refroidir." },
+        { "ordre": 3, "description": "Garnir de crème pâtissière chocolat par le dessous." },
+        { "ordre": 4, "description": "Glacer la base avec le fondant chocolat tiédi à 37°C." }
+      ],
+      "quiz": [
+        { "question": "Forme du gland ?", "reponses": ["Allongée façon gland", "Ronde", "Couronne"], "bonne": 0 }
+      ],
+      "techniques_cap": ["Pâte à choux", "Glaçage fondant", "Pochage"],
+      "conseils": "Petits formats : adapter la cuisson (22–25 min).",
+      "chrono_cible": 60
     },
 
     {
@@ -434,170 +974,594 @@
       "nom": "Mille-feuille",
       "categorie": "feuilletage",
       "competences": ["cuissons", "assemblages", "techniques"],
-      "temps": 95,
-      "difficulte": 4,
-      "ep": "EP1",
-      "prerequis": ["creme-patissiere"],
+      "temps": 95, "difficulte": 4, "ep": "EP1", "prerequis": ["pate-feuilletee", "creme-patissiere"],
       "ingredients": [
-        { "nom": "Pâte feuilletée",      "quantite": 500, "unite": "g" },
-        { "nom": "Lait entier",          "quantite": 500, "unite": "ml" },
-        { "nom": "Jaunes d'œufs",       "quantite": 4,   "unite": "pièces" },
-        { "nom": "Sucre semoule",        "quantite": 100, "unite": "g" },
-        { "nom": "Maïzena",              "quantite": 40,  "unite": "g" },
-        { "nom": "Vanille (gousse)",     "quantite": 1,   "unite": "pièce" },
-        { "nom": "Fondant blanc",        "quantite": 250, "unite": "g" },
-        { "nom": "Chocolat noir fondu",  "quantite": 50,  "unite": "g" }
+        { "nom": "Pâte feuilletée",        "quantite": 500, "unite": "g" },
+        { "nom": "Crème pâtissière vanille", "quantite": 500, "unite": "g" },
+        { "nom": "Fondant blanc",          "quantite": 250, "unite": "g" },
+        { "nom": "Chocolat noir fondu",    "quantite": 50,  "unite": "g" }
       ],
       "etapes": [
-        { "ordre": 1, "description": "Abaisser la pâte feuilletée à 3 mm, piquer, sucrer, cuire entre deux plaques 30–35 min à 180°C jusqu'à dorure." },
-        { "ordre": 2, "description": "Découper 3 rectangles égaux. Réaliser la crème pâtissière vanille, filmer et réserver." },
-        { "ordre": 3, "description": "Monter : feuilletage / crème pâtissière / feuilletage / crème pâtissière / feuilletage." },
-        { "ordre": 4, "description": "Glacer le dessus au fondant blanc tempéré à 37°C. Tracer des lignes de chocolat fondu." },
-        { "ordre": 5, "description": "Réaliser le marbrage au couteau en alternant le sens des traits. Réserver au frais avant de détailler." }
+        { "ordre": 1, "description": "Abaisser le feuilletage à 3 mm. Piquer. Sucrer." },
+        { "ordre": 2, "description": "Cuire entre deux plaques 30–35 min à 180°C jusqu'à caramélisation." },
+        { "ordre": 3, "description": "Découper 3 rectangles égaux. Monter : feuilletage / crème / feuilletage / crème / feuilletage." },
+        { "ordre": 4, "description": "Glacer le dessus au fondant à 37°C. Tracer des lignes de chocolat." },
+        { "ordre": 5, "description": "Marbrer au couteau perpendiculairement. Réserver au frais." }
       ],
       "quiz": [
-        { "question": "Pourquoi cuire la pâte feuilletée entre deux plaques ?", "reponses": ["Pour qu'elle reste plate et régulière", "Pour qu'elle gonfle davantage", "Pour qu'elle cuise plus vite"], "bonne": 0 },
-        { "question": "Comment réaliser le marbrage du mille-feuille ?", "reponses": ["Tracer des lignes chocolat puis passer le couteau perpendiculairement", "Étaler le chocolat en spirale", "Projeter le chocolat avec un pinceau"], "bonne": 0 }
+        { "question": "Pourquoi cuire entre 2 plaques ?", "reponses": ["Garder le feuilletage plat et régulier", "Cuire plus vite", "Gonfler davantage"], "bonne": 0 }
       ],
-      "techniques_cap": ["Feuilletage", "Crème pâtissière", "Glaçage fondant", "Marbrage"],
-      "conseils": "Le fondant ne doit jamais dépasser 40°C. Appuyer légèrement au montage pour éviter les glissements à la découpe.",
+      "techniques_cap": ["Feuilletage", "Crème pâtissière", "Marbrage"],
+      "conseils": "Fondant ≤ 40°C. Marbrage immédiat avant que le fondant prenne.",
       "chrono_cible": 80
     },
-
     {
-      "id": "charlotte-fraises",
-      "nom": "Charlotte aux fraises",
-      "categorie": "entremets",
-      "competences": ["assemblages", "textures", "techniques"],
-      "temps": 50,
-      "difficulte": 3,
-      "ep": "EP2",
-      "prerequis": ["creme-chantilly"],
+      "id": "chausson-pommes",
+      "nom": "Chausson aux pommes",
+      "categorie": "feuilletage",
+      "competences": ["cuissons", "techniques"],
+      "temps": 50, "difficulte": 3, "ep": "EP1", "prerequis": ["pate-feuilletee"],
       "ingredients": [
-        { "nom": "Biscuits cuillère", "quantite": 24,  "unite": "pièces" },
-        { "nom": "Fraises fraîches",  "quantite": 500, "unite": "g" },
-        { "nom": "Crème liquide 35%", "quantite": 400, "unite": "ml" },
-        { "nom": "Sucre glace",       "quantite": 60,  "unite": "g" },
-        { "nom": "Gélatine",          "quantite": 4,   "unite": "feuilles" },
-        { "nom": "Coulis de fraises", "quantite": 100, "unite": "ml" },
-        { "nom": "Sirop d'imbibage",  "quantite": 100, "unite": "ml" }
+        { "nom": "Pâte feuilletée",      "quantite": 400, "unite": "g" },
+        { "nom": "Compote de pommes",    "quantite": 300, "unite": "g" },
+        { "nom": "Dorure (jaunes+lait)", "quantite": 2,   "unite": "jaunes" }
       ],
       "etapes": [
-        { "ordre": 1, "description": "Chemiser le cercle avec les biscuits cuillère imbibés de sirop (côté sucre vers l'extérieur)." },
-        { "ordre": 2, "description": "Monter la crème chantilly avec le sucre glace." },
-        { "ordre": 3, "description": "Faire fondre la gélatine ramollie dans le coulis chaud, incorporer à la chantilly." },
-        { "ordre": 4, "description": "Alterner mousse et fraises coupées en deux. Terminer par une couche de biscuits imbibés." },
-        { "ordre": 5, "description": "Réfrigérer minimum 4h. Démouler, décorer de fraises fraîches et d'un miroir de coulis." }
+        { "ordre": 1, "description": "Abaisser le feuilletage à 3 mm. Détailler disques de 15 cm." },
+        { "ordre": 2, "description": "Garnir un côté de compote, replier en chausson." },
+        { "ordre": 3, "description": "Souder les bords, dorer, chiqueter." },
+        { "ordre": 4, "description": "Rayer le dessus en arc de cercle. Cuire 20–25 min à 190°C." }
       ],
       "quiz": [
-        { "question": "De quel côté les biscuits cuillère doivent-ils être placés contre le cercle ?", "reponses": ["Côté sucre vers l'extérieur", "Côté sucre vers l'intérieur", "Peu importe"], "bonne": 0 },
-        { "question": "Pourquoi incorporer la gélatine dans le coulis chaud ?", "reponses": ["Pour la faire fondre complètement", "Pour refroidir plus vite", "Pour sucrer davantage"], "bonne": 0 }
+        { "question": "Pourquoi chiqueter les bords ?", "reponses": ["Souder + permettre le développement", "Décorer seulement", "Sécher la pâte"], "bonne": 0 }
       ],
-      "techniques_cap": ["Chemisage cercle", "Crème chantilly", "Gélatine", "Montage entremet"],
-      "conseils": "Les biscuits doivent être imbibés mais pas détrempés. Démouler sur grille, jamais directement sur le plat.",
+      "techniques_cap": ["Feuilletage", "Dorure", "Chiqueter"],
+      "conseils": "Bien souder pour éviter que la compote s'échappe à la cuisson.",
       "chrono_cible": 40
     },
-
     {
-      "id": "paris-brest",
-      "nom": "Paris-Brest",
-      "categorie": "choux",
-      "competences": ["cuissons", "techniques", "assemblages"],
-      "temps": 85,
-      "difficulte": 3,
-      "ep": "EP1",
-      "prerequis": ["pate-a-choux", "creme-patissiere"],
+      "id": "saint-honore",
+      "nom": "Saint-honoré",
+      "categorie": "feuilletage",
+      "competences": ["assemblages", "techniques", "cuissons"],
+      "temps": 150, "difficulte": 5, "ep": "EP2", "prerequis": ["pate-feuilletee", "pate-a-choux", "creme-chiboust"],
       "ingredients": [
-        { "nom": "Eau",              "quantite": 125, "unite": "ml" },
-        { "nom": "Lait entier",      "quantite": 125, "unite": "ml" },
-        { "nom": "Beurre",           "quantite": 110, "unite": "g" },
-        { "nom": "Farine T55",       "quantite": 140, "unite": "g" },
-        { "nom": "Œufs entiers",     "quantite": 4,   "unite": "u" },
-        { "nom": "Amandes effilées", "quantite": 50,  "unite": "g" },
-        { "nom": "Pralin en poudre", "quantite": 80,  "unite": "g" },
-        { "nom": "Crème pâtissière", "quantite": 300, "unite": "g" },
-        { "nom": "Beurre pommade",   "quantite": 150, "unite": "g" },
-        { "nom": "Sucre glace déco", "quantite": 20,  "unite": "g" }
+        { "nom": "Pâte feuilletée",   "quantite": 200, "unite": "g" },
+        { "nom": "Pâte à choux",      "quantite": 300, "unite": "g" },
+        { "nom": "Crème chiboust",    "quantite": 500, "unite": "g" },
+        { "nom": "Sucre (caramel)",   "quantite": 200, "unite": "g" },
+        { "nom": "Profiteroles",      "quantite": 10,  "unite": "u" }
       ],
       "etapes": [
-        { "ordre": 1, "description": "Pocher la pâte à choux en couronne de 22 cm (double rangée). Parsemer d'amandes effilées." },
-        { "ordre": 2, "description": "Cuire 28–30 min à 180°C. Laisser refroidir sur grille." },
-        { "ordre": 3, "description": "Préparer la crème mousseline pralinée : crémer le beurre, incorporer la crème pâtissière et le pralin progressivement." },
-        { "ordre": 4, "description": "Couper la couronne en deux à l'horizontale. Pocher la crème mousseline à la douille étoile." },
-        { "ordre": 5, "description": "Replacer le couvercle, saupoudrer de sucre glace." }
+        { "ordre": 1, "description": "Détailler un disque de feuilletage. Pocher une couronne de pâte à choux sur le bord." },
+        { "ordre": 2, "description": "Pocher des petits choux à part. Cuire le tout 25–30 min à 180°C." },
+        { "ordre": 3, "description": "Préparer la crème chiboust." },
+        { "ordre": 4, "description": "Caraméliser les petits choux (caramel ambré). Les coller sur la couronne." },
+        { "ordre": 5, "description": "Garnir le centre de chiboust à la douille Saint-honoré." }
       ],
       "quiz": [
-        { "question": "Qu'est-ce que la crème mousseline ?", "reponses": ["Crème pâtissière + beurre pommade foisonnés", "Crème chantilly + pralin", "Crème anglaise montée"], "bonne": 0 },
-        { "question": "Pourquoi couper la couronne à l'horizontale avant de garnir ?", "reponses": ["Pour garnir proprement à la douille", "Pour retirer l'humidité", "Pour vérifier la cuisson"], "bonne": 0 }
+        { "question": "Crème utilisée pour le Saint-honoré ?", "reponses": ["Chiboust", "Diplomate", "Anglaise"], "bonne": 0 }
       ],
-      "techniques_cap": ["Pâte à choux", "Crème mousseline", "Pralin", "Pochage étoile", "Couronne"],
-      "conseils": "La crème mousseline doit être à température ambiante pour foisonner correctement. Éviter les courants d'air.",
-      "chrono_cible": 70
+      "techniques_cap": ["Feuilletage", "Pâte à choux", "Caramel", "Chiboust", "Douille Saint-honoré"],
+      "conseils": "Caramel ambré pas brun (sinon amer). Travailler vite avant prise.",
+      "chrono_cible": 130
     },
 
+    {
+      "id": "tarte-citron-meringuee",
+      "nom": "Tarte au citron meringuée",
+      "categorie": "tartes",
+      "competences": ["cuissons", "techniques", "assemblages"],
+      "temps": 70, "difficulte": 3, "ep": "EP1", "prerequis": ["pate-sucree"],
+      "ingredients": [
+        { "nom": "Pâte sucrée",              "quantite": 250, "unite": "g" },
+        { "nom": "Jus de citron",            "quantite": 150, "unite": "g" },
+        { "nom": "Zestes de citron",         "quantite": 2,   "unite": "citrons" },
+        { "nom": "Œufs entiers",             "quantite": 3,   "unite": "u" },
+        { "nom": "Sucre",                    "quantite": 150, "unite": "g" },
+        { "nom": "Beurre",                   "quantite": 80,  "unite": "g" },
+        { "nom": "Blancs (meringue)",        "quantite": 100, "unite": "g" },
+        { "nom": "Sucre (meringue)",         "quantite": 180, "unite": "g" }
+      ],
+      "etapes": [
+        { "ordre": 1, "description": "Foncer le cercle, piquer, cuire à blanc 20 min à 170°C." },
+        { "ordre": 2, "description": "Préparer le curd : chauffer jus, zestes, sucre, œufs jusqu'à épaississement." },
+        { "ordre": 3, "description": "Incorporer le beurre froid hors du feu, mixer." },
+        { "ordre": 4, "description": "Garnir le fond cuit. Réfrigérer 30 min." },
+        { "ordre": 5, "description": "Pocher une meringue italienne. Brûler au chalumeau." }
+      ],
+      "quiz": [
+        { "question": "Quand ajouter le beurre dans le curd ?", "reponses": ["Hors du feu, à chaud", "Pendant la cuisson", "Une fois froid"], "bonne": 0 }
+      ],
+      "techniques_cap": ["Cuisson à blanc", "Curd citron", "Meringue italienne", "Chalumeau"],
+      "conseils": "Curd qui nappe la spatule. Meringue dorée pas brûlée.",
+      "chrono_cible": 60
+    },
     {
       "id": "tarte-tatin",
       "nom": "Tarte Tatin",
       "categorie": "tartes",
       "competences": ["cuissons", "techniques"],
-      "temps": 75,
-      "difficulte": 3,
-      "ep": "EP1",
-      "prerequis": [],
+      "temps": 75, "difficulte": 3, "ep": "EP1", "prerequis": ["pate-brisee"],
       "ingredients": [
         { "nom": "Pâte brisée",      "quantite": 250, "unite": "g" },
         { "nom": "Pommes Golden",    "quantite": 1200,"unite": "g" },
         { "nom": "Sucre semoule",    "quantite": 150, "unite": "g" },
         { "nom": "Beurre",           "quantite": 80,  "unite": "g" },
-        { "nom": "Vanille (gousse)", "quantite": 1,   "unite": "pièce" }
+        { "nom": "Vanille",          "quantite": 1,   "unite": "gousse" }
       ],
       "etapes": [
-        { "ordre": 1, "description": "Réaliser un caramel à sec dans le moule jusqu'à coloration ambrée. Ajouter le beurre et les graines de vanille." },
-        { "ordre": 2, "description": "Disposer les pommes pelées en quartiers épais, bien serrés dans le moule." },
-        { "ordre": 3, "description": "Cuire les pommes à feu moyen 15 min pour les confire dans le caramel." },
-        { "ordre": 4, "description": "Couvrir avec la pâte brisée en rentrant les bords. Piquer." },
-        { "ordre": 5, "description": "Enfourner 25–30 min à 190°C. Démouler tiède (jamais froid) sur le plat de service." }
+        { "ordre": 1, "description": "Réaliser un caramel à sec, ajouter beurre + graines de vanille." },
+        { "ordre": 2, "description": "Disposer les quartiers de pommes serrés dans le moule." },
+        { "ordre": 3, "description": "Confire à feu moyen 15 min." },
+        { "ordre": 4, "description": "Couvrir avec la pâte brisée, rentrer les bords. Piquer." },
+        { "ordre": 5, "description": "Cuire 25–30 min à 190°C. Démouler tiède." }
       ],
       "quiz": [
-        { "question": "Pourquoi démouler la Tatin tiède et non froide ?", "reponses": ["Pour que le caramel s'écoule bien et ne reste pas figé", "Pour éviter les brûlures", "Pour que la pâte soit croustillante"], "bonne": 0 },
-        { "question": "Comment réaliser un caramel à sec ?", "reponses": ["Faire fondre le sucre seul sans eau jusqu'à coloration ambrée", "Mélanger sucre et eau puis cuire", "Ajouter la crème directement dans le sucre"], "bonne": 0 }
+        { "question": "Pourquoi démouler tiède ?", "reponses": ["Caramel encore fluide", "Plus facile à couper", "Sécurité"], "bonne": 0 }
       ],
-      "techniques_cap": ["Caramel à sec", "Pâte brisée", "Cuisson inversée", "Démoulage"],
-      "conseils": "Démouler impérativement tiède. Trop chaud = brûlures. Trop froid = caramel figé impossible à démouler.",
+      "techniques_cap": ["Caramel à sec", "Cuisson inversée"],
+      "conseils": "Démouler tiède impérativement. Trop froid = caramel figé.",
       "chrono_cible": 60
+    },
+    {
+      "id": "tarte-pommes",
+      "nom": "Tarte aux pommes",
+      "categorie": "tartes",
+      "competences": ["cuissons", "assemblages"],
+      "temps": 60, "difficulte": 2, "ep": "EP1", "prerequis": ["pate-a-foncer"],
+      "ingredients": [
+        { "nom": "Pâte à foncer",       "quantite": 250, "unite": "g" },
+        { "nom": "Compote de pommes",   "quantite": 200, "unite": "g" },
+        { "nom": "Pommes Golden",       "quantite": 600, "unite": "g" },
+        { "nom": "Sucre",               "quantite": 50,  "unite": "g" },
+        { "nom": "Beurre",              "quantite": 30,  "unite": "g" },
+        { "nom": "Nappage blond",       "quantite": 50,  "unite": "g" }
+      ],
+      "etapes": [
+        { "ordre": 1, "description": "Foncer le cercle, piquer, cuire à blanc 10 min à 180°C." },
+        { "ordre": 2, "description": "Garnir de compote." },
+        { "ordre": 3, "description": "Disposer les lamelles de pommes en rosace." },
+        { "ordre": 4, "description": "Saupoudrer de sucre, parsemer de beurre. Cuire 25 min à 180°C." },
+        { "ordre": 5, "description": "Napper de nappage blond chaud à la sortie." }
+      ],
+      "quiz": [
+        { "question": "Pourquoi cuire à blanc avant ?", "reponses": ["Éviter l'humidité dans le fond", "Colorer la pâte", "Gagner du temps"], "bonne": 0 }
+      ],
+      "techniques_cap": ["Fonçage", "Rosace", "Nappage"],
+      "conseils": "Rosace régulière. Nappage chaud pour la brillance.",
+      "chrono_cible": 50
+    },
+    {
+      "id": "tarte-bourdaloue",
+      "nom": "Tarte bourdaloue",
+      "categorie": "tartes",
+      "competences": ["cuissons", "assemblages"],
+      "temps": 60, "difficulte": 3, "ep": "EP1", "prerequis": ["pate-sucree", "creme-amandes"],
+      "ingredients": [
+        { "nom": "Pâte sucrée",       "quantite": 250, "unite": "g" },
+        { "nom": "Crème d'amandes",   "quantite": 300, "unite": "g" },
+        { "nom": "Poires au sirop",   "quantite": 5,   "unite": "demi-poires" },
+        { "nom": "Amandes effilées",  "quantite": 30,  "unite": "g" },
+        { "nom": "Nappage blond",     "quantite": 50,  "unite": "g" }
+      ],
+      "etapes": [
+        { "ordre": 1, "description": "Foncer le cercle avec la pâte sucrée." },
+        { "ordre": 2, "description": "Garnir de crème d'amandes." },
+        { "ordre": 3, "description": "Déposer les demi-poires égouttées en rosace." },
+        { "ordre": 4, "description": "Parsemer d'amandes effilées. Cuire 35 min à 175°C." },
+        { "ordre": 5, "description": "Napper chaud." }
+      ],
+      "quiz": [
+        { "question": "Fruit caractéristique de la bourdaloue ?", "reponses": ["Poire", "Pomme", "Abricot"], "bonne": 0 }
+      ],
+      "techniques_cap": ["Fonçage", "Crème d'amandes", "Nappage"],
+      "conseils": "Bien égoutter les poires pour éviter une crème détrempée.",
+      "chrono_cible": 50
+    },
+    {
+      "id": "tarte-fruits-frais",
+      "nom": "Tarte aux fruits frais",
+      "categorie": "tartes",
+      "competences": ["assemblages", "techniques"],
+      "temps": 50, "difficulte": 2, "ep": "EP2", "prerequis": ["pate-sucree", "creme-patissiere"],
+      "ingredients": [
+        { "nom": "Pâte sucrée",       "quantite": 250, "unite": "g" },
+        { "nom": "Crème pâtissière",  "quantite": 300, "unite": "g" },
+        { "nom": "Fruits de saison",  "quantite": 400, "unite": "g" },
+        { "nom": "Nappage neutre",    "quantite": 100, "unite": "g" }
+      ],
+      "etapes": [
+        { "ordre": 1, "description": "Foncer le cercle. Cuire à blanc 25 min à 170°C. Refroidir." },
+        { "ordre": 2, "description": "Garnir le fond cuit de crème pâtissière." },
+        { "ordre": 3, "description": "Disposer les fruits frais joliment." },
+        { "ordre": 4, "description": "Napper de nappage neutre tiède." }
+      ],
+      "quiz": [
+        { "question": "Pourquoi un nappage neutre sur les fruits ?", "reponses": ["Brillance et conservation", "Sucrer", "Coller les fruits"], "bonne": 0 }
+      ],
+      "techniques_cap": ["Cuisson à blanc", "Crème pâtissière", "Nappage"],
+      "conseils": "Disposer du plus grand au plus petit. Nappage juste tiède.",
+      "chrono_cible": 40
     },
 
     {
-      "id": "fondant-chocolat",
-      "nom": "Fondant au chocolat",
-      "categorie": "biscuits",
-      "competences": ["cuissons", "pesees", "textures"],
-      "temps": 32,
-      "difficulte": 2,
-      "ep": "EP1",
-      "prerequis": [],
+      "id": "opera",
+      "nom": "Opéra",
+      "categorie": "entremets",
+      "competences": ["assemblages", "techniques", "cuissons"],
+      "temps": 120, "difficulte": 5, "ep": "EP2", "prerequis": ["biscuit-joconde", "creme-au-beurre", "ganache-chocolat"],
       "ingredients": [
-        { "nom": "Chocolat noir 70%", "quantite": 200, "unite": "g" },
-        { "nom": "Beurre",            "quantite": 120, "unite": "g" },
-        { "nom": "Œufs entiers",      "quantite": 4,   "unite": "u" },
-        { "nom": "Sucre semoule",     "quantite": 100, "unite": "g" },
-        { "nom": "Farine T55",        "quantite": 40,  "unite": "g" },
-        { "nom": "Sel fin",           "quantite": 1,   "unite": "pincée" }
+        { "nom": "Biscuit Joconde",       "quantite": 1,   "unite": "plaque" },
+        { "nom": "Crème au beurre café",  "quantite": 300, "unite": "g" },
+        { "nom": "Ganache chocolat",      "quantite": 250, "unite": "g" },
+        { "nom": "Sirop café",            "quantite": 150, "unite": "g" },
+        { "nom": "Glaçage chocolat",      "quantite": 150, "unite": "g" }
       ],
       "etapes": [
-        { "ordre": 1, "description": "Faire fondre le chocolat et le beurre au bain-marie. Laisser tiédir." },
-        { "ordre": 2, "description": "Blanchir les œufs avec le sucre jusqu'à ruban." },
-        { "ordre": 3, "description": "Incorporer le chocolat-beurre aux œufs blanchis, puis la farine tamisée." },
-        { "ordre": 4, "description": "Beurrer et fariner les moules individuels. Verser l'appareil aux 3/4." },
-        { "ordre": 5, "description": "Cuire exactement 10–12 min à 200°C. Le centre doit rester coulant. Démouler aussitôt." }
+        { "ordre": 1, "description": "Préparer biscuit Joconde, crème au beurre café, ganache." },
+        { "ordre": 2, "description": "Détailler 3 rectangles de biscuit. Chablonner le premier au chocolat." },
+        { "ordre": 3, "description": "Monter : biscuit chablonné / crème au beurre / biscuit imbibé / ganache / biscuit imbibé / crème au beurre." },
+        { "ordre": 4, "description": "Bloquer au froid 2h. Lisser le dessus." },
+        { "ordre": 5, "description": "Napper de glaçage chocolat. Inscrire 'Opéra' au cornet. Détailler à la lyre." }
       ],
       "quiz": [
-        { "question": "Comment savoir si le fondant est bien cuit ?", "reponses": ["Le cure-dent ressort humide mais pas liquide, les bords sont fermes", "Le dessus est totalement sec", "Le cure-dent ressort propre"], "bonne": 0 },
-        { "question": "Pourquoi faire fondre au bain-marie plutôt qu'au micro-ondes ?", "reponses": ["Pour une chaleur douce et homogène sans brûler le chocolat", "Par tradition", "Le résultat est identique"], "bonne": 0 }
+        { "question": "Combien de couches dans un opéra ?", "reponses": ["3 biscuits, 2 CAB, 1 ganache, 1 nappage", "2 biscuits, 1 crème", "4 biscuits"], "bonne": 0 }
       ],
-      "techniques_cap": ["Bain-marie", "Ruban", "Appareil à biscuit", "Cuisson minute"],
-      "conseils": "Le temps de cuisson est crucial : trop cuit = plus de cœur coulant. Le centre doit rester légèrement tremblotant à la sortie du four.",
-      "chrono_cible": 20
+      "techniques_cap": ["Joconde", "Crème au beurre", "Ganache", "Chablonnage", "Nappage"],
+      "conseils": "Chaque couche bien plane. Travailler dans une cuisine fraîche.",
+      "chrono_cible": 100
+    },
+    {
+      "id": "charlotte-fraises",
+      "nom": "Charlotte aux fraises",
+      "categorie": "entremets",
+      "competences": ["assemblages", "textures", "techniques"],
+      "temps": 50, "difficulte": 3, "ep": "EP2", "prerequis": ["biscuit-cuillere", "creme-chantilly"],
+      "ingredients": [
+        { "nom": "Biscuits cuillère",  "quantite": 24,  "unite": "u" },
+        { "nom": "Fraises fraîches",   "quantite": 500, "unite": "g" },
+        { "nom": "Crème liquide 35%",  "quantite": 400, "unite": "g" },
+        { "nom": "Sucre glace",        "quantite": 60,  "unite": "g" },
+        { "nom": "Gélatine",           "quantite": 8,   "unite": "g" },
+        { "nom": "Coulis de fraises",  "quantite": 100, "unite": "g" },
+        { "nom": "Sirop d'imbibage",   "quantite": 100, "unite": "g" }
+      ],
+      "etapes": [
+        { "ordre": 1, "description": "Chemiser le cercle avec les biscuits cuillère imbibés (sucre vers l'extérieur)." },
+        { "ordre": 2, "description": "Monter la crème chantilly avec le sucre glace." },
+        { "ordre": 3, "description": "Fondre la gélatine ramollie dans le coulis chaud. Incorporer à la chantilly." },
+        { "ordre": 4, "description": "Alterner mousse et fraises. Terminer par une couche de biscuits imbibés." },
+        { "ordre": 5, "description": "Réfrigérer 4h min. Décorer fraises fraîches + miroir de coulis." }
+      ],
+      "quiz": [
+        { "question": "Côté du biscuit cuillère contre le cercle ?", "reponses": ["Côté sucre vers l'extérieur", "Côté sucre intérieur", "Peu importe"], "bonne": 0 }
+      ],
+      "techniques_cap": ["Chemisage cercle", "Chantilly", "Gélatine"],
+      "conseils": "Biscuits imbibés mais pas détrempés. Démouler sur grille.",
+      "chrono_cible": 40
+    },
+    {
+      "id": "fraisier",
+      "nom": "Fraisier",
+      "categorie": "entremets",
+      "competences": ["assemblages", "techniques", "cuissons"],
+      "temps": 130, "difficulte": 4, "ep": "EP2", "prerequis": ["genoise", "creme-mousseline"],
+      "ingredients": [
+        { "nom": "Génoise",            "quantite": 2,   "unite": "disques 20cm" },
+        { "nom": "Crème mousseline",   "quantite": 500, "unite": "g" },
+        { "nom": "Fraises fraîches",   "quantite": 500, "unite": "g" },
+        { "nom": "Sirop d'imbibage",   "quantite": 150, "unite": "g" },
+        { "nom": "Pâte d'amandes rose","quantite": 100, "unite": "g" }
+      ],
+      "etapes": [
+        { "ordre": 1, "description": "Détailler 2 disques de génoise au diamètre du cercle." },
+        { "ordre": 2, "description": "Premier disque imbibé. Chemiser le cercle de demi-fraises coupées." },
+        { "ordre": 3, "description": "Pocher la mousseline entre les fraises et sur le disque." },
+        { "ordre": 4, "description": "Disposer les fraises au centre, recouvrir de mousseline." },
+        { "ordre": 5, "description": "Couvrir du 2e disque imbibé. Étaler la pâte d'amandes rose. Décorer." }
+      ],
+      "quiz": [
+        { "question": "Comment placer les demi-fraises ?", "reponses": ["Coupées contre le cercle, pointe vers le haut", "À plat", "Entières"], "bonne": 0 }
+      ],
+      "techniques_cap": ["Génoise", "Mousseline", "Chemisage fraises", "Pâte d'amandes"],
+      "conseils": "Fraises de taille uniforme. Mousseline bien remplie entre chaque fraise.",
+      "chrono_cible": 115
+    },
+    {
+      "id": "foret-noire",
+      "nom": "Forêt-noire",
+      "categorie": "entremets",
+      "competences": ["assemblages", "cuissons"],
+      "temps": 110, "difficulte": 4, "ep": "EP2", "prerequis": ["genoise", "creme-chantilly"],
+      "ingredients": [
+        { "nom": "Génoise chocolat",   "quantite": 3,   "unite": "disques" },
+        { "nom": "Crème chantilly",    "quantite": 600, "unite": "g" },
+        { "nom": "Cerises griottines", "quantite": 300, "unite": "g" },
+        { "nom": "Kirsch",             "quantite": 30,  "unite": "g" },
+        { "nom": "Copeaux chocolat",   "quantite": 50,  "unite": "g" }
+      ],
+      "etapes": [
+        { "ordre": 1, "description": "Réaliser 3 disques de génoise au cacao." },
+        { "ordre": 2, "description": "Imbiber chaque disque de sirop kirsch." },
+        { "ordre": 3, "description": "Monter : disque / chantilly + cerises / disque / chantilly + cerises / disque." },
+        { "ordre": 4, "description": "Masquer entièrement de chantilly à la palette." },
+        { "ordre": 5, "description": "Décorer copeaux de chocolat + cerises sur le dessus." }
+      ],
+      "quiz": [
+        { "question": "Alcool d'imbibage de la forêt-noire ?", "reponses": ["Kirsch", "Rhum", "Cognac"], "bonne": 0 }
+      ],
+      "techniques_cap": ["Génoise", "Imbibage", "Masquage", "Copeaux"],
+      "conseils": "Copeaux réalisés au couteau économe sur tablette tempérée.",
+      "chrono_cible": 95
+    },
+    {
+      "id": "moka",
+      "nom": "Moka",
+      "categorie": "entremets",
+      "competences": ["assemblages", "techniques"],
+      "temps": 100, "difficulte": 4, "ep": "EP2", "prerequis": ["genoise", "creme-au-beurre"],
+      "ingredients": [
+        { "nom": "Génoise",                "quantite": 3,   "unite": "disques" },
+        { "nom": "Crème au beurre café",   "quantite": 500, "unite": "g" },
+        { "nom": "Sirop café",             "quantite": 150, "unite": "g" },
+        { "nom": "Amandes effilées grillées","quantite": 80, "unite": "g" },
+        { "nom": "Grains café chocolat",   "quantite": 12,  "unite": "u" }
+      ],
+      "etapes": [
+        { "ordre": 1, "description": "Détailler 3 disques de génoise. Imbiber au sirop café." },
+        { "ordre": 2, "description": "Monter : disque / CAB café / disque / CAB café / disque." },
+        { "ordre": 3, "description": "Masquer le dessus et les côtés de crème au beurre café." },
+        { "ordre": 4, "description": "Appliquer les amandes grillées sur les côtés." },
+        { "ordre": 5, "description": "Décorer rosaces à la douille + grains de café chocolat." }
+      ],
+      "quiz": [
+        { "question": "Décor traditionnel du moka ?", "reponses": ["Rosaces + grains café chocolat", "Fruits frais", "Glaçage miroir"], "bonne": 0 }
+      ],
+      "techniques_cap": ["Génoise", "Crème au beurre", "Masquage", "Décor douille"],
+      "conseils": "Amandes appliquées à la main sur les côtés froids.",
+      "chrono_cible": 85
+    },
+    {
+      "id": "entremet-chocolat",
+      "nom": "Entremets chocolat",
+      "categorie": "entremets",
+      "competences": ["assemblages", "textures"],
+      "temps": 140, "difficulte": 4, "ep": "EP2", "prerequis": ["genoise", "ganache-chocolat"],
+      "ingredients": [
+        { "nom": "Génoise chocolat",      "quantite": 2,   "unite": "disques" },
+        { "nom": "Ganache montée",        "quantite": 500, "unite": "g" },
+        { "nom": "Sirop cacao",           "quantite": 100, "unite": "g" },
+        { "nom": "Glaçage miroir chocolat","quantite": 300, "unite": "g" }
+      ],
+      "etapes": [
+        { "ordre": 1, "description": "Détailler 2 disques de génoise chocolat, imbiber." },
+        { "ordre": 2, "description": "Monter en cercle : disque / ganache / disque / ganache." },
+        { "ordre": 3, "description": "Lisser et bloquer au congélateur 4h minimum." },
+        { "ordre": 4, "description": "Démouler congelé. Glacer au miroir chocolat à 35°C." },
+        { "ordre": 5, "description": "Décorer copeaux + feuille d'or éventuelle." }
+      ],
+      "quiz": [
+        { "question": "Pourquoi glacer un entremets congelé ?", "reponses": ["Le miroir prend immédiatement", "Pour le conserver", "Pour le démouler"], "bonne": 0 }
+      ],
+      "techniques_cap": ["Ganache montée", "Glaçage miroir", "Congélation"],
+      "conseils": "Glaçage à 35°C exactement sur entremets à -18°C.",
+      "chrono_cible": 120
+    },
+    {
+      "id": "entremet-fruits-rouges",
+      "nom": "Entremets fruits rouges",
+      "categorie": "entremets",
+      "competences": ["assemblages", "textures"],
+      "temps": 130, "difficulte": 4, "ep": "EP2", "prerequis": ["biscuit-dacquoise"],
+      "ingredients": [
+        { "nom": "Dacquoise",          "quantite": 2,   "unite": "disques" },
+        { "nom": "Mousse fruits rouges","quantite": 500, "unite": "g" },
+        { "nom": "Coulis gélifié",     "quantite": 200, "unite": "g" },
+        { "nom": "Nappage miroir",     "quantite": 200, "unite": "g" }
+      ],
+      "etapes": [
+        { "ordre": 1, "description": "Détailler 2 disques de dacquoise." },
+        { "ordre": 2, "description": "Couler le coulis gélifié sur l'un, congeler en insert." },
+        { "ordre": 3, "description": "Monter : dacquoise / mousse / insert congelé / mousse / dacquoise." },
+        { "ordre": 4, "description": "Bloquer au congélateur 4h. Démouler." },
+        { "ordre": 5, "description": "Glacer au nappage miroir rouge à 35°C." }
+      ],
+      "quiz": [
+        { "question": "Rôle de l'insert congelé ?", "reponses": ["Cœur de saveur intense", "Tenir l'entremets", "Décorer"], "bonne": 0 }
+      ],
+      "techniques_cap": ["Dacquoise", "Mousse aux fruits", "Insert", "Glaçage miroir"],
+      "conseils": "L'insert apporte le contraste de texture et de saveur.",
+      "chrono_cible": 110
+    },
+
+    {
+      "id": "pate-levee-feuilletee",
+      "nom": "Pâte levée feuilletée",
+      "categorie": "viennoiseries",
+      "competences": ["cuissons", "techniques", "assemblages"],
+      "temps": 180, "difficulte": 5, "ep": "EP1", "prerequis": [],
+      "ingredients": [
+        { "nom": "Farine T45",          "quantite": 500, "unite": "g" },
+        { "nom": "Lait",                "quantite": 250, "unite": "g" },
+        { "nom": "Levure fraîche",      "quantite": 20,  "unite": "g" },
+        { "nom": "Sucre",               "quantite": 50,  "unite": "g" },
+        { "nom": "Sel",                 "quantite": 10,  "unite": "g" },
+        { "nom": "Beurre de détrempe",  "quantite": 50,  "unite": "g" },
+        { "nom": "Beurre de tourage",   "quantite": 250, "unite": "g" }
+      ],
+      "etapes": [
+        { "ordre": 1, "description": "Pétrir la détrempe sans le beurre de tourage. Pointer 30 min." },
+        { "ordre": 2, "description": "Abaisser, enfermer le beurre de tourage (14–16°C)." },
+        { "ordre": 3, "description": "Donner 3 tours simples avec repos 20 min entre chaque." },
+        { "ordre": 4, "description": "Abaisser à 3 mm, détailler, façonner, apprêter 1h30 à 26–28°C." },
+        { "ordre": 5, "description": "Dorer, cuire 18–22 min à 170°C four ventilé." }
+      ],
+      "quiz": [
+        { "question": "Combien de tours pour la PLF ?", "reponses": ["3 tours simples", "6 tours simples", "1 tour double"], "bonne": 0 }
+      ],
+      "techniques_cap": ["Tourage", "Pointage", "Apprêt"],
+      "conseils": "Détrempe et beurre à même consistance. Étuve 26–28°C max.",
+      "chrono_cible": 150
+    },
+    {
+      "id": "brioche",
+      "nom": "Brioche",
+      "categorie": "viennoiseries",
+      "competences": ["cuissons", "techniques"],
+      "temps": 180, "difficulte": 3, "ep": "EP1", "prerequis": [],
+      "ingredients": [
+        { "nom": "Farine T45",     "quantite": 500, "unite": "g" },
+        { "nom": "Sucre",          "quantite": 50,  "unite": "g" },
+        { "nom": "Sel",            "quantite": 10,  "unite": "g" },
+        { "nom": "Levure fraîche", "quantite": 20,  "unite": "g" },
+        { "nom": "Œufs entiers",   "quantite": 5,   "unite": "u" },
+        { "nom": "Lait",           "quantite": 60,  "unite": "g" },
+        { "nom": "Beurre",         "quantite": 250, "unite": "g" }
+      ],
+      "etapes": [
+        { "ordre": 1, "description": "Pétrir tous les ingrédients sauf beurre jusqu'au décollement." },
+        { "ordre": 2, "description": "Incorporer le beurre pommade progressivement." },
+        { "ordre": 3, "description": "Pointer 1h à température ambiante." },
+        { "ordre": 4, "description": "Rabattre, façonner, apprêter 1h30 à 26–28°C." },
+        { "ordre": 5, "description": "Dorer, cuire 25–30 min à 180°C." }
+      ],
+      "quiz": [
+        { "question": "Quand incorporer le beurre ?", "reponses": ["Après décollement de la pâte", "Dès le début", "À la fin du pointage"], "bonne": 0 }
+      ],
+      "techniques_cap": ["Pétrissage", "Pointage", "Apprêt"],
+      "conseils": "Décollement = test du voile. Beurre frais (pas fondu).",
+      "chrono_cible": 160
+    },
+    {
+      "id": "pain-au-lait",
+      "nom": "Pain au lait",
+      "categorie": "viennoiseries",
+      "competences": ["cuissons", "techniques"],
+      "temps": 150, "difficulte": 2, "ep": "EP1", "prerequis": [],
+      "ingredients": [
+        { "nom": "Farine T45",     "quantite": 500, "unite": "g" },
+        { "nom": "Sucre",          "quantite": 50,  "unite": "g" },
+        { "nom": "Sel",            "quantite": 10,  "unite": "g" },
+        { "nom": "Levure fraîche", "quantite": 20,  "unite": "g" },
+        { "nom": "Lait",           "quantite": 270, "unite": "g" },
+        { "nom": "Beurre",         "quantite": 75,  "unite": "g" },
+        { "nom": "Œuf entier",     "quantite": 1,   "unite": "u" }
+      ],
+      "etapes": [
+        { "ordre": 1, "description": "Pétrir tous les ingrédients sauf beurre." },
+        { "ordre": 2, "description": "Incorporer le beurre progressivement." },
+        { "ordre": 3, "description": "Pointer 1h, rabattre." },
+        { "ordre": 4, "description": "Façonner en navettes. Apprêter 1h30." },
+        { "ordre": 5, "description": "Dorer, scarifier, cuire 12–15 min à 180°C." }
+      ],
+      "quiz": [
+        { "question": "Pourquoi scarifier le pain au lait ?", "reponses": ["Maîtriser le développement et décorer", "Aérer", "Cuire plus vite"], "bonne": 0 }
+      ],
+      "techniques_cap": ["Pétrissage", "Façonnage navette", "Scarification"],
+      "conseils": "Façonnage allongé régulier. Coups de lame en biais.",
+      "chrono_cible": 130
+    },
+    {
+      "id": "croissant",
+      "nom": "Croissants",
+      "categorie": "viennoiseries",
+      "competences": ["cuissons", "techniques", "assemblages"],
+      "temps": 200, "difficulte": 5, "ep": "EP1", "prerequis": ["pate-levee-feuilletee"],
+      "ingredients": [
+        { "nom": "Pâte levée feuilletée", "quantite": 600, "unite": "g" },
+        { "nom": "Dorure (œuf entier)",   "quantite": 1,   "unite": "u" }
+      ],
+      "etapes": [
+        { "ordre": 1, "description": "Abaisser la PLF à 5 mm." },
+        { "ordre": 2, "description": "Détailler des triangles base 9 cm, hauteur 22 cm." },
+        { "ordre": 3, "description": "Inciser la base, étirer légèrement, rouler en partant de la base." },
+        { "ordre": 4, "description": "Disposer pointe dessous. Apprêter 1h30 à 26–28°C." },
+        { "ordre": 5, "description": "Dorer, cuire 18–22 min à 170°C four ventilé." }
+      ],
+      "quiz": [
+        { "question": "Forme des triangles à détailler ?", "reponses": ["Base 9 cm, hauteur 22 cm", "Carrés 10 cm", "Disques 12 cm"], "bonne": 0 }
+      ],
+      "techniques_cap": ["Détaillage", "Façonnage croissant", "Apprêt"],
+      "conseils": "Tension juste : ne pas serrer trop le roulage.",
+      "chrono_cible": 180
+    },
+    {
+      "id": "pain-au-chocolat",
+      "nom": "Pain au chocolat",
+      "categorie": "viennoiseries",
+      "competences": ["cuissons", "techniques", "assemblages"],
+      "temps": 200, "difficulte": 4, "ep": "EP1", "prerequis": ["pate-levee-feuilletee"],
+      "ingredients": [
+        { "nom": "Pâte levée feuilletée",  "quantite": 600, "unite": "g" },
+        { "nom": "Bâtons de chocolat",     "quantite": 24,  "unite": "u" },
+        { "nom": "Dorure (œuf entier)",    "quantite": 1,   "unite": "u" }
+      ],
+      "etapes": [
+        { "ordre": 1, "description": "Abaisser la PLF à 5 mm." },
+        { "ordre": 2, "description": "Détailler des rectangles 8×12 cm." },
+        { "ordre": 3, "description": "Placer 2 bâtons de chocolat, rouler en serrant." },
+        { "ordre": 4, "description": "Disposer soudure dessous. Apprêter 1h30 à 26–28°C." },
+        { "ordre": 5, "description": "Dorer, cuire 18–22 min à 170°C four ventilé." }
+      ],
+      "quiz": [
+        { "question": "Combien de bâtons de chocolat ?", "reponses": ["2 par pain", "1 par pain", "3 par pain"], "bonne": 0 }
+      ],
+      "techniques_cap": ["Détaillage", "Façonnage", "Apprêt"],
+      "conseils": "Soudure bien fermée pour éviter l'ouverture à la cuisson.",
+      "chrono_cible": 180
+    },
+
+    {
+      "id": "glacage-fondant",
+      "nom": "Glaçage fondant",
+      "categorie": "glacages",
+      "competences": ["techniques", "textures"],
+      "temps": 10, "difficulte": 2, "ep": "EP1", "prerequis": [],
+      "ingredients": [
+        { "nom": "Fondant blanc",       "quantite": 500, "unite": "g" },
+        { "nom": "Sirop 30°B",          "quantite": 50,  "unite": "g" },
+        { "nom": "Colorant ou arôme",   "quantite": 5,   "unite": "g" }
+      ],
+      "etapes": [
+        { "ordre": 1, "description": "Détendre le fondant avec un peu de sirop." },
+        { "ordre": 2, "description": "Chauffer doucement au bain-marie jusqu'à 37°C MAX." },
+        { "ordre": 3, "description": "Incorporer l'arôme ou le colorant." },
+        { "ordre": 4, "description": "Utiliser immédiatement sur les pièces à glacer." }
+      ],
+      "quiz": [
+        { "question": "Température maximale du fondant ?", "reponses": ["37°C max (40°C absolu)", "60°C", "25°C"], "bonne": 0 }
+      ],
+      "techniques_cap": ["Glaçage fondant", "Bain-marie"],
+      "conseils": "JAMAIS au-dessus de 40°C : il perd sa brillance et blanchit.",
+      "chrono_cible": 8
+    },
+    {
+      "id": "glacage-miroir-chocolat",
+      "nom": "Glaçage miroir chocolat",
+      "categorie": "glacages",
+      "competences": ["cuissons", "techniques", "textures"],
+      "temps": 30, "difficulte": 3, "ep": "EP2", "prerequis": [],
+      "ingredients": [
+        { "nom": "Eau",                  "quantite": 125, "unite": "g" },
+        { "nom": "Sucre",                "quantite": 225, "unite": "g" },
+        { "nom": "Crème entière",        "quantite": 225, "unite": "g" },
+        { "nom": "Cacao en poudre",      "quantite": 75,  "unite": "g" },
+        { "nom": "Gélatine (5 feuilles)","quantite": 10,  "unite": "g" }
+      ],
+      "etapes": [
+        { "ordre": 1, "description": "Réhydrater la gélatine dans l'eau froide." },
+        { "ordre": 2, "description": "Porter eau + sucre + crème à ébullition." },
+        { "ordre": 3, "description": "Ajouter le cacao, cuire 2 min en remuant." },
+        { "ordre": 4, "description": "Refroidir à 60°C, incorporer la gélatine essorée. Mixer sans bulles." },
+        { "ordre": 5, "description": "Utiliser à 35°C sur entremets congelé." }
+      ],
+      "quiz": [
+        { "question": "Température d'utilisation du miroir ?", "reponses": ["35°C sur entremets congelé", "60°C sur entremets froid", "20°C sur entremets ambiant"], "bonne": 0 }
+      ],
+      "techniques_cap": ["Glaçage miroir", "Gélatine", "Cuisson sirop"],
+      "conseils": "Mixer sans incorporer d'air. Filtrer si nécessaire. Couler en 1 fois.",
+      "chrono_cible": 25
     }
   ]
 }

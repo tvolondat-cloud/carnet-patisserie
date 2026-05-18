@@ -1,0 +1,47 @@
+name: Docs Nightly Sync
+
+# Tourne tous les soirs à 18h heure de Paris (16h UTC en été, 17h UTC en hiver)
+# Déclenche aussi manuellement via l'UI GitHub Actions
+
+on:
+  schedule:
+    - cron: '0 16 * * *'   # 18h CEST (UTC+2, avril–oct)
+  workflow_dispatch:
+
+permissions:
+  contents: write   # nécessaire pour git push
+
+jobs:
+  sync-docs:
+    name: Sync CHANGELOG + docs
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --no-audit --prefer-offline
+
+      - name: Sync CHANGELOG
+        run: node scripts/sync-docs.js
+
+      - name: Commit if changed
+        run: |
+          git config user.name  "Brigade Sucrée Bot"
+          git config user.email "bot@brigadesucree.app"
+          git add CHANGELOG.md docs/
+          git diff --staged --quiet && echo "Rien à commiter." || (
+            git commit -m "docs(auto): nightly sync $(date -u +'%Y-%m-%d') [skip ci]"
+            git push
+          )

@@ -11,8 +11,8 @@ import Gingerbread from './Gingerbread.svelte';
 				<span class="accent">sans stress.</span>
 			</h1>
 			<p class="ld-lead">
-				La méthode CFA dans ta poche : <strong>17 recettes incontournables</strong>,
-				mode laboratoire avec quiz et chrono, suivi de progression.
+				La méthode CFA dans ta poche : <strong>58 recettes CAP Pâtissier</strong>,
+				mode laboratoire avec quiz et chrono, fiches de révision, examen blanc.
 				Pour étudiants CAP <strong>et</strong> particuliers passionnés.
 			</p>
 
@@ -20,21 +20,21 @@ import Gingerbread from './Gingerbread.svelte';
 				<a href="/auth" class="ld-btn ld-btn-primary ld-btn-large" data-track="cta:hero-signup">
 					Commencer gratuitement →
 				</a>
-				<a href="#how" class="ld-btn ld-btn-secondary ld-btn-large" data-track="cta:hero-howto">
-					Voir comment ça marche
+				<a href="#pricing" class="ld-btn ld-btn-secondary ld-btn-large" data-track="cta:hero-pricing">
+					Voir les formules
 				</a>
 			</div>
 
 			<p class="hero-reassurance">
-				⏱️ <strong>30 secondes</strong> pour t'inscrire · Pas de carte bancaire ·
-				Tu peux supprimer ton compte à tout moment
+				⏱️ <strong>30 secondes</strong> pour t'inscrire · 10 recettes gratuites ·
+				Pas de carte bancaire requise
 			</p>
 
 			<div class="hero-trust">
 				<div class="trust-stars" aria-hidden="true">
 					<span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
 				</div>
-				<span class="trust-text">Bêta de lancement · Toutes les fonctionnalités débloquées</span>
+				<span class="trust-text">Référentiel CAP officiel 2025-2026 · Mode labo complet</span>
 			</div>
 		</div>
 
@@ -45,7 +45,7 @@ import Gingerbread from './Gingerbread.svelte';
 				<span>📚</span>
 				<div>
 					<strong>Quiz</strong>
-					<small>17 recettes</small>
+					<small>58 recettes</small>
 				</div>
 			</div>
 			<div class="hero-badge badge-chrono" aria-hidden="true">

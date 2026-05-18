@@ -3,12 +3,14 @@ import { page } from '$app/stores';
 import { goto } from '$app/navigation';
 import { recettes } from '$lib/stores/recettes.js';
 import { progression, updateProgression } from '$lib/stores/progression.js';
+import { isPro, FREE_RECIPE_SLUGS } from '$lib/stores/auth.js';
 import { events } from '$lib/analytics.js';
 import { slugify } from '$lib/utils/slugify.js';
 
 $: slug = $page.params.id;
 $: recette = $recettes.find(r => slugify(r.nom) === slug);
 $: id = recette?.id;
+$: locked = !$isPro && !FREE_RECIPE_SLUGS.has(slug);
 $: p = $progression[id];
 
 let labStartTracked = false;
@@ -57,6 +59,19 @@ async function finishLab() {
 
 {#if !recette}
 <div class="page"><div class="spinner" style="margin-top:48px"></div></div>
+{:else if locked}
+<div class="page">
+	<div style="margin-bottom:8px">
+		<button class="btn btn-ghost btn-sm" on:click={() => goto(`/recettes/${slug}`)}>← Retour</button>
+	</div>
+	<div class="paywall-card">
+		<div class="paywall-icon">🔒</div>
+		<div class="paywall-title">Mode Labo · Recette Pro</div>
+		<p class="paywall-desc">Le mode laboratoire pour cette recette est disponible avec le plan Pro (58 recettes CAP complètes).</p>
+		<a href="/profil#plan" class="btn btn-primary btn-block" style="margin-top:12px">Passer au plan Pro →</a>
+		<button class="btn btn-ghost btn-sm btn-block" style="margin-top:8px" on:click={() => goto('/recettes')}>← Voir les recettes gratuites</button>
+	</div>
+</div>
 {:else}
 <div class="page">
 	<div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">

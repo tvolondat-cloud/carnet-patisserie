@@ -76,12 +76,12 @@ jobs:
 
   # ─────────────────────────────────────────────────────────────
   # Job security — scan secrets + vulnérabilités npm
-  # Tourne sur chaque push main + PR vers main
+  # Tourne sur chaque push main (prod) + PR vers main
   # ─────────────────────────────────────────────────────────────
   security:
     name: Security Scan
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 8
     if: github.ref == 'refs/heads/main' || github.event_name == 'pull_request'
 
     steps:
@@ -104,8 +104,65 @@ jobs:
         env:
           CI: true
 
+      - name: npm audit (auto-fix si possible)
+        run: |
+          echo "=== npm audit (production deps) ==="
+          npm audit --production --json > /tmp/audit.json 2>/dev/null || true
+          # Afficher un résumé lisible
+          node -e "
+            const a = JSON.parse(require('fs').readFileSync('/tmp/audit.json','utf8'));
+            const meta = a.metadata?.vulnerabilities ?? {};
+            const total = (meta.critical??0)+(meta.high??0)+(meta.moderate??0)+(meta.low??0);
+            console.log('Vulnérabilités :', JSON.stringify(meta));
+            if ((meta.critical??0) > 0) { console.error('❌ Vulnérabilités critiques détectées !'); process.exit(1); }
+            console.log('✅ Audit OK (' + total + ' vulns dont 0 critiques)');
+          "
+        env:
+          CI: true
+
       - name: Résumé si succès
         if: success()
         run: |
           echo ""
           echo "✅ Security scan OK — aucun secret ni nouvelle vuln critique."
+
+  # ─────────────────────────────────────────────────────────────
+  # Job post-prod — sync docs après push en production
+  # ─────────────────────────────────────────────────────────────
+  post-prod-docs:
+    name: Post-Prod Docs Sync
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: [build, security]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --no-audit --prefer-offline
+
+      - name: Sync CHANGELOG post-push
+        run: node scripts/sync-docs.js
+
+      - name: Commit docs si changements
+        run: |
+          git config user.name  "Brigade Sucrée Bot"
+          git config user.email "bot@brigadesucree.app"
+          git add CHANGELOG.md docs/
+          git diff --staged --quiet && echo "Docs déjà à jour." || (
+            git commit -m "docs(auto): post-prod sync [skip ci]"
+            git push
+          )

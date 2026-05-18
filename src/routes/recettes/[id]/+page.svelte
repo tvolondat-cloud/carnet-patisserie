@@ -11,7 +11,7 @@ import {
 	submitSuggestion
 } from '$lib/stores/recettes.js';
 import { progression, updateProgression } from '$lib/stores/progression.js';
-import { session } from '$lib/stores/auth.js';
+import { session, isPro, FREE_RECIPE_SLUGS } from '$lib/stores/auth.js';
 import { events } from '$lib/analytics.js';
 import { onDestroy } from 'svelte';
 import { slugify } from '$lib/utils/slugify.js';
@@ -19,6 +19,7 @@ import { slugify } from '$lib/utils/slugify.js';
 $: slug = $page.params.id;
 $: recette = $recettes.find(r => slugify(r.nom) === slug);
 $: id = recette?.id;
+$: locked = !$isPro && !FREE_RECIPE_SLUGS.has(slug);
 $: p = $progression[id];
 $: statut = p?.statut ?? 'a-tester';
 $: recCommentaires = $commentaires[id] ?? [];
@@ -299,6 +300,16 @@ onMount(async () => {
 	</div>
 
 	<h1 class="page-title">{recette.nom}</h1>
+
+	{#if locked}
+	<div class="paywall-card">
+		<div class="paywall-icon">🔒</div>
+		<div class="paywall-title">Recette Pro</div>
+		<p class="paywall-desc">Cette recette fait partie des 48 recettes avancées, accessibles avec le plan Pro.</p>
+		<a href="/profil#plan" class="btn btn-primary btn-block" style="margin-top:12px">Passer au plan Pro →</a>
+		<button class="btn btn-ghost btn-sm btn-block" style="margin-top:8px" on:click={() => goto('/recettes')}>← Voir les recettes gratuites</button>
+	</div>
+	{:else}
 	<div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
 		<span class="badge badge-{statut}">{statutLabel[statut]}</span>
 		<span class="badge badge-{recette.ep?.toLowerCase()}">{recette.ep}</span>
@@ -488,6 +499,7 @@ onMount(async () => {
 			💡 Proposer une amélioration
 		</button>
 	</div>
+	{/if}<!-- end locked gate -->
 </div>
 {/if}
 
@@ -574,6 +586,19 @@ onMount(async () => {
 {/if}
 
 <style>
+/* ── Paywall ── */
+.paywall-card {
+	text-align: center;
+	padding: 40px 24px;
+	background: var(--color-surface);
+	border: 2px dashed var(--color-border);
+	border-radius: var(--radius-xl);
+	margin-top: 8px;
+}
+.paywall-icon { font-size: 2.5rem; margin-bottom: 10px; }
+.paywall-title { font-size: 1.2rem; font-weight: 800; margin-bottom: 8px; color: var(--color-text); }
+.paywall-desc { font-size: 0.9rem; color: var(--color-text-2); line-height: 1.55; margin: 0; }
+
 .ing-row {
 	display: flex;
 	justify-content: space-between;

@@ -64,6 +64,23 @@ if [ ! -f scripts/sync-docs.js ]; then
 	exit 0
 fi
 
+# ── 2.5. Security scan rapide (staged) avant push main ──────
+if [ "$BRANCH" = "main" ] && [ "$SKIP_SECURITY" != "1" ]; then
+	echo "[pre-push] 🔒 Security scan (fichiers staged)..."
+	if ! command -v node >/dev/null 2>&1; then
+		echo "[pre-push] ⚠️  node introuvable, security scan ignoré."
+	elif ! node scripts/security-scan.js --staged --no-audit 2>&1; then
+		echo ""
+		echo "❌ Security scan échoué — push annulé."
+		echo "   Corrige les secrets détectés avant de pousser en prod."
+		echo "   Pour bypasser : SKIP_SECURITY=1 git push ..."
+		echo ""
+		exit 1
+	else
+		echo "[pre-push] ✅ Security scan OK."
+	fi
+fi
+
 echo "[pre-push] 📝 Synchronisation CHANGELOG.md..."
 node scripts/sync-docs.js --auto-stage
 
