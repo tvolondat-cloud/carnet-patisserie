@@ -21,7 +21,7 @@ const profiles = [
 		title: 'Si tu es particulier passionné',
 		subtitle: 'Sans école, mais avec l\'envie de progresser sérieusement',
 		bullets: [
-			'17 recettes incontournables, pédagogiques et détaillées',
+			'58 recettes incontournables, pédagogiques et détaillées',
 			'Calculateur de rendement ×0.25 → ×10 en temps réel',
 			'Notes et commentaires : ton journal de cuisine perso',
 			'Mode cuisine grand format pour les mains farinées'

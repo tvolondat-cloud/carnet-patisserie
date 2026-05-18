@@ -15,26 +15,19 @@
  * GEO (Generative Engine Optimization) :
  * - JSON-LD structuré = digestible par ChatGPT, Perplexity, Claude, Gemini
  * - FAQ explicite pour les AI Overviews / Featured Snippets Google
- * - Description d'entité claire avec faits chiffrés (17 recettes, etc.)
+ * - Description d'entité claire avec faits chiffrés (58 recettes, etc.)
  */
+
+import { faqs } from '$lib/data/landing-faq.js';
 
 const SITE_URL = 'https://brigadesucree.app';
 const TITLE = 'Brigade Sucrée — App CAP Pâtissier · Recettes, Mode Labo & Suivi de progression';
-const DESCRIPTION = 'L\'app gratuite des étudiants CAP Pâtissier et passionnés. 17 recettes du référentiel officiel, mode laboratoire (test + quiz + chrono), suivi par compétence, carnet PDF imprimable. Conforme au référentiel CAP 2024-2025.';
+const DESCRIPTION = 'L\'app des étudiants CAP Pâtissier et passionnés. 58 recettes du référentiel officiel, mode laboratoire (test + quiz + chrono), suivi par compétence, carnet PDF imprimable. 10 recettes gratuites, plan Pro dès 39€/an. Conforme au référentiel CAP 2025-2026.';
 const KEYWORDS = 'CAP Pâtissier, app CAP Pâtissier, réviser CAP Pâtissier, préparer CAP Pâtissier, examen CAP Pâtissier, candidat libre CAP Pâtissier, EP1 EP2 pâtisserie, recettes CAP, mode laboratoire pâtisserie, app pâtisserie';
 const OG_IMAGE = `${SITE_URL}/og-image.png`;
 
-// FAQ identique à LandingFAQ.svelte (à garder synchro)
-const faqs = [
-	{ q: 'Brigade Sucrée est-elle adaptée à un débutant complet ?', a: 'Oui. Chaque recette inclut les étapes détaillées, le vocabulaire technique expliqué, les pièges courants à éviter, et un quiz pour ancrer la théorie. Le mode Labo te guide pas à pas, avec des messages encourageants même si tu rates.' },
-	{ q: 'Combien coûte l\'app ?', a: '100% gratuit pendant la bêta — toutes les fonctionnalités incluses. Le plan Pro à 4,99€/mois (ou 39€/an) sortira après le Sprint 3 avec des features avancées (photos, partage, streak). Les inscrits avant le passage en Pro gardent leur accès gratuit aux fonctionnalités actuelles.' },
-	{ q: 'Le mode Laboratoire, c\'est concrètement quoi ?', a: 'Une méthode en 3 étapes : (1) Tester la recette en cuisine et la cocher. (2) Quiz théorique avec 4 questions, validé à 75%. (3) Chrono de réalisation, validé si tu es dans les temps + 20% de tolérance. Quand les 3 sont validées → recette "maîtrisée".' },
-	{ q: 'Est-ce que Brigade Sucrée remplace une école de pâtisserie ?', a: 'Non, c\'est un complément. L\'app structure ta révision et te fait gagner du temps, mais le geste se travaille en pratique. Pour les étudiants CAP en alternance, c\'est l\'outil idéal entre les sessions au CFA. Pour les particuliers, c\'est un guide structuré.' },
-	{ q: 'Sur quels appareils ça marche ?', a: 'Brigade Sucrée est une PWA (Progressive Web App) : ça tourne sur iOS, Android, desktop, peu importe le navigateur moderne. Tu peux l\'installer comme une app native (icône sur l\'écran d\'accueil) et l\'utiliser hors-ligne grâce au cache.' },
-	{ q: 'Mes données sont-elles privées ?', a: 'Oui. Tes recettes, notes et progression sont stockées en France (Supabase Paris) avec Row Level Security : seul ton compte y accède. Pas de revente, pas de pub. Les analytics sont opt-in (Consent Mode v2 RGPD), tu peux refuser depuis la bannière cookies.' },
-	{ q: 'Je peux exporter mes recettes ?', a: 'Oui : export PDF complet (format A4, marge 3 cm classeur, couleurs Berry Jam). Le PDF inclut les ingrédients, les étapes, tes notes personnelles. Filtres par catégorie ou option "uniquement les recettes maîtrisées".' },
-	{ q: 'Puis-je ajouter mes propres recettes ?', a: 'Pas encore : la bêta inclut les 17 recettes du référentiel CAP officiel. Les recettes personnelles arrivent au Sprint 2 (création, édition, photos). En attendant, tu peux modifier les ingrédients, les notes et les commentaires sur les recettes existantes.' }
-];
+// FAQ : source unique partagée avec LandingFAQ.svelte (pas de duplication)
+// → src/lib/data/landing-faq.js
 
 // JSON-LD : Organization
 const orgJsonLd = {
@@ -79,19 +72,39 @@ const appJsonLd = {
 		'@type': 'EducationalAudience',
 		audienceType: 'Étudiants CAP Pâtissier et particuliers passionnés'
 	},
-	offers: {
-		'@type': 'Offer',
-		price: '0',
-		priceCurrency: 'EUR',
-		availability: 'https://schema.org/InStock',
-		category: 'Free during beta'
-	},
+	offers: [
+		{
+			'@type': 'Offer',
+			name: 'Gratuit',
+			price: '0',
+			priceCurrency: 'EUR',
+			availability: 'https://schema.org/InStock',
+			description: '10 recettes fondamentales, Mode Labo, suivi, cours EP1/EP2'
+		},
+		{
+			'@type': 'Offer',
+			name: 'Pro mensuel',
+			price: '4.99',
+			priceCurrency: 'EUR',
+			availability: 'https://schema.org/InStock',
+			description: '58 recettes, carnet PDF, 50 fiches, 60 QCM'
+		},
+		{
+			'@type': 'Offer',
+			name: 'Pro annuel',
+			price: '39',
+			priceCurrency: 'EUR',
+			availability: 'https://schema.org/InStock',
+			description: 'Plan Pro complet, −35% vs mensuel'
+		}
+	],
 	featureList: [
-		'17 recettes du référentiel CAP officiel',
+		'58 recettes du référentiel CAP Pâtissier 2025-2026',
 		'Mode Laboratoire (test + quiz + chrono)',
 		'Suivi de progression par compétence',
 		'Calculateur de rendement (×0.25 à ×10)',
 		'Carnet PDF imprimable A4',
+		'50 fiches de révision + 60 QCM d\'examen blanc',
 		'Cours d\'ordonnancement EP1/EP2',
 		'Mode hors-ligne (PWA)',
 		'Authentification Google OAuth ou email'

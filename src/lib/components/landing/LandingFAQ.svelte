@@ -1,38 +1,5 @@
 <script>
-const faqs = [
-	{
-		q: 'Brigade Sucrée est-elle adaptée à un débutant complet ?',
-		a: 'Oui. Chaque recette inclut les étapes détaillées, le vocabulaire technique expliqué, les pièges courants à éviter, et un quiz pour ancrer la théorie. Le mode Labo te guide pas à pas, avec des messages encourageants même si tu rates.'
-	},
-	{
-		q: 'Combien coûte l\'app ?',
-		a: '100% gratuit pendant la bêta — toutes les fonctionnalités incluses. Le plan Pro à 4,99€/mois (ou 39€/an) sortira après le Sprint 3 avec des features avancées (photos, partage, streak). La promesse : ce que tu utilises maintenant restera gratuit.'
-	},
-	{
-		q: 'Le mode Laboratoire, c\'est concrètement quoi ?',
-		a: 'Une méthode en 3 étapes : (1) Tester la recette en cuisine et la cocher. (2) Quiz théorique avec 4 questions, validé à 75%. (3) Chrono de réalisation, validé si tu es dans les temps + 20% de tolérance. Quand les 3 sont validées → recette "maîtrisée".'
-	},
-	{
-		q: 'Est-ce que Brigade Sucrée remplace une école de pâtisserie ?',
-		a: 'Non, c\'est un complément. L\'app structure ta révision et te fait gagner du temps, mais le geste se travaille en pratique. Pour les étudiants CAP en alternance, c\'est l\'outil idéal entre les sessions au CFA. Pour les particuliers, c\'est un guide structuré.'
-	},
-	{
-		q: 'Sur quels appareils ça marche ?',
-		a: 'Brigade Sucrée est une PWA (Progressive Web App) : ça tourne sur iOS, Android, desktop, peu importe le navigateur moderne. Tu peux l\'installer comme une app native (icône sur l\'écran d\'accueil) et l\'utiliser hors-ligne grâce au cache.'
-	},
-	{
-		q: 'Mes données sont-elles privées ?',
-		a: 'Oui. Tes recettes, notes et progression sont stockées en France (Supabase Paris) avec Row Level Security : seul ton compte y accède. Pas de revente, pas de pub. Les analytics sont opt-in (Consent Mode v2 RGPD), tu peux refuser depuis la bannière cookies.'
-	},
-	{
-		q: 'Je peux exporter mes recettes ?',
-		a: 'Oui : export PDF complet (format A4, marge 3 cm classeur, couleurs Berry Jam). Le PDF inclut les ingrédients, les étapes, tes notes personnelles. Filtres par catégorie ou option "uniquement les recettes maîtrisées".'
-	},
-	{
-		q: 'Puis-je ajouter mes propres recettes ?',
-		a: 'Pas encore : la bêta inclut les 17 recettes du référentiel CAP officiel. Les recettes personnelles arrivent au Sprint 2 (création, édition, photos). En attendant, tu peux modifier les ingrédients, les notes et les commentaires sur les recettes existantes.'
-	}
-];
+import { faqs } from '$lib/data/landing-faq.js';
 
 let openIndex = 0;
 

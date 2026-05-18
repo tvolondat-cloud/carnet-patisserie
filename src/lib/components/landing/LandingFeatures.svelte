@@ -8,8 +8,8 @@ const features = [
 	},
 	{
 		icon: '📚',
-		title: '17 recettes du référentiel',
-		desc: 'Crèmes, pâtes, viennoiseries, entremets… Toutes les bases du CAP, prêtes à étudier.',
+		title: '58 recettes du référentiel',
+		desc: 'Crèmes, pâtes, viennoiseries, entremets, glaçages… Tout le référentiel CAP 2025-2026, prêt à étudier.',
 		bullets: ['Pâte feuilletée, levée feuilletée, à choux', 'Crèmes pâtissière, anglaise, mousseline', 'Opéra, Paris-Brest, Tarte Tatin']
 	},
 	{

@@ -8,8 +8,9 @@ import Gingerbread from './Gingerbread.svelte';
 			<span class="ld-eyebrow">Le moment, c'est maintenant</span>
 			<h2 class="ld-h2">Tu fais partie de la <span class="cta-accent">Brigade Sucrée</span>.</h2>
 			<p class="ld-lead">
-				Inscription en 30 secondes. Aucune carte bancaire. Toutes les fonctionnalités débloquées
-				pendant la bêta. Tu démarres avec les 17 recettes CAP, prêtes à étudier.
+				Inscription en 30 secondes, sans carte bancaire. Tu démarres gratuitement avec
+				10 recettes fondamentales et le Mode Labo complet. Passe au plan Pro quand tu veux
+				pour débloquer les 58 recettes CAP.
 			</p>
 
 			<div class="cta-actions">
