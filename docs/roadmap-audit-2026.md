@@ -43,9 +43,9 @@
 |---|--------|--------|--------|
 | P1 | **Pages recettes publiques (SEO)** | 5-10 recettes indexables sans auth : intro + ingrédients + contexte CAP, étapes détaillées derrière paywall. Cible : « crème pâtissière CAP », « pâte feuilletée recette CAP ». C'est le **levier d'acquisition organique #1** (la SPA cache tout le contenu). | 🔴 SEO majeur |
 | P1 | Recipe schema.org sur ces pages | `Recipe` JSON-LD (rich snippets cuisine Google = fort CTR). | 🟠 SEO |
-| P2 | Blog / contenu | 10 articles : « comment réviser le CAP Pâtissier », « programme EP1/EP2 », « candidat libre : conseils »… mots-clés fort volume identifiés dans l'audit. | 🟠 SEO long terme |
+| P2 | **Blog (SEO + idées recettes / inspirations)** | Section blog sur le site avec deux lignes éditoriales : **(a) SEO** — « comment réviser le CAP Pâtissier », « programme EP1/EP2 », « candidat libre : conseils »… (mots-clés fort volume de l'audit, contenu indexable = levier d'acquisition avec les pages recettes publiques) ; **(b) Idées recettes & inspirations** — variations, recettes saisonnières, défis, coulisses techniques (engage le persona passionné, donne une raison de revenir hors période d'examen). Prérequis technique : un rendu d'articles indexables (Markdown prérendu via SvelteKit, pas de CMS lourd). | 🟠 SEO + 🟡 Rétention |
 | P2 | Partenariats blogs CAP | Empreinte Sucrée, PatisCoach : guest post croisé + affiliation. Autorité SEO + audience alignée. → voir §4. | 🟠 Backlinks |
-| P2 | Contenu hors-saison | Trafic CAP = pic oct-juin, creux juil-sept. Prévoir contenu passionnés (recettes saisonnières, défis) pour lisser. | 🟡 Rétention |
+| P2 | Contenu hors-saison | Trafic CAP = pic oct-juin, creux juil-sept. **Couvert par le volet (b) du blog ci-dessus** (recettes saisonnières, défis pour les passionnés). | 🟡 Rétention |
 
 ---
 
@@ -143,7 +143,7 @@
 | 8 | Offre B2B CFA / lycées pro | 9 | 6 | 3 | **6.0** | I : scale x3-5 du revenu (ARR) = transformateur / C : audit insiste, marché structuré, non validé terrain / E : plan `school` + dashboard + prospection, 3-6 mois — **big bet** |
 | 9 | App Store (wrapper PWA) | 7 | 6 | 4 | **5.7** | I : +30-50% découvrabilité / C : wrappers connus, review stores incertaine / E : 2-4 sem + comptes dev |
 | 10 | A/B test CTA landing | 5 | 5 | 6 | **5.3** | I : hero = 100% trafic, lift wording modéré / C : test = incertain par nature / E : config GTM ~1h mais **significativité bloquée par le faible trafic actuel** |
-| 11 | Blog / contenu SEO (10 articles) | 7 | 6 | 3 | **5.3** | I : fort volume mots-clés / C : mécanique connue, résultat différé / E : ~2 mois rédaction — **big bet** |
+| 11 | Blog (SEO + idées recettes / inspirations) | 7 | 6 | 3 | **5.3** | Deux axes : (a) articles SEO "comment réviser le CAP", "programme EP1/EP2"… (acquisition) ; (b) **idées de recettes, inspirations, variations saisonnières** (rétention persona passionnés + lissage du creux juil-sept). I : fort volume mots-clés + engagement / C : mécanique SEO connue, effet rétention plus hypothétique / E : ~2 mois éditorial + besoin d'un rendu d'articles indexables (pas de moteur de blog aujourd'hui) — **big bet**. Absorbe le besoin "contenu hors-saison" (#14). |
 | 12 | Recipe schema.org sur pages publiques | 6 | 8 | 8 | **7.3** | Score élevé MAIS **dépend de l'action #3** → ne peut pas être exécuté avant. Séquencé après les pages recettes. |
 | 13 | Extension CAP Boulanger / Chocolatier | 6 | 4 | 3 | **4.3** | I : marché ×3-4 mais futur, hors cœur / C : hypothèse non validée / E : 3-6 mois contenu |
 | 14 | Contenu hors-saison (passionnés) | 4 | 4 | 4 | **4.0** | I : lisse la saisonnalité, segment secondaire / C : hypothèse, peu de data / E : production continue |
