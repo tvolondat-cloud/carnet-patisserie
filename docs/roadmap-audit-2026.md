@@ -1,8 +1,12 @@
-# Roadmap & checklist — suite audit 2026
+# Annexe audit 2026 — détail & checklists
 
-> Source : `Audit_BrigadeSucree_2026.pdf` (v1.0, 18/05/2026). Score global 7/10.
-> Ce document trace les actions **déjà faites**, **à moyen terme** et **long terme**,
-> avec un volet dédié à la **prospection commerciale B2B (CFA, lycées, écoles)**.
+> ⚠️ **Ce document est une ANNEXE du [PRD](PRD.md).**
+> La **roadmap** et la **matrice ICE canoniques** vivent dans le PRD (§6 et §7).
+> Ici on conserve uniquement le **détail non dupliqué** : traçabilité audit (§0),
+> contexte des actions (§1-3, origine audit), **prospection B2B CFA/écoles** (§4),
+> **spec feature PRO coût/rentabilité** (§6). En cas de divergence, **le PRD fait foi**.
+>
+> Source audit : `Audit_BrigadeSucree_2026.pdf` (v1.0, 18/05/2026). Score global 7/10.
 
 ---
 
@@ -123,67 +127,12 @@
 
 ---
 
-## 5. Priorisation ICE
+## 5. Priorisation ICE → déplacée dans le PRD
 
-**KPI cible** : (A) acquisition organique (trafic non-auth) + (B) conversion Free→Pro ; B2B = ARR (levier de scale).
-**Contraintes** : dev solo, urgence saisonnière (fenêtre d'acquisition jusqu'à l'examen de juin), **aucune baseline analytics** aujourd'hui (plafonne la Confidence de plusieurs actions).
-**Méthode** : ICE — score = (Impact + Confidence + Ease) / 3.
-**Date** : 2026-05-18.
-
-| Rang | Action | I | C | E | Score | Justifications |
-|------|--------|---|---|---|-------|----------------|
-| 1 | Instrumenter les indicateurs (inscrits, DAU/MAU, Free→Pro, NPS) | 7 | 9 | 8 | **8.0** | I : prérequis transverse, débloque la priorisation de tout le reste / C : nécessité évidente, GTM+Supabase déjà en place / E : events GA4 + 1 vue SQL, ~1j |
-| 2 | **Wake Lock — écran toujours allumé sur les pages recette/labo** | 6 | 8 | 8 | **7.3** | I : pain point réel du persona cœur (mains sales en cuisine, écran qui s'éteint), même esprit que l'offline "critique en labo" / C : `navigator.wakeLock` documenté, attendu d'une app cuisine / E : front seul, ~2-4h (acquérir le lock à l'entrée recette/labo, ré-acquérir sur `visibilitychange`, fallback silencieux iOS<16.4) |
-| 3 | Screenshots produit dans la landing | 8 | 7 | 6 | **7.0** | I : 100% du trafic visiteurs, "chat dans un sac" = fuite conversion / C : best practice universelle + audit critique / E : front, ~1-2j mais bloqueur = vraies captures |
-| 3 | Pages recettes publiques (SEO) | 9 | 8 | 4 | **7.0** | I : levier d'acquisition #1, débloque le SEO (SPA cache tout) / C : audit le désigne frein majeur, mots-clés volume identifiés / E : 1-2 sem dev+rédac, prerender + paywall partiel — **big bet** |
-| 4 | Compteur d'inscrits réel | 5 | 6 | 8 | **6.3** | I : FOMO, modéré si volume faible / C : best practice, efficacité dépend du chiffre réel / E : RPC count public + UI, ~2-3h |
-| 5 | Contraste couleur marque (WCAG AA) | 3 | 9 | 7 | **6.3** | I : a11y + qualité perçue, effet conversion faible / C : ratio mesurable objectivement / E : ajustement token ciblé <1j (vérifier régressions) |
-| 6 | Témoignages utilisateurs réels | 7 | 7 | 5 | **6.3** | I : social proof réel = fort, audit "important" / C : best practice + audit / E : collecte humaine ~1 sem (bloqueur = obtenir les verbatims) |
-| 7 | Partenariats blogs CAP (Empreinte Sucrée, PatisCoach) | 7 | 6 | 5 | **6.0** | I : backlinks (autorité faible) + audience alignée / C : audience qualifiée mais dépend de négo / E : négo externe, cycle long, 0 dev |
-| 8 | Offre B2B CFA / lycées pro | 9 | 6 | 3 | **6.0** | I : scale x3-5 du revenu (ARR) = transformateur / C : audit insiste, marché structuré, non validé terrain / E : plan `school` + dashboard + prospection, 3-6 mois — **big bet** |
-| 9 | App Store (wrapper PWA) | 7 | 6 | 4 | **5.7** | I : +30-50% découvrabilité / C : wrappers connus, review stores incertaine / E : 2-4 sem + comptes dev |
-| 10 | A/B test CTA landing | 5 | 5 | 6 | **5.3** | I : hero = 100% trafic, lift wording modéré / C : test = incertain par nature / E : config GTM ~1h mais **significativité bloquée par le faible trafic actuel** |
-| 11 | Blog (SEO + idées recettes / inspirations) | 7 | 6 | 3 | **5.3** | Deux axes : (a) articles SEO "comment réviser le CAP", "programme EP1/EP2"… (acquisition) ; (b) **idées de recettes, inspirations, variations saisonnières** (rétention persona passionnés + lissage du creux juil-sept). I : fort volume mots-clés + engagement / C : mécanique SEO connue, effet rétention plus hypothétique / E : ~2 mois éditorial + besoin d'un rendu d'articles indexables (pas de moteur de blog aujourd'hui) — **big bet**. Absorbe le besoin "contenu hors-saison" (#14). |
-| 12 | **PRO — Coût matières premières & rentabilité par projet** | 6 | 6 | 3 | **5.0** | Saisie du prix des matières premières → calcul du coût de revient et de la marge/rentabilité par projet (Mode Compta v2). I : différenciant fort + levier d'upsell Pro, mais cible le persona secondaire (passionné/semi-pro), pas le cœur CAP / C : besoin connu du marché home-baker (tableurs, outils payants) mais non validé sur notre audience / E : nouvelles tables (`ingredient_prices`, `projets`, lignes de coût) + UX saisie + moteur de calcul + exports, plusieurs sprints. Détail roadmap + checklist → §6. |
-| 13 | Recipe schema.org sur pages publiques | 6 | 8 | 8 | **7.3** | Score élevé MAIS **dépend de l'action #3** → ne peut pas être exécuté avant. Séquencé après les pages recettes. |
-| 13 | Extension CAP Boulanger / Chocolatier | 6 | 4 | 3 | **4.3** | I : marché ×3-4 mais futur, hors cœur / C : hypothèse non validée / E : 3-6 mois contenu |
-| 14 | Contenu hors-saison (passionnés) | 4 | 4 | 4 | **4.0** | I : lisse la saisonnalité, segment secondaire / C : hypothèse, peu de data / E : production continue |
-| 15 | Communauté / partage de recettes | 5 | 3 | 2 | **3.3** | I : rétention + effet réseau mais **risque de dilution du focus** / C : double tranchant / E : 6+ mois |
-
-> _Note : la matrice est enrichie au fil des itérations (Wake Lock, feature PRO coût/rentabilité…). Les rangs ne sont pas renumérotés ligne à ligne à chaque insertion — **le score ICE fait foi** pour l'arbitrage, pas le numéro de ligne._
-
-### Quick wins à lancer en premier
-*(Ease ≥ 7 ET Impact ≥ 5)*
-1. **Instrumenter les indicateurs** (#1) — ~1j. **Prérequis** : sans baseline, toutes les Confidence restent plafonnées et aucun argument chiffré pour les CFA.
-2. **Wake Lock écran sur recette/labo** (#2) — ~2-4h, front seul, sans dépendance. Quick win à plus fort confort pour le persona cœur ; à shipper rapidement.
-3. **Compteur d'inscrits réel** (#4) — ~2-3h, à enchaîner une fois #1 en place (réutilise le `count`).
-4. **Recipe schema.org** (#13) — trivial **mais bloqué** par les pages recettes : à faire dans la foulée des pages publiques.
-
-### Sprint suivant (2–4 semaines)
-4. **Screenshots produit landing** (#2) — dès que des captures propres du Mode Labo / menu comptoir / suivi sont disponibles.
-5. **Contraste WCAG** (#5) — assombrir le texte fin vers `--color-brand-dark`, vérifier régressions.
-6. **Témoignages réels** (#6) — lancer la collecte maintenant (délai humain), publier sous 2-3 sem.
-
-### Big bets (planifier, séquencer hors sprint courant)
-*(Impact ≥ 8, Ease ≤ 4)*
-- **Pages recettes publiques SEO** (#3) — chantier d'acquisition prioritaire. Le démarrer en parallèle des quick wins car c'est le levier de fond. Puis **#13 schema** dans la foulée.
-- **Offre B2B CFA** (#8) — vraie trajectoire de scale. Préparer l'offre + plan `school` (cf. §4) **en parallèle**, sans attendre que le reste soit fini : cycle commercial long, à amorcer tôt.
-
-### À écarter pour l'instant
-- **Communauté / partage** (#15) : score 3.3, risque de dilution du focus relevé par l'audit. À reconsidérer une fois la conversion Free→Pro et le B2B stabilisés.
-- **Contenu hors-saison** (#14) : faible priorité, pas éliminé — utile pour lisser juil-sept une fois l'acquisition CAP rodée.
-
-### Hypothèses de test A/B prioritaires
-1. **Pages recettes publiques** : si on expose 5-10 recettes en contenu partiel indexable, alors le trafic organique non-auth augmentera significativement sous 2-3 mois, parce que 0 contenu n'est crawlable aujourd'hui (frein #1 de l'audit).
-2. **Screenshots landing** : si on ajoute un mockup hero + 3-4 captures, alors le taux inscription visiteur→/auth augmentera, parce que le visiteur "achète un chat dans un sac" actuellement.
-3. **Compteur d'inscrits** : si on affiche un compteur réel, alors la conversion landing augmentera via preuve sociale — **à valider seulement quand le chiffre est crédible** (ne pas afficher de faux).
-
-### Notes / arbitrages
-- **#13 (schema recettes) a un des meilleurs scores isolés (7.3) mais est rétrogradé** : dépendance dure à #3. La séquence l'emporte sur le score brut.
-- **#12 (PRO coût/rentabilité)** : score moyen (5.0) car il sert le persona secondaire, mais c'est un **levier de monétisation Pro** et une porte vers le segment semi-pro/micro-entrepreneur — à reconsidérer à la hausse si la donnée (#1) montre une demande ou si le pivot vers ce segment se confirme.
-- **#8 (B2B CFA) sous-classé par l'Ease (3)** mais c'est le levier de revenu le plus fort : à amorcer en parallèle malgré le rang, le cycle commercial est long (cf. jalons §4.5).
-- **#10 (A/B CTA)** : Ease nominalement correcte (config 1h) mais **Impact réel bridé par le faible trafic** → repoussé tant que l'acquisition (#3) n'a pas augmenté le volume, sinon test non significatif.
-- Recalibrer Impact/Confidence après 1-2 mois, à la lumière des indicateurs (#1).
+> La matrice ICE, les quick wins / big bets / écartés, les hypothèses de test et
+> les arbitrages sont désormais **canoniques dans le [PRD §7](PRD.md#7-matrice-de-priorisation-ice)**
+> (et la roadmap synthétique au [PRD §6](PRD.md#6-roadmap-par-horizon)).
+> Ne plus éditer de matrice ICE ici : **une seule source**, le PRD.
 
 ---
 
@@ -245,10 +194,8 @@
 
 ---
 
-## 7. Suivi
+## 7. Suivi → voir PRD §8
 
-- Mettre à jour les cases à cocher au fil de l'eau.
-- Revue mensuelle : avancement + reprioriser selon traction.
-- Indicateurs à instrumenter (manquants aujourd'hui) : inscrits, actifs (DAU/MAU),
-  taux de conversion Free→Pro, NPS. Sans ces chiffres, impossible de rassurer un
-  partenaire ou un CFA — **prérequis transverse à toute la prospection** (= action ICE #1).
+Le suivi global, la cadence de revue et la gouvernance sont dans le
+**[PRD §8](PRD.md#8-suivi)**. Cette annexe ne porte que le détail B2B (§4) et
+la spec PRO (§6) ; cocher leurs checklists au fil de l'eau.

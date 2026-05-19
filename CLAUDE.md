@@ -538,13 +538,23 @@ Pour ajouter un package à l'allowlist, modifier `AUDIT_ALLOWLIST` dans `scripts
 
 ---
 
+## Produit — PRD (source unique)
+
+📌 **[`docs/PRD.md`](docs/PRD.md) est LE document produit canonique.**
+Vision, personas, **catalogue des idées d'évolution**, **roadmap** et
+**matrice de priorisation ICE** y vivent. Toute nouvelle idée / repriorisation
+entre dans le PRD en premier. Les autres docs le **référencent**, ne le dupliquent pas.
+`docs/roadmap-audit-2026.md` n'est plus qu'une **annexe** du PRD (détail audit,
+prospection B2B §4, spec feature PRO §6).
+
 ## Documentation pointers
 
+- [`docs/PRD.md`](docs/PRD.md) — **PRD : source unique produit (idées, roadmap, ICE)**
 - [`README.md`](README.md) — quick start utilisateur
 - [`docs/SETUP.md`](docs/SETUP.md) — Supabase + Google OAuth + troubleshooting
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — stores, modèle de données, design system
 - [`docs/AUDIT.md`](docs/AUDIT.md) — audit du conseil + roadmap optimisations
-- [`docs/roadmap-audit-2026.md`](docs/roadmap-audit-2026.md) — suite audit 2026 : **matrice de priorisation ICE** (§5), quick wins, moyen/long terme, **prospection B2B CFA/écoles** (§4), **feature PRO coût/rentabilité** (§6)
+- [`docs/roadmap-audit-2026.md`](docs/roadmap-audit-2026.md) — **annexe du PRD** : traçabilité audit 2026, **prospection B2B CFA/écoles** (§4), **spec feature PRO coût/rentabilité** (§6)
 - [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) — Cloudflare Pages, custom domain, monitoring
 - [`docs/UPDATE-DOCS.md`](docs/UPDATE-DOCS.md) — comment fonctionne la routine doc auto-update
 - [`CHANGELOG.md`](CHANGELOG.md) — historique des évolutions (auto-géré)
@@ -554,8 +564,9 @@ Pour ajouter un package à l'allowlist, modifier `AUDIT_ALLOWLIST` dans `scripts
 ## Si tu reprends ce projet
 
 1. Lis ce CLAUDE.md en entier d'abord
-2. Lis [`CHANGELOG.md`](CHANGELOG.md) pour voir ce qui a été fait récemment
-3. Avant de coder : `npm install` + lancer `npm run dev` pour confirmer que l'app tourne en local
-4. Pour toute action sensible (DB, paiement, déploiement) : demander confirmation
-5. Toujours commit + push avec `Co-Authored-By: Claude Sonnet 4.6`
-6. Le hook `pre-push` met à jour CHANGELOG automatiquement avant chaque push
+2. Lis le [`docs/PRD.md`](docs/PRD.md) — vision produit, idées, roadmap, priorisation ICE
+3. Lis [`CHANGELOG.md`](CHANGELOG.md) pour voir ce qui a été fait récemment
+4. Avant de coder : `npm install` + lancer `npm run dev` pour confirmer que l'app tourne en local
+5. Pour toute action sensible (DB, paiement, déploiement) : demander confirmation
+6. Toujours commit + push avec `Co-Authored-By: Claude Sonnet 4.6`
+7. Le hook `pre-push` met à jour CHANGELOG automatiquement avant chaque push
