@@ -150,7 +150,18 @@ let stepsOpen = false;
 <style>
 .hero {
 	position: relative;
-	padding: 22px 0 36px;
+	/* Le header est sticky (85px). La hero remplit le reste de l'écran
+	   visible → la section suivante démarre pile au pli, plus de
+	   "section 2 qui dépasse". svh = hauteur viewport réelle (barres
+	   navigateur déduites) ; fallback vh pour les vieux navigateurs.
+	   min-height : si le contenu est plus haut (mobile), pas de clip. */
+	--hero-offset: 85px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	min-height: calc(100vh - var(--hero-offset));
+	min-height: calc(100svh - var(--hero-offset));
+	padding: 28px 0;
 	overflow: hidden;
 }
 
