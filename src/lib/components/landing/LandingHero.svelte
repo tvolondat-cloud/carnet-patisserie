@@ -150,7 +150,7 @@ let stepsOpen = false;
 <style>
 .hero {
 	position: relative;
-	padding: 44px 0 56px;
+	padding: 22px 0 36px;
 	overflow: hidden;
 }
 
@@ -173,24 +173,36 @@ let stepsOpen = false;
 		"intro  visual"
 		"actions visual";
 	column-gap: 60px;
-	row-gap: 28px;
+	row-gap: 12px;
 	align-items: start;
 }
 .hero-intro { grid-area: intro; max-width: 580px; }
 .hero-visual { grid-area: visual; align-self: center; }
 .hero-actions { grid-area: actions; max-width: 580px; }
 
-.hero-intro .ld-h1 { margin-bottom: 24px; }
+/* Rythme vertical resserré : tout doit tenir une fois la barre
+   d'onglets + d'adresse du navigateur déduite de la hauteur visible. */
+.hero-intro .ld-eyebrow { margin-bottom: 14px; }
+.hero-intro .ld-h1 {
+	font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+	line-height: 1.06;
+	margin: 0 0 14px;
+}
+.hero-intro .ld-lead {
+	font-size: clamp(0.96rem, 1.5vw, 1.06rem);
+	line-height: 1.5;
+	margin: 0;
+}
 
 .hero-cta {
 	display: flex;
 	gap: 12px;
-	margin-bottom: 16px;
+	margin-bottom: 12px;
 	flex-wrap: wrap;
 }
 
 .hero-reassurance {
-	margin: 0 0 24px;
+	margin: 0 0 12px;
 	font-size: 0.85rem;
 	color: var(--ld-text-muted);
 	line-height: 1.5;
@@ -445,7 +457,7 @@ let stepsOpen = false;
 			"intro"
 			"visual"
 			"actions";
-		row-gap: 32px;
+		row-gap: 20px;
 	}
 	.hero-intro,
 	.hero-actions { max-width: 100%; }
@@ -454,8 +466,8 @@ let stepsOpen = false;
 
 /* ── Mobile ───────────────────────────────────────────────────── */
 @media (max-width: 520px) {
-	.hero { padding: 36px 0 56px; }
-	.hero-grid { row-gap: 26px; }
+	.hero { padding: 16px 0 32px; }
+	.hero-grid { row-gap: 18px; }
 	.hero-cta { flex-direction: column; align-items: stretch; }
 	.hero-cta .ld-btn { width: 100%; }
 
