@@ -1,6 +1,4 @@
 <script>
-import { onMount } from 'svelte';
-
 // Recette vitrine = données canoniques de la pâte à choux (recipes.json).
 // Hardcodé volontairement : on n'importe pas les 58 recettes dans le
 // bundle critique de la landing (prérendu).
@@ -30,11 +28,9 @@ function fmt(q, m) {
 // dans le template ne serait pas re-évaluée toute seule par Svelte).
 $: rows = ingredients.map((ing) => ({ n: ing.n, u: ing.u, d: fmt(ing.q, mult) }));
 
-// Étapes dépliables — ouvertes par défaut sur desktop, repliées sur mobile
-let stepsOpen = true;
-onMount(() => {
-	if (window.innerWidth <= 520) stepsOpen = false;
-});
+// Étapes dépliables — repliées par défaut pour garder la carte compacte
+// (toute la hero, CTA compris, doit tenir sans scroll).
+let stepsOpen = false;
 </script>
 
 <section class="hero">
@@ -124,13 +120,6 @@ onMount(() => {
 					<span class="rp-labo-steps">Test · Quiz 75% · Chrono</span>
 				</div>
 			</article>
-
-			<div class="hero-chip chip-mastered" aria-hidden="true">
-				<span>✓</span><div><strong>Maîtrisée</strong><small>3 étapes validées</small></div>
-			</div>
-			<div class="hero-chip chip-quiz" aria-hidden="true">
-				<span>📚</span><div><strong>Quiz</strong><small>58 recettes</small></div>
-			</div>
 		</div>
 
 		<div class="hero-actions">
@@ -161,7 +150,7 @@ onMount(() => {
 <style>
 .hero {
 	position: relative;
-	padding: 60px 0 100px;
+	padding: 44px 0 56px;
 	overflow: hidden;
 }
 
@@ -236,10 +225,10 @@ onMount(() => {
 .recipe-preview {
 	position: relative;
 	width: 100%;
-	max-width: 380px;
+	max-width: 360px;
 	background: var(--ld-white);
-	border-radius: 22px;
-	padding: 22px 22px 0;
+	border-radius: 20px;
+	padding: 18px 20px 0;
 	box-shadow:
 		0 24px 60px rgba(31, 77, 69, 0.16),
 		0 2px 6px rgba(31, 77, 69, 0.06);
@@ -259,15 +248,15 @@ onMount(() => {
 .rp-emoji {
 	display: grid;
 	place-items: center;
-	width: 40px;
-	height: 40px;
+	width: 34px;
+	height: 34px;
 	border-radius: 50%;
 	background: rgba(210, 104, 61, 0.12);
-	font-size: 1.2rem;
+	font-size: 1.05rem;
 	flex-shrink: 0;
 }
 .rp-title {
-	font-size: 1.18rem;
+	font-size: 1.1rem;
 	font-weight: 800;
 	color: var(--ld-deep);
 	margin: 0;
@@ -277,8 +266,8 @@ onMount(() => {
 	display: flex;
 	align-items: center;
 	gap: 8px;
-	margin: 12px 0 14px;
-	font-size: 0.8rem;
+	margin: 9px 0 10px;
+	font-size: 0.78rem;
 	color: var(--ld-text-muted);
 }
 .rp-tag {
@@ -307,8 +296,8 @@ onMount(() => {
 	align-items: center;
 	justify-content: space-between;
 	gap: 10px;
-	padding: 10px 12px;
-	margin-bottom: 14px;
+	padding: 8px 10px;
+	margin-bottom: 10px;
 	background: rgba(210, 104, 61, 0.06);
 	border: 1px solid rgba(210, 104, 61, 0.16);
 	border-radius: 12px;
@@ -334,15 +323,15 @@ onMount(() => {
 	color: #fff;
 }
 
-.rp-section { margin-bottom: 14px; }
+.rp-section { margin-bottom: 10px; }
 .rp-label {
 	display: block;
-	font-size: 0.66rem;
+	font-size: 0.64rem;
 	font-weight: 800;
 	letter-spacing: 0.12em;
 	text-transform: uppercase;
 	color: var(--ld-orange);
-	margin-bottom: 8px;
+	margin-bottom: 6px;
 }
 
 .rp-ings {
@@ -351,16 +340,16 @@ onMount(() => {
 	padding: 0;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	gap: 5px 18px;
+	gap: 4px 16px;
 }
 .rp-ings li {
 	display: flex;
 	justify-content: space-between;
 	gap: 8px;
-	font-size: 0.82rem;
+	font-size: 0.8rem;
 	color: var(--ld-text);
 	border-bottom: 1px dashed rgba(31, 77, 69, 0.1);
-	padding-bottom: 4px;
+	padding-bottom: 3px;
 }
 .rp-q {
 	color: var(--ld-text-muted);
@@ -422,8 +411,8 @@ onMount(() => {
 	align-items: center;
 	justify-content: space-between;
 	gap: 10px;
-	margin: 4px -22px 0;
-	padding: 14px 22px;
+	margin: 2px -20px 0;
+	padding: 11px 20px;
 	background: linear-gradient(180deg, transparent, rgba(210, 104, 61, 0.06));
 	border-top: 1px solid rgba(31, 77, 69, 0.07);
 }
@@ -434,39 +423,6 @@ onMount(() => {
 }
 .rp-labo-steps { font-size: 0.74rem; color: var(--ld-text-muted); }
 
-/* Puces flottantes (décoratives) */
-.hero-chip {
-	position: absolute;
-	background: var(--ld-white);
-	border-radius: 14px;
-	padding: 10px 14px;
-	box-shadow: 0 12px 28px rgba(31, 77, 69, 0.14);
-	display: flex;
-	align-items: center;
-	gap: 9px;
-	border: 1px solid rgba(31, 77, 69, 0.05);
-	animation: float 4.5s ease-in-out infinite;
-}
-.hero-chip span:first-child {
-	display: grid;
-	place-items: center;
-	width: 26px;
-	height: 26px;
-	border-radius: 50%;
-	font-size: 0.85rem;
-	font-weight: 900;
-}
-.hero-chip strong { display: block; color: var(--ld-deep); font-weight: 700; font-size: 0.84rem; }
-.hero-chip small { color: var(--ld-text-muted); font-size: 0.7rem; }
-.chip-mastered { top: 4%; right: -6%; animation-delay: 0s; }
-.chip-mastered span:first-child { background: rgba(16, 185, 129, 0.16); color: #059669; }
-.chip-quiz { bottom: 8%; left: -8%; animation-delay: 1.6s; }
-.chip-quiz span:first-child { background: rgba(210, 104, 61, 0.14); }
-
-@keyframes float {
-	0%, 100% { transform: translateY(0); }
-	50% { transform: translateY(-8px); }
-}
 @keyframes rp-rise {
 	from { opacity: 0; transform: translateY(18px) scale(0.97); }
 	to   { opacity: 1; transform: translateY(0) scale(1); }
@@ -476,7 +432,6 @@ onMount(() => {
 	to   { opacity: 1; transform: translateY(0); }
 }
 @media (prefers-reduced-motion: reduce) {
-	.hero-chip,
 	.recipe-preview,
 	.rp-steps { animation: none; }
 	.rp-chev { transition: none; }
@@ -495,8 +450,6 @@ onMount(() => {
 	.hero-intro,
 	.hero-actions { max-width: 100%; }
 	.recipe-preview { max-width: 420px; }
-	.chip-mastered { right: -2%; }
-	.chip-quiz { left: -2%; }
 }
 
 /* ── Mobile ───────────────────────────────────────────────────── */
@@ -511,8 +464,6 @@ onMount(() => {
 	/* 1 colonne d'ingrédients, on garde l'essentiel pour rester compact */
 	.rp-ings { grid-template-columns: 1fr; gap: 4px; }
 	.rp-ings .rp-extra { display: none; }     /* 5 ingrédients affichés */
-	.rp-foot { margin: 2px -18px 0; padding: 12px 18px; }
-	/* Puces flottantes masquées : zéro débordement */
-	.hero-chip { display: none; }
+	.rp-foot { margin: 2px -18px 0; padding: 11px 18px; }
 }
 </style>
