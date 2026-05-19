@@ -1,10 +1,45 @@
 <script>
-import Gingerbread from './Gingerbread.svelte';
+import { onMount } from 'svelte';
+
+// Recette vitrine = données canoniques de la pâte à choux (recipes.json).
+// Hardcodé volontairement : on n'importe pas les 58 recettes dans le
+// bundle critique de la landing (prérendu).
+const ingredients = [
+	{ n: 'Eau', q: 125, u: 'g' },
+	{ n: 'Lait entier', q: 125, u: 'g' },
+	{ n: 'Beurre', q: 100, u: 'g' },
+	{ n: 'Farine T55', q: 150, u: 'g' },
+	{ n: 'Œufs entiers', q: 5, u: 'u' },
+	{ n: 'Sel', q: 4, u: 'g' },
+	{ n: 'Sucre', q: 5, u: 'g' }
+];
+const steps = [
+	'Porter à ébullition eau, lait, beurre, sel et sucre.',
+	'Hors du feu, ajouter la farine d’un coup, mélanger.',
+	'Dessécher la panade jusqu’au décollement des parois.'
+];
+
+// Calculateur de rendement (comme dans l'app : ×0.25 → ×10)
+const presets = [0.5, 1, 2, 3];
+let mult = 1;
+function fmt(q, m) {
+	const v = Math.round(q * m * 10) / 10;
+	return Number.isInteger(v) ? String(v) : String(v).replace('.', ',');
+}
+// Réactif : recalculé à chaque changement de `mult` (une fonction appelée
+// dans le template ne serait pas re-évaluée toute seule par Svelte).
+$: rows = ingredients.map((ing) => ({ n: ing.n, u: ing.u, d: fmt(ing.q, mult) }));
+
+// Étapes dépliables — ouvertes par défaut sur desktop, repliées sur mobile
+let stepsOpen = true;
+onMount(() => {
+	if (window.innerWidth <= 520) stepsOpen = false;
+});
 </script>
 
 <section class="hero">
 	<div class="ld-container hero-grid">
-		<div class="hero-text">
+		<div class="hero-intro">
 			<span class="ld-eyebrow">🍪 L'app des passionnés de pâtisserie</span>
 			<h1 class="ld-h1">
 				Réussis ton CAP Pâtissier<br />
@@ -15,7 +50,90 @@ import Gingerbread from './Gingerbread.svelte';
 				mode laboratoire avec quiz et chrono, fiches de révision, examen blanc.
 				Pour étudiants CAP <strong>et</strong> particuliers passionnés.
 			</p>
+		</div>
 
+		<div class="hero-visual">
+			<div class="hero-glow" aria-hidden="true"></div>
+
+			<!-- Aperçu réel de l'app : la fiche recette telle qu'on l'a dedans -->
+			<article class="recipe-preview" aria-label="Aperçu d'une recette dans l'application : Pâte à choux">
+				<header class="rp-head">
+					<div class="rp-title-row">
+						<span class="rp-emoji" aria-hidden="true">🍮</span>
+						<h2 class="rp-title">Pâte à choux</h2>
+					</div>
+					<div class="rp-meta">
+						<span class="rp-tag rp-ep">EP1</span>
+						<span class="rp-dot">·</span>
+						<span class="rp-time">⏱ 35 min</span>
+						<span class="rp-diff" aria-label="Difficulté 3 sur 5">
+							{#each Array(5) as _, i}
+								<i class:on={i < 3}></i>
+							{/each}
+						</span>
+					</div>
+				</header>
+
+				<div class="rp-calc">
+					<span class="rp-label">Calculateur de rendement</span>
+					<div class="rp-calc-ctrl" role="group" aria-label="Multiplicateur de quantités">
+						{#each presets as p}
+						<button
+							type="button"
+							class="rp-mult"
+							class:on={mult === p}
+							aria-pressed={mult === p}
+							on:click={() => (mult = p)}
+						>×{String(p).replace('.', ',')}</button>
+						{/each}
+					</div>
+				</div>
+
+				<div class="rp-section">
+					<span class="rp-label">Ingrédients</span>
+					<ul class="rp-ings">
+						{#each rows as ing, i}
+						<li class:rp-extra={i >= 5}>
+							<span>{ing.n}</span><span class="rp-q">{ing.d} {ing.u}</span>
+						</li>
+						{/each}
+					</ul>
+				</div>
+
+				<div class="rp-section rp-steps-sec">
+					<button
+						type="button"
+						class="rp-steps-toggle"
+						aria-expanded={stepsOpen}
+						on:click={() => (stepsOpen = !stepsOpen)}
+					>
+						<span class="rp-label">Étapes ({steps.length})</span>
+						<span class="rp-chev" class:open={stepsOpen} aria-hidden="true">⌄</span>
+					</button>
+					{#if stepsOpen}
+					<ol class="rp-steps">
+						{#each steps as s, i}
+						<li><span class="rp-num">{i + 1}</span>{s}</li>
+						{/each}
+					</ol>
+					{/if}
+				</div>
+
+				<div class="rp-foot">
+					<span class="rp-labo">🧪 Mode Labo</span>
+					<span class="rp-labo-steps">Test · Quiz 75% · Chrono</span>
+				</div>
+			</article>
+
+			<div class="hero-chip chip-mastered" aria-hidden="true">
+				<span>✓</span><div><strong>Maîtrisée</strong><small>3 étapes validées</small></div>
+			</div>
+			<div class="hero-chip chip-quiz" aria-hidden="true">
+				<span>📚</span><div><strong>Quiz</strong><small>58 recettes</small></div>
+			</div>
+		</div>
+
+		<div class="hero-actions">
 			<div class="hero-cta">
 				<a href="/auth" class="ld-btn ld-btn-primary ld-btn-large" data-track="cta:hero-signup">
 					Commencer gratuitement →
@@ -35,32 +153,6 @@ import Gingerbread from './Gingerbread.svelte';
 					<span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
 				</div>
 				<span class="trust-text">Référentiel CAP officiel 2025-2026 · Mode labo complet</span>
-			</div>
-		</div>
-
-		<div class="hero-visual">
-			<div class="hero-glow" aria-hidden="true"></div>
-			<Gingerbread pose="celebrating" size={320} />
-			<div class="hero-badge badge-quiz" aria-hidden="true">
-				<span>📚</span>
-				<div>
-					<strong>Quiz</strong>
-					<small>58 recettes</small>
-				</div>
-			</div>
-			<div class="hero-badge badge-chrono" aria-hidden="true">
-				<span>⏱️</span>
-				<div>
-					<strong>Chrono</strong>
-					<small>×1.2 tolérance</small>
-				</div>
-			</div>
-			<div class="hero-badge badge-pdf" aria-hidden="true">
-				<span>📄</span>
-				<div>
-					<strong>Carnet PDF</strong>
-					<small>Berry Jam</small>
-				</div>
 			</div>
 		</div>
 	</div>
@@ -84,15 +176,22 @@ import Gingerbread from './Gingerbread.svelte';
 	pointer-events: none;
 }
 
+/* Desktop : 2 colonnes — intro + actions à gauche, visuel à droite */
 .hero-grid {
 	display: grid;
 	grid-template-columns: 1.1fr 1fr;
-	gap: 60px;
-	align-items: center;
+	grid-template-areas:
+		"intro  visual"
+		"actions visual";
+	column-gap: 60px;
+	row-gap: 28px;
+	align-items: start;
 }
+.hero-intro { grid-area: intro; max-width: 580px; }
+.hero-visual { grid-area: visual; align-self: center; }
+.hero-actions { grid-area: actions; max-width: 580px; }
 
-.hero-text { max-width: 580px; }
-.hero-text .ld-h1 { margin-bottom: 24px; }
+.hero-intro .ld-h1 { margin-bottom: 24px; }
 
 .hero-cta {
 	display: flex;
@@ -123,80 +222,297 @@ import Gingerbread from './Gingerbread.svelte';
 	position: relative;
 	display: grid;
 	place-items: center;
-	min-height: 380px;
 }
 
 .hero-glow {
 	position: absolute;
-	inset: 10% 10%;
-	background: radial-gradient(circle, rgba(168, 109, 61, 0.25), transparent 70%);
+	inset: 6% 6%;
+	background: radial-gradient(circle, rgba(168, 109, 61, 0.22), transparent 70%);
 	filter: blur(40px);
 	pointer-events: none;
 }
 
-.hero-badge {
+/* ── Fiche recette (aperçu réel de l'app) ─────────────────────── */
+.recipe-preview {
+	position: relative;
+	width: 100%;
+	max-width: 380px;
+	background: var(--ld-white);
+	border-radius: 22px;
+	padding: 22px 22px 0;
+	box-shadow:
+		0 24px 60px rgba(31, 77, 69, 0.16),
+		0 2px 6px rgba(31, 77, 69, 0.06);
+	border: 1px solid rgba(31, 77, 69, 0.06);
+	overflow: hidden;
+	animation: rp-rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+.recipe-preview::before {
+	content: '';
+	position: absolute;
+	inset: 0 0 auto;
+	height: 5px;
+	background: linear-gradient(90deg, var(--ld-orange), var(--ld-orange-light));
+}
+
+.rp-title-row { display: flex; align-items: center; gap: 10px; }
+.rp-emoji {
+	display: grid;
+	place-items: center;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	background: rgba(210, 104, 61, 0.12);
+	font-size: 1.2rem;
+	flex-shrink: 0;
+}
+.rp-title {
+	font-size: 1.18rem;
+	font-weight: 800;
+	color: var(--ld-deep);
+	margin: 0;
+	line-height: 1.1;
+}
+.rp-meta {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin: 12px 0 14px;
+	font-size: 0.8rem;
+	color: var(--ld-text-muted);
+}
+.rp-tag {
+	font-size: 0.7rem;
+	font-weight: 800;
+	letter-spacing: 0.03em;
+	padding: 2px 8px;
+	border-radius: 999px;
+	background: rgba(31, 77, 69, 0.1);
+	color: var(--ld-deep);
+}
+.rp-dot { opacity: 0.4; }
+.rp-time { font-weight: 600; }
+.rp-diff { display: inline-flex; gap: 3px; margin-left: auto; }
+.rp-diff i {
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background: rgba(31, 77, 69, 0.15);
+}
+.rp-diff i.on { background: var(--ld-orange); }
+
+/* Calculateur de rendement */
+.rp-calc {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+	padding: 10px 12px;
+	margin-bottom: 14px;
+	background: rgba(210, 104, 61, 0.06);
+	border: 1px solid rgba(210, 104, 61, 0.16);
+	border-radius: 12px;
+}
+.rp-calc-ctrl { display: flex; gap: 5px; }
+.rp-mult {
+	min-width: 34px;
+	padding: 5px 8px;
+	font-size: 0.78rem;
+	font-weight: 800;
+	color: var(--ld-text-muted);
+	background: var(--ld-white);
+	border: 1.5px solid rgba(31, 77, 69, 0.12);
+	border-radius: 8px;
+	cursor: pointer;
+	transition: all 0.15s;
+	font-variant-numeric: tabular-nums;
+}
+.rp-mult:hover { border-color: var(--ld-orange); color: var(--ld-orange-dark); }
+.rp-mult.on {
+	background: var(--ld-orange);
+	border-color: var(--ld-orange);
+	color: #fff;
+}
+
+.rp-section { margin-bottom: 14px; }
+.rp-label {
+	display: block;
+	font-size: 0.66rem;
+	font-weight: 800;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: var(--ld-orange);
+	margin-bottom: 8px;
+}
+
+.rp-ings {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 5px 18px;
+}
+.rp-ings li {
+	display: flex;
+	justify-content: space-between;
+	gap: 8px;
+	font-size: 0.82rem;
+	color: var(--ld-text);
+	border-bottom: 1px dashed rgba(31, 77, 69, 0.1);
+	padding-bottom: 4px;
+}
+.rp-q {
+	color: var(--ld-text-muted);
+	font-variant-numeric: tabular-nums;
+	white-space: nowrap;
+}
+
+/* Étapes dépliables */
+.rp-steps-toggle {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	background: none;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+}
+.rp-steps-toggle .rp-label { margin-bottom: 0; }
+.rp-chev {
+	color: var(--ld-orange);
+	font-size: 1rem;
+	line-height: 0;
+	transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.rp-chev.open { transform: rotate(180deg); }
+.rp-steps {
+	list-style: none;
+	margin: 10px 0 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	animation: rp-unfold 0.25s ease;
+}
+.rp-steps li {
+	display: flex;
+	gap: 9px;
+	font-size: 0.82rem;
+	line-height: 1.4;
+	color: var(--ld-text);
+}
+.rp-num {
+	flex-shrink: 0;
+	width: 19px;
+	height: 19px;
+	border-radius: 50%;
+	background: var(--ld-deep);
+	color: #fff;
+	font-size: 0.68rem;
+	font-weight: 800;
+	display: grid;
+	place-items: center;
+	margin-top: 1px;
+}
+
+.rp-foot {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+	margin: 4px -22px 0;
+	padding: 14px 22px;
+	background: linear-gradient(180deg, transparent, rgba(210, 104, 61, 0.06));
+	border-top: 1px solid rgba(31, 77, 69, 0.07);
+}
+.rp-labo {
+	font-weight: 800;
+	font-size: 0.9rem;
+	color: var(--ld-orange-dark);
+}
+.rp-labo-steps { font-size: 0.74rem; color: var(--ld-text-muted); }
+
+/* Puces flottantes (décoratives) */
+.hero-chip {
 	position: absolute;
 	background: var(--ld-white);
 	border-radius: 14px;
-	padding: 12px 16px;
-	box-shadow: 0 12px 28px rgba(31, 77, 69, 0.12);
+	padding: 10px 14px;
+	box-shadow: 0 12px 28px rgba(31, 77, 69, 0.14);
 	display: flex;
 	align-items: center;
-	gap: 10px;
-	font-size: 0.84rem;
+	gap: 9px;
 	border: 1px solid rgba(31, 77, 69, 0.05);
-	animation: float 4s ease-in-out infinite;
+	animation: float 4.5s ease-in-out infinite;
 }
-.hero-badge span:first-child { font-size: 1.4rem; }
-.hero-badge strong {
-	display: block;
-	color: var(--ld-deep);
-	font-weight: 700;
-	font-size: 0.92rem;
+.hero-chip span:first-child {
+	display: grid;
+	place-items: center;
+	width: 26px;
+	height: 26px;
+	border-radius: 50%;
+	font-size: 0.85rem;
+	font-weight: 900;
 }
-.hero-badge small { color: var(--ld-text-muted); font-size: 0.75rem; }
-
-.badge-quiz {
-	top: 8%;
-	left: -8%;
-	animation-delay: 0s;
-}
-.badge-chrono {
-	top: 38%;
-	right: -10%;
-	animation-delay: 1.2s;
-}
-.badge-pdf {
-	bottom: 12%;
-	left: -4%;
-	animation-delay: 2.4s;
-}
+.hero-chip strong { display: block; color: var(--ld-deep); font-weight: 700; font-size: 0.84rem; }
+.hero-chip small { color: var(--ld-text-muted); font-size: 0.7rem; }
+.chip-mastered { top: 4%; right: -6%; animation-delay: 0s; }
+.chip-mastered span:first-child { background: rgba(16, 185, 129, 0.16); color: #059669; }
+.chip-quiz { bottom: 8%; left: -8%; animation-delay: 1.6s; }
+.chip-quiz span:first-child { background: rgba(210, 104, 61, 0.14); }
 
 @keyframes float {
 	0%, 100% { transform: translateY(0); }
 	50% { transform: translateY(-8px); }
 }
-
+@keyframes rp-rise {
+	from { opacity: 0; transform: translateY(18px) scale(0.97); }
+	to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes rp-unfold {
+	from { opacity: 0; transform: translateY(-4px); }
+	to   { opacity: 1; transform: translateY(0); }
+}
 @media (prefers-reduced-motion: reduce) {
-	.hero-badge { animation: none; }
+	.hero-chip,
+	.recipe-preview,
+	.rp-steps { animation: none; }
+	.rp-chev { transition: none; }
 }
 
+/* ── Tablette / mobile : 1 colonne, ordre intro → recette → CTA ── */
 @media (max-width: 920px) {
-	.hero-grid { grid-template-columns: 1fr; gap: 40px; }
-	.hero-visual { order: -1; min-height: 280px; }
-	.hero-badge {
-		font-size: 0.76rem;
-		padding: 8px 12px;
+	.hero-grid {
+		grid-template-columns: 1fr;
+		grid-template-areas:
+			"intro"
+			"visual"
+			"actions";
+		row-gap: 32px;
 	}
-	.hero-badge span:first-child { font-size: 1.1rem; }
-	.badge-quiz { left: 0%; top: 0; }
-	.badge-chrono { right: 0%; top: 50%; }
-	.badge-pdf { left: 5%; bottom: 0; }
+	.hero-intro,
+	.hero-actions { max-width: 100%; }
+	.recipe-preview { max-width: 420px; }
+	.chip-mastered { right: -2%; }
+	.chip-quiz { left: -2%; }
 }
 
+/* ── Mobile ───────────────────────────────────────────────────── */
 @media (max-width: 520px) {
-	.hero { padding: 40px 0 60px; }
+	.hero { padding: 36px 0 56px; }
+	.hero-grid { row-gap: 26px; }
 	.hero-cta { flex-direction: column; align-items: stretch; }
 	.hero-cta .ld-btn { width: 100%; }
+
+	.recipe-preview { max-width: 100%; padding: 18px 18px 0; border-radius: 18px; }
+	.rp-title { font-size: 1.05rem; }
+	/* 1 colonne d'ingrédients, on garde l'essentiel pour rester compact */
+	.rp-ings { grid-template-columns: 1fr; gap: 4px; }
+	.rp-ings .rp-extra { display: none; }     /* 5 ingrédients affichés */
+	.rp-foot { margin: 2px -18px 0; padding: 12px 18px; }
+	/* Puces flottantes masquées : zéro débordement */
+	.hero-chip { display: none; }
 }
 </style>
