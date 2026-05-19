@@ -144,19 +144,20 @@
 | 9 | App Store (wrapper PWA) | 7 | 6 | 4 | **5.7** | I : +30-50% découvrabilité / C : wrappers connus, review stores incertaine / E : 2-4 sem + comptes dev |
 | 10 | A/B test CTA landing | 5 | 5 | 6 | **5.3** | I : hero = 100% trafic, lift wording modéré / C : test = incertain par nature / E : config GTM ~1h mais **significativité bloquée par le faible trafic actuel** |
 | 11 | Blog (SEO + idées recettes / inspirations) | 7 | 6 | 3 | **5.3** | Deux axes : (a) articles SEO "comment réviser le CAP", "programme EP1/EP2"… (acquisition) ; (b) **idées de recettes, inspirations, variations saisonnières** (rétention persona passionnés + lissage du creux juil-sept). I : fort volume mots-clés + engagement / C : mécanique SEO connue, effet rétention plus hypothétique / E : ~2 mois éditorial + besoin d'un rendu d'articles indexables (pas de moteur de blog aujourd'hui) — **big bet**. Absorbe le besoin "contenu hors-saison" (#14). |
-| 12 | Recipe schema.org sur pages publiques | 6 | 8 | 8 | **7.3** | Score élevé MAIS **dépend de l'action #3** → ne peut pas être exécuté avant. Séquencé après les pages recettes. |
+| 12 | **PRO — Coût matières premières & rentabilité par projet** | 6 | 6 | 3 | **5.0** | Saisie du prix des matières premières → calcul du coût de revient et de la marge/rentabilité par projet (Mode Compta v2). I : différenciant fort + levier d'upsell Pro, mais cible le persona secondaire (passionné/semi-pro), pas le cœur CAP / C : besoin connu du marché home-baker (tableurs, outils payants) mais non validé sur notre audience / E : nouvelles tables (`ingredient_prices`, `projets`, lignes de coût) + UX saisie + moteur de calcul + exports, plusieurs sprints. Détail roadmap + checklist → §6. |
+| 13 | Recipe schema.org sur pages publiques | 6 | 8 | 8 | **7.3** | Score élevé MAIS **dépend de l'action #3** → ne peut pas être exécuté avant. Séquencé après les pages recettes. |
 | 13 | Extension CAP Boulanger / Chocolatier | 6 | 4 | 3 | **4.3** | I : marché ×3-4 mais futur, hors cœur / C : hypothèse non validée / E : 3-6 mois contenu |
 | 14 | Contenu hors-saison (passionnés) | 4 | 4 | 4 | **4.0** | I : lisse la saisonnalité, segment secondaire / C : hypothèse, peu de data / E : production continue |
 | 15 | Communauté / partage de recettes | 5 | 3 | 2 | **3.3** | I : rétention + effet réseau mais **risque de dilution du focus** / C : double tranchant / E : 6+ mois |
 
-> _Note : l'insertion du Wake Lock en rang 2 décale d'un cran les rangs suivants (le rang n devient n+1). Non renuméroté ligne à ligne — la roadmap est itérative, le score fait foi._
+> _Note : la matrice est enrichie au fil des itérations (Wake Lock, feature PRO coût/rentabilité…). Les rangs ne sont pas renumérotés ligne à ligne à chaque insertion — **le score ICE fait foi** pour l'arbitrage, pas le numéro de ligne._
 
 ### Quick wins à lancer en premier
 *(Ease ≥ 7 ET Impact ≥ 5)*
 1. **Instrumenter les indicateurs** (#1) — ~1j. **Prérequis** : sans baseline, toutes les Confidence restent plafonnées et aucun argument chiffré pour les CFA.
 2. **Wake Lock écran sur recette/labo** (#2) — ~2-4h, front seul, sans dépendance. Quick win à plus fort confort pour le persona cœur ; à shipper rapidement.
 3. **Compteur d'inscrits réel** (#4) — ~2-3h, à enchaîner une fois #1 en place (réutilise le `count`).
-4. **Recipe schema.org** (#12) — trivial **mais bloqué** par les pages recettes : à faire dans la foulée des pages publiques.
+4. **Recipe schema.org** (#13) — trivial **mais bloqué** par les pages recettes : à faire dans la foulée des pages publiques.
 
 ### Sprint suivant (2–4 semaines)
 4. **Screenshots produit landing** (#2) — dès que des captures propres du Mode Labo / menu comptoir / suivi sont disponibles.
@@ -165,7 +166,7 @@
 
 ### Big bets (planifier, séquencer hors sprint courant)
 *(Impact ≥ 8, Ease ≤ 4)*
-- **Pages recettes publiques SEO** (#3) — chantier d'acquisition prioritaire. Le démarrer en parallèle des quick wins car c'est le levier de fond. Puis **#12 schema** dans la foulée.
+- **Pages recettes publiques SEO** (#3) — chantier d'acquisition prioritaire. Le démarrer en parallèle des quick wins car c'est le levier de fond. Puis **#13 schema** dans la foulée.
 - **Offre B2B CFA** (#8) — vraie trajectoire de scale. Préparer l'offre + plan `school` (cf. §4) **en parallèle**, sans attendre que le reste soit fini : cycle commercial long, à amorcer tôt.
 
 ### À écarter pour l'instant
@@ -178,14 +179,73 @@
 3. **Compteur d'inscrits** : si on affiche un compteur réel, alors la conversion landing augmentera via preuve sociale — **à valider seulement quand le chiffre est crédible** (ne pas afficher de faux).
 
 ### Notes / arbitrages
-- **#12 (schema recettes) a le meilleur score isolé (7.3) mais est rétrogradé** : dépendance dure à #3. La séquence l'emporte sur le score brut.
+- **#13 (schema recettes) a un des meilleurs scores isolés (7.3) mais est rétrogradé** : dépendance dure à #3. La séquence l'emporte sur le score brut.
+- **#12 (PRO coût/rentabilité)** : score moyen (5.0) car il sert le persona secondaire, mais c'est un **levier de monétisation Pro** et une porte vers le segment semi-pro/micro-entrepreneur — à reconsidérer à la hausse si la donnée (#1) montre une demande ou si le pivot vers ce segment se confirme.
 - **#8 (B2B CFA) sous-classé par l'Ease (3)** mais c'est le levier de revenu le plus fort : à amorcer en parallèle malgré le rang, le cycle commercial est long (cf. jalons §4.5).
 - **#10 (A/B CTA)** : Ease nominalement correcte (config 1h) mais **Impact réel bridé par le faible trafic** → repoussé tant que l'acquisition (#3) n'a pas augmenté le volume, sinon test non significatif.
 - Recalibrer Impact/Confidence après 1-2 mois, à la lumière des indicateurs (#1).
 
 ---
 
-## 6. Suivi
+## 6. Feature PRO — Coût matières premières & rentabilité par projet
+
+> **= "Mode Compta v2"** (déjà esquissé dans `CLAUDE.md`). Réservé au plan **Pro**.
+> Score ICE : **5.0** (I 6 / C 6 / E 3). Cible : passionné qui vend, micro-entrepreneur,
+> futur segment semi-pro. Lever de monétisation Pro + différenciation.
+
+### 6.1 Périmètre fonctionnel
+
+- Bibliothèque de **prix matières premières** (ingrédient → prix d'achat / unité, conditionnement, fournisseur, date).
+- Association automatique : chaque ingrédient de recette → son prix → **coût de revient de la recette** (avec le calculateur de rendement existant).
+- Notion de **projet** : un projet = 1+ recettes × quantités + frais (variables : emballage, déplacement ; fixes répartis).
+- **Indicateurs par projet** : coût total, prix de vente cible, **marge brute**, **rentabilité (%)**, prix de vente conseillé selon marge visée.
+- **Exports** : PDF/CSV/XLSX (réutiliser jsPDF + SheetJS déjà prévus).
+- **Gating** : tout le module derrière `isPro` (cf. `FREE_RECIPE_SLUGS`/`isPro` existants).
+
+### 6.2 Roadmap (phasée)
+
+| Phase | Contenu | Sortie |
+|-------|---------|--------|
+| **P1 — Données** | Tables `ingredient_prices`, `projets`, `projet_lignes` + RLS `auth.uid() = user_id` + index. Migration SQL idempotente. | Schéma en prod |
+| **P2 — Saisie prix** | UI bibliothèque de prix (CRUD prix par ingrédient, optimistic + rollback comme les stores existants). | Saisie utilisable |
+| **P3 — Coût recette** | Calcul du coût de revient d'une recette (branché sur le calculateur ×0.25–×10). Affiché sur la fiche recette (Pro). | Coût visible |
+| **P4 — Projets & marge** | CRUD projet, ajout recettes+quantités, frais variables/fixes, calcul marge & rentabilité, prix conseillé. | MVP rentabilité |
+| **P5 — Exports & polish** | Export PDF/CSV/XLSX, dashboard projet, états vides, dark mode, a11y. | Feature Pro complète |
+
+### 6.3 Checklist
+
+**Préalables**
+- [ ] Valider la demande réelle via les indicateurs (#1) ou un micro-sondage in-app (éviter de construire à l'aveugle — Confidence 6).
+- [ ] Décider du modèle de frais fixes (forfait simple vs répartition horaire) — commencer **simple**.
+
+**P1 — Données**
+- [ ] Migration `supabase/migrations/*_compta_v2.sql` : `ingredient_prices` (user_id, nom_ingredient|ingredient_ref, prix, unite, conditionnement, fournisseur, maj_le).
+- [ ] Tables `projets` (user_id, nom, marge_cible, notes) et `projet_lignes` (projet_id, recette_id, quantite).
+- [ ] RLS `WITH CHECK (auth.uid() = user_id)` + index (cohérent avec le hardening existant).
+- [ ] Vérifier que le scan sécurité (pre-push / CI) passe sur la migration.
+
+**P2–P4 — Produit**
+- [ ] Store `comptaPrices` / `projets` (writable + Supabase + optimistic + rollback, conventions projet).
+- [ ] Route `/pro/couts` (bibliothèque prix) + `/pro/projets` + `/pro/projets/[id]`.
+- [ ] Gating `isPro` + paywall cohérent avec le reste (renvoi `/profil#plan`).
+- [ ] Calcul coût de revient branché sur le calculateur de rendement existant.
+- [ ] Calcul marge / rentabilité / prix conseillé ; arrondis et TVA explicités.
+
+**P5 — Sortie**
+- [ ] Exports PDF (jsPDF) + CSV/XLSX (SheetJS).
+- [ ] États vides pédagogiques, dark mode, tap targets, `prefers-reduced-motion`.
+- [ ] MAJ `CLAUDE.md` (remplacer la ligne "Mode Compta v2 (prévu)" par l'état réel) + `LandingPricing`/comparatif (argument Pro).
+- [ ] `npm run preview:check` → staging → prod (workflow standard).
+
+### 6.4 Risques / arbitrages
+
+- **Scope creep compta** : ne pas dériver vers un logiciel de gestion. MVP = coût de revient + marge par projet, rien de plus tant que la demande n'est pas prouvée.
+- **Fiabilité des prix** : prix matières volatils → afficher la date de MAJ, pas de promesse d'exactitude.
+- **Cohérence persona** : feature secondaire — ne pas la mettre en avant au point de brouiller le message CAP (persona cœur). La présenter comme un **bonus Pro**, pas comme l'argument central.
+
+---
+
+## 7. Suivi
 
 - Mettre à jour les cases à cocher au fil de l'eau.
 - Revue mensuelle : avancement + reprioriser selon traction.

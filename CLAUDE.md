@@ -417,8 +417,9 @@ Automatique via `@media (prefers-color-scheme: dark)` — tokens override.
 - [ ] Streak hebdomadaire
 - [ ] Email hebdo
 
-### Mode Compta v2 (prévu)
+### Mode Compta v2 (prévu) — PRO : coût matières & rentabilité par projet
 Tables : `ingredient_prices`, `frais_variables`, `frais_fixes`, `projections_ca`. Export XLSX + CSV + PDF.
+Réservé au plan **Pro**. Roadmap phasée + checklist détaillée : [`docs/roadmap-audit-2026.md`](docs/roadmap-audit-2026.md) §6 (priorisé ICE 5.0 dans la matrice §5).
 
 ---
 
@@ -543,7 +544,7 @@ Pour ajouter un package à l'allowlist, modifier `AUDIT_ALLOWLIST` dans `scripts
 - [`docs/SETUP.md`](docs/SETUP.md) — Supabase + Google OAuth + troubleshooting
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — stores, modèle de données, design system
 - [`docs/AUDIT.md`](docs/AUDIT.md) — audit du conseil + roadmap optimisations
-- [`docs/roadmap-audit-2026.md`](docs/roadmap-audit-2026.md) — suite audit 2026 : quick wins, moyen/long terme, **prospection B2B CFA/écoles**
+- [`docs/roadmap-audit-2026.md`](docs/roadmap-audit-2026.md) — suite audit 2026 : **matrice de priorisation ICE** (§5), quick wins, moyen/long terme, **prospection B2B CFA/écoles** (§4), **feature PRO coût/rentabilité** (§6)
 - [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) — Cloudflare Pages, custom domain, monitoring
 - [`docs/UPDATE-DOCS.md`](docs/UPDATE-DOCS.md) — comment fonctionne la routine doc auto-update
 - [`CHANGELOG.md`](CHANGELOG.md) — historique des évolutions (auto-géré)
