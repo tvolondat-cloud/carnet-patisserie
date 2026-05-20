@@ -382,44 +382,32 @@ Automatique via `@media (prefers-color-scheme: dark)` — tokens override.
 
 ## Roadmap produit
 
+> **La roadmap et la priorisation canoniques sont dans le [PRD](docs/PRD.md)**
+> (catalogue d'idées §5, roadmap par horizon §6, matrice ICE §7).
+> Ci-dessous : uniquement le « déjà livré ». Ne plus tenir de backlog ici.
+
 ### ✅ Fait
 - MVP : Home, Recettes, Mode Labo, Suivi, Réviser, Ordonnancement, Carnet PDF
-- Itération 1 conseil : sécurité (RLS WITH CHECK, index, constraints, idempotence seed)
-- Itération 2 conseil : UX (icônes PWA, page profil, a11y, bottom nav refondue)
-- Itération 3 conseil : robustesse (try/catch + rollback, upsert, FR errors)
-- Itération 4 partielle : dark mode, prefers-reduced-motion, tap targets, safe-area
-- Branding Brigade Sucrée + domaines `.fr` et `.app`
-- Déploiement Cloudflare Pages avec custom domain
-- Analytics GTM + GA4 + Consent Mode v2
+- Itérations conseil 1-4 : sécurité (RLS WITH CHECK, index, constraints), UX (icônes
+  PWA, profil, a11y, bottom nav), robustesse (rollback, upsert, FR errors), dark mode
+- **58 recettes** CAP 2025-2026 (12 catégories dont `glacages`), `seed.sql` auto-généré
+- **Modèle freemium livré** : `isPro` + `FREE_RECIPE_SLUGS` (10 recettes gratuites),
+  Carnet PDF / Mode Labo Pro, migration `plan` (`free|pro|admin`), paywall cohérent
+- **Landing** refondue : hero plein écran avec fiche recette interactive
+  (calculateur + étapes dépliables), pricing freemium (annuel −35 % mis en avant),
+  FAQ unifiée, schema.org prérendu, cohérence chiffres
+- **Menu catégories "comptoir"** (tuiles colorées + compteurs, repli progressif)
+- Routines : docs nightly cron, security scan CI, sync CHANGELOG pre-push
+- Suite audit 2026 + **PRD** (source produit unique) + roadmap ICE
+- Branding + domaines `.fr`/`.app`, Cloudflare Pages custom domain, GTM/GA4 Consent v2
 
-### Sprint 1 (en cours)
-- [ ] Module **Fiches CAP** (50 fiches, route `/fiches`, `/fiches/[id]`)
-- [ ] Module **Examen blanc** (60 QCM, route `/reviser/examen`)
-- [ ] Onboarding 3 écrans avec branching (CAP vs Particulier)
-- [ ] Freemium gate : 10 recettes gratuites, Pro = tout
-- [ ] Landing page avant auth
-- [ ] Vocabulaire adaptatif selon profil
-- [ ] Install prompt PWA (`beforeinstallprompt`)
-- [ ] Skeleton loaders au lieu de spinner
-- [ ] Toast feedback offline (`online`/`offline`)
-- [ ] Haptic feedback (`navigator.vibrate`)
-
-### Sprint 2
-- [ ] Upload photos réalisations (Supabase Storage)
-- [ ] Partage recette (lien public)
-- [ ] Favoris + collections personnelles
-- [ ] Mode cuisine grand format (police 20px)
-
-### Sprint 3
-- [ ] Stripe intégration (Pro 4,99€/mois · Annuel 39€/an)
-- [ ] Webhook Stripe via Cloudflare Workers (édit profiles.plan)
-- [ ] Notifications push
-- [ ] Streak hebdomadaire
-- [ ] Email hebdo
+### Backlog & priorisation
+→ **[`docs/PRD.md`](docs/PRD.md)** (Fiches CAP, Examen blanc, onboarding, Wake Lock,
+pages recettes SEO, B2B CFA, Stripe, feature PRO compta, etc. — tous scorés ICE).
 
 ### Mode Compta v2 (prévu) — PRO : coût matières & rentabilité par projet
 Tables : `ingredient_prices`, `frais_variables`, `frais_fixes`, `projections_ca`. Export XLSX + CSV + PDF.
-Réservé au plan **Pro**. Roadmap phasée + checklist détaillée : [`docs/roadmap-audit-2026.md`](docs/roadmap-audit-2026.md) §6 (priorisé ICE 5.0 dans la matrice §5).
+Réservé au plan **Pro**. Priorisé ICE 5.0 dans le [PRD §7](docs/PRD.md) ; spec phasée + checklist : [`docs/roadmap-audit-2026.md`](docs/roadmap-audit-2026.md) §6.
 
 ---
 

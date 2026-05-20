@@ -2,7 +2,7 @@
 
 > *« Tu fais partie de la Brigade Sucrée. »*
 
-PWA mobile-first pour les étudiants **CAP Pâtissier** et particuliers passionnés de pâtisserie. Carnet de recettes, mode laboratoire (test → quiz → chrono), suivi de progression et export PDF.
+PWA mobile-first pour les étudiants **CAP Pâtissier** et particuliers passionnés de pâtisserie. **58 recettes** du référentiel officiel 2025-2026, mode laboratoire (test → quiz → chrono), suivi de progression et export PDF. Modèle **freemium** : 10 recettes gratuites, plan Pro (4,99 €/mois ou 39 €/an) pour tout débloquer.
 
 | | |
 |---|---|
@@ -37,36 +37,36 @@ Voir [`docs/SETUP.md`](docs/SETUP.md) pour la config Supabase complète (schéma
 ```
 src/
 ├── lib/
-│   ├── data/                     ← recipes.json, fiches-cap.json, questions-examen.json
-│   ├── stores/                   ← auth, recettes, progression
+│   ├── data/                     ← recipes.json (58 recettes), fiches-cap.json, questions-examen.json, landing-faq.js
+│   ├── stores/                   ← auth (isPro, FREE_RECIPE_SLUGS), recettes, progression
+│   ├── components/landing/       ← Hero, Pricing, FAQ, SEO… (landing prérendue)
 │   ├── components/               ← ConsentBanner.svelte
+│   ├── utils/slugify.js          ← nom recette → slug URL
 │   ├── analytics.js              ← GTM/GA4 wrapper + Consent Mode v2
 │   └── supabase.js               ← client + flowType:'pkce'
 ├── routes/
-│   ├── +layout.svelte            ← auth guard + bottom nav + tracking
-│   ├── +page.svelte              ← Home (score ring, exam countdown)
+│   ├── +layout.svelte            ← auth guard + nav (sidebar/bottom) + tracking
+│   ├── +page.svelte              ← Landing (anon) / Home (score ring, countdown)
 │   ├── auth/                     ← login + callback OAuth
-│   ├── recettes/                 ← liste + fiche détail + calculateur
-│   ├── laboratoire/[id]/         ← Mode Labo 3 étapes
-│   ├── suivi/                    ← Dashboard
-│   ├── reviser/                  ← Hub révision
-│   ├── ordonnancement/           ← Cours EP1/EP2
-│   ├── carnet-pdf/               ← Export PDF
-│   └── profil/                   ← Édition profil + signOut + privacy
+│   ├── recettes/                 ← liste + menu "comptoir" + fiche + calculateur (gate Pro)
+│   ├── laboratoire/[id]/         ← Mode Labo 3 étapes (gate Pro)
+│   ├── suivi/ · reviser/ · ordonnancement/ · carnet-pdf/ (gate Pro) · profil/ (#plan)
 ├── app.css                       ← Design system + dark mode + a11y
 └── app.html                      ← Shell + GTM + Consent Mode v2 + canonical
 
 scripts/
 ├── generate-icons.js             ← Génère 7 icônes PWA depuis SVG
+├── generate-seed.js              ← Génère seed.sql depuis recipes.json (npm run seed:generate)
+├── security-scan.js              ← Scan secrets + npm audit (CI + pre-push)
 └── sync-docs.js                  ← Auto-update CHANGELOG depuis git log
 
-.githooks/
-└── pre-push                      ← Lance sync-docs avant push (auto-actif via npm install)
+.github/workflows/                ← CI (build + security) + docs-nightly (cron 18h)
+.githooks/pre-push                ← build check + security + sync-docs (auto via npm install)
 
 supabase/
-├── schema.sql                    ← 6 tables + RLS
-├── seed.sql                      ← 17 recettes CAP
-└── migrations/                   ← Sécurité, contraintes, idempotence
+├── schema.sql                    ← tables + RLS
+├── seed.sql                      ← 58 recettes CAP (AUTO-GÉNÉRÉ — ne pas éditer à la main)
+└── migrations/                   ← sécurité, contraintes, idempotence, plan freemium
 ```
 
 Détails complets : [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)
@@ -88,12 +88,19 @@ Multiplicateur 0.25× à 10×, mise à jour temps réel des ingrédients. Éditi
 - Notes libres avec auto-save (debounce 800 ms)
 - Commentaires catégorisés : `note` · `astuce` · `erreur` · `variation`
 
+### Freemium
+- 10 recettes gratuites (`FREE_RECIPE_SLUGS`) · Pro = 58 recettes + Carnet PDF + fiches + QCM
+- Gate client via `isPro` (dérivé de `profiles.plan` : `free|pro|admin`), paywall → `/profil#plan`
+- Pricing : Pro 4,99 €/mois ou **39 €/an (−35 %)**
+
+### Landing (visiteurs anonymes, prérendue)
+- Hero plein écran avec **fiche recette interactive** (calculateur de rendement + étapes dépliables)
+- Pricing freemium, comparatif, FAQ unifiée, schema.org (Organization/WebApplication/FAQPage)
+
 ### Suivi & Profil
-- Score ring + countdown date d'examen
-- Skill bars par compétence CAP
+- Score ring + countdown date d'examen · Skill bars par compétence CAP
 - Export PDF du carnet (Berry Jam `#7D2333`, marge 3 cm classeur)
-- Cours d'ordonnancement EP1/EP2 (7 sections)
-- Dark mode automatique selon préférence système
+- Cours d'ordonnancement EP1/EP2 (7 sections) · Dark mode automatique
 
 ### Analytics RGPD-compliant
 GTM + GA4 avec **Consent Mode v2** : aucun cookie analytics avant opt-in explicite. Bannière de consentement révocable depuis le profil.
@@ -103,12 +110,18 @@ GTM + GA4 avec **Consent Mode v2** : aucun cookie analytics avant opt-in explici
 ## 🚦 Scripts
 
 ```bash
-npm run dev          # serveur dev (HMR + PWA active)
-npm run build        # build production (adapter-static)
-npm run preview      # tester le build localement
-npm run icons        # régénère les 7 icônes PWA depuis SVG
-npm run docs:sync    # synchronise CHANGELOG.md depuis git log
+npm run dev            # serveur dev (HMR + PWA active)
+npm run build          # build production (adapter-static)
+npm run preview:check  # build + preview local (OBLIGATOIRE avant push)
+npm run icons          # régénère les 7 icônes PWA depuis SVG
+npm run seed:generate  # régénère supabase/seed.sql depuis recipes.json
+npm run security       # scan sécurité (secrets + npm audit)
+npm run docs:sync      # synchronise CHANGELOG.md depuis git log
+npm run push:staging   # pousse sur staging
+npm run push:prod      # pousse main → prod (brigadesucree.app)
 ```
+
+⚠️ `supabase/seed.sql` est **auto-généré** : modifier `src/lib/data/recipes.json` puis `npm run seed:generate`, ne jamais éditer le SQL à la main.
 
 À chaque `git push`, le hook `pre-push` lance automatiquement `docs:sync` et crée un commit `docs(auto):` si CHANGELOG a évolué. Voir [`docs/UPDATE-DOCS.md`](docs/UPDATE-DOCS.md).
 
@@ -131,10 +144,13 @@ En **production** sur Cloudflare Pages : Settings → Environment variables. En 
 
 | Doc | Contenu |
 |---|---|
-| [`CLAUDE.md`](CLAUDE.md) | **Source de vérité** — contexte projet complet pour Claude Code |
+| [`docs/PRD.md`](docs/PRD.md) | **PRD — source produit unique** : vision, idées, roadmap, matrice ICE |
+| [`CLAUDE.md`](CLAUDE.md) | **Source de vérité technique** — contexte projet pour Claude Code |
 | [`docs/SETUP.md`](docs/SETUP.md) | Création projet Supabase, schéma SQL, Google OAuth |
 | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | Stores Svelte, modèle de données, design system |
-| [`docs/AUDIT.md`](docs/AUDIT.md) | Audit du conseil — bugs, sécurité, optimisations, roadmap |
+| [`docs/AUDIT.md`](docs/AUDIT.md) | Audit du conseil — bugs, sécurité, optimisations (historique) |
+| [`docs/roadmap-audit-2026.md`](docs/roadmap-audit-2026.md) | Annexe PRD : audit 2026, prospection B2B, spec feature PRO |
+| [`docs/carnet-cap-2025-2026.md`](docs/carnet-cap-2025-2026.md) | Référentiel CAP (quantités, techniques) — source contenu recettes |
 | [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) | Déploiement Cloudflare Pages + custom domain + monitoring |
 | [`docs/UPDATE-DOCS.md`](docs/UPDATE-DOCS.md) | Routine d'auto-update des docs (script + git hook) |
 | [`CHANGELOG.md`](CHANGELOG.md) | Historique des évolutions (auto-géré) |
@@ -143,13 +159,13 @@ En **production** sur Cloudflare Pages : Settings → Environment variables. En 
 
 ## 🚧 Roadmap
 
-**Sprint 1 (en cours)** : Module Fiches CAP, Examen blanc 60 QCM, Onboarding 3 écrans, Freemium gate, Page profil avancée, Install prompt PWA, Skeleton loaders
+✅ **Livré récemment** : modèle freemium (10 recettes gratuites / Pro), 58 recettes,
+landing refondue, menu catégories "comptoir", PRD + priorisation ICE.
 
-**Sprint 2** : Upload photos (Supabase Storage), Favoris, Mode cuisine grand format, Partage recette public
-
-**Sprint 3** : Stripe (Pro 4,99€/mois · Annuel 39€/an), Push notifications, Streak hebdo, Email digest
-
-Détail dans [`CLAUDE.md`](CLAUDE.md) section *Roadmap produit*.
+📌 **Roadmap & priorisation canoniques** → [`docs/PRD.md`](docs/PRD.md)
+(catalogue d'idées §5, roadmap par horizon §6, matrice ICE §7).
+Prochains chantiers prioritaires : instrumentation KPI, Wake Lock, pages recettes
+publiques SEO, offre B2B CFA.
 
 ---
 

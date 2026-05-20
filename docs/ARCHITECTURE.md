@@ -85,7 +85,12 @@ signUpWithEmail(e, p, nom)
 signOut()
 ```
 
-**Comportement spécial** : `loadProfile()` vérifie si l'user a des recettes ; sinon appelle `rpc('seed_recettes_cap')` pour seeder les 17 recettes.
+```js
+isPro              // derived<boolean>  ← profile.plan ∈ {pro, admin}
+FREE_RECIPE_SLUGS  // Set<string>       ← 10 slugs accessibles en gratuit
+```
+
+**Comportement spécial** : `loadProfile()` vérifie si l'user a des recettes ; sinon appelle `rpc('seed_recettes_cap_safe')` (wrapper **idempotent** : no-op si déjà seedé) pour seeder les **58 recettes**. Le gating freemium est client : `locked = !$isPro && !FREE_RECIPE_SLUGS.has(slug)`, paywall → `/profil#plan`.
 
 ### `src/lib/stores/recettes.js`
 
@@ -150,13 +155,13 @@ stats = {
 4. loadProfile(userId)
    ├─ SELECT * FROM profiles WHERE id = userId
    └─ SELECT count(*) FROM recettes WHERE user_id = userId
-       └─ si count = 0 : rpc('seed_recettes_cap', { p_user_id })
-           → INSERT 17 recettes + ingredients + quiz_questions
+       └─ si count = 0 : rpc('seed_recettes_cap_safe', { p_user_id })
+           → INSERT 58 recettes + ingredients + quiz_questions
 5. loadRecettes() + loadProgression() depuis +layout.svelte onMount
 6. redirect → /
 ```
 
-⚠️ **Race condition** : si l'user ouvre 2 onglets simultanément, le seed peut être appelé 2 fois. Voir AUDIT.md pour le fix (garde idempotente dans la fonction SQL).
+✅ **Race condition résolue** : `seed_recettes_cap_safe` est **idempotent** (no-op si l'user a déjà des recettes), donc un double appel (2 onglets) n'aboutit pas à un doublon. `seed.sql` est **auto-généré** depuis `src/lib/data/recipes.json` via `npm run seed:generate` — ne jamais l'éditer à la main.
 
 ---
 

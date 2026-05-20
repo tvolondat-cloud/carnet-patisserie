@@ -64,11 +64,22 @@ Dans **SQL Editor** → New query :
 - Copie tout le contenu de `supabase/seed.sql`
 - **Run** ▶
 
-Cela crée la fonction `seed_recettes_cap(p_user_id UUID)`. Elle est appelée automatiquement par l'app à la première connexion d'un utilisateur (voir `src/lib/stores/auth.js`).
+Cela crée `seed_recettes_cap(p_user_id)` (58 recettes) **et** son wrapper idempotent `seed_recettes_cap_safe(p_user_id)` — c'est ce dernier que l'app appelle à la première connexion (voir `src/lib/stores/auth.js`).
+
+> ⚠️ `supabase/seed.sql` est **auto-généré** depuis `src/lib/data/recipes.json`
+> (`npm run seed:generate`). Pour modifier les recettes : éditer le JSON, régénérer,
+> puis ré-exécuter le SQL ici (`CREATE OR REPLACE`, sans toucher aux données existantes).
+
+### Étape C — Migrations
+
+Dans **SQL Editor**, exécuter dans l'ordre le contenu de `supabase/migrations/` :
+- `*_security_hardening.sql` — RLS WITH CHECK, index, contraintes (idempotent)
+- `*_add_plan_freemium.sql` — colonne `profiles.plan` (`free|pro|admin`), **requise**
+  pour le gating freemium (`isPro`). Sans elle, tous les comptes restent `free`.
 
 ### Vérification
 
-Dans **Table Editor**, tu dois voir les 6 tables vides. Dans **Database → Functions**, tu dois voir `handle_new_user` et `seed_recettes_cap`.
+Dans **Table Editor**, tu dois voir les tables vides + la colonne `profiles.plan`. Dans **Database → Functions** : `handle_new_user`, `seed_recettes_cap`, `seed_recettes_cap_safe`.
 
 ---
 
@@ -142,7 +153,7 @@ npm run dev
 
 1. Tu es redirigé vers `/auth`
 2. Crée un compte (email ou Google)
-3. À la première connexion, l'app appelle `seed_recettes_cap()` automatiquement → 17 recettes apparaissent
+3. À la première connexion, l'app appelle `seed_recettes_cap_safe()` (idempotent) automatiquement → 58 recettes apparaissent
 4. Va dans `/recettes` : la liste s'affiche
 
 ### En cas d'erreur

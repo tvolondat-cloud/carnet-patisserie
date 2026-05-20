@@ -10,9 +10,13 @@ Cette doc liste les points d'attention par sévérité, avec le fix proposé. Se
 
 ### Backend / Sécurité
 
-#### B1. Race condition sur le seed des 17 recettes
+#### B1. Race condition sur le seed des recettes — ✅ RÉSOLU
+> _Document historique (audit à l'époque des 17 recettes). Aujourd'hui : **58 recettes**,
+> `seed.sql` auto-généré depuis `recipes.json`. **Fix livré** : l'app appelle
+> `seed_recettes_cap_safe()`, wrapper idempotent (no-op si déjà seedé) → plus de doublon._
+
 **Fichier** : `src/lib/stores/auth.js` + `supabase/seed.sql`
-**Problème** : `loadProfile` se déclenche à chaque event `onAuthStateChange` (incl. `TOKEN_REFRESHED`). Avec 2 onglets ouverts, le check `count === 0` puis `seed_recettes_cap` peut s'exécuter en parallèle → **34 recettes au lieu de 17**.
+**Problème (à l'époque)** : `loadProfile` se déclenche à chaque event `onAuthStateChange` (incl. `TOKEN_REFRESHED`). Avec 2 onglets ouverts, le check `count === 0` puis `seed_recettes_cap` pouvait s'exécuter en parallèle → doublon de recettes.
 
 **Fix** :
 1. Garde idempotente côté SQL — ajouter au début de `seed_recettes_cap` :
