@@ -7,16 +7,23 @@ const features = [
 		bullets: ['Quiz validé à 75%', 'Chrono +20% tolérance', 'Maîtrisée = 3 étapes ✓']
 	},
 	{
+		icon: '🎯',
+		title: 'Examen blanc',
+		desc: '60 QCM officiels rangés par thème (cadre, EP1, EP2, hygiène, technologie…). Tu choisis un thème, tu enchaînes — comme le jour J.',
+		bullets: ['10 thèmes du programme', 'Note /20 + verdict couleur', 'Moyenne suivie dans le tableau de bord'],
+		featured: true
+	},
+	{
 		icon: '📚',
 		title: '58 recettes du référentiel',
 		desc: 'Crèmes, pâtes, viennoiseries, entremets, glaçages… Tout le référentiel CAP 2025-2026, prêt à étudier.',
-		bullets: ['Pâte feuilletée, levée feuilletée, à choux', 'Crèmes pâtissière, anglaise, mousseline', 'Opéra, Paris-Brest, Tarte Tatin']
+		bullets: ['Programme EP1 / EP2 couvert', 'Pâte feuilletée, à choux, brioche', 'Opéra, Paris-Brest, Tarte Tatin']
 	},
 	{
 		icon: '📊',
 		title: 'Suivi par compétence',
-		desc: 'Score global et barres par compétence CAP. Tu vois où tu progresses, où tu cales.',
-		bullets: ['Cuissons · Textures · Pesées', 'Assemblages · Organisation', '4 statuts : à tester → maîtrisée']
+		desc: 'Score global, barres par compétence CAP et moyenne d\'examen blanc. Tu vois où tu progresses, où tu cales.',
+		bullets: ['Cuissons · Textures · Pesées', 'Moyenne examen blanc /20', '4 statuts : à tester → maîtrisée']
 	},
 	{
 		icon: '📄',
@@ -29,12 +36,6 @@ const features = [
 		title: 'Calculateur de rendement',
 		desc: 'Multiplicateur ×0.25 à ×10. Adapte chaque recette en temps réel selon tes besoins.',
 		bullets: ['Édition inline', 'Sauvegarde auto', 'Toutes les unités']
-	},
-	{
-		icon: '📋',
-		title: 'Cours EP1 / EP2',
-		desc: 'Stratégie d\'épreuve, ordonnancement, vocabulaire pro. Le savoir des formateurs.',
-		bullets: ['Référentiel 2024-2025', '7 sections illustrées', 'Méthode d\'entraînement']
 	}
 ];
 </script>
@@ -52,7 +53,8 @@ const features = [
 
 		<div class="ld-grid ld-grid-3 features-grid">
 			{#each features as f}
-				<article class="feature-card ld-card">
+				<article class="feature-card ld-card" class:feature-card-featured={f.featured}>
+					{#if f.featured}<span class="feature-badge">Nouveau</span>{/if}
 					<div class="feature-icon" aria-hidden="true">{f.icon}</div>
 					<h3 class="ld-h3">{f.title}</h3>
 					<p class="feature-desc">{f.desc}</p>
@@ -61,6 +63,9 @@ const features = [
 							<li>{b}</li>
 						{/each}
 					</ul>
+					{#if f.featured}
+					<a href="#pricing" class="feature-cta" data-track="cta:examen-feature">Voir comment ça marche →</a>
+					{/if}
 				</article>
 			{/each}
 		</div>
@@ -121,4 +126,42 @@ const features = [
 	color: var(--ld-orange);
 	font-weight: 700;
 }
+
+/* Carte Examen blanc — mise en avant */
+.feature-card-featured {
+	position: relative;
+	border: 1.5px solid var(--ld-orange);
+	background: linear-gradient(180deg, var(--ld-white), rgba(232, 152, 85, 0.06));
+	box-shadow: 0 18px 38px rgba(210, 104, 61, 0.16);
+}
+.feature-badge {
+	position: absolute;
+	top: -10px;
+	left: 18px;
+	background: var(--ld-orange);
+	color: #fff;
+	font-size: 0.66rem;
+	font-weight: 800;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	padding: 4px 10px;
+	border-radius: 999px;
+	box-shadow: 0 4px 10px rgba(210, 104, 61, 0.3);
+}
+.feature-card-featured .feature-icon {
+	background: linear-gradient(135deg, #fbbf24, var(--ld-orange));
+}
+.feature-cta {
+	margin-top: 4px;
+	font-size: 0.85rem;
+	font-weight: 800;
+	color: var(--ld-orange-dark);
+	text-decoration: none;
+	transition: color 0.15s, transform 0.15s;
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	align-self: flex-start;
+}
+.feature-cta:hover { color: var(--ld-orange); transform: translateX(3px); }
 </style>

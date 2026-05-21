@@ -12,7 +12,7 @@ const PRO_FEATURES = [
 	{ text: '58 recettes CAP complètes', icon: '🎯', highlight: true },
 	{ text: 'Carnet PDF imprimable (Berry Jam)', icon: '📄', highlight: true },
 	{ text: '50 fiches de révision CAP', icon: '📚', highlight: true },
-	{ text: '60 QCM examen blanc par thème', icon: '🎓', highlight: true },
+	{ text: '60 QCM examen blanc par thème (note /20)', icon: '🎓', highlight: true },
 	{ text: 'Notes & commentaires illimitées', icon: '✏️' },
 	{ text: 'Mode Labo sur toutes les recettes', icon: '⭐' },
 ];
@@ -101,7 +101,7 @@ const PRO_FEATURES = [
 					['Mode Laboratoire', '✓', '✓'],
 					['Carnet PDF imprimable', '✗', '✓'],
 					['Fiches de révision', '✗', '50 fiches'],
-					['Examen blanc QCM', '✗', '60 QCM'],
+					['Examen blanc QCM', '✗', '60 QCM · /20'],
 					['Suivi & statistiques', '✓', '✓'],
 				] as [label, free, pro]}
 				<div class="compare-row">
