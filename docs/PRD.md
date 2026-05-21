@@ -94,10 +94,12 @@ baseline analytics aujourd'hui — voir ICE #1).
   Prérequis à toute priorisation fiable et à tout argumentaire B2B.
 
 ### 5.2 Produit cœur (Labo / recettes / confort)
-- [ ] **🔴 RÉGRESSION — Restaurer l'étape Chrono du Mode Labo** (#0). Le Labo est
-  tombé à 2 étapes (Test→Quiz) ; il faut rétablir **Test→Quiz→Chrono** (seuil ×1.2,
-  statut `validee` intermédiaire `testee→validee→maitrisee`). Promesse de toute la
-  landing + PRD §4 + **interdit `CLAUDE.md`**. Détecté au test équipe (QA + Léa).
+- [x] **Chrono d'entraînement — déplacé sur la fiche recette** (#0, ✅ fait 2026-05-21).
+  Décision produit : le chrono n'est **pas** un 3ᵉ écran de Labo, il est **sur la page
+  recette** pour qu'on suive les étapes en se chronométrant (chrono *sticky* pendant
+  qu'il tourne). Modèle de maîtrise : **testé + quiz ≥ 75 % (Labo) + chrono validé (×1.2,
+  fiche)** → `maitrisee` ; quiz seul → `validee` (corrige le statut `validee` jamais
+  atteint). Le Labo reste Test→Quiz (intentionnel).
 - [ ] **Wake Lock** — écran toujours allumé sur pages recette/labo (#2).
   Pain point persona cœur (mains sales, écran qui s'éteint).
 - [ ] Pistes ouvertes : photos de réalisations, favoris/collections, mode cuisine
@@ -187,7 +189,7 @@ baseline analytics aujourd'hui — voir ICE #1).
 
 | Rang | Action | I | C | E | Score | Justifications |
 |---|---|---|---|---|---|---|
-| 0 | 🔴 **Restaurer le Chrono du Mode Labo** (Test→Quiz→Chrono, ×1.2, statut `validee`) | 9 | 9 | 7 | **8.3** | Régression : Labo tombé à 2 étapes. I : cœur produit + promesse landing/PRD §4 + pain Léa (chrono = le stress CAP) / C : spec figée au CLAUDE.md (interdit de la modifier) + event `lab_chrono_completed` déjà câblé / E : 1 page front + flux statut, ~1j. Inclut le fix saut `testee→validee→maitrisee`. |
+| 0 | ✅ **Chrono d'entraînement sur la fiche recette** (fait — relocalisé hors du Labo) | 9 | 9 | 7 | **8.3** | Livré : chrono sticky sur `/recettes/[id]` (suivre la recette en se chronométrant), maîtrise = test + quiz ≥75 % + chrono ×1.2 ; Labo reste Test→Quiz ; corrige le statut `validee` jamais atteint. `lab_chrono_completed` câblé. |
 | 0bis | 🔴 **Unifier le récit pricing bêta/payant** (Pricing/FAQ/Comparison/profil) | 7 | 9 | 8 | **8.0** | 3 récits contradictoires (« 7j/Stripe » vs « Bientôt disponible » vs « 0€ bêta ») → rupture de confiance post-clic, 100 % des convertis. C : décision business (Stripe pas live) / E : copy + fix `feature-cta`→`#how`/`/auth`, ~½j. |
 | 1 | Instrumenter les KPI (inscrits, DAU/MAU, Free→Pro, NPS) | 7 | 9 | 8 | **8.0** | I : prérequis transverse / C : nécessité évidente, GTM+Supabase déjà là / E : events GA4 (`paywall_viewed`, `upgrade_clicked`, `exam_completed`+note, `sync_applied`) + vues SQL, ~1j |
 | 2 | Wake Lock écran (recette/labo) | 6 | 8 | 8 | **7.3** | I : pain point persona cœur / C : `navigator.wakeLock` documenté / E : front seul ~2-4h (ré-acquérir sur `visibilitychange`, fallback iOS<16.4) |

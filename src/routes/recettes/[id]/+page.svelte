@@ -267,6 +267,55 @@ async function advanceStatut() {
 	}
 }
 
+// ── Chrono d'entraînement (sur la fiche : on suit la recette en se chronométrant) ──
+let chronoElapsed = 0;     // secondes écoulées
+let chronoRunning = false;
+let chronoId = null;
+$: chronoTargetSec = (recette?.chrono_cible ?? recette?.temps ?? 0) * 60;
+$: chronoMaxSec = Math.round(chronoTargetSec * 1.2);   // tolérance +20 %
+$: chronoOver = chronoTargetSec > 0 && chronoElapsed > chronoMaxSec;
+
+function fmtChrono(s) {
+	const m = Math.floor(s / 60);
+	return `${m}:${String(s % 60).padStart(2, '0')}`;
+}
+function chronoStart() {
+	if (chronoRunning) return;
+	chronoRunning = true;
+	chronoId = setInterval(() => { chronoElapsed += 1; }, 1000);
+}
+function chronoPause() {
+	chronoRunning = false;
+	clearInterval(chronoId);
+	chronoId = null;
+}
+function chronoReset() {
+	chronoPause();
+	chronoElapsed = 0;
+}
+async function chronoFinish() {
+	chronoPause();
+	if (chronoElapsed === 0) return;
+	const valide = chronoTargetSec > 0 && chronoElapsed <= chronoMaxSec;
+	// Maîtrise = testé + quiz ≥ 75 % (Mode Labo) + chrono validé (ici).
+	const reachesMastery = valide && p?.tested && (p?.quiz_score ?? 0) >= 75 && statut !== 'maitrisee';
+	const updates = { chrono_seconds: chronoElapsed, chrono_valide: valide };
+	if (reachesMastery) updates.statut = 'maitrisee';
+	try {
+		await updateProgression(id, updates);
+		events.labChronoCompleted(id, chronoElapsed, valide);
+		if (reachesMastery) {
+			if (recette) events.recipeMastered(recette);
+			showToast('⭐ Recette maîtrisée !');
+		} else {
+			showToast(valide ? '✅ Dans les temps !' : '⏱️ Au-dessus de l’objectif — réessaie !');
+		}
+	} catch (e) {
+		showToast('Erreur : ' + e.message);
+	}
+}
+onDestroy(() => clearInterval(chronoId));
+
 const statutLabel = { 'a-tester': 'À tester', testee: 'Testée', validee: 'Validée', maitrisee: 'Maîtrisée' };
 const nextStatutLabel = { 'a-tester': 'Marquer testée', testee: 'Marquer validée', validee: 'Marquer maîtrisée', maitrisee: '' };
 const typeLabel = { note: '📝', astuce: '💡', erreur: '⚠️', variation: '🔄' };
@@ -328,6 +377,38 @@ onMount(async () => {
 		⭐ Recette maîtrisée !
 	</div>
 	{/if}
+
+	<!-- ── Chrono d'entraînement (sticky quand il tourne : la recette reste visible) ── -->
+	<div class="card mb-3 chrono-card" class:chrono-running={chronoRunning}>
+		<div class="chrono-head">
+			<span class="section-title">⏱️ Chrono d'entraînement</span>
+			{#if chronoTargetSec > 0}
+			<span class="chrono-target">Objectif {Math.round(chronoTargetSec / 60)} min · max {Math.round(chronoMaxSec / 60)} min</span>
+			{/if}
+		</div>
+
+		<div class="chrono-display" class:over={chronoOver} role="timer" aria-live="off">{fmtChrono(chronoElapsed)}</div>
+
+		<div class="chrono-actions">
+			{#if !chronoRunning}
+			<button class="btn btn-primary" style="flex:1" on:click={chronoStart}>
+				{chronoElapsed ? '▶ Reprendre' : '▶ Démarrer'}
+			</button>
+			{:else}
+			<button class="btn btn-secondary" style="flex:1" on:click={chronoPause}>⏸ Pause</button>
+			{/if}
+			<button class="btn btn-primary" style="flex:1" on:click={chronoFinish} disabled={!chronoElapsed}>🏁 J'ai fini</button>
+			<button class="btn btn-ghost" on:click={chronoReset} disabled={!chronoElapsed} aria-label="Réinitialiser le chrono">↺</button>
+		</div>
+
+		{#if p?.chrono_seconds}
+		<div class="chrono-last">
+			Dernier&nbsp;: <strong>{fmtChrono(p.chrono_seconds)}</strong>
+			{#if p.chrono_valide}<span class="chrono-ok">✓ dans les temps</span>{:else}<span class="chrono-ko">au-dessus</span>{/if}
+		</div>
+		{/if}
+		<p class="chrono-hint text-xs text-muted">Lance le chrono et réalise la recette : les étapes restent visibles juste en dessous.</p>
+	</div>
 
 	<!-- ── Calculateur ── -->
 	<div class="card mb-3">
@@ -586,6 +667,40 @@ onMount(async () => {
 {/if}
 
 <style>
+/* ── Chrono d'entraînement ── */
+.chrono-card { transition: box-shadow 0.2s ease; }
+.chrono-card.chrono-running {
+	position: sticky;
+	top: calc(var(--safe-top, 0px) + 8px);
+	z-index: 20;
+	box-shadow: var(--shadow-lg);
+	border: 1.5px solid var(--color-brand);
+}
+.chrono-head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px;
+	flex-wrap: wrap;
+	margin-bottom: 4px;
+}
+.chrono-target { font-size: 0.76rem; font-weight: 600; color: var(--color-text-3); }
+.chrono-display {
+	font-size: 2.6rem;
+	font-weight: 900;
+	text-align: center;
+	font-variant-numeric: tabular-nums;
+	color: var(--color-brand);
+	line-height: 1.1;
+	margin: 8px 0 14px;
+}
+.chrono-display.over { color: var(--color-testee); }
+.chrono-actions { display: flex; gap: 8px; align-items: stretch; }
+.chrono-last { font-size: 0.82rem; color: var(--color-text-2); margin-top: 12px; }
+.chrono-ok { color: var(--color-maitrisee); font-weight: 700; margin-left: 6px; }
+.chrono-ko { color: var(--color-testee); font-weight: 700; margin-left: 6px; }
+.chrono-hint { margin: 6px 0 0; }
+
 /* ── Paywall ── */
 .paywall-card {
 	text-align: center;

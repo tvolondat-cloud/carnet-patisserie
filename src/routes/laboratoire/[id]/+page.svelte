@@ -29,7 +29,10 @@ let quizScore = 0;
 
 $: questions = recette?.quiz_questions ?? [];
 $: quizPass = quizScore >= 75;
-$: allDone = tested && quizPass;
+$: allDone = tested && quizPass;                 // session Labo terminée (test + quiz)
+// La maîtrise exige aussi le chrono, désormais réalisé sur la fiche recette.
+$: chronoOk = $progression[id]?.chrono_valide === true;
+$: mastered = allDone && chronoOk;
 
 function submitQuiz() {
 	let correct = 0;
@@ -50,8 +53,11 @@ function markTested() {
 
 async function finishLab() {
 	if (allDone) {
-		await updateProgression(id, { statut: 'maitrisee' });
-		if (recette) events.recipeMastered(recette);
+		// Quiz réussi → "validée". Maîtrisée seulement si le chrono est aussi validé
+		// (le chrono se fait sur la fiche recette pour pouvoir suivre les étapes).
+		const newStatut = chronoOk ? 'maitrisee' : 'validee';
+		await updateProgression(id, { statut: newStatut });
+		if (newStatut === 'maitrisee' && recette) events.recipeMastered(recette);
 	}
 	goto(`/recettes/${slug}`);
 }
@@ -133,7 +139,7 @@ async function finishLab() {
 			{/if}
 			<button class="btn btn-secondary btn-block mt-3" on:click={() => { quizSubmitted = false; quizAnswers = {}; }}>Recommencer le quiz</button>
 			<button class="btn btn-primary btn-block mt-2" on:click={finishLab}>
-				{allDone ? '⭐ Terminer — recette maîtrisée !' : 'Terminer la session'}
+				{mastered ? '⭐ Terminer — recette maîtrisée !' : allDone ? '✅ Terminer — recette validée' : 'Terminer la session'}
 			</button>
 		</div>
 		{:else}
@@ -164,10 +170,15 @@ async function finishLab() {
 	<!-- Résumé final -->
 	{#if tested && quizSubmitted}
 	<div class="card mt-3" style="text-align:center">
-		{#if allDone}
+		{#if mastered}
 		<div style="font-size:2.5rem;margin-bottom:8px">⭐</div>
 		<div style="font-weight:800;font-size:1.1rem;color:var(--color-maitrisee)">Recette maîtrisée !</div>
-		<p class="text-sm text-muted mt-1">Les 2 étapes sont validées. Bravo !</p>
+		<p class="text-sm text-muted mt-1">Test, quiz et chrono validés. Bravo !</p>
+		{:else if allDone}
+		<div style="font-size:2.5rem;margin-bottom:8px">✅</div>
+		<div style="font-weight:800;font-size:1.1rem;color:var(--color-validee)">Recette validée !</div>
+		<p class="text-sm text-muted mt-1">Dernière étape : lance le <strong>chrono sur la fiche recette</strong> (tu suis les étapes en te chronométrant) pour la maîtriser.</p>
+		<a href="/recettes/{slug}" class="btn btn-secondary btn-block mt-3">⏱️ Aller chronométrer →</a>
 		{:else}
 		<p class="text-sm text-muted">Continue à t'entraîner pour maîtriser cette recette.</p>
 		{/if}
