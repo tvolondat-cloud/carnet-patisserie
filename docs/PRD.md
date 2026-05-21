@@ -76,6 +76,11 @@ baseline analytics aujourd'hui — voir ICE #1).
 - **Menu catégories "comptoir"** (tuiles colorées + compteurs, repli progressif).
 - Routines : sync docs nightly, security scan CI, sync CHANGELOG pre-push.
 - Suite audit 2026 traitée (cohérence freemium, FAQ, schema, chiffres) — détail annexe §0.
+- **Examen blanc** : 60 QCM par thème, note /20 + statut couleur, moyenne dans le Suivi.
+  Notes persistées côté **Supabase** (table `exam_scores`) → **sync multi-device**.
+- **Synchronisation multi-device** : chargement au login + refetch au focus +
+  **Supabase Realtime** (`stores/realtime.js`). Migrations requises :
+  `20260521_exam_scores.sql` puis `20260521_realtime.sql`.
 
 ---
 

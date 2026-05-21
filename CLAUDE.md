@@ -126,12 +126,15 @@ src/
 │   │   ├── fiches-cap.json       ← 50 fiches référentiel (PDF source)
 │   │   └── questions-examen.json ← 60 QCM examen blanc
 │   ├── stores/
-│   │   ├── auth.js               ← session, profile, signIn/Out, resetStores
+│   │   ├── auth.js               ← session, profile, isPro, FREE_RECIPE_SLUGS, signIn/Out
 │   │   ├── recettes.js           ← CRUD + cache + optimistic + rollback
-│   │   └── progression.js        ← upsert + stats dérivées
-│   └── supabase.js               ← client + flowType:'pkce' + env validation
+│   │   ├── progression.js        ← upsert + stats dérivées
+│   │   ├── exam.js               ← notes examen blanc (Supabase + cache local + migration)
+│   │   └── realtime.js           ← Supabase Realtime (sync live multi-device)
+│   ├── utils/exam-scores.js      ← helpers purs (note /20, statut couleur, moyenne)
+│   └── supabase.js               ← client + flowType:'pkce' + polyfill WS (SSR) + env validation
 ├── routes/
-│   ├── +layout.svelte            ← auth guard + bottom nav + ConsentBanner + page_view tracking
+│   ├── +layout.svelte            ← auth guard + nav + tracking + load/refetch focus + Realtime
 │   ├── +page.svelte              ← Home V5 (score ring + countdown + activité)
 │   ├── auth/
 │   │   ├── +page.svelte          ← Login/Signup (form + a11y + FR errors)
@@ -156,7 +159,9 @@ supabase/
     ├── 20260501_security_hardening.sql    ← RLS WITH CHECK + index + constraints + idempotence
     ├── 20260513_fix_oeufs_unite.sql
     ├── 20260513_photos_suggestions_nb_pieces.sql
-    └── 20260514_add_plan_freemium.sql     ← colonne profiles.plan (free/pro/admin)
+    ├── 20260514_add_plan_freemium.sql     ← colonne profiles.plan (free/pro/admin)
+    ├── 20260521_exam_scores.sql           ← table exam_scores (notes examen blanc, RLS)
+    └── 20260521_realtime.sql              ← publication supabase_realtime + REPLICA IDENTITY FULL
 
 scripts/
 ├── generate-icons.js             ← Génère 7 icônes PWA depuis SVG (lettre B)
@@ -185,15 +190,30 @@ docs/
 
 ## Base de données Supabase
 
-### Tables (6)
+### Tables
 ```sql
-profiles          -- créé auto via trigger handle_new_user (robuste, fallback metadata)
+profiles          -- créé auto via trigger handle_new_user (robuste, fallback metadata) ; colonne plan
 recettes          -- user_id, nom, categorie, competences[], temps, difficulte, ep, chrono_cible, notes, etapes (JSONB)
 ingredients       -- recette_id, user_id, nom, quantite, unite, ordre
 quiz_questions    -- recette_id, user_id, question, reponses[], bonne, ordre
 progression       -- user_id, recette_id, statut, tested, quiz_score, chrono_seconds, chrono_valide, UNIQUE(user_id, recette_id)
 commentaires      -- user_id, recette_id, contenu, type (note/erreur/astuce/variation)
+recipe_photos     -- user_id, recette_id, storage_path  (migration photos)
+suggestions       -- user_id, contenu, type            (migration suggestions)
+exam_scores       -- user_id, theme, score, total, pct, UNIQUE(user_id, theme)  (notes examen blanc)
 ```
+
+### Synchronisation multi-device
+- Données serveur (Supabase, par `user_id` + RLS) : recettes, progression, notes,
+  commentaires, photos, **exam_scores**. Synchronisées entre appareils.
+- **3 couches** : (1) chargement au login ; (2) **refetch au focus**
+  (`visibilitychange`/`focus` dans `+layout`) ; (3) **Supabase Realtime**
+  (`stores/realtime.js`, browser-only, `postgres_changes` filtrés `user_id`).
+- Realtime requiert d'avoir exécuté la migration `20260521_realtime.sql`
+  (publication `supabase_realtime` + `REPLICA IDENTITY FULL`). Sans elle :
+  pas de live, mais le refetch au focus reste actif (dégradation gracieuse).
+- Examen blanc : `stores/exam.js` = Supabase source de vérité + cache localStorage
+  (offline + migration one-shot des anciennes notes locales).
 
 ### Modèle freemium
 
