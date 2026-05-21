@@ -21,7 +21,7 @@ import Gingerbread from './Gingerbread.svelte';
 
 			<div class="cta-stats">
 				<div class="stat">
-					<strong>17</strong>
+					<strong>58</strong>
 					<span>recettes CAP prêtes</span>
 				</div>
 				<div class="stat">

@@ -5,6 +5,7 @@ import { progression } from '$lib/stores/progression.js';
 import { slugify } from '$lib/utils/slugify.js';
 import fichesData from '$lib/data/fiches-cap.json';
 import questionsData from '$lib/data/questions-examen.json';
+import { readScores, averagePct, gradeOn20 } from '$lib/utils/exam-scores.js';
 
 const ficheCount = fichesData.fiches.length;
 const questionCount = questionsData.questions.length;
@@ -20,11 +21,12 @@ $: testees  = $recettes.filter(r => $progression[r.id]?.statut === 'testee');
 $: validees = $recettes.filter(r => $progression[r.id]?.statut === 'validee');
 $: allMastered = aTester.length === 0 && testees.length === 0 && validees.length === 0;
 
-let lastScore = null;
-
+let examScores = {};
 onMount(() => {
-	try { lastScore = JSON.parse(localStorage.getItem('bs_last_exam_score')); } catch {}
+	examScores = readScores();
 });
+$: examCount = Object.keys(examScores).length;
+$: examAvg   = averagePct(examScores);
 </script>
 
 <svelte:head>
@@ -50,8 +52,8 @@ onMount(() => {
 		<div class="module-body">
 			<div class="module-title">Examen blanc</div>
 			<div class="module-sub">{questionCount} QCM · entraînement par thème</div>
-			{#if lastScore}
-			<div class="module-score">Dernier : {lastScore.score}/{lastScore.total} · {lastScore.pct}%</div>
+			{#if examCount > 0}
+			<div class="module-score">Moyenne : {gradeOn20(examAvg)}/20 · {examCount} thème{examCount > 1 ? 's' : ''}</div>
 			{/if}
 		</div>
 		<span class="module-chevron">›</span>

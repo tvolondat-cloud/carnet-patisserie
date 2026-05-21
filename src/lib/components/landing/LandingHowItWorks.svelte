@@ -5,7 +5,7 @@ const steps = [
 	{
 		num: '01',
 		title: 'Choisis ta recette',
-		desc: 'Parmi les 17 du référentiel CAP, ou crée la tienne. Filtre par catégorie, EP, statut, compétence.',
+		desc: 'Parmi les 58 du référentiel CAP, ou crée la tienne. Filtre par catégorie, EP, statut, compétence.',
 		pose: 'learning'
 	},
 	{
