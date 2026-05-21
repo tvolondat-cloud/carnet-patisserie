@@ -4,20 +4,18 @@ import { recettes } from '$lib/stores/recettes.js';
 import { stats, progression } from '$lib/stores/progression.js';
 import recipesData from '$lib/data/recipes.json';
 import { slugify } from '$lib/utils/slugify.js';
-import { readScores, averagePct, gradeOn20, statusFor } from '$lib/utils/exam-scores.js';
+import { averagePct, gradeOn20, statusFor } from '$lib/utils/exam-scores.js';
+import { examScores, loadExamScores } from '$lib/stores/exam.js';
 
 const competences = recipesData.competences;
 
 const statutLabel = { 'a-tester': 'À tester', testee: 'Testée', validee: 'Validée', maitrisee: 'Maîtrisée' };
 const statutColor = { 'a-tester': 'var(--color-a-tester)', testee: 'var(--color-testee)', validee: 'var(--color-validee)', maitrisee: 'var(--color-maitrisee)' };
 
-// Examen blanc — agrégat localStorage
-let examScores = {};
-onMount(() => {
-	examScores = readScores();
-});
-$: examCount  = Object.keys(examScores).length;
-$: examAvg    = averagePct(examScores);          // % (peut être null)
+// Examen blanc — store Supabase (sync multi-device)
+onMount(loadExamScores);
+$: examCount  = Object.keys($examScores).length;
+$: examAvg    = averagePct($examScores);          // % (peut être null)
 $: examGrade  = examAvg == null ? null : gradeOn20(examAvg); // /20
 $: examStatus = statusFor(examAvg);              // 'pending' | 'green' | 'orange' | 'red'
 </script>

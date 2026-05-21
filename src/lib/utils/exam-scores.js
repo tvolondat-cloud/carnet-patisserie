@@ -1,12 +1,10 @@
 /**
- * Notes de l'examen blanc — persistance locale (par appareil).
+ * Helpers purs de l'examen blanc (note /20, statut couleur, moyenne)
+ * + cache localStorage (fallback hors-ligne / migration).
  *
- * Structure : { [themeId]: { score, total, pct, date } }
- *
- * Choix `localStorage` (pas Supabase) :
- * - Donnée non critique, par appareil = OK pour un examen blanc.
- * - Pas de migration de schéma ni de RLS à gérer.
- * - Migration vers Supabase possible plus tard si on veut un suivi cross-device.
+ * La SOURCE DE VÉRITÉ est désormais Supabase (table `exam_scores`),
+ * orchestrée par `src/lib/stores/exam.js`. Le localStorage ne sert plus
+ * que de cache offline et de réservoir de migration des anciennes notes.
  */
 
 const KEY = 'bs_exam_scores';
@@ -15,8 +13,8 @@ function isBrowser() {
 	return typeof window !== 'undefined' && typeof window.localStorage !== 'undefined';
 }
 
-/** Lit toutes les notes stockées. */
-export function readScores() {
+/** Lit le cache local. */
+export function readLocal() {
 	if (!isBrowser()) return {};
 	try {
 		return JSON.parse(localStorage.getItem(KEY) || '{}');
@@ -25,18 +23,15 @@ export function readScores() {
 	}
 }
 
-/** Écrit / écrase la note d'un thème. Retourne l'objet à jour. */
-export function saveScore(themeId, { score, total, pct }) {
-	if (!isBrowser()) return readScores();
-	const all = readScores();
-	all[themeId] = { score, total, pct, date: new Date().toISOString() };
+/** Écrit le cache local (miroir de l'état Supabase). */
+export function writeLocal(scores) {
+	if (!isBrowser()) return;
 	try {
-		localStorage.setItem(KEY, JSON.stringify(all));
+		localStorage.setItem(KEY, JSON.stringify(scores ?? {}));
 	} catch {}
-	return all;
 }
 
-/** Moyenne (%) des notes enregistrées. `null` si aucune note. */
+/** Moyenne (%) des notes. `null` si aucune. */
 export function averagePct(scores) {
 	const arr = Object.values(scores ?? {});
 	if (!arr.length) return null;
@@ -44,19 +39,16 @@ export function averagePct(scores) {
 	return Math.round(sum / arr.length);
 }
 
-/** Convertit un pourcentage en note /20 (1 décimale, formatée FR). */
+/** Convertit un pourcentage en note /20 (1 décimale, format FR). */
 export function gradeOn20(pct) {
 	if (pct == null) return null;
 	const n = Math.round(pct * 0.2 * 10) / 10;
-	return Number.isInteger(n) ? `${n}` : `${n}`.replace('.', ',');
+	return `${n}`.replace('.', ',');
 }
 
 /**
- * Statut colorimétrique d'un score.
- * - `green`  : ≥ 75 % — réussi
- * - `orange` : 50–74 % — moyenne
- * - `red`    : < 50 % — sous la moyenne
- * - `pending`: pas encore joué
+ * Statut colorimétrique :
+ * - `green`  ≥ 75 % (réussi) · `orange` 50–74 % (moyenne) · `red` < 50 % · `pending`
  */
 export function statusFor(pct) {
 	if (pct == null) return 'pending';

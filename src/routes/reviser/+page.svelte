@@ -5,7 +5,8 @@ import { progression } from '$lib/stores/progression.js';
 import { slugify } from '$lib/utils/slugify.js';
 import fichesData from '$lib/data/fiches-cap.json';
 import questionsData from '$lib/data/questions-examen.json';
-import { readScores, averagePct, gradeOn20 } from '$lib/utils/exam-scores.js';
+import { averagePct, gradeOn20 } from '$lib/utils/exam-scores.js';
+import { examScores, loadExamScores } from '$lib/stores/exam.js';
 
 const ficheCount = fichesData.fiches.length;
 const questionCount = questionsData.questions.length;
@@ -21,12 +22,9 @@ $: testees  = $recettes.filter(r => $progression[r.id]?.statut === 'testee');
 $: validees = $recettes.filter(r => $progression[r.id]?.statut === 'validee');
 $: allMastered = aTester.length === 0 && testees.length === 0 && validees.length === 0;
 
-let examScores = {};
-onMount(() => {
-	examScores = readScores();
-});
-$: examCount = Object.keys(examScores).length;
-$: examAvg   = averagePct(examScores);
+onMount(loadExamScores);
+$: examCount = Object.keys($examScores).length;
+$: examAvg   = averagePct($examScores);
 </script>
 
 <svelte:head>

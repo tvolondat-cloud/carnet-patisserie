@@ -1,15 +1,13 @@
 <script>
 import { onMount } from 'svelte';
 import questionsData from '$lib/data/questions-examen.json';
-import { readScores, saveScore, gradeOn20, statusFor } from '$lib/utils/exam-scores.js';
+import { gradeOn20, statusFor } from '$lib/utils/exam-scores.js';
+import { examScores, saveExamScore, loadExamScores } from '$lib/stores/exam.js';
 
 const allQ = questionsData.questions;
 
-// Notes par thème (localStorage)
-let scores = {};
-onMount(() => {
-	scores = readScores();
-});
+// Notes par thème : store Supabase (sync multi-device) + cache offline
+onMount(loadExamScores);
 
 const THEMES = [
 	{ id: 'all',          label: 'Tout le programme',   emoji: '🎯' },
@@ -75,7 +73,7 @@ function next() {
 }
 
 function finish() {
-	scores = saveScore(selectedTheme, { score, total: questions.length, pct });
+	saveExamScore(selectedTheme, { score, total: questions.length, pct });
 	mode = 'result';
 }
 
@@ -122,7 +120,7 @@ $: progressPct = questions.length ? Math.round((idx + (answered ? 1 : 0)) / ques
 	<div class="theme-grid" role="list">
 		{#each THEMES as t}
 		{@const count = themeCount(t.id)}
-		{@const s = scores[t.id]}
+		{@const s = $examScores[t.id]}
 		{@const status = statusFor(s?.pct)}
 		<button
 			type="button"

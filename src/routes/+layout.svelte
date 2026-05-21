@@ -6,6 +6,7 @@ import { goto } from '$app/navigation';
 import { initAuth, isAuthenticated, authLoading } from '$lib/stores/auth.js';
 import { loadRecettes } from '$lib/stores/recettes.js';
 import { loadProgression } from '$lib/stores/progression.js';
+import { loadExamScores } from '$lib/stores/exam.js';
 import { initAnalytics, trackPageView } from '$lib/analytics.js';
 import ConsentBanner from '$lib/components/ConsentBanner.svelte';
 import '../app.css';
@@ -15,13 +16,29 @@ const homeIsPublic = true;
 
 let initialized = !browser;
 
+function refreshUserData() {
+	if (!$isAuthenticated) return;
+	return Promise.all([loadRecettes(), loadProgression(), loadExamScores()]);
+}
+
 onMount(async () => {
 	initAnalytics();
 	await initAuth();
 	initialized = true;
-	if ($isAuthenticated) {
-		await Promise.all([loadRecettes(), loadProgression()]);
-	}
+	await refreshUserData();
+});
+
+// Pas de Supabase Realtime : on resynchronise quand l'app reprend le focus
+// (changement d'onglet / retour depuis un autre device). onMount sync =
+// la fonction de nettoyage est bien prise en compte par Svelte.
+onMount(() => {
+	const onVisible = () => { if (document.visibilityState === 'visible') refreshUserData(); };
+	document.addEventListener('visibilitychange', onVisible);
+	window.addEventListener('focus', onVisible);
+	return () => {
+		document.removeEventListener('visibilitychange', onVisible);
+		window.removeEventListener('focus', onVisible);
+	};
 });
 
 $: currentPath = $page.url.pathname;
