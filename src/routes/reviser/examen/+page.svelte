@@ -1,8 +1,15 @@
 <script>
 import { onMount } from 'svelte';
 import questionsData from '$lib/data/questions-examen.json';
+import { readScores, saveScore, gradeOn20, statusFor } from '$lib/utils/exam-scores.js';
 
 const allQ = questionsData.questions;
+
+// Notes par thème (localStorage)
+let scores = {};
+onMount(() => {
+	scores = readScores();
+});
 
 const THEMES = [
 	{ id: 'all',          label: 'Tout le programme',   emoji: '🎯' },
@@ -68,13 +75,18 @@ function next() {
 }
 
 function finish() {
-	try {
-		localStorage.setItem('bs_last_exam_score', JSON.stringify({
-			score, total: questions.length, pct, date: new Date().toISOString()
-		}));
-	} catch {}
+	scores = saveScore(selectedTheme, { score, total: questions.length, pct });
 	mode = 'result';
 }
+
+// Thème suivant (saute "all" pour rester sur du contenu spécifique).
+$: nextTheme = (() => {
+	const specific = THEMES.filter(t => t.id !== 'all');
+	const i = specific.findIndex(t => t.id === selectedTheme);
+	// Depuis "all" → premier thème spécifique. Sinon → suivant, avec boucle.
+	if (i === -1) return specific[0];
+	return specific[(i + 1) % specific.length];
+})();
 
 function btnState(i) {
 	if (!answered) return '';
@@ -110,16 +122,25 @@ $: progressPct = questions.length ? Math.round((idx + (answered ? 1 : 0)) / ques
 	<div class="theme-grid" role="list">
 		{#each THEMES as t}
 		{@const count = themeCount(t.id)}
+		{@const s = scores[t.id]}
+		{@const status = statusFor(s?.pct)}
 		<button
 			type="button"
-			class="theme-btn"
+			class="theme-btn theme-{status}"
+			class:done={!!s}
 			role="listitem"
-			aria-label="{t.label} — {count} questions, lance le quiz"
+			aria-label={s
+				? `${t.label} — dernière note ${gradeOn20(s.pct)}/20, rejouer le quiz`
+				: `${t.label} — ${count} questions, lance le quiz`}
 			on:click={() => startTheme(t.id)}
 		>
 			<span class="theme-emoji">{t.emoji}</span>
 			<span class="theme-label">{t.label}</span>
-			<span class="theme-count">{count} Q</span>
+			{#if s}
+				<span class="theme-grade" title="Note /20">{gradeOn20(s.pct)}<small>/20</small></span>
+			{:else}
+				<span class="theme-count">{count} Q</span>
+			{/if}
 			<span class="theme-go" aria-hidden="true">→</span>
 		</button>
 		{/each}
@@ -168,15 +189,15 @@ $: progressPct = questions.length ? Math.round((idx + (answered ? 1 : 0)) / ques
 <!-- ══════════════════ RESULT ══════════════════ -->
 {:else if mode === 'result'}
 
-	<div class="result-score" class:result-pass={passed} class:result-fail={!passed}>
-		<div class="result-pct">{pct}%</div>
-		<div class="result-fraction">{score} / {questions.length} bonnes réponses</div>
-		<div class="result-verdict">{passed ? '🎉 Objectif atteint !' : '💪 Continue à réviser !'}</div>
-		{#if passed}
-		<div class="result-bar-wrap"><div class="result-bar" style="width:{pct}%;background:#10b981"></div></div>
-		{:else}
-		<div class="result-bar-wrap"><div class="result-bar" style="width:{pct}%;background:#f59e0b"></div></div>
-		{/if}
+	<div class="result-score result-{statusFor(pct)}">
+		<div class="result-grade">{gradeOn20(pct)}<span class="result-grade-on">/20</span></div>
+		<div class="result-pct-line">{pct}% · {score} / {questions.length} bonnes réponses</div>
+		<div class="result-verdict">
+			{#if statusFor(pct) === 'green'}🎉 Réussi
+			{:else if statusFor(pct) === 'orange'}💪 Moyenne, continue
+			{:else}📚 Sous la moyenne — révise{/if}
+		</div>
+		<div class="result-bar-wrap"><div class="result-bar" style="width:{pct}%"></div></div>
 	</div>
 
 	{#if wrong.length === 0}
@@ -198,9 +219,15 @@ $: progressPct = questions.length ? Math.round((idx + (answered ? 1 : 0)) / ques
 	{/each}
 	{/if}
 
+	{#if nextTheme}
+	<button type="button" class="btn btn-primary btn-block btn-lg result-next" on:click={() => startTheme(nextTheme.id)}>
+		Thème suivant · {nextTheme.emoji} {nextTheme.label} →
+	</button>
+	{/if}
+
 	<div class="result-actions">
-		<button type="button" class="btn btn-secondary" on:click={() => mode = 'start'}>← Thèmes</button>
-		<button type="button" class="btn btn-primary" on:click={start}>🔄 Recommencer</button>
+		<button type="button" class="btn btn-ghost" on:click={() => mode = 'start'}>← Thèmes</button>
+		<button type="button" class="btn btn-secondary" on:click={start}>🔄 Recommencer</button>
 	</div>
 
 {/if}
@@ -247,6 +274,37 @@ $: progressPct = questions.length ? Math.round((idx + (answered ? 1 : 0)) / ques
 	flex-shrink: 0;
 }
 .theme-btn:hover .theme-go { color: var(--color-brand); transform: translateX(3px); }
+
+/* Pastille note /20 (thème complété) */
+.theme-grade {
+	font-size: 0.85rem;
+	font-weight: 800;
+	padding: 4px 10px;
+	border-radius: var(--radius-full);
+	color: #fff;
+	font-variant-numeric: tabular-nums;
+	flex-shrink: 0;
+}
+.theme-grade small { font-weight: 600; opacity: 0.85; font-size: 0.72em; }
+
+/* Statut colorimétrique des tuiles complétées */
+.theme-btn.theme-green {
+	border-color: var(--color-maitrisee);
+	background: rgba(16, 185, 129, 0.07);
+}
+.theme-btn.theme-green .theme-grade { background: var(--color-maitrisee); }
+
+.theme-btn.theme-orange {
+	border-color: var(--color-testee);
+	background: rgba(245, 158, 11, 0.08);
+}
+.theme-btn.theme-orange .theme-grade { background: var(--color-testee); }
+
+.theme-btn.theme-red {
+	border-color: #ef4444;
+	background: rgba(239, 68, 68, 0.08);
+}
+.theme-btn.theme-red .theme-grade { background: #ef4444; }
 
 /* ── Quiz top bar ───────────────────────────── */
 .quiz-top {
@@ -357,16 +415,24 @@ $: progressPct = questions.length ? Math.round((idx + (answered ? 1 : 0)) / ques
 	padding: 28px 20px 20px;
 	border-radius: var(--radius-xl);
 	border: 2px solid;
+	--result-color: var(--color-text-2);
 }
-.result-pass { border-color: var(--color-maitrisee); background: rgba(16, 185, 129, 0.07); }
-.result-fail { border-color: var(--color-testee);    background: rgba(245, 158, 11, 0.07); }
+.result-green  { border-color: var(--color-maitrisee); background: rgba(16, 185, 129, 0.07); --result-color: var(--color-maitrisee); }
+.result-orange { border-color: var(--color-testee);    background: rgba(245, 158, 11, 0.08); --result-color: var(--color-testee); }
+.result-red    { border-color: #ef4444;                background: rgba(239, 68, 68, 0.08);  --result-color: #ef4444; }
 
-.result-pct      { font-size: 3.5rem; font-weight: 900; line-height: 1; margin-bottom: 4px; }
-.result-pass .result-pct { color: var(--color-maitrisee); }
-.result-fail .result-pct { color: var(--color-testee); }
+.result-grade {
+	font-size: 3.6rem;
+	font-weight: 900;
+	line-height: 1;
+	margin-bottom: 4px;
+	color: var(--result-color);
+	font-variant-numeric: tabular-nums;
+}
+.result-grade-on { font-size: 1.1rem; font-weight: 700; opacity: 0.65; margin-left: 2px; }
 
-.result-fraction { font-size: 0.95rem; color: var(--color-text-2); margin-bottom: 6px; }
-.result-verdict  { font-size: 1rem; font-weight: 700; margin-bottom: 14px; }
+.result-pct-line { font-size: 0.9rem; color: var(--color-text-2); margin-bottom: 6px; }
+.result-verdict  { font-size: 1rem; font-weight: 700; margin-bottom: 14px; color: var(--result-color); }
 
 .result-bar-wrap {
 	height: 6px;
@@ -377,8 +443,11 @@ $: progressPct = questions.length ? Math.round((idx + (answered ? 1 : 0)) / ques
 .result-bar {
 	height: 100%;
 	border-radius: var(--radius-full);
+	background: var(--result-color);
 	transition: width 0.6s ease;
 }
+
+.result-next { margin-top: 18px; }
 
 /* ── Wrong answers ──────────────────────────── */
 .wrong-card {

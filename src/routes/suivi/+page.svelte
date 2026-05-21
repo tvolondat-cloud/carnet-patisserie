@@ -1,13 +1,25 @@
 <script>
+import { onMount } from 'svelte';
 import { recettes } from '$lib/stores/recettes.js';
 import { stats, progression } from '$lib/stores/progression.js';
 import recipesData from '$lib/data/recipes.json';
 import { slugify } from '$lib/utils/slugify.js';
+import { readScores, averagePct, gradeOn20, statusFor } from '$lib/utils/exam-scores.js';
 
 const competences = recipesData.competences;
 
 const statutLabel = { 'a-tester': 'À tester', testee: 'Testée', validee: 'Validée', maitrisee: 'Maîtrisée' };
 const statutColor = { 'a-tester': 'var(--color-a-tester)', testee: 'var(--color-testee)', validee: 'var(--color-validee)', maitrisee: 'var(--color-maitrisee)' };
+
+// Examen blanc — agrégat localStorage
+let examScores = {};
+onMount(() => {
+	examScores = readScores();
+});
+$: examCount  = Object.keys(examScores).length;
+$: examAvg    = averagePct(examScores);          // % (peut être null)
+$: examGrade  = examAvg == null ? null : gradeOn20(examAvg); // /20
+$: examStatus = statusFor(examAvg);              // 'pending' | 'green' | 'orange' | 'red'
 </script>
 
 <div class="page">
@@ -35,6 +47,24 @@ const statutColor = { 'a-tester': 'var(--color-a-tester)', testee: 'var(--color-
 			{/each}
 		</div>
 	</div>
+
+	<!-- Examen blanc -->
+	<a href="/reviser/examen" class="card mb-3 exam-card exam-{examStatus}" aria-label="Examen blanc — voir détail">
+		<div class="exam-head">
+			<span class="exam-emoji" aria-hidden="true">🎯</span>
+			<div class="exam-title">Examen blanc</div>
+			{#if examGrade != null}
+			<span class="exam-grade">{examGrade}<small>/20</small></span>
+			{/if}
+		</div>
+		<div class="exam-meta">
+			{#if examCount === 0}
+				Aucun thème encore passé — teste tes connaissances.
+			{:else}
+				Moyenne sur {examCount} thème{examCount > 1 ? 's' : ''} complété{examCount > 1 ? 's' : ''} · {examAvg}%
+			{/if}
+		</div>
+	</a>
 
 	<!-- Compétences -->
 	<div class="card mb-3">
@@ -68,3 +98,47 @@ const statutColor = { 'a-tester': 'var(--color-a-tester)', testee: 'var(--color-
 	{/if}
 	{/each}
 </div>
+
+<style>
+.exam-card {
+	display: block;
+	text-decoration: none;
+	color: inherit;
+	border-left: 4px solid var(--color-border);
+	transition: border-color 0.15s, background 0.15s, transform 0.15s;
+}
+.exam-card:hover { transform: translateY(-1px); }
+.exam-card.exam-green   { border-left-color: var(--color-maitrisee); background: rgba(16, 185, 129, 0.04); }
+.exam-card.exam-orange  { border-left-color: var(--color-testee);    background: rgba(245, 158, 11, 0.05); }
+.exam-card.exam-red     { border-left-color: #ef4444;                background: rgba(239, 68, 68, 0.04); }
+
+.exam-head {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+.exam-emoji { font-size: 1.3rem; flex-shrink: 0; }
+.exam-title {
+	flex: 1;
+	font-size: 0.95rem;
+	font-weight: 800;
+	color: var(--color-text);
+}
+.exam-grade {
+	font-size: 1.45rem;
+	font-weight: 900;
+	font-variant-numeric: tabular-nums;
+	color: var(--color-text-2);
+}
+.exam-card.exam-green  .exam-grade { color: var(--color-maitrisee); }
+.exam-card.exam-orange .exam-grade { color: var(--color-testee); }
+.exam-card.exam-red    .exam-grade { color: #ef4444; }
+.exam-grade small { font-size: 0.65em; font-weight: 700; opacity: 0.6; margin-left: 1px; }
+
+.exam-meta {
+	font-size: 0.82rem;
+	color: var(--color-text-2);
+	margin-top: 6px;
+	line-height: 1.45;
+}
+</style>
