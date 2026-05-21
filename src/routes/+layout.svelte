@@ -7,6 +7,7 @@ import { initAuth, isAuthenticated, authLoading } from '$lib/stores/auth.js';
 import { loadRecettes } from '$lib/stores/recettes.js';
 import { loadProgression } from '$lib/stores/progression.js';
 import { loadExamScores } from '$lib/stores/exam.js';
+import { startRealtime, stopRealtime } from '$lib/stores/realtime.js';
 import { initAnalytics, trackPageView } from '$lib/analytics.js';
 import ConsentBanner from '$lib/components/ConsentBanner.svelte';
 import '../app.css';
@@ -28,9 +29,14 @@ onMount(async () => {
 	await refreshUserData();
 });
 
-// Pas de Supabase Realtime : on resynchronise quand l'app reprend le focus
-// (changement d'onglet / retour depuis un autre device). onMount sync =
-// la fonction de nettoyage est bien prise en compte par Svelte.
+// Synchro live entre appareils via Supabase Realtime, démarrée/arrêtée
+// selon l'état d'auth. Le refetch au focus reste le filet de sécurité
+// (réseau coupé, Realtime indisponible…).
+$: if (browser && initialized) {
+	if ($isAuthenticated) startRealtime();
+	else stopRealtime();
+}
+
 onMount(() => {
 	const onVisible = () => { if (document.visibilityState === 'visible') refreshUserData(); };
 	document.addEventListener('visibilitychange', onVisible);
@@ -38,6 +44,7 @@ onMount(() => {
 	return () => {
 		document.removeEventListener('visibilitychange', onVisible);
 		window.removeEventListener('focus', onVisible);
+		stopRealtime();
 	};
 });
 
