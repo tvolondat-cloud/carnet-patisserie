@@ -46,6 +46,12 @@ function start() {
 	mode = 'quiz';
 }
 
+// Cliquer un thème lance directement le quiz (plus de bouton "Commencer")
+function startTheme(themeId) {
+	selectedTheme = themeId;
+	start();
+}
+
 function pick(choice) {
 	if (answered) return;
 	answers[q.id] = choice;
@@ -101,20 +107,23 @@ $: progressPct = questions.length ? Math.round((idx + (answered ? 1 : 0)) / ques
 	<h1 class="page-title">🎯 Examen blanc</h1>
 	<p class="page-subtitle">Choisis un thème et teste tes connaissances</p>
 
-	<div class="theme-grid">
+	<div class="theme-grid" role="list">
 		{#each THEMES as t}
 		{@const count = themeCount(t.id)}
-		<button type="button" class="theme-btn" class:active={selectedTheme === t.id} on:click={() => selectedTheme = t.id}>
+		<button
+			type="button"
+			class="theme-btn"
+			role="listitem"
+			aria-label="{t.label} — {count} questions, lance le quiz"
+			on:click={() => startTheme(t.id)}
+		>
 			<span class="theme-emoji">{t.emoji}</span>
 			<span class="theme-label">{t.label}</span>
 			<span class="theme-count">{count} Q</span>
+			<span class="theme-go" aria-hidden="true">→</span>
 		</button>
 		{/each}
 	</div>
-
-	<button type="button" class="btn btn-primary btn-block btn-lg" style="margin-top:20px" on:click={start}>
-		Commencer · {themeCount(selectedTheme)} questions →
-	</button>
 
 <!-- ══════════════════ QUIZ ══════════════════ -->
 {:else if mode === 'quiz' && q}
@@ -221,7 +230,23 @@ $: progressPct = questions.length ? Math.round((idx + (answered ? 1 : 0)) / ques
 }
 .theme-emoji { font-size: 1.2rem; flex-shrink: 0; }
 .theme-label { flex: 1; font-size: 0.9rem; font-weight: 600; color: var(--color-text); }
-.theme-count { font-size: 0.8rem; font-weight: 700; color: var(--color-text-3); }
+.theme-count {
+	font-size: 0.72rem;
+	font-weight: 800;
+	color: var(--color-text-3);
+	background: var(--color-surface-2);
+	padding: 3px 8px;
+	border-radius: var(--radius-full);
+	flex-shrink: 0;
+}
+.theme-go {
+	font-size: 1.05rem;
+	font-weight: 700;
+	color: var(--color-text-3);
+	transition: transform 0.18s ease, color 0.18s ease;
+	flex-shrink: 0;
+}
+.theme-btn:hover .theme-go { color: var(--color-brand); transform: translateX(3px); }
 
 /* ── Quiz top bar ───────────────────────────── */
 .quiz-top {
