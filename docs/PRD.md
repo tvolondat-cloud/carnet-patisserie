@@ -94,6 +94,10 @@ baseline analytics aujourd'hui — voir ICE #1).
   Prérequis à toute priorisation fiable et à tout argumentaire B2B.
 
 ### 5.2 Produit cœur (Labo / recettes / confort)
+- [ ] **🔴 RÉGRESSION — Restaurer l'étape Chrono du Mode Labo** (#0). Le Labo est
+  tombé à 2 étapes (Test→Quiz) ; il faut rétablir **Test→Quiz→Chrono** (seuil ×1.2,
+  statut `validee` intermédiaire `testee→validee→maitrisee`). Promesse de toute la
+  landing + PRD §4 + **interdit `CLAUDE.md`**. Détecté au test équipe (QA + Léa).
 - [ ] **Wake Lock** — écran toujours allumé sur pages recette/labo (#2).
   Pain point persona cœur (mains sales, écran qui s'éteint).
 - [ ] Pistes ouvertes : photos de réalisations, favoris/collections, mode cuisine
@@ -110,6 +114,11 @@ baseline analytics aujourd'hui — voir ICE #1).
 - [ ] **A/B test CTA** landing (#12, bridé par le trafic actuel).
 
 ### 5.4 Conversion / confiance (landing)
+- [ ] **🔴 Unifier le récit pricing bêta/payant** (#0bis). Trois récits contradictoires :
+  Pricing/FAQ vendent « 7 jours gratuits / Stripe / essai » alors que `profil` montre
+  des boutons `disabled` « Bientôt disponible » et `LandingComparison` dit « 0€ bêta ».
+  Décision business : **une seule vérité « bêta 0€ »** tant que Stripe n'est pas live.
+  Inclut le fix trivial `feature-cta` → `#how`/`/auth`. Détecté au test équipe (designer + Léa).
 - [ ] **Screenshots produit** supplémentaires (sections features) (#4).
   (Le hero montre déjà la fiche Pâte à choux.)
 - [ ] **Compteur d'inscrits réel** (#6) — preuve sociale, **jamais de chiffre fictif**.
@@ -137,8 +146,12 @@ baseline analytics aujourd'hui — voir ICE #1).
 
 > Synthèse priorisée (détail des scores au §7). Dépendances signalées.
 
+**🔴 Correctifs de confiance — AVANT tout (issus du test équipe 2026-05-21)**
+0. **Restaurer le Chrono du Mode Labo** (#0) — régression bloquante, ~1j. Répare la promesse cœur avant de mesurer.
+0bis. **Unifier le récit pricing bêta/payant** (#0bis) + fix `feature-cta` — ~½j, copy.
+
 **Quick wins (0–2 sem.)** — *Ease ≥ 7 & Impact ≥ 5*
-1. Instrumenter les KPI (#1) — prérequis, ~1j.
+1. Instrumenter les KPI (#1) — prérequis, ~1j. Events précisés par l'analyste : `paywall_viewed`, `upgrade_clicked`, `exam_completed`(+note), `sync_applied` + vues Supabase.
 2. Wake Lock recette/labo (#2) — ~2-4h, front seul.
 3. Compteur d'inscrits réel (#6) — ~2-3h, après #1 (réutilise le `count`).
 
@@ -170,11 +183,13 @@ baseline analytics aujourd'hui — voir ICE #1).
 **KPI cible** : acquisition organique + conversion Free→Pro ; B2B = ARR.
 **Contraintes** : dev solo, urgence saisonnière (examen juin), **aucune baseline analytics**
 (plafonne la Confidence de plusieurs actions).
-**Date de calibrage** : 2026-05-19.
+**Date de calibrage** : 2026-05-21 (repriorisé après le test équipe).
 
 | Rang | Action | I | C | E | Score | Justifications |
 |---|---|---|---|---|---|---|
-| 1 | Instrumenter les KPI (inscrits, DAU/MAU, Free→Pro, NPS) | 7 | 9 | 8 | **8.0** | I : prérequis transverse / C : nécessité évidente, GTM+Supabase déjà là / E : events GA4 + 1 vue SQL, ~1j |
+| 0 | 🔴 **Restaurer le Chrono du Mode Labo** (Test→Quiz→Chrono, ×1.2, statut `validee`) | 9 | 9 | 7 | **8.3** | Régression : Labo tombé à 2 étapes. I : cœur produit + promesse landing/PRD §4 + pain Léa (chrono = le stress CAP) / C : spec figée au CLAUDE.md (interdit de la modifier) + event `lab_chrono_completed` déjà câblé / E : 1 page front + flux statut, ~1j. Inclut le fix saut `testee→validee→maitrisee`. |
+| 0bis | 🔴 **Unifier le récit pricing bêta/payant** (Pricing/FAQ/Comparison/profil) | 7 | 9 | 8 | **8.0** | 3 récits contradictoires (« 7j/Stripe » vs « Bientôt disponible » vs « 0€ bêta ») → rupture de confiance post-clic, 100 % des convertis. C : décision business (Stripe pas live) / E : copy + fix `feature-cta`→`#how`/`/auth`, ~½j. |
+| 1 | Instrumenter les KPI (inscrits, DAU/MAU, Free→Pro, NPS) | 7 | 9 | 8 | **8.0** | I : prérequis transverse / C : nécessité évidente, GTM+Supabase déjà là / E : events GA4 (`paywall_viewed`, `upgrade_clicked`, `exam_completed`+note, `sync_applied`) + vues SQL, ~1j |
 | 2 | Wake Lock écran (recette/labo) | 6 | 8 | 8 | **7.3** | I : pain point persona cœur / C : `navigator.wakeLock` documenté / E : front seul ~2-4h (ré-acquérir sur `visibilitychange`, fallback iOS<16.4) |
 | 3 | Recipe schema.org (pages publiques) | 6 | 8 | 8 | **7.3** | **Bloqué par #5** → séquencé après. Score isolé élevé mais la séquence prime. |
 | 4 | Screenshots produit landing | 8 | 7 | 6 | **7.0** | I : 100 % du trafic visiteurs / C : best practice + audit / E : front ~1-2j, bloqueur = vraies captures |
@@ -204,6 +219,11 @@ baseline analytics aujourd'hui — voir ICE #1).
    quand le chiffre est crédible (jamais de faux)*.
 
 ### Notes / arbitrages
+- **Confiance avant features (CEO, test équipe 2026-05-21)** : #0 (Chrono) et #0bis
+  (pricing) passent **devant l'instrumentation #1 elle-même** — inutile de mesurer une
+  conversion sur un funnel qui ment / une promesse non tenue. On répare le produit
+  promis, puis on instrumente le vrai funnel. Aucun nouveau chantier (B2B, compta,
+  multi-CAP) ne remonte tant que ces deux ruptures de confiance ne sont pas réglées.
 - **#3 (schema recettes)** : score 7.3 mais **dépendance dure à #5** → séquencé après.
 - **#10 (B2B CFA)** : sous-classé par l'Ease (3) mais **levier de revenu le plus fort**
   → amorcer en parallèle (cycle long), cf. annexe roadmap-audit §4.
