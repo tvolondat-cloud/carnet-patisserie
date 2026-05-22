@@ -22,7 +22,7 @@ function trackCta(loc) {
 <header class="ld-header" class:scrolled>
 	<div class="ld-container ld-header-inner">
 		<a href="/" class="ld-logo" aria-label="Brigade Sucrée — Accueil">
-			<span class="ld-logo-circle">🍪</span>
+			<img src="/logo.svg" alt="" class="ld-logo-img" width="40" height="40" />
 			<span class="ld-logo-text">Brigade <span>Sucrée</span></span>
 		</a>
 
@@ -107,15 +107,12 @@ function trackCta(loc) {
 	color: var(--ld-deep);
 	font-weight: 800;
 }
-.ld-logo-circle {
+.ld-logo-img {
 	width: 40px;
 	height: 40px;
-	display: grid;
-	place-items: center;
-	background: linear-gradient(135deg, var(--ld-gingerbread-light), var(--ld-gingerbread));
-	border-radius: 50%;
-	font-size: 1.4rem;
-	box-shadow: 0 2px 8px rgba(168, 109, 61, 0.4);
+	object-fit: contain;
+	display: block;
+	border-radius: 10px;
 }
 .ld-logo-text { font-size: 1.05rem; line-height: 1; }
 .ld-logo-text span { color: var(--ld-orange); }
