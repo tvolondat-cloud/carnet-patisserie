@@ -51,7 +51,7 @@ function toggleMode() {
 <div style="min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;background:var(--color-bg)">
 	<div style="width:100%;max-width:380px">
 		<div style="text-align:center;margin-bottom:32px">
-			<div style="font-size:3rem;margin-bottom:12px" aria-hidden="true">🥐</div>
+			<img src="/logo.png" alt="" width="72" height="72" style="display:block;margin:0 auto 12px;width:72px;height:72px;object-fit:contain" />
 			<h1 style="font-size:1.8rem;font-weight:800;color:var(--color-text)">Brigade Sucrée</h1>
 			<p style="color:var(--color-text-2);margin-top:6px">L'app des passionnés de pâtisserie</p>
 		</div>
