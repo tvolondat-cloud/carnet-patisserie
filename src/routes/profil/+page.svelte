@@ -184,7 +184,7 @@ async function handleSignOut() {
 				</span>
 			</button>
 
-			<p class="text-xs text-muted" style="margin-top:8px;text-align:center">Bientôt disponible · 7 jours d'essai gratuit</p>
+			<p class="text-xs text-muted" style="margin-top:8px;text-align:center">Plan Pro bientôt disponible</p>
 		</div>
 		{/if}
 	</div>

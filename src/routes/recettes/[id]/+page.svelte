@@ -271,6 +271,17 @@ async function advanceStatut() {
 let chronoElapsed = 0;     // secondes écoulées
 let chronoRunning = false;
 let chronoId = null;
+let chronoRecipeId = null;
+// La route [id] réutilise le composant : naviguer vers une autre recette
+// ne déclenche pas onDestroy. On réinitialise donc le chrono dès que l'id
+// change (sinon le temps d'une recette se reporterait sur une autre).
+$: if (id && id !== chronoRecipeId) {
+	clearInterval(chronoId);
+	chronoId = null;
+	chronoRunning = false;
+	chronoElapsed = 0;
+	chronoRecipeId = id;
+}
 $: chronoTargetSec = (recette?.chrono_cible ?? recette?.temps ?? 0) * 60;
 $: chronoMaxSec = Math.round(chronoTargetSec * 1.2);   // tolérance +20 %
 $: chronoOver = chronoTargetSec > 0 && chronoElapsed > chronoMaxSec;

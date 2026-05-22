@@ -116,11 +116,10 @@ baseline analytics aujourd'hui — voir ICE #1).
 - [ ] **A/B test CTA** landing (#12, bridé par le trafic actuel).
 
 ### 5.4 Conversion / confiance (landing)
-- [ ] **🔴 Unifier le récit pricing bêta/payant** (#0bis). Trois récits contradictoires :
-  Pricing/FAQ vendent « 7 jours gratuits / Stripe / essai » alors que `profil` montre
-  des boutons `disabled` « Bientôt disponible » et `LandingComparison` dit « 0€ bêta ».
-  Décision business : **une seule vérité « bêta 0€ »** tant que Stripe n'est pas live.
-  Inclut le fix trivial `feature-cta` → `#how`/`/auth`. Détecté au test équipe (designer + Léa).
+- [x] **Unifier le récit pricing bêta/payant** (#0bis, ✅ fait 2026-05-21). Récit unique :
+  **plan Pro « bientôt disponible »**, paiement pas encore activé. Retiré « 7 jours gratuits /
+  Stripe / essai / annulable » de Pricing + FAQ + foot ; CTA Pro = « Commencer gratuitement ».
+  Fix `feature-cta` → `#how`. (Reste cohérent avec `profil` « Bientôt disponible ».)
 - [ ] **Screenshots produit** supplémentaires (sections features) (#4).
   (Le hero montre déjà la fiche Pâte à choux.)
 - [ ] **Compteur d'inscrits réel** (#6) — preuve sociale, **jamais de chiffre fictif**.
@@ -128,6 +127,10 @@ baseline analytics aujourd'hui — voir ICE #1).
 - [ ] **Contraste couleur marque WCAG AA** (#7) — `#6c63ff` ≈ 3,6:1 sur blanc.
 
 ### 5.5 Monétisation / Pro
+- [ ] **PRO — Créer / ajouter ses propres recettes** (#16). UI de création (recette +
+  ingrédients + étapes + quiz), édition, suppression. Schéma déjà prêt (table `recettes`
+  par user, édition d'ingrédients fonctionne) → manque surtout l'UI + le gating Pro.
+  Argument Pro fort pour Sophie (passionnée). Déjà annoncé « à venir » dans la FAQ.
 - [ ] **PRO — Coût matières premières & rentabilité par projet** (#14).
   Mode Compta v2. Spec + roadmap phasée + checklist : **annexe roadmap-audit §6**.
 
@@ -190,7 +193,7 @@ baseline analytics aujourd'hui — voir ICE #1).
 | Rang | Action | I | C | E | Score | Justifications |
 |---|---|---|---|---|---|---|
 | 0 | ✅ **Chrono d'entraînement sur la fiche recette** (fait — relocalisé hors du Labo) | 9 | 9 | 7 | **8.3** | Livré : chrono sticky sur `/recettes/[id]` (suivre la recette en se chronométrant), maîtrise = test + quiz ≥75 % + chrono ×1.2 ; Labo reste Test→Quiz ; corrige le statut `validee` jamais atteint. `lab_chrono_completed` câblé. |
-| 0bis | 🔴 **Unifier le récit pricing bêta/payant** (Pricing/FAQ/Comparison/profil) | 7 | 9 | 8 | **8.0** | 3 récits contradictoires (« 7j/Stripe » vs « Bientôt disponible » vs « 0€ bêta ») → rupture de confiance post-clic, 100 % des convertis. C : décision business (Stripe pas live) / E : copy + fix `feature-cta`→`#how`/`/auth`, ~½j. |
+| 0bis | ✅ **Récit pricing unifié (« Pro bientôt »)** | 7 | 9 | 8 | **8.0** | Fait : retiré « 7j/Stripe/essai » de Pricing+FAQ+foot, CTA « Commencer gratuitement », fix `feature-cta`→`#how`. Cohérent avec profil « Bientôt disponible ». |
 | 1 | Instrumenter les KPI (inscrits, DAU/MAU, Free→Pro, NPS) | 7 | 9 | 8 | **8.0** | I : prérequis transverse / C : nécessité évidente, GTM+Supabase déjà là / E : events GA4 (`paywall_viewed`, `upgrade_clicked`, `exam_completed`+note, `sync_applied`) + vues SQL, ~1j |
 | 2 | Wake Lock écran (recette/labo) | 6 | 8 | 8 | **7.3** | I : pain point persona cœur / C : `navigator.wakeLock` documenté / E : front seul ~2-4h (ré-acquérir sur `visibilitychange`, fallback iOS<16.4) |
 | 3 | Recipe schema.org (pages publiques) | 6 | 8 | 8 | **7.3** | **Bloqué par #5** → séquencé après. Score isolé élevé mais la séquence prime. |
@@ -204,6 +207,7 @@ baseline analytics aujourd'hui — voir ICE #1).
 | 11 | App Store (wrapper PWA) | 7 | 6 | 4 | **5.7** | I : +30-50 % découvrabilité / C : wrappers connus / E : 2-4 sem + comptes dev |
 | 12 | A/B test CTA landing | 5 | 5 | 6 | **5.3** | I : hero 100 % trafic, lift modéré / C : incertain par nature / E : ~1h config mais **significativité bridée par le faible trafic** |
 | 13 | Blog (SEO + idées recettes/inspirations) | 7 | 6 | 3 | **5.3** | (a) SEO + (b) inspirations/saisonnier (rétention). E : ~2 mois éditorial + rendu Markdown prérendu — **big bet**. Absorbe « hors-saison ». |
+| 13bis | PRO — Créer / ajouter ses propres recettes | 6 | 6 | 4 | **5.3** | Argument Pro (Sophie), déjà annoncé FAQ. Schéma prêt (table `recettes` par user) → manque l'UI création (recette+ingrédients+étapes+quiz) + gating Pro. E : CRUD + validation, moyen. |
 | 14 | PRO — Coût matières & rentabilité par projet | 6 | 6 | 3 | **5.0** | Levier monétisation Pro, persona secondaire. E : tables + UX + moteur + exports, plusieurs sprints. Spec → annexe roadmap-audit §6. |
 | 15 | Extension CAP Boulanger / Chocolatier | 6 | 4 | 3 | **4.3** | I : marché ×3-4 mais futur / C : non validé / E : 3-6 mois contenu |
 | 16 | Contenu hors-saison (passionnés) | 4 | 4 | 4 | **4.0** | Absorbé par le blog #13 ; faible priorité isolée |

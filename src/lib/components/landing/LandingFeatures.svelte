@@ -64,7 +64,7 @@ const features = [
 						{/each}
 					</ul>
 					{#if f.featured}
-					<a href="#pricing" class="feature-cta" data-track="cta:examen-feature">Voir comment ça marche →</a>
+					<a href="#how" class="feature-cta" data-track="cta:examen-feature">Voir comment ça marche →</a>
 					{/if}
 				</article>
 			{/each}

@@ -121,8 +121,8 @@ async function generatePDF() {
 			<span>✓ Format A4 · Marge 3 cm · Berry Jam</span>
 			<span>✓ Filtres par catégorie</span>
 		</div>
-		<a href="/profil#plan" class="btn btn-primary btn-block" style="margin-top:16px">Passer au plan Pro →</a>
-		<p class="paywall-note">7 jours d'essai gratuit · Annulable à tout moment</p>
+		<a href="/profil#plan" class="btn btn-primary btn-block" style="margin-top:16px">Voir le plan Pro →</a>
+		<p class="paywall-note">Plan Pro bientôt disponible</p>
 	</div>
 	{:else}
 	<div class="card mb-3">

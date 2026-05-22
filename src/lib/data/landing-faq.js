@@ -15,7 +15,7 @@ export const faqs = [
 	},
 	{
 		q: 'Combien coûte l\'app ?',
-		a: 'Le plan Gratuit l\'est pour toujours : 10 recettes fondamentales, Mode Labo complet, suivi de progression et cours EP1/EP2 — sans carte bancaire. Le plan Pro (4,99€/mois ou 39€/an, soit −35%) débloque les 58 recettes CAP, le carnet PDF imprimable, les 50 fiches de révision et les 60 QCM d\'examen blanc. Essai 7 jours, annulable à tout moment.'
+		a: 'Le plan Gratuit l\'est pour toujours : 10 recettes fondamentales, Mode Labo complet, suivi de progression et cours EP1/EP2 — sans carte bancaire. Le plan Pro (4,99€/mois ou 39€/an, soit −35%) débloquera les 58 recettes CAP, le carnet PDF imprimable, les 50 fiches de révision et les 60 QCM d\'examen blanc. Le paiement n\'est pas encore activé : pendant la bêta, profite du gratuit, le plan Pro arrive bientôt.'
 	},
 	{
 		q: 'Le mode Laboratoire, c\'est concrètement quoi ?',

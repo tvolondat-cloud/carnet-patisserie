@@ -80,9 +80,9 @@ const PRO_FEATURES = [
 				</ul>
 
 				<a href="/auth" class="ld-btn ld-btn-primary ld-btn-large plan-cta" data-track="cta:pricing-pro">
-					Commencer — 7 jours gratuits →
+					Commencer gratuitement →
 				</a>
-				<p class="plan-note">Annulable à tout moment · Aucun engagement</p>
+				<p class="plan-note">Plan Pro <strong>bientôt disponible</strong> — démarre dès maintenant avec le gratuit.</p>
 			</article>
 
 		</div>
@@ -114,7 +114,7 @@ const PRO_FEATURES = [
 		</div>
 
 		<p class="pricing-foot">
-			🔒 Paiement sécurisé · Stripe · Annulation sans frais à tout moment
+			Pendant la bêta : 10 recettes gratuites, sans carte bancaire. Le plan Pro (paiement sécurisé) arrive bientôt.
 		</p>
 	</div>
 </section>
