@@ -78,7 +78,7 @@ $: isActive = (href) =>
 	<!-- Sidebar nav — desktop uniquement (affichée via CSS ≥ 1024px) -->
 	{#if $isAuthenticated}
 		<aside class="sidebar-nav" aria-label="Navigation principale">
-			<div class="sidebar-brand"><img src="/logo.svg" alt="" class="sidebar-logo" width="24" height="24" /> Brigade</div>
+			<div class="sidebar-brand"><img src="/logo.png" alt="" class="sidebar-logo" width="24" height="24" /> Brigade</div>
 			{#each navItems as item (item.href)}
 				<a
 					href={item.href}

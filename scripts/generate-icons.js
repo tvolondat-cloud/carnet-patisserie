@@ -1,60 +1,48 @@
 import sharp from 'sharp';
 import { writeFileSync, mkdirSync } from 'node:fs';
 
+// Génère le jeu d'icônes (favicon, apple-touch, PWA 192/512, maskable)
+// à partir de la marque fournie : scripts/favicon-source.png.
+// Régénérer avec : npm run icons
+
 mkdirSync('static', { recursive: true });
 
-const BRAND = '#6c63ff';
-const BRAND_DARK = '#4c43df';
+const SOURCE = 'scripts/favicon-source.png';
+const CREAM = { r: 250, g: 241, b: 226, alpha: 1 }; // fond clair (iOS n'aime pas la transparence)
+const TRANSPARENT = { r: 0, g: 0, b: 0, alpha: 0 };
 
-const baseSvg = (size, padding = 0) => {
-	const inner = size - padding * 2;
-	const fontSize = inner * 0.62;
-	return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}">
-  <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="${BRAND}"/>
-      <stop offset="100%" stop-color="${BRAND_DARK}"/>
-    </linearGradient>
-  </defs>
-  <rect fill="url(#g)" width="${size}" height="${size}" rx="${size * 0.18}"/>
-  <text x="${size / 2}" y="${size / 2 + fontSize * 0.36}" font-family="Arial, Helvetica, sans-serif" font-size="${fontSize}" font-weight="900" fill="white" text-anchor="middle">B</text>
-</svg>`;
-};
-
-const maskableSvg = (size) => {
-	const safeArea = size * 0.8;
-	const offset = (size - safeArea) / 2;
-	const fontSize = safeArea * 0.62;
-	return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}">
-  <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="${BRAND}"/>
-      <stop offset="100%" stop-color="${BRAND_DARK}"/>
-    </linearGradient>
-  </defs>
-  <rect fill="url(#g)" width="${size}" height="${size}"/>
-  <text x="${size / 2}" y="${offset + safeArea / 2 + fontSize * 0.36}" font-family="Arial, Helvetica, sans-serif" font-size="${fontSize}" font-weight="900" fill="white" text-anchor="middle">C</text>
-</svg>`;
-};
+/** Logo redimensionné (contain) centré sur un carré. */
+async function squareIcon(size, { background = TRANSPARENT, scale = 1 } = {}) {
+	const inner = Math.round(size * scale);
+	const logo = await sharp(SOURCE)
+		.resize(inner, inner, { fit: 'contain', background: TRANSPARENT })
+		.toBuffer();
+	const pad = Math.round((size - inner) / 2);
+	return sharp({ create: { width: size, height: size, channels: 4, background } })
+		.composite([{ input: logo, top: pad, left: pad }])
+		.png()
+		.toBuffer();
+}
 
 const tasks = [
-	{ name: 'icon-192.png', size: 192, svg: baseSvg(192) },
-	{ name: 'icon-512.png', size: 512, svg: baseSvg(512) },
-	{ name: 'icon-maskable-512.png', size: 512, svg: maskableSvg(512) },
-	{ name: 'apple-touch-icon.png', size: 180, svg: baseSvg(180) },
-	{ name: 'favicon-32.png', size: 32, svg: baseSvg(32) }
+	// Favicons / PWA : fond transparent
+	{ name: 'favicon-32.png', buf: () => squareIcon(32) },
+	{ name: 'icon-192.png', buf: () => squareIcon(192) },
+	{ name: 'icon-512.png', buf: () => squareIcon(512) },
+	// Apple touch : fond plein (iOS rend la transparence en noir)
+	{ name: 'apple-touch-icon.png', buf: () => squareIcon(180, { background: CREAM, scale: 0.86 }) },
+	// Maskable : zone de sécurité ~80 % sur fond plein
+	{ name: 'icon-maskable-512.png', buf: () => squareIcon(512, { background: CREAM, scale: 0.8 }) }
 ];
 
-for (const { name, svg } of tasks) {
-	await sharp(Buffer.from(svg)).png().toFile(`static/${name}`);
+for (const { name, buf } of tasks) {
+	writeFileSync(`static/${name}`, await buf());
 	console.log(`✓ static/${name}`);
 }
 
-writeFileSync('static/icon.svg', baseSvg(512));
-console.log('✓ static/icon.svg');
-
-const ico = await sharp(Buffer.from(baseSvg(32))).resize(32, 32).png().toBuffer();
-writeFileSync('static/favicon.ico', ico);
+// favicon.ico : on y écrit le PNG 32px (les navigateurs l'acceptent —
+// même approche que la version précédente).
+writeFileSync('static/favicon.ico', await squareIcon(32));
 console.log('✓ static/favicon.ico');
 
-console.log('\nIcônes PWA générées dans static/.');
+console.log('\nIcônes générées depuis', SOURCE, '→ static/.');

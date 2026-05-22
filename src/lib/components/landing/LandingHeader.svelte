@@ -22,7 +22,7 @@ function trackCta(loc) {
 <header class="ld-header" class:scrolled>
 	<div class="ld-container ld-header-inner">
 		<a href="/" class="ld-logo" aria-label="Brigade Sucrée — Accueil">
-			<img src="/logo.svg" alt="" class="ld-logo-img" width="40" height="40" />
+			<img src="/logo.png" alt="" class="ld-logo-img" width="40" height="40" />
 			<span class="ld-logo-text">Brigade <span>Sucrée</span></span>
 		</a>
 
