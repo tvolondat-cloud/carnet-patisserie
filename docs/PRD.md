@@ -90,8 +90,10 @@ baseline analytics aujourd'hui — voir ICE #1).
 > Cases à cocher = avancement.
 
 ### 5.1 Mesure & socle (transverse)
-- [ ] **Instrumenter les KPI** : inscrits, DAU/MAU, conversion Free→Pro, NPS (#1).
-  Prérequis à toute priorisation fiable et à tout argumentaire B2B.
+- [~] **Instrumenter les KPI** (#1) — **events funnel câblés** : `paywall_viewed`
+  (recette/labo/carnet-pdf), `upgrade_clicked` (toutes les CTA Pro), `exam_completed`
+  (+ note /20). **Reste** : vues SQL serveur (inscrits, conversion Free→Pro, DAU/MAU)
+  + NPS. Prérequis à toute priorisation fiable et argumentaire B2B.
 
 ### 5.2 Produit cœur (Labo / recettes / confort)
 - [x] **Chrono d'entraînement — déplacé sur la fiche recette** (#0, ✅ fait 2026-05-21).
@@ -100,8 +102,9 @@ baseline analytics aujourd'hui — voir ICE #1).
   qu'il tourne). Modèle de maîtrise : **testé + quiz ≥ 75 % (Labo) + chrono validé (×1.2,
   fiche)** → `maitrisee` ; quiz seul → `validee` (corrige le statut `validee` jamais
   atteint). Le Labo reste Test→Quiz (intentionnel).
-- [ ] **Wake Lock** — écran toujours allumé sur pages recette/labo (#2).
-  Pain point persona cœur (mains sales, écran qui s'éteint).
+- [x] **Wake Lock** — écran toujours allumé sur pages recette/labo (#2, ✅ fait 2026-05-22).
+  Action Svelte `wakeLock` (`src/lib/utils/wake-lock.js`), ré-acquise au focus,
+  dégradation silencieuse si l'API manque (iOS < 16.4).
 - [ ] Pistes ouvertes : photos de réalisations, favoris/collections, mode cuisine
   grand format, haptique, skeleton loaders, toast offline.
 
@@ -194,8 +197,8 @@ baseline analytics aujourd'hui — voir ICE #1).
 |---|---|---|---|---|---|---|
 | 0 | ✅ **Chrono d'entraînement sur la fiche recette** (fait — relocalisé hors du Labo) | 9 | 9 | 7 | **8.3** | Livré : chrono sticky sur `/recettes/[id]` (suivre la recette en se chronométrant), maîtrise = test + quiz ≥75 % + chrono ×1.2 ; Labo reste Test→Quiz ; corrige le statut `validee` jamais atteint. `lab_chrono_completed` câblé. |
 | 0bis | ✅ **Récit pricing unifié (« Pro bientôt »)** | 7 | 9 | 8 | **8.0** | Fait : retiré « 7j/Stripe/essai » de Pricing+FAQ+foot, CTA « Commencer gratuitement », fix `feature-cta`→`#how`. Cohérent avec profil « Bientôt disponible ». |
-| 1 | Instrumenter les KPI (inscrits, DAU/MAU, Free→Pro, NPS) | 7 | 9 | 8 | **8.0** | I : prérequis transverse / C : nécessité évidente, GTM+Supabase déjà là / E : events GA4 (`paywall_viewed`, `upgrade_clicked`, `exam_completed`+note, `sync_applied`) + vues SQL, ~1j |
-| 2 | Wake Lock écran (recette/labo) | 6 | 8 | 8 | **7.3** | I : pain point persona cœur / C : `navigator.wakeLock` documenté / E : front seul ~2-4h (ré-acquérir sur `visibilitychange`, fallback iOS<16.4) |
+| 1 | 🟡 Instrumenter les KPI (events funnel **faits** ; reste vues SQL serveur + NPS) | 7 | 9 | 8 | **8.0** | Fait : `paywall_viewed`, `upgrade_clicked`, `exam_completed`(+note) câblés. Reste : vues SQL (inscrits, Free→Pro, DAU/MAU) + NPS. |
+| 2 | ✅ Wake Lock écran (recette/labo) | 6 | 8 | 8 | **7.3** | Fait : action `wakeLock`, ré-acquise au focus, fallback silencieux iOS<16.4. |
 | 3 | Recipe schema.org (pages publiques) | 6 | 8 | 8 | **7.3** | **Bloqué par #5** → séquencé après. Score isolé élevé mais la séquence prime. |
 | 4 | Screenshots produit landing | 8 | 7 | 6 | **7.0** | I : 100 % du trafic visiteurs / C : best practice + audit / E : front ~1-2j, bloqueur = vraies captures |
 | 5 | Pages recettes publiques (SEO) | 9 | 8 | 4 | **7.0** | I : levier d'acquisition #1 / C : audit, mots-clés volume identifiés / E : 1-2 sem dev+rédac — **big bet** |

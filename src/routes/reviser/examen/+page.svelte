@@ -3,6 +3,7 @@ import { onMount } from 'svelte';
 import questionsData from '$lib/data/questions-examen.json';
 import { gradeOn20, statusFor } from '$lib/utils/exam-scores.js';
 import { examScores, saveExamScore, loadExamScores } from '$lib/stores/exam.js';
+import { events } from '$lib/analytics.js';
 
 const allQ = questionsData.questions;
 
@@ -74,6 +75,7 @@ function next() {
 
 function finish() {
 	saveExamScore(selectedTheme, { score, total: questions.length, pct });
+	events.examCompleted(selectedTheme, pct, gradeOn20(pct), pct >= 75);
 	mode = 'result';
 }
 

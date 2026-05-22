@@ -6,6 +6,7 @@ import { progression, updateProgression } from '$lib/stores/progression.js';
 import { isPro, FREE_RECIPE_SLUGS } from '$lib/stores/auth.js';
 import { events } from '$lib/analytics.js';
 import { slugify } from '$lib/utils/slugify.js';
+import { wakeLock } from '$lib/utils/wake-lock.js';
 
 $: slug = $page.params.id;
 $: recette = $recettes.find(r => slugify(r.nom) === slug);
@@ -18,6 +19,9 @@ $: if (recette && !labStartTracked) {
 	events.labStarted(id);
 	labStartTracked = true;
 }
+
+let labPaywallTracked = false;
+$: if (recette && locked && !labPaywallTracked) { events.paywallViewed('labo', id); labPaywallTracked = true; }
 
 let step = 0; // 0=tester, 1=quiz
 let tested = false;
@@ -74,12 +78,12 @@ async function finishLab() {
 		<div class="paywall-icon">🔒</div>
 		<div class="paywall-title">Mode Labo · Recette Pro</div>
 		<p class="paywall-desc">Le mode laboratoire pour cette recette est disponible avec le plan Pro (58 recettes CAP complètes).</p>
-		<a href="/profil#plan" class="btn btn-primary btn-block" style="margin-top:12px">Passer au plan Pro →</a>
+		<a href="/profil#plan" class="btn btn-primary btn-block" style="margin-top:12px" on:click={() => events.upgradeClicked('labo-paywall')}>Passer au plan Pro →</a>
 		<button class="btn btn-ghost btn-sm btn-block" style="margin-top:8px" on:click={() => goto('/recettes')}>← Voir les recettes gratuites</button>
 	</div>
 </div>
 {:else}
-<div class="page">
+<div class="page" use:wakeLock>
 	<div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
 		<button class="btn btn-ghost btn-sm" on:click={() => goto(`/recettes/${slug}`)}>← Retour</button>
 	</div>

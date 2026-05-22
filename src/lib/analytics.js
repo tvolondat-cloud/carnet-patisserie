@@ -169,5 +169,17 @@ export const events = {
 		track('comment_added', { recipe_id: recetteId, comment_type: type }),
 	pdfExported: (count, onlyMaitrisees) =>
 		track('pdf_exported', { count, only_maitrisees: onlyMaitrisees }),
-	profileUpdated: () => track('profile_updated')
+	profileUpdated: () => track('profile_updated'),
+
+	// ── Funnel conversion (KPI Free→Pro) ──
+	/** Un paywall est affiché. `source` : recipe | carnet-pdf | labo */
+	paywallViewed: (source, recipeId) =>
+		track('paywall_viewed', { source, recipe_id: recipeId }),
+	/** Clic sur un CTA d'upgrade. `source` : recipe-paywall | carnet-pdf-paywall | labo-paywall | profil */
+	upgradeClicked: (source) => track('upgrade_clicked', { source }),
+
+	// ── Examen blanc ──
+	/** Examen blanc terminé. `grade` = note /20, `passed` = ≥ 75 %. */
+	examCompleted: (theme, score, grade, passed) =>
+		track('exam_completed', { theme, score, grade, passed })
 };

@@ -15,6 +15,7 @@ import { session, isPro, FREE_RECIPE_SLUGS } from '$lib/stores/auth.js';
 import { events } from '$lib/analytics.js';
 import { onDestroy } from 'svelte';
 import { slugify } from '$lib/utils/slugify.js';
+import { wakeLock } from '$lib/utils/wake-lock.js';
 
 $: slug = $page.params.id;
 $: recette = $recettes.find(r => slugify(r.nom) === slug);
@@ -27,6 +28,9 @@ $: photos = $recipePhotos[id] ?? [];
 
 let viewTracked = false;
 $: if (recette && !viewTracked) { events.viewRecipe(recette); viewTracked = true; }
+
+let paywallTracked = false;
+$: if (recette && locked && !paywallTracked) { events.paywallViewed('recipe', id); paywallTracked = true; }
 
 // ── Calculateur ────────────────────────────────────────────
 let multiplicateur = 1;
@@ -354,7 +358,7 @@ onMount(async () => {
 {#if !recette}
 <div class="page"><div class="spinner" style="margin-top:48px"></div></div>
 {:else}
-<div class="page">
+<div class="page" use:wakeLock>
 	<div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
 		<button class="btn btn-ghost btn-sm" on:click={() => goto('/recettes')}>← Retour</button>
 	</div>
@@ -366,7 +370,7 @@ onMount(async () => {
 		<div class="paywall-icon">🔒</div>
 		<div class="paywall-title">Recette Pro</div>
 		<p class="paywall-desc">Cette recette fait partie des 48 recettes avancées, accessibles avec le plan Pro.</p>
-		<a href="/profil#plan" class="btn btn-primary btn-block" style="margin-top:12px">Passer au plan Pro →</a>
+		<a href="/profil#plan" class="btn btn-primary btn-block" style="margin-top:12px" on:click={() => events.upgradeClicked('recipe-paywall')}>Passer au plan Pro →</a>
 		<button class="btn btn-ghost btn-sm btn-block" style="margin-top:8px" on:click={() => goto('/recettes')}>← Voir les recettes gratuites</button>
 	</div>
 	{:else}

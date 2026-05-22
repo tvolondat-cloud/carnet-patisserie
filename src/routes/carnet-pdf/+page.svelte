@@ -11,6 +11,9 @@ let filterCat = 'all';
 let onlyMaitrisees = false;
 let generating = false;
 
+let pdfPaywallTracked = false;
+$: if (!$isPro && !pdfPaywallTracked) { events.paywallViewed('carnet-pdf'); pdfPaywallTracked = true; }
+
 $: filtered = $recettes.filter(r => {
 	if (filterCat !== 'all' && r.categorie !== filterCat) return false;
 	if (onlyMaitrisees && $progression[r.id]?.statut !== 'maitrisee') return false;
@@ -121,7 +124,7 @@ async function generatePDF() {
 			<span>✓ Format A4 · Marge 3 cm · Berry Jam</span>
 			<span>✓ Filtres par catégorie</span>
 		</div>
-		<a href="/profil#plan" class="btn btn-primary btn-block" style="margin-top:16px">Voir le plan Pro →</a>
+		<a href="/profil#plan" class="btn btn-primary btn-block" style="margin-top:16px" on:click={() => events.upgradeClicked('carnet-pdf-paywall')}>Voir le plan Pro →</a>
 		<p class="paywall-note">Plan Pro bientôt disponible</p>
 	</div>
 	{:else}
