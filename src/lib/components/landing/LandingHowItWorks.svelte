@@ -1,24 +1,22 @@
 <script>
-import Gingerbread from './Gingerbread.svelte';
-
 const steps = [
 	{
 		num: '01',
 		title: 'Choisis ta recette',
 		desc: 'Parmi les 58 du référentiel CAP, ou crée la tienne. Filtre par catégorie, EP, statut, compétence.',
-		pose: 'learning'
+		img: '/perso-recette.png'
 	},
 	{
 		num: '02',
 		title: 'Lance le mode Labo',
 		desc: 'Tester en cuisine, valider le quiz, chronométrer. La méthode CFA, en 3 étapes guidées.',
-		pose: 'baking'
+		img: '/perso-cuisine.png'
 	},
 	{
 		num: '03',
 		title: 'Maîtrise et progresse',
 		desc: 'Statut "maîtrisée" débloqué quand les 3 étapes passent. Suivi par compétence CAP.',
-		pose: 'celebrating'
+		img: '/perso-celebration.png'
 	}
 ];
 </script>
@@ -34,7 +32,7 @@ const steps = [
 			{#each steps as step, i}
 				<div class="step-card">
 					<div class="step-visual">
-						<Gingerbread pose={step.pose} size={140} />
+						<img src={step.img} alt="" class="step-img" loading="lazy" width="140" height="140" />
 					</div>
 					<div class="step-num" aria-hidden="true">{step.num}</div>
 					<h3 class="ld-h3">{step.title}</h3>
@@ -85,6 +83,12 @@ const steps = [
 	background: linear-gradient(135deg, var(--ld-cream-light), var(--ld-cream));
 	border-radius: 16px;
 	padding: 16px;
+}
+.step-img {
+	width: 140px;
+	height: 140px;
+	object-fit: contain;
+	display: block;
 }
 
 .step-num {
