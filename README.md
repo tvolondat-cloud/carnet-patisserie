@@ -49,13 +49,13 @@ src/
 │   ├── +page.svelte              ← Landing (anon) / Home (score ring, countdown)
 │   ├── auth/                     ← login + callback OAuth
 │   ├── recettes/                 ← liste + menu "comptoir" + fiche + calculateur (gate Pro)
-│   ├── laboratoire/[id]/         ← Mode Labo 3 étapes (gate Pro)
+│   ├── laboratoire/[id]/         ← Mode Labo Test→Quiz (gate Pro ; chrono sur la fiche recette)
 │   ├── suivi/ · reviser/ · ordonnancement/ · carnet-pdf/ (gate Pro) · profil/ (#plan)
 ├── app.css                       ← Design system + dark mode + a11y
 └── app.html                      ← Shell + GTM + Consent Mode v2 + canonical
 
 scripts/
-├── generate-icons.js             ← Génère 7 icônes PWA depuis SVG
+├── generate-icons.js             ← Génère favicon + icônes PWA depuis scripts/favicon-source.png
 ├── generate-seed.js              ← Génère seed.sql depuis recipes.json (npm run seed:generate)
 ├── security-scan.js              ← Scan secrets + npm audit (CI + pre-push)
 └── sync-docs.js                  ← Auto-update CHANGELOG depuis git log
@@ -76,10 +76,10 @@ Détails complets : [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)
 ## 🎯 Features
 
 ### Mode Laboratoire (cœur du produit)
-Stepper 3 étapes : **Tester → Quiz → Chrono**.
+Mode Labo = **Tester → Quiz**. Le **chrono** est sur la fiche recette (on suit les étapes en se chronométrant).
 - Quiz validé si score ≥ 75 %
 - Chrono validé si temps ≤ chrono_cible × 1.2
-- Recette **maîtrisée** quand les 3 étapes sont validées
+- Recette **maîtrisée** = testé + quiz + chrono validés (sinon **validée** au quiz seul)
 
 ### Calculateur de rendement
 Multiplicateur 0.25× à 10×, mise à jour temps réel des ingrédients. Édition inline persistée en Supabase avec optimistic updates et rollback.
@@ -113,7 +113,7 @@ GTM + GA4 avec **Consent Mode v2** : aucun cookie analytics avant opt-in explici
 npm run dev            # serveur dev (HMR + PWA active)
 npm run build          # build production (adapter-static)
 npm run preview:check  # build + preview local (OBLIGATOIRE avant push)
-npm run icons          # régénère les 7 icônes PWA depuis SVG
+npm run icons          # régénère favicon + icônes PWA depuis scripts/favicon-source.png
 npm run seed:generate  # régénère supabase/seed.sql depuis recipes.json
 npm run security       # scan sécurité (secrets + npm audit)
 npm run docs:sync      # synchronise CHANGELOG.md depuis git log

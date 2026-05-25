@@ -55,10 +55,10 @@ a-tester → testee → validee → maitrisee
 ```
 
 Promotion automatique :
-- `tested = true` → `statut = testee`
-- `quiz_score ≥ 75` → étape quiz validée
-- `chrono ≤ chrono_cible × 1.2` → étape chrono validée
-- 3 étapes validées → `statut = maitrisee`
+- `tested = true` (Mode Labo) → `statut = testee`
+- `quiz_score ≥ 75` (Mode Labo) + chrono non validé → `statut = validee`
+- `chrono ≤ chrono_cible × 1.2` (chrono sur la **fiche recette** `/recettes/[id]`)
+- testé + quiz ≥ 75 % + chrono validé → `statut = maitrisee`
 
 ### RLS
 
@@ -131,8 +131,8 @@ stats = {
 | `/auth` | Login/Signup (Google + email) |
 | `/auth/callback` | OAuth callback (poll session, redirige vers `/`) |
 | `/recettes` | Liste avec filtres (catégorie, compétence, statut, recherche) |
-| `/recettes/[id]` | Détail — calculateur réactif, notes, commentaires |
-| `/laboratoire/[id]` | Mode Labo — stepper Tester → Quiz → Chrono |
+| `/recettes/[id]` | Détail — calculateur réactif, **chrono d'entraînement (sticky)**, notes, commentaires |
+| `/laboratoire/[id]` | Mode Labo — stepper Tester → Quiz (le chrono est sur la fiche recette) |
 | `/suivi` | Dashboard progression (skill bars + listes par statut) |
 | `/reviser` | Hub révision groupé par statut, lien vers Labo |
 | `/ordonnancement` | Cours EP1/EP2 (7 sections navigables) |

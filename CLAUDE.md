@@ -1,6 +1,6 @@
 # BRIGADE SUCRÉE — Claude Code System Prompt
 
-> **Dernière mise à jour** : 2026-05-18
+> **Dernière mise à jour** : 2026-05-25
 
 ## Rôle
 Tu es un expert senior SvelteKit, Supabase, PWA et déploiement Cloudflare. Tu travailles sur **Brigade Sucrée**, une PWA mobile-first pour les étudiants CAP Pâtissier et les particuliers passionnés de pâtisserie.
@@ -142,7 +142,7 @@ src/
 │   ├── recettes/
 │   │   ├── +page.svelte          ← Liste + menu catégories "comptoir" (tuiles colorées + compteurs)
 │   │   └── [id]/+page.svelte     ← Détail + calculateur + notes + commentaires
-│   ├── laboratoire/[id]/+page.svelte ← Mode Labo 3 étapes
+│   ├── laboratoire/[id]/+page.svelte ← Mode Labo (Test→Quiz ; chrono sur la fiche recette)
 │   ├── suivi/+page.svelte        ← Dashboard skill bars + listes par statut
 │   ├── reviser/+page.svelte      ← Hub révision (à enrichir avec /examen)
 │   ├── ordonnancement/+page.svelte ← Cours EP1/EP2 (7 sections)
@@ -164,8 +164,9 @@ supabase/
     └── 20260521_realtime.sql              ← publication supabase_realtime + REPLICA IDENTITY FULL
 
 scripts/
-├── generate-icons.js             ← Génère 7 icônes PWA depuis SVG (lettre B)
+├── generate-icons.js             ← Génère favicon + icônes PWA depuis scripts/favicon-source.png (Favicon.png)
 ├── generate-seed.js              ← Génère seed.sql depuis recipes.json (npm run seed:generate)
+├── favicon-source.png            ← source de marque (Favicon.png) pour generate-icons
 ├── security-scan.js              ← Scan secrets + npm audit (CI prod + pre-push main)
 └── sync-docs.js                  ← Auto-update CHANGELOG depuis git log
 
@@ -176,7 +177,8 @@ static/
 ├── favicon.ico, favicon-32.png
 ├── apple-touch-icon.png
 ├── icon-192.png, icon-512.png, icon-maskable-512.png
-└── icon.svg
+├── logo.png                      ← logo de marque (header landing, sidebar, /auth)
+└── perso-recette.png, perso-cuisine.png, perso-celebration.png ← visuels "Comment ça marche"
 
 docs/
 ├── SETUP.md
@@ -287,6 +289,9 @@ VITE_SUPABASE_ANON_KEY=eyJhbGci...
 - `pdf_exported` (count, only_maitrisees)
 - `profile_updated`
 - `consent_granted`
+- `paywall_viewed` (source: recipe|labo|carnet-pdf, recipe_id) — funnel Pro
+- `upgrade_clicked` (source) — funnel Pro
+- `exam_completed` (theme, score, grade /20, passed) — examen blanc
 
 ⚠️ Pour que GA4 reçoive les events, il faut configurer dans GTM une balise **Google Tag** avec `Tag ID: G-XJMXR88JGC` + trigger `Initialization - All Pages`, puis **Submit → Publish**.
 
@@ -315,11 +320,13 @@ la fonction `seed_recettes_cap` (les users existants gardent leurs recettes — 
 ## Features validées (NE PAS MODIFIER)
 
 ### Mode Laboratoire (cœur du produit)
-- Stepper 3 étapes : Tester → Quiz → Chrono
-- Quiz validé si score ≥ 75%
-- Chrono validé si temps ≤ chrono_cible × 1.2
-- Maîtrisée si les 3 étapes sont validées
-- Jamais de message négatif — toujours positif/encourageant
+- **Mode Labo** = 2 écrans : **Tester → Quiz** (`/laboratoire/[id]`).
+- **Chrono déplacé sur la fiche recette** (`/recettes/[id]`) : on suit les étapes en se
+  chronométrant (widget sticky). Décision produit 2026-05-21.
+- Seuils inchangés : quiz validé ≥ 75 % · chrono validé si temps ≤ `chrono_cible` × 1.2.
+- **Maîtrise = les 3 critères** : testé + quiz ≥ 75 % + chrono validé → `maitrisee`.
+  Quiz réussi sans chrono → `validee`. (4 statuts tous atteignables.)
+- Jamais de message négatif — toujours positif/encourageant.
 
 ### Calculateur de rendement
 - Multiplicateur 0.25 → ×10
@@ -417,9 +424,17 @@ Automatique via `@media (prefers-color-scheme: dark)` — tokens override.
   (calculateur + étapes dépliables), pricing freemium (annuel −35 % mis en avant),
   FAQ unifiée, schema.org prérendu, cohérence chiffres
 - **Menu catégories "comptoir"** (tuiles colorées + compteurs, repli progressif)
+- **Examen blanc** : note /20, statut couleur, « thème suivant », moyenne dans le Suivi.
+  Notes en Supabase (`exam_scores`) → **sync multi-device** (refetch focus + **Realtime**)
+- **Chrono d'entraînement** sur la fiche recette (sticky) ; Labo = Test→Quiz
+- **Wake Lock** (écran allumé sur recette/labo) ; **events funnel** (`paywall_viewed`,
+  `upgrade_clicked`, `exam_completed`)
+- **Récit pricing unifié** (« plan Pro bientôt » ; paiement pas encore actif)
+- **Nouvelle identité visuelle** : logo (header/sidebar/auth) + favicon & icônes PWA
+  régénérés depuis `Favicon.png` ; visuels persos "Comment ça marche"
 - Routines : docs nightly cron, security scan CI, sync CHANGELOG pre-push
-- Suite audit 2026 + **PRD** (source produit unique) + roadmap ICE
-- Branding + domaines `.fr`/`.app`, Cloudflare Pages custom domain, GTM/GA4 Consent v2
+- Suite audit 2026 + **PRD** (source produit unique) + roadmap ICE + **équipe d'agents** (`.claude/agents/`)
+- Domaines `.fr`/`.app`, Cloudflare Pages custom domain, GTM/GA4 Consent v2
 
 ### Backlog & priorisation
 → **[`docs/PRD.md`](docs/PRD.md)** (Fiches CAP, Examen blanc, onboarding, Wake Lock,
@@ -457,7 +472,7 @@ npm run security         # scan sécurité complet (secrets + npm audit)
 npm run security:staged  # scan rapide des fichiers staged seulement
 npm run push:staging     # pousse sur la branche staging → staging.brigade-sucree.pages.dev
 npm run push:prod        # pousse main en prod → brigadesucree.app
-npm run icons            # régénère les 7 icônes PWA depuis SVG
+npm run icons            # régénère favicon + icônes PWA depuis scripts/favicon-source.png
 npm run docs:sync        # synchronise CHANGELOG.md depuis git log
 ```
 
@@ -534,7 +549,8 @@ Pour ajouter un package à l'allowlist, modifier `AUDIT_ALLOWLIST` dans `scripts
 - ❌ Migrer vers React, Next.js ou tout autre framework
 - ❌ Ajouter TypeScript (JSDoc seulement)
 - ❌ Remplacer Supabase par une autre BDD
-- ❌ Modifier la logique du Mode Laboratoire (3 étapes, seuils 75% et ×1.2)
+- ❌ Modifier les seuils de maîtrise (quiz ≥ 75 %, chrono ≤ ×1.2) ni le principe
+  test + quiz + chrono. (Le Labo = Test→Quiz ; le chrono vit sur la fiche recette.)
 - ❌ Changer les couleurs des statuts (maîtrisée=vert, etc.)
 - ❌ Supprimer l'offline-first
 - ❌ Ajouter des messages négatifs dans le Mode Labo
