@@ -1,0 +1,56 @@
+name: Supabase Keep-Alive
+
+# Ping le projet Supabase 2× par semaine pour empêcher la mise en pause
+# automatique (les projets free-tier se pausent après ~7 jours d'inactivité,
+# puis sont purgés après ~90 jours). Une requête REST suffit à enregistrer
+# de l'activité DB.
+#
+# Prérequis (secrets repo à configurer 1 fois) :
+#   gh secret set SUPABASE_URL --body "https://wkexxddknocpmwgfvodw.supabase.co"
+#   gh secret set SUPABASE_ANON_KEY --body "eyJhbGciOi..."  (depuis Supabase → Settings → API)
+
+on:
+  schedule:
+    - cron: '0 8 * * 1,4'    # lundi + jeudi à 08:00 UTC
+  workflow_dispatch:           # déclenchement manuel possible
+
+permissions:
+  contents: read
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Ping Supabase REST
+        env:
+          URL: ${{ secrets.SUPABASE_URL }}
+          KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: |
+          set -uo pipefail
+
+          if [ -z "${URL:-}" ] || [ -z "${KEY:-}" ]; then
+            echo "::error::Secrets manquants. Configurer SUPABASE_URL et SUPABASE_ANON_KEY au niveau repo."
+            exit 1
+          fi
+
+          # On interroge une table existante (RLS renverra une liste vide
+          # pour l'anon, mais la requête déclenche bien une activité DB).
+          code=$(curl -s -o /tmp/out -w "%{http_code}" -m 15 \
+            -H "apikey: $KEY" \
+            -H "Authorization: Bearer $KEY" \
+            "$URL/rest/v1/profiles?select=id&limit=1")
+
+          echo "HTTP $code"
+          echo "--- réponse ---"
+          head -c 500 /tmp/out || true
+          echo
+
+          # 2xx ou 4xx d'auth = le projet a répondu → activité enregistrée.
+          # 5xx ou timeout = projet en pause / mort → alerte.
+          if [ "$code" -ge 200 ] && [ "$code" -lt 500 ]; then
+            echo "✅ Supabase actif (HTTP $code)"
+          else
+            echo "::error::Supabase ne répond pas correctement (HTTP $code) — projet possiblement en pause."
+            exit 1
+          fi
