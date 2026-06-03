@@ -17,6 +17,7 @@ export const isAuthenticated = derived(session, ($s) => !!$s);
 
 // Plan freemium — dérivé du profil
 export const isPro = derived(profile, ($p) => $p?.plan === 'pro' || $p?.plan === 'admin');
+export const isAdmin = derived(profile, ($p) => $p?.plan === 'admin');
 
 // IDs des recettes accessibles gratuitement (slugs correspondant aux noms)
 export const FREE_RECIPE_SLUGS = new Set([

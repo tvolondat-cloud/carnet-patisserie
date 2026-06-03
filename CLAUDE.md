@@ -161,7 +161,8 @@ supabase/
     ├── 20260513_photos_suggestions_nb_pieces.sql
     ├── 20260514_add_plan_freemium.sql     ← colonne profiles.plan (free/pro/admin)
     ├── 20260521_exam_scores.sql           ← table exam_scores (notes examen blanc, RLS)
-    └── 20260521_realtime.sql              ← publication supabase_realtime + REPLICA IDENTITY FULL
+    ├── 20260521_realtime.sql              ← publication supabase_realtime + REPLICA IDENTITY FULL
+    └── 20260604_admin_kpi.sql             ← colonne plan + is_admin() + RPC admin (KPI, gestion users)
 
 scripts/
 ├── generate-icons.js             ← Génère favicon + icônes PWA depuis scripts/favicon-source.png (Favicon.png)

@@ -94,6 +94,11 @@ baseline analytics aujourd'hui — voir ICE #1).
   (recette/labo/carnet-pdf), `upgrade_clicked` (toutes les CTA Pro), `exam_completed`
   (+ note /20). **Reste** : vues SQL serveur (inscrits, conversion Free→Pro, DAU/MAU)
   + NPS. Prérequis à toute priorisation fiable et argumentaire B2B.
+- [x] **Page admin `/admin`** (✅ fait 2026-06-04). Gate `isAdmin` (`profiles.plan='admin'`) +
+  RPC SECURITY DEFINER (`admin_list_users`, `admin_update_user_plan`, `admin_kpi_users`,
+  `admin_kpi_recipes`, `admin_kpi_features`). KPI live : users (total/par plan/inscrits/actifs),
+  features (progression, examens, notes, commentaires, photos), top 10 recettes testées/maîtrisées.
+  Modification de plan par row. Sécurité serveur via RLS + check `is_admin()`.
 
 ### 5.2 Produit cœur (Labo / recettes / confort)
 - [x] **Chrono d'entraînement — déplacé sur la fiche recette** (#0, ✅ fait 2026-05-21).

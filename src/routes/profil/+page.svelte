@@ -1,6 +1,6 @@
 <script>
 import { goto } from '$app/navigation';
-import { profile, session, signOut, updateProfile, isPro } from '$lib/stores/auth.js';
+import { profile, session, signOut, updateProfile, isPro, isAdmin } from '$lib/stores/auth.js';
 import { stats } from '$lib/stores/progression.js';
 import { events, consentState, resetConsent } from '$lib/analytics.js';
 
@@ -204,6 +204,10 @@ async function handleSignOut() {
 			</button>
 		</div>
 	</div>
+
+	{#if $isAdmin}
+	<a href="/admin" class="btn btn-secondary btn-block" style="margin-bottom:10px">🛠️ Dashboard admin</a>
+	{/if}
 
 	<!-- Déconnexion -->
 	<button type="button" class="btn btn-danger btn-block" on:click={handleSignOut}>
