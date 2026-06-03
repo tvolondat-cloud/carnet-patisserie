@@ -11,7 +11,7 @@ const profiles = [
 			'Le Mode Labo reproduit la méthode des CFA : test, quiz, chrono',
 			'Date d\'examen + countdown sur ton tableau de bord',
 			'Carnet PDF imprimable pour réviser n\'importe où',
-			'Vocabulaire technique conforme au référentiel 2024-2025'
+			'Vocabulaire technique conforme au référentiel 2025-2026'
 		],
 		cta: 'Voir le mode Labo',
 		anchor: '#how'

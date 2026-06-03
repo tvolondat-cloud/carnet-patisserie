@@ -105,6 +105,9 @@ baseline analytics aujourd'hui — voir ICE #1).
 - [x] **Wake Lock** — écran toujours allumé sur pages recette/labo (#2, ✅ fait 2026-05-22).
   Action Svelte `wakeLock` (`src/lib/utils/wake-lock.js`), ré-acquise au focus,
   dégradation silencieuse si l'API manque (iOS < 16.4).
+- [ ] **Chrono désactivable** (#19) — toggle profil « Mode passionné » / « Mode CAP »
+  (Sophie : « chronométrer une pâte à choux le dimanche n'a aucun sens » ; Pierre :
+  « stress de plus dès le jour 1 »). Front pur, ~½j.
 - [ ] Pistes ouvertes : photos de réalisations, favoris/collections, mode cuisine
   grand format, haptique, skeleton loaders, toast offline.
 
@@ -123,6 +126,12 @@ baseline analytics aujourd'hui — voir ICE #1).
   **plan Pro « bientôt disponible »**, paiement pas encore activé. Retiré « 7 jours gratuits /
   Stripe / essai / annulable » de Pricing + FAQ + foot ; CTA Pro = « Commencer gratuitement ».
   Fix `feature-cta` → `#how`. (Reste cohérent avec `profil` « Bientôt disponible ».)
+- [x] **Fix landing « 2024-2025 »** (#24, ✅ fait 2026-06-04) sur `LandingPersonas.svelte`
+  (signalé par Anne CFA, bug de crédibilité).
+- [ ] **Glossaire CAP** (#18) — tooltip + page dédiée pour EP1/EP2/Labo/Chrono/×1.2.
+  Vocabulaire = mur d'entrée pour les passionnés et les débutants complets (Pierre).
+- [ ] **Onboarding post-signup 3 voies** (#20) — « débutant / CAP / passionné » + parcours
+  guidé sur les 10 recettes gratuites. Évite le décrochage en semaine 2.
 - [ ] **Screenshots produit** supplémentaires (sections features) (#4).
   (Le hero montre déjà la fiche Pâte à choux.)
 - [ ] **Compteur d'inscrits réel** (#6) — preuve sociale, **jamais de chiffre fictif**.
@@ -130,14 +139,22 @@ baseline analytics aujourd'hui — voir ICE #1).
 - [ ] **Contraste couleur marque WCAG AA** (#7) — `#6c63ff` ≈ 3,6:1 sur blanc.
 
 ### 5.5 Monétisation / Pro
-- [ ] **PRO — Créer / ajouter ses propres recettes** (#16). UI de création (recette +
-  ingrédients + étapes + quiz), édition, suppression. Schéma déjà prêt (table `recettes`
-  par user, édition d'ingrédients fonctionne) → manque surtout l'UI + le gating Pro.
+- [ ] **Activer Stripe + plan Pro réellement payable** (#21). Prérequis economic du
+  lancement early adopters : sans paiement actif, « Pro bientôt » = frustration et
+  zéro revenu testable. ICE 7.7.
+- [ ] **PRO — Créer / ajouter ses propres recettes** (#13bis, **recalibré** suite test
+  personas : Sophie + Marc convergent, Confidence 6→8, ICE 5.3→6.0). UI de création
+  (recette + ingrédients + étapes + quiz) ; Marc demande aussi un champ **prix/kg**
+  par ingrédient (fait pont avec #14 compta).
   Argument Pro fort pour Sophie (passionnée). Déjà annoncé « à venir » dans la FAQ.
 - [ ] **PRO — Coût matières premières & rentabilité par projet** (#14).
   Mode Compta v2. Spec + roadmap phasée + checklist : **annexe roadmap-audit §6**.
 
 ### 5.6 Scale / B2B
+- [ ] **Dashboard formateur V1** (#22) — vue classe + progression élèves agrégée
+  (% recettes maîtrisées, top recettes faibles). **Condition pilote Anne CFA**, big bet.
+- [ ] **Cadre RGPD mineurs documenté** (#23) — consentement parental, registre, désact.
+  analytics par défaut sur comptes `school`. Condition pilote (apprentis CAP mineurs).
 - [ ] **Offre B2B CFA / lycées pro** (#10) — vrai levier de scale (x3-5 du revenu).
   Plan `school`, dashboard formateur, prospection : **annexe roadmap-audit §4**.
 
@@ -153,6 +170,38 @@ baseline analytics aujourd'hui — voir ICE #1).
 ## 6. Roadmap par horizon
 
 > Synthèse priorisée (détail des scores au §7). Dépendances signalées.
+
+### 🎯 Lancement early adopters (CEO, test 4 personas 2026-06-04)
+
+**Verdict** : **GO ciblé** sur le segment **candidats libres CAP** uniquement (Marc + Pierre).
+**Pas grand public**, **pas B2B**, **pas passionnés** → on évite la dilution et les promesses
+non tenues qui brûleraient des leads.
+
+**Conditions sine qua non avant ouverture** (séquencées) :
+1. **#24** Fix landing « 2024-2025 » → ✅ fait.
+2. **#21** Stripe live + Pro payable (~3-5 j, prérequis economic).
+3. **#18** Glossaire CAP + **#19** chrono désactivable (~1-2 j combiné).
+4. **#20** Onboarding 3 voies + parcours guidé 10 recettes (~2-3 j).
+5. **#1 reste** vues SQL serveur (inscrits, Free→Pro, DAU/MAU) (~½ j).
+
+**Stratégie d'acquisition** : 30-50 candidats libres CAP session 2027, via groupes FB
+« CAP Pâtissier candidat libre », r/pastry FR, commentaires Empreinte Sucrée / PatisCoach,
+TikTok #CAPpâtissier. Offre early bird : **Pro annuel à 19 € au lieu de 39 € à vie**
+contre 1 témoignage 60 s + NPS J30. Mails J15 et J45 pour structurer les retours
+(alimente #8 témoignages).
+
+**Métriques de décision ouverture grand public** :
+| Métrique | Seuil GO grand public |
+|---|---|
+| Conversion Free→Pro à J30 | ≥ 8 % |
+| Rétention W2 (revient ≥ 1×) | ≥ 50 % |
+| NPS early adopters | ≥ 40 |
+| Témoignages exploitables | ≥ 10 |
+
+**À exclure de l'early adoption** : Sophie / passionnés (tant que #13bis pas livré),
+Marc côté « vente pro » (tant que #14 pas livré), B2B CFA (pilote conditionnel ≠ early).
+
+
 
 **🔴 Correctifs de confiance — AVANT tout (issus du test équipe 2026-05-21)**
 0. **Restaurer le Chrono du Mode Labo** (#0) — régression bloquante, ~1j. Répare la promesse cœur avant de mesurer.
@@ -210,7 +259,14 @@ baseline analytics aujourd'hui — voir ICE #1).
 | 11 | App Store (wrapper PWA) | 7 | 6 | 4 | **5.7** | I : +30-50 % découvrabilité / C : wrappers connus / E : 2-4 sem + comptes dev |
 | 12 | A/B test CTA landing | 5 | 5 | 6 | **5.3** | I : hero 100 % trafic, lift modéré / C : incertain par nature / E : ~1h config mais **significativité bridée par le faible trafic** |
 | 13 | Blog (SEO + idées recettes/inspirations) | 7 | 6 | 3 | **5.3** | (a) SEO + (b) inspirations/saisonnier (rétention). E : ~2 mois éditorial + rendu Markdown prérendu — **big bet**. Absorbe « hors-saison ». |
-| 13bis | PRO — Créer / ajouter ses propres recettes | 6 | 6 | 4 | **5.3** | Argument Pro (Sophie), déjà annoncé FAQ. Schéma prêt (table `recettes` par user) → manque l'UI création (recette+ingrédients+étapes+quiz) + gating Pro. E : CRUD + validation, moyen. |
+| 13bis | PRO — Créer / ajouter ses propres recettes | 6 | 8 | 4 | **6.0** | **Convergence Sophie + Marc** (test personas 2026-06-04) : argument Pro confirmé. Schéma prêt (table `recettes` par user) → manque l'UI création + gating Pro. Marc : « ma priorité #1, avec champ prix d'achat/kg ». |
+| 18 | **Glossaire CAP intégré** (tooltip + page) | 7 | 8 | 8 | **7.7** | Test personas : vocabulaire EP1/EP2/Labo/Chrono = mur d'entrée pour Pierre (débutant) et Sophie (passionnée). Quick win front. |
+| 19 | **Chrono désactivable** (toggle profil « Mode passionné » / « Mode CAP ») | 6 | 8 | 8 | **7.3** | Demandé par Sophie ET Pierre (chrono = stress, pas envie d'être chronométré le dimanche). Front pur, ~½j. |
+| 20 | **Onboarding post-signup 3 voies** + parcours guidé sur les 10 recettes gratuites | 8 | 7 | 5 | **6.7** | Pierre décroche semaine 2 sans onboarding. Structure l'early adoption. |
+| 21 | **Stripe live + plan Pro réellement payable** | 9 | 9 | 5 | **7.7** | Prérequis economic de l'early adoption. Sans ça « Pro bientôt » = frustration + 0 revenu testable. |
+| 22 | Dashboard formateur V1 (vue classe + progression élèves) | 8 | 5 | 3 | **5.3** | Condition pilote B2B Anne. Big bet, démarrer en parallèle. |
+| 23 | Cadre RGPD mineurs documenté (consent parental, DPA) | 6 | 7 | 5 | **6.0** | Condition pilote B2B (apprentis CAP mineurs). Doc + checkbox, pas dev lourd. |
+| 24 | ✅ **Fix landing « 2024-2025 »** | 4 | 10 | 10 | **8.0** | Bug crédibilité repéré par Anne sur `LandingPersonas`. Corrigé 2026-06-04. |
 | 14 | PRO — Coût matières & rentabilité par projet | 6 | 6 | 3 | **5.0** | Levier monétisation Pro, persona secondaire. E : tables + UX + moteur + exports, plusieurs sprints. Spec → annexe roadmap-audit §6. |
 | 15 | Extension CAP Boulanger / Chocolatier | 6 | 4 | 3 | **4.3** | I : marché ×3-4 mais futur / C : non validé / E : 3-6 mois contenu |
 | 16 | Contenu hors-saison (passionnés) | 4 | 4 | 4 | **4.0** | Absorbé par le blog #13 ; faible priorité isolée |
