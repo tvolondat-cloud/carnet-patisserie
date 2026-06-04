@@ -140,9 +140,36 @@ async function handleSignOut() {
 		<a href="/ordonnancement" class="btn btn-ghost btn-block" style="justify-content:flex-start;margin-bottom:8px">
 			📋 Cours d'ordonnancement EP1/EP2
 		</a>
+		<a href="/glossaire" class="btn btn-ghost btn-block" style="justify-content:flex-start;margin-bottom:8px">
+			📘 Glossaire CAP
+		</a>
 		<a href="/carnet-pdf" class="btn btn-ghost btn-block" style="justify-content:flex-start">
 			📄 Exporter mon carnet en PDF
 		</a>
+	</div>
+
+	<!-- Préférences -->
+	<div class="card mb-3">
+		<div class="section-title mb-3">Préférences</div>
+		<label class="pref-row" for="pref-chrono">
+			<div class="pref-text">
+				<div class="pref-label">⏱️ Chrono d'entraînement</div>
+				<div class="pref-help">
+					{#if $profile?.show_chrono !== false}
+						Affiché sur la fiche recette. Décoche pour passer en <strong>mode passionné</strong> : la maîtrise se fait sans le chrono (test + quiz).
+					{:else}
+						Masqué (mode passionné). La maîtrise se fait sans le chrono (test + quiz).
+					{/if}
+				</div>
+			</div>
+			<input
+				type="checkbox"
+				id="pref-chrono"
+				class="pref-switch"
+				checked={$profile?.show_chrono !== false}
+				on:change={(e) => updateProfile({ show_chrono: e.target.checked }).then(() => showToast('Préférence enregistrée ✅')).catch((err) => showToast('Erreur : ' + err.message))}
+			/>
+		</label>
 	</div>
 
 	<!-- Plan freemium -->
@@ -222,6 +249,60 @@ async function handleSignOut() {
 {/if}
 
 <style>
+.pref-row {
+	display: flex;
+	align-items: flex-start;
+	gap: 16px;
+	cursor: pointer;
+}
+.pref-text { flex: 1; }
+.pref-label {
+	font-size: 0.95rem;
+	font-weight: 700;
+	color: var(--color-text);
+	margin-bottom: 4px;
+}
+.pref-help {
+	font-size: 0.8rem;
+	color: var(--color-text-2);
+	line-height: 1.45;
+}
+.pref-switch {
+	flex-shrink: 0;
+	appearance: none;
+	-webkit-appearance: none;
+	width: 44px;
+	height: 26px;
+	border-radius: 999px;
+	background: var(--color-surface-2);
+	position: relative;
+	cursor: pointer;
+	transition: background 0.2s;
+	margin-top: 2px;
+}
+.pref-switch::after {
+	content: '';
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	width: 22px;
+	height: 22px;
+	background: var(--color-surface);
+	border-radius: 50%;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.18);
+	transition: transform 0.2s;
+}
+.pref-switch:checked {
+	background: var(--color-brand);
+}
+.pref-switch:checked::after {
+	transform: translateX(18px);
+}
+.pref-switch:focus-visible {
+	outline: 2px solid var(--color-brand);
+	outline-offset: 2px;
+}
+
 .upgrade-box {
 	background: rgba(108, 99, 255, 0.06);
 	border-radius: var(--radius-md);

@@ -16,6 +16,12 @@ import { events } from '$lib/analytics.js';
 import { onDestroy } from 'svelte';
 import { slugify } from '$lib/utils/slugify.js';
 import { wakeLock } from '$lib/utils/wake-lock.js';
+import { profile } from '$lib/stores/auth.js';
+import GlossaryTerm from '$lib/components/GlossaryTerm.svelte';
+
+// Préférence UI : afficher / masquer le chrono d'entraînement.
+// Par défaut (champ absent ou null) → visible.
+$: showChrono = $profile?.show_chrono !== false;
 
 $: slug = $page.params.id;
 $: recette = $recettes.find(r => slugify(r.nom) === slug);
@@ -376,7 +382,9 @@ onMount(async () => {
 	{:else}
 	<div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
 		<span class="badge badge-{statut}">{statutLabel[statut]}</span>
-		<span class="badge badge-{recette.ep?.toLowerCase()}">{recette.ep}</span>
+		<span class="badge badge-{recette.ep?.toLowerCase()}">
+			<GlossaryTerm key={recette.ep?.toLowerCase() === 'ep1' ? 'ep1' : 'ep2'}>{recette.ep}</GlossaryTerm>
+		</span>
 		<span class="text-sm text-muted">⏱ {recette.temps} min</span>
 	</div>
 
@@ -394,6 +402,7 @@ onMount(async () => {
 	{/if}
 
 	<!-- ── Chrono d'entraînement (sticky quand il tourne : la recette reste visible) ── -->
+	{#if showChrono}
 	<div class="card mb-3 chrono-card" class:chrono-running={chronoRunning}>
 		<div class="chrono-head">
 			<span class="section-title">⏱️ Chrono d'entraînement</span>
@@ -424,6 +433,7 @@ onMount(async () => {
 		{/if}
 		<p class="chrono-hint text-xs text-muted">Lance le chrono et réalise la recette : les étapes restent visibles juste en dessous.</p>
 	</div>
+	{/if}
 
 	<!-- ── Calculateur ── -->
 	<div class="card mb-3">

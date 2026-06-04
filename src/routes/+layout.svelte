@@ -12,7 +12,7 @@ import { initAnalytics, trackPageView } from '$lib/analytics.js';
 import ConsentBanner from '$lib/components/ConsentBanner.svelte';
 import '../app.css';
 
-const publicRoutes = ['/auth', '/auth/callback', '/confidentialite', '/mentions-legales', '/cgu'];
+const publicRoutes = ['/auth', '/auth/callback', '/confidentialite', '/mentions-legales', '/cgu', '/glossaire'];
 const homeIsPublic = true;
 
 let initialized = !browser;

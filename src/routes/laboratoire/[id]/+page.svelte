@@ -3,7 +3,7 @@ import { page } from '$app/stores';
 import { goto } from '$app/navigation';
 import { recettes } from '$lib/stores/recettes.js';
 import { progression, updateProgression } from '$lib/stores/progression.js';
-import { isPro, FREE_RECIPE_SLUGS } from '$lib/stores/auth.js';
+import { isPro, FREE_RECIPE_SLUGS, profile } from '$lib/stores/auth.js';
 import { events } from '$lib/analytics.js';
 import { slugify } from '$lib/utils/slugify.js';
 import { wakeLock } from '$lib/utils/wake-lock.js';
@@ -34,9 +34,11 @@ let quizScore = 0;
 $: questions = recette?.quiz_questions ?? [];
 $: quizPass = quizScore >= 75;
 $: allDone = tested && quizPass;                 // session Labo terminée (test + quiz)
-// La maîtrise exige aussi le chrono, désormais réalisé sur la fiche recette.
+// Préférence "Mode passionné" : si le chrono est désactivé dans le profil,
+// la maîtrise se passe de chrono (test + quiz suffisent).
+$: chronoEnabled = $profile?.show_chrono !== false;
 $: chronoOk = $progression[id]?.chrono_valide === true;
-$: mastered = allDone && chronoOk;
+$: mastered = allDone && (chronoOk || !chronoEnabled);
 
 function submitQuiz() {
 	let correct = 0;
@@ -57,9 +59,9 @@ function markTested() {
 
 async function finishLab() {
 	if (allDone) {
-		// Quiz réussi → "validée". Maîtrisée seulement si le chrono est aussi validé
-		// (le chrono se fait sur la fiche recette pour pouvoir suivre les étapes).
-		const newStatut = chronoOk ? 'maitrisee' : 'validee';
+		// chronoEnabled false (mode passionné) → maîtrisée dès test+quiz.
+		// Sinon : maîtrisée si chrono validé sur la fiche, sinon validée.
+		const newStatut = (!chronoEnabled || chronoOk) ? 'maitrisee' : 'validee';
 		await updateProgression(id, { statut: newStatut });
 		if (newStatut === 'maitrisee' && recette) events.recipeMastered(recette);
 	}

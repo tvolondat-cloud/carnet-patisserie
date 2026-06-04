@@ -110,9 +110,16 @@ baseline analytics aujourd'hui — voir ICE #1).
 - [x] **Wake Lock** — écran toujours allumé sur pages recette/labo (#2, ✅ fait 2026-05-22).
   Action Svelte `wakeLock` (`src/lib/utils/wake-lock.js`), ré-acquise au focus,
   dégradation silencieuse si l'API manque (iOS < 16.4).
-- [ ] **Chrono désactivable** (#19) — toggle profil « Mode passionné » / « Mode CAP »
-  (Sophie : « chronométrer une pâte à choux le dimanche n'a aucun sens » ; Pierre :
-  « stress de plus dès le jour 1 »). Front pur, ~½j.
+- [x] **Chrono désactivable** (#19, ✅ fait 2026-06-04). Toggle dans `/profil` →
+  `profiles.show_chrono` (migration `20260604_show_chrono.sql`). Quand désactivé : le
+  widget chrono est masqué sur la fiche recette, et la maîtrise dans le Mode Labo
+  passe directement de test+quiz à `maitrisee` (sans exiger le chrono).
+- [x] **Carnet PDF refondu conforme arrêté du 3 oct 2022** (✅ fait 2026-06-04).
+  Format conforme aux consignes nationales CAP : page de garde + sections magenta
+  par catégorie + grille 3 colonnes de tables. **Aucune méthode, technique ou
+  température** (sinon le jury retire le carnet le jour de l'examen). Ingrédients
+  triés par **ordre d'utilisation** (heuristique : 1ʳᵉ apparition dans les étapes).
+  Masse totale calculée en grammes (œufs convertis 1u = 50g).
 - [ ] Pistes ouvertes : photos de réalisations, favoris/collections, mode cuisine
   grand format, haptique, skeleton loaders, toast offline.
 
@@ -133,8 +140,10 @@ baseline analytics aujourd'hui — voir ICE #1).
   Fix `feature-cta` → `#how`. (Reste cohérent avec `profil` « Bientôt disponible ».)
 - [x] **Fix landing « 2024-2025 »** (#24, ✅ fait 2026-06-04) sur `LandingPersonas.svelte`
   (signalé par Anne CFA, bug de crédibilité).
-- [ ] **Glossaire CAP** (#18) — tooltip + page dédiée pour EP1/EP2/Labo/Chrono/×1.2.
-  Vocabulaire = mur d'entrée pour les passionnés et les débutants complets (Pierre).
+- [x] **Glossaire CAP** (#18, ✅ fait 2026-06-04). Page publique `/glossaire` (27 entrées,
+  5 catégories : examen, méthode, progression, technique, ingrédient) + composant
+  `<GlossaryTerm key="…">` (tooltip inline avec lien vers la page). Branchement sur
+  les badges EP1/EP2 des fiches recettes.
 - [ ] **Onboarding post-signup 3 voies** (#20) — « débutant / CAP / passionné » + parcours
   guidé sur les 10 recettes gratuites. Évite le décrochage en semaine 2.
 - [ ] **Screenshots produit** supplémentaires (sections features) (#4).
@@ -265,8 +274,8 @@ Marc côté « vente pro » (tant que #14 pas livré), B2B CFA (pilote condition
 | 12 | A/B test CTA landing | 5 | 5 | 6 | **5.3** | I : hero 100 % trafic, lift modéré / C : incertain par nature / E : ~1h config mais **significativité bridée par le faible trafic** |
 | 13 | Blog (SEO + idées recettes/inspirations) | 7 | 6 | 3 | **5.3** | (a) SEO + (b) inspirations/saisonnier (rétention). E : ~2 mois éditorial + rendu Markdown prérendu — **big bet**. Absorbe « hors-saison ». |
 | 13bis | PRO — Créer / ajouter ses propres recettes | 6 | 8 | 4 | **6.0** | **Convergence Sophie + Marc** (test personas 2026-06-04) : argument Pro confirmé. Schéma prêt (table `recettes` par user) → manque l'UI création + gating Pro. Marc : « ma priorité #1, avec champ prix d'achat/kg ». |
-| 18 | **Glossaire CAP intégré** (tooltip + page) | 7 | 8 | 8 | **7.7** | Test personas : vocabulaire EP1/EP2/Labo/Chrono = mur d'entrée pour Pierre (débutant) et Sophie (passionnée). Quick win front. |
-| 19 | **Chrono désactivable** (toggle profil « Mode passionné » / « Mode CAP ») | 6 | 8 | 8 | **7.3** | Demandé par Sophie ET Pierre (chrono = stress, pas envie d'être chronométré le dimanche). Front pur, ~½j. |
+| 18 | ✅ **Glossaire CAP intégré** (tooltip + page `/glossaire`) | 7 | 8 | 8 | **7.7** | Fait 2026-06-04 : 27 entrées, 5 catégories, composant `<GlossaryTerm>` branché sur les badges EP1/EP2. |
+| 19 | ✅ **Chrono désactivable** (toggle profil → `show_chrono`) | 6 | 8 | 8 | **7.3** | Fait 2026-06-04 : toggle dans `/profil`, désactive le widget sur la fiche ET bypass dans le Labo (mastery = test+quiz). Migration `20260604_show_chrono.sql`. |
 | 20 | **Onboarding post-signup 3 voies** + parcours guidé sur les 10 recettes gratuites | 8 | 7 | 5 | **6.7** | Pierre décroche semaine 2 sans onboarding. Structure l'early adoption. |
 | 21 | **Stripe live + plan Pro réellement payable** | 9 | 9 | 5 | **7.7** | Prérequis economic de l'early adoption. Sans ça « Pro bientôt » = frustration + 0 revenu testable. |
 | 22 | Dashboard formateur V1 (vue classe + progression élèves) | 8 | 5 | 3 | **5.3** | Condition pilote B2B Anne. Big bet, démarrer en parallèle. |
